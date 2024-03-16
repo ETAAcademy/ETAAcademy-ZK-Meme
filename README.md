@@ -32,7 +32,7 @@ Ideals (I) and Quotient Rings (R/I) are like normal subgroups with Absorption La
 
 Primitive Root & Discrete Logarithm: An integer g 🐳 is a primitive root (mod n) that generates every element for a group $Z_n^*,$ So g🐳 may serve as a base $🧜‍♀️g^x$ ≡ a (mod n) for a discrete logarithm x = $log_g^a$ and as a generator 🐬for a cyclic group <🐬> = { $🐬^k$ | k ∈ Z }
 
-Polynomial P(x) = $Σ_{j=0}^{n}{a_jx^j}$ is a sum of terms with the highest power of deg(P), its coefficient Lc(P), common add and mult, while factoring used to find roots (x for P(x)=0) construct L*i(x) for Lagrange interpolation P(x) = $Σ*{i=0}^n y_i ⋅L_i(x).$
+Polynomial P(x) = $Σ_{j=0}^{n}{a_jx^j}$ is a sum of terms with the highest power of deg(P), its coefficient Lc(P), common add and mult, while factoring used to find roots (x for P(x)=0) construct Li(x) for Lagrange interpolation P(x) = $Σ*{i=0}^n y_i ⋅L_i(x).$
 
 ## R
 
