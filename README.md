@@ -45,7 +45,7 @@ Elliptic curve addition: For $P=(x_1, y_1),$ $Q=(x_2, y 2),$ P≠Q，P=Q, Both h
 
 Fflonk & Dan: Fflonk changes single-point polynomials into a polynomial multi-point calculation $g(X):=∑_{i\<t}f_i(X^t) ⋅ X^i,$ where k= 1, Dan verifies pairings on polynomials, not points, by three double-point operations, $h(X) =∑_{i∈[k]}γ^{i-1}{f_i(X)-r_i(X)}/{Z_{s_i(X)}.$
 
-Fiat-Shamir: Non-interactive Fiat, compared to interactive zk proof, hash c to for randomization, i.e. A: $v ∈ Z^*_p,$ $t = g^v mod p$ ⇒ B: c = H(g, y, t) ⇒ A: r = v - cx mod {φ(p)}, ⇒ B: $t ≡ g^rg^c,$ as $g^{r}y^{c} ≡ g^{v-cx}g^{xc} ≡ g^{v} ≡ t and { g^{φ (p)} ≡ 1}🛸$
+Fiat-Shamir: Non-interactive Fiat, compared to interactive zk proof, hash c to for randomization, i.e. A: $v ∈ Z^*_p,$ $t = g^v mod p$ ⇒ B: c = H(g, y, t) ⇒ A: r = v - cx$ mod ${φ(p)}, ⇒ B: $t ≡ g^rg^c,$ as $g^{r}y^{c} ≡ g^{v-cx}g^{xc} ≡ g^{v} ≡ t$ and ${ g^{φ (p)} ≡ 1}🛸$
 
 Fields(F) extend the concepts of Groups (add, sub) and Rings (add, sub, mult) by introducing division，i.e., non-zero element has a mult inverse $a^{-1}.$ The characteristic of a field is the order of the additive identity, usually 0 or a prime number.
 
@@ -58,9 +58,9 @@ The finite field GF(p), or $F_p,$ is characterized by having a prime number of e
 
 ## G
 
-Goldwasser-Micali(GM): Legendre $x/p = x/q = -1,$ Jacobi $x/N = (x/p)(x/q) = 1,$ public key (x, N), private key(p, q) => quadratic non-residue encryption $c_i = r^2x mod N => quadratic residue decryption c_p^{(p-1)/2} = 1 mod p, c_q^{(q-1)/2} = 1 mod q.$
+Goldwasser-Micali(GM): Legendre $x/p = x/q = -1,$ Jacobi $x/N = (x/p)(x/q) = 1,$ public key (x, N), private key(p, q) => quadratic non-residue encryption $c_i = r^2x$ mod N => quadratic residue decryption $c_p^{(p-1)/2}$ = 1 mod p, $c_q^{(q-1)/2}$ = 1 mod q.
 
-Groth16: upgrades Pinocchio, also verifies bilinearpairing $e([A]_1,[B]_2)=e(αG_1, βG_2)⋅e (∑^l_{i=0} {βu_i(x)+αv_i(x)+w_i(x)}/{γ} G_1, γG_2) ⋅ e([C]_1, δG_2) by QAP,∑^m_{i=0}a_iu_i(x)∑^m_{i=0}a_iv_i(x)=∑^m_{i=0}a_iω_i(x) + h(x)z(x)),$ but less constraints.
+Groth16: upgrades Pinocchio, also verifies bilinearpairing $e([A]_1,[B]_2)=e(αG_1, βG_2)⋅e (∑^l_{i=0} {βu_i(x)+αv_i(x)+w_i(x)}/{γ} G_1, γG_2) ⋅ e([C]_1, δG_2)$ by QAP, $∑^m_{i=0}a_iu_i(x)∑^m_{i=0}a_iv_i(x)=∑^m_{i=0}a_iω_i(x) + h(x)z(x)),$ but less constraints.
 
 ## H
 
