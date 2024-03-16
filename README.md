@@ -60,7 +60,7 @@ The finite field GF(p), or $F_p,$ is characterized by having a prime number of e
 
 Goldwasser-Micali(GM): Legendre $x/p = x/q = -1,$ Jacobi $x/N = (x/p)(x/q) = 1,$ public key (x, N), private key(p, q) => quadratic non-residue encryption $c_i = r^2x$ mod N => quadratic residue decryption $c_p^{(p-1)/2}$ = 1 mod p, $c_q^{(q-1)/2}$ = 1 mod q.
 
-Groth16: upgrades Pinocchio, also verifies bilinearpairing $e([A]_1,[B]_2) = e(αG_1, βG_2) ⋅ e (∑^l_{i=0} \frac{βu_i(x)+αv_i(x)+w_i(x)}{γ} G_1, γG_2) ⋅ e([C]_1, δG_2)$ by QAP, $∑^m_{i=0}a_iu_i(x) ∑^m_{i=0} a_iv_i(x) = ∑^m_{i=0}a_iω_i(x) + h(x)z(x),$ but less constraints.
+Groth16: upgrades Pinocchio, also verifies bilinearpairing e([A]_1,[B]\_2) = $e(αG_1, βG_2) ⋅ e (∑^l_{i=0} \frac{βu*i(x)+αv_i(x)+w_i(x)}{γ} G_1, γG_2) ⋅ e([C]\_1, δG_2)$ by QAP, $∑^m*{i=0}a*iu_i(x) ∑^m*{i=0} a*iv_i(x) = ∑^m*{i=0}a_iω_i(x) + h(x)z(x),$ but less constraints.
 
 ## H
 
