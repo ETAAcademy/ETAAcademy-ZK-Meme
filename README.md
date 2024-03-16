@@ -43,7 +43,7 @@ Elliptic curve addition: For $P=(x_1, y_1),$ $Q=(x_2, y 2),$ P≠Q，P=Q, Both h
 
 ## F
 
-Fflonk & Dan: Fflonk changes single-point polynomials into a polynomial multi-point calculation $g(X):=∑_{i\<t}f_i(X^t) ⋅ X^i,$ where k= 1, Dan verifies pairings on polynomials, not points, by three double-point operations, $h(X) =∑_{i∈[k]}γ^{i-1}{f_i(X)-r_i(X)}/{Z_{s_i(X)}.$
+Fflonk & Dan: Fflonk changes single-point polynomials into a polynomial multi-point calculation, where k= 1, Dan verifies pairings on polynomials, not points, by three double-point operations.
 
 Fiat-Shamir: Non-interactive Fiat, compared to interactive zk proof, hash c to for randomization, i.e. A: $v ∈ Z^*_p,$ $t = g^v$ mod p ⇒ B: c = H(g, y, t) ⇒ A: r = v - cx mod {φ(p)}, ⇒ B: $t ≡ g^rg^c,$ as $g^{r}y^{c} ≡ g^{v-cx}g^{xc} ≡ g^{v} ≡ t$ and ${ g^{φ (p)} ≡ 1}🛸$
 
@@ -60,11 +60,11 @@ The finite field GF(p), or $F_p,$ is characterized by having a prime number of e
 
 Goldwasser-Micali(GM): Legendre $x/p = x/q = -1,$ Jacobi $x/N = (x/p)(x/q) = 1,$ public key (x, N), private key(p, q) => quadratic non-residue encryption $c_i = r^2x$ mod N => quadratic residue decryption $c_p^{(p-1)/2}$ = 1 mod p, $c_q^{(q-1)/2}$ = 1 mod q.
 
-Groth16: upgrades Pinocchio, also verifies bilinearpairing $e([A]_1,[B]_2)$ = $e(αG_1, βG_2)$ ⋅ e ( $∑^l_{i=0}$ $\frac{βu \* i(x)+αv_i(x)+w_i(x)}{γ} G_1, γG_2$ ) ⋅ e( $[C]_1,$ $δG_2$ ) by QAP, $∑^m \* {i=0}a \* iu_i(x) ∑^m \* {i=0} a \* iv_i(x) = ∑^m \* {i=0}a_iω_i(x) + h(x)z(x),$ but less constraints.
+Groth16: upgrades Pinocchio, also verifies bilinearpairing e( \[A\]1 , \[B\]2 ) = e(α $G_1$, β $G_2$ ) ⋅ e ( $∑^l_{i=0}$ $\frac{βu \* i(x)+αv_i(x)+w_i(x)}{γ} G_1, γG_2$ ) ⋅ e( $[C]_1,$ $δG_2$ ) by QAP, $∑^m \* {i=0}a \* iu_i(x) ∑^m \* {i=0} a \* iv_i(x) = ∑^m \* {i=0}a_iω_i(x) + h(x)z(x),$ but less constraints.
 
 ## H
 
-Halo2 like UltralPlonk, creates final-poly by Plookup, vanishing, multipoint opening argument, $p(X)=q'(X)+[x_4]∑^{n_q-1}_{i=0}[x^i_4]q_i(X),$ but verified by IPAs, $P'+∑^{k-1}_{j=0}[u^{-1}_j]L_j+∑^{k-1}_{j=0}[u_j]R_j = [c]G_0^{→'} + [cb_0^→z]G_0'+[r]W.$
+Halo2 like UltralPlonk, creates final-poly by Plookup, vanishing, multipoint opening argument, p(X) = q'(X) + \[x_4\] $\Sigma^{n \* q-1}$ \* ${i=0}[x^i_4]q \* i(X)$ , but verified by IPAs.
 
 Halo2 Fibonacci API utilizes a constraint system with columns for advice, instance, fixed, and selector. It's optimized by regions to implement the Fibonacci trait through configuration, chip, and circuit, e.g. f(n) = f(n-1) + f(n-2).
 
@@ -135,11 +135,11 @@ Splitting field L，as simple extensions added by elements, is the minimal exten
 
 Trace (Tr) and Norm (N) are ➕ and ✖️ mappings from extension field to its base，a ∈ F = $F_q^m,$ K= $F_q,$ $Tr_{F/K}(a)$ = $a + a^q + ... + a^{q^{m-1}};$ Compute: minimal polynomial => characteristic polynomial $g(x)^{ m/d}$ => $Tr_{F/K}(a)$ = $-a_{m-1},$ $N_{F/K}(a)=(-1)^ma_0.$
 
-Tweedledum & Amortization take parallel computation on polynomial commitments and value, add random and secret a for Sigma zk proof, $C':=A' +z'U+r'H = U+r'H = [A+x^{-2}L_a+x^2R_a] + [z+x^{-2}l_z+x^2r_z]U + (r+x^{-2}r_L+x^2r_H)H = C+x^{-2}L+x^{-2}R; c·C +R = z_1G+z_1b·U+z_2·H.$
+Tweedledum & Amortization take parallel computation on polynomial commitments and value, add random and secret a for Sigma zk proof, C':=A' +z'U+r'H = U+r'H = $A+x^{-2}L_a+x^2R_a$ + $z+x^{-2}l_z+x^2r_zU$ + $(r+x^{-2}r_L+x^2r_H)H$ = $C+x^{-2}L+x^{-2}R;$ $c·C +R = z_1G+z_1b·U+z_2·H.$
 
 ## U
 
-UltraPlonk: PK of Plonk KZG (or Dan + Fflonk) PK, Plookup table T*{1,i}, T*{2,i},T*{3,i},i=1,..,n, circuit to create quotient polynomial, verify bilinear pairing by VK on ETH, $e([W*η(x)]_1 + u·[W_{ωη}(x)]*1,[χ]\_2)$ = $e(η·[W*η(x)]_1+uηω·[W_{ωη}(x)]\_1 +[F]\_1-[E]\_1,[l]\_2).$
+UltraPlonk: PK of Plonk KZG (or Dan + Fflonk) PK, Plookup table T*{1,i}, T*{2,i},T*{3,i},i=1,..,n, circuit to create quotient polynomial, verify bilinear pairing by VK on ETH, e(Wη(x)1 + u· W{ωη}(x) · 1, χ2) = e(η· W * η(x)1+uηω·W{ωη}x1 + F1-E1,l2).
 
 ## Z
 
