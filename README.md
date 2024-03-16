@@ -74,9 +74,9 @@ Homo and Iso: Similar to group homomorphisms (addition) but with multiplication,
 
 Ideals (I) and Quotient Rings (R/I) are like normal subgroups with Absorption Law and quotient groups. 🐣(I) include {0}, R itself, and principal ideals (a) = {ab | b ∈ R}, while 🐥R/I has add (a+I)+(b+I)=a+b+I, mult (a+I)(b+I)=ab+I, with a congruence relation a≡b(mod I).
 
-Infinite & Singular: 1. Elliptic curve is an affine equation, $(x, y) ∈ A^2(F) =>projective (X, Y, Z) ∈ P^2(F).$ If Z = 0, they are infinite point O, & line $P^1(F).$ 2. If $△ = 4a^3 + 27b^2 = 0,$ <=> not smooth <=> repeated roots, singular points lie on the x-axis.
+Infinite & Singular: 1. Elliptic curve is an affine equation, $(x, y) ∈ A^2(F)$ =>projective $(X, Y, Z) ∈ P^2(F).$ If Z = 0, they are infinite point O, & line $P^1(F).$ 2. If $△ = 4a^3 + 27b^2 = 0,$ <=> not smooth <=> repeated roots, singular points lie on the x-axis.
 
-IPAs, using elliptic curve add and mult to verify and not to reveal the polynomial $P(x) = Σ_ic_ix^is, C(P) = Σ_ic_ig_i,$ with generator 'g', coefficients 'c', random a, aggregate each cg into a larger one $untilc'_0 g'_0 = C', i.e. C' = C + a^2L + {R}/{a^2}.🛸$
+IPAs, using elliptic curve add and mult to verify and not to reveal the polynomial $P(x) = Σ_ic_ix^is, C(P) = Σ_ic_ig_i,$ with generator 'g', coefficients 'c', random a, aggregate each cg into a larger one until $c'_0 g'_0 = C', i.e. C' = C + a^2L + {R}/{a^2}.🛸$
 
 Modified IPAs have generators on elliptic curves by hashing system parameters(SP) , $G_i= hash(G,i, SP), i=1, ...,n ,$ and vector inner product $z= <a^→, b^→>=z+x^{-2}l_z + x^2f_z,$ rather than multi-party secure computation and quotient polynomial commitment of KZG.
 
@@ -94,11 +94,11 @@ Merkle commitment: By computing the Merkle root' := Merkle(c, path(c)) based on 
 
 ## P
 
-Pinocchio: 1) create elliptic curve generator for all operand to simplify constraints, $g_l  =g^{ρl}; 2)$ let verifier & prover compute together $L(x)=L_v(x)+L_p(x);$ 3) obfuscate &random for zk proof $(L(s) + δ_l) ·(R(s) + δ_r) - (O(s) + δ_o) =t(s)·(h(s) + △).$
+Pinocchio: 1) create elliptic curve generator for all operand to simplify constraints, $g_l  =g^{ρl};$ 2) let verifier & prover compute together $L(x)=L_v(x)+L_p(x);$ 3) obfuscate &random for zk proof $(L(s) + δ_l) ·(R(s) + δ_r) - (O(s) + δ_o) =t(s)·(h(s) + △).$
 
 PLONK: It creates polynomials by Gate & Linear Constraints(➕, ✖️, &), not R1CS, $Q_L(X)⋅a(X)+Q_R(X)⋅b(X)+Q_o(X)⋅c(X)+Q_M(X)⋅a(X)⋅b(X)+Qc(X)=Z(x)⋅H(x), f(i⋅G)=f(i⋅G)+ β⋅i+γ,g(i⋅G)=g(i⋅G)+β⋅σ(i)+γ,$ Aggregation proofs to a Bilinear $e(x⋅G1, y⋅G2)=e(j⋅ G1, k⋅G2).$
 
-Plookup coordinate accumulators prove polynomial ⊂ and/or table for gate constraints; i.e., given $f∈F^n,t∈F^d, s∈F^{n+d}, F(β, γ)≔(1+β)^n⋅∏_{i∈[n]}(γ+fi)∏_{i∈[d−1]}(γ(1 + β) + t_i + β ⋅ t_{i+1}), G(β, γ);  then Z(g^n+1) = 1 => F ≡ G => f ⊂ t, s = (f, t). ❤️🛸$
+Plookup coordinate accumulators prove polynomial ⊂ and/or table for gate constraints; i.e., given $f∈F^n,t∈F^d, s∈F^{n+d}, F(β, γ)≔(1+β)^n⋅∏_{i∈[n]}(γ+fi)∏_{i∈[d−1]}(γ(1 + β) + t_i + β ⋅ t_{i+1}), G(β, γ);$ then $Z(g^n+1) = 1 => F ≡ G => f ⊂ t, s = (f, t).$ ❤️🛸
 
 Primitive f(x) over F_q is the minimal polynomial of a primitive element in the field $F_q[X]$ that f(x) with non-zero a constant term must be monic, $ord(f(x)) = q^m - 1,$ where the polynomial order ord(f(x)) is the smallest positive integer n for $f(x)|(x^n-e).$
 
@@ -106,9 +106,9 @@ Primitive Root & Discrete Logarithm: An integer g 🐳 is a primitive root (mod 
 
 Polynomial P(x) = $Σ_{j=0}^{n}{a_jx^j}$ is a sum of terms with the highest power of deg(P), its coefficient Lc(P), common add and mult, while factoring used to find roots (x for P(x)=0) construct Li(x) for Lagrange interpolation P(x) = $Σ*{i=0}^n y_i ⋅L_i(x).$
 
-Polynomial Constraints, to increase randomness and prevent proving forgery, use v, α，β, γ to constrain p(x)=L(x) ⋅ R(x) - O(x) in terms of value (0, 1), transforming e.g. O ⋅R = L, consistency $v_{L,i} = v_{R,i} = v_{o,i} = v_{ β,i}， i∈{1,…,n} and constants.$
+Polynomial Constraints, to increase randomness and prevent proving forgery, use v, α，β, γ to constrain p(x)=L(x) ⋅ R(x) - O(x) in terms of value (0, 1), transforming e.g. O ⋅R = L, consistency $v_{L,i} = v_{R,i} = v_{o,i} = v_{ β,i}， i∈{1,…,n}$ and constants.
 
-Polynomial ring R[x] has a and x from its base ring R, i.e., if R is a commutative or integral ring, the R[x] inherits these properties. But a field F[x] is different, e.g. Q(x) = a_n^{-1} P(x) is a monic polynomial if P(x) ∈ F[x] with Lc(P) = a_n.
+Polynomial ring R[x] has a and x from its base ring R, i.e., if R is a commutative or integral ring, the R[x] inherits these properties. But a field F[x] is different, e.g. $Q(x) = a_n^{-1} P(x)$ is a monic polynomial if P(x) ∈ F[x] with $Lc(P) = a_n.$
 
 ## Q
 
@@ -125,34 +125,34 @@ Ring simply seen as a group has two binary operations, ➕ and ✖️, e.g. the 
 
 SHA256 table generates 256-bit random zk proof by 8+64 constants, padding Delta+1+k+64 mod 512 = 0, expansion & compression $MapH_i:= Map(H_{i-1}, M_i),$ which constrains boolean to spread lookup + arithmetic circuit (Plonk), (x, x') ∈ Table, x' = spread (x).
 
-SHA256 constraints have expansion of $Wi=σ_1(W_{i−2})田W_{i−7}田σ_0(W_{i−15})田W_{i−16},$ spread of modular $a田b =c,$ functions of $Ma(A,B,C)=(A∧B)⊕(A∧C)⊕(B∧C), Ch(E,F,G), ∑_0(A)=(A>>>2)⊕(A>>>13)⊕(A>>>22), ∑_1(E) constraints to algebraic operation.$
+SHA256 constraints have expansion of $Wi=σ_1(W_{i−2})田W_{i−7}田σ_0(W_{i−15})田W_{i−16},$ spread of modular $a田b =c,$ functions of $Ma(A,B,C)=(A∧B)⊕(A∧C)⊕(B∧C), Ch(E,F,G), ∑_0(A)=(A>>>2)⊕(A>>>13)⊕(A>>>22), ∑_1(E)$ constraints to algebraic operation.
 
 Simple extension K(a) is the smallest extension field of subfield K and “a”, the homomorphic image to be an isomorphism with the quotient ring ofits irreducible polynomial g(x), $Im(t) ≅ K[X]/Ker(t) ⇒ Im(t) ≅ K[X]/ (g(x)) ⇒ K(a) ≅ K[X]/ (g(x)).$
 
-Splitting field L，as simple extensions added by elements, is the minimal extension of field K and the roots of polynomial factors $f(x) = b(x-a_1)(x-a_2)...(x-a_m).$ The finite field of $p^n$ is isomorphic to its unique splitting field of $x^{p^n}−x over Zp.$
+Splitting field L，as simple extensions added by elements, is the minimal extension of field K and the roots of polynomial factors $f(x) = b(x-a_1)(x-a_2)...(x-a_m).$ The finite field of $p^n$ is isomorphic to its unique splitting field of $x^{p^n}−x$ over $Z_p.$
 
 ## T
 
-Trace (Tr) and Norm (N) are ➕ and ✖️ mappings from extension field to its base，$a ∈ F = F_q^m, K= F_q, Tr_{F/K}(a) = a + a^q + ... + a^{q^{m-1}};$ Compute: minimal polynomial => characteristic polynomial $g(x)^{ m/d} => Tr_{F/K}(a)=-a_{m-1}, N_{F/K}(a)=(-1)^ma_0.$
+Trace (Tr) and Norm (N) are ➕ and ✖️ mappings from extension field to its base，a ∈ F = $F_q^m,$ K= $F_q,$ $Tr_{F/K}(a)$ = $a + a^q + ... + a^{q^{m-1}};$ Compute: minimal polynomial => characteristic polynomial $g(x)^{ m/d}$ => $Tr_{F/K}(a)$ = $-a_{m-1},$ $N_{F/K}(a)=(-1)^ma_0.$
 
-Tweedledum & Amortization take parallel computation on polynomial commitments and value, add random and secret a for Sigma zk proof, $C':=A' +z'U+r'H=U+r'H=[A+x^{-2}L_a+x^2R_a]+[z+x^{-2}l_z+x^2r_z]U+(r+x^{-2}r_L+x^2r_H)H=C+x^{-2}L+x^{-2}R; c·C +R=z_1G+z_1b·U+z_2·H.$
+Tweedledum & Amortization take parallel computation on polynomial commitments and value, add random and secret a for Sigma zk proof, $C':=A' +z'U+r'H = U+r'H = [A+x^{-2}L_a+x^2R_a] + [z+x^{-2}l_z+x^2r_z]U + (r+x^{-2}r_L+x^2r_H)H = C+x^{-2}L+x^{-2}R; c·C +R = z_1G+z_1b·U+z_2·H.$
 
 ## U
 
-UltraPlonk: PK of Plonk KZG (or Dan + Fflonk) PK, Plookup table T*{1,i}, T*{2,i},T*{3,i},i=1,..,n, circuit to create quotient polynomial, verify bilinear pairing by VK on ETH, $e([W*η(x)]_1+u·[W_{ωη}(x)]*1,[χ]\_2) =e(η·[W*η(x)]_1+uηω·[W_{ωη}(x)]\_1 +[F]\_1-[E]\_1,[l]\_2).$
+UltraPlonk: PK of Plonk KZG (or Dan + Fflonk) PK, Plookup table T*{1,i}, T*{2,i},T*{3,i},i=1,..,n, circuit to create quotient polynomial, verify bilinear pairing by VK on ETH, $e([W*η(x)]_1 + u·[W_{ωη}(x)]*1,[χ]\_2)$ = $e(η·[W*η(x)]_1+uηω·[W_{ωη}(x)]\_1 +[F]\_1-[E]\_1,[l]\_2).$
 
 ## Z
 
 ZK-EVMs scale ETH by improving verification or EVM compatibility from ETH-equiv(PSE, Taiko), EVM-equiv(Scroll, Polygon), Almost EVM-equiv(Gas adjust), to language-equiv(Starkware, zkSync), e.g. Geth→Trace→Roller(zkEVM Aggr. circuit →Aggr. proof) → L1 contract.
 
-zk Homomorphism in projective coordinates: For Φ: E(K) → E'(K), E(k) be $y^2 = x^3 + ax + b,$ $f(x) = x^3 + ax + b,$ P = (x, y) ∈ E(K), the standard form is $Φ(x, y) = ({u(x)}/{v(x)}, {s(x)}/{t(x)}y),$ with divisor relations: $v^3(x)|t^2(x) and t^2(x)|v^3(x)f(x).$
+zk Homomorphism in projective coordinates: For Φ: E(K) → E'(K), E(k) be $y^2 = x^3 + ax + b,$ $f(x) = x^3 + ax + b,$ P = (x, y) ∈ E(K), the standard form is $Φ(x, y) = ({u(x)}/{v(x)}, {s(x)}/{t(x)}y),$ with divisor relations: $v^3(x)|t^2(x)$ and $t^2(x)|v^3(x)f(x).$
 
-ZK Proof: For m = 0 <=> z = r, m = 1 <=> z = rx, validators verifie the quadratic residue directly by $c · x^{2b} ≡ z^2 mod N,$ compared to the GM algorithm. The zk proof ensures validators succesfully verify z when m = 0 even if they doesn't know x.
+ZK Proof: For m = 0 <=> z = r, m = 1 <=> z = rx, validators verifie the quadratic residue directly by $c · x^{2b} ≡ z^2$ mod $N,$ compared to the GM algorithm. The zk proof ensures validators succesfully verify z when m = 0 even if they doesn't know x.
 
-zkStark: RS Codes improves 2^n Trace poly on AIR, not circuit PK & VK, immune to for loops. Unchanged order blowup root 2^kN poly, hash Poseidon2, combined by quotient poly, yields $DEEP(x)=a_0{s_0(x)-s_0(z)}/{x-z}+a_1{s_1(x)-s_1(z)}/{x-z}+a_2{CP(x)-CP(z)}/{x-z}.$ For FRI, along with folding n and Merkle commitments of verified by grinding factors like Pow.
+zkStark: RS Codes improves 2^n Trace poly on AIR, not circuit PK & VK, immune to for loops. Unchanged order blowup root $2^kN$ poly, hash Poseidon2, combined by quotient poly, yields $DEEP(x) = a_0{s_0(x) - s_0(z)}/{x-z} + a_1{s_1(x) - s_1(z)}/{x-z} + a_2{CP(x)-CP(z)}/{x-z}.$ For FRI, along with folding n and Merkle commitments of verified by grinding factors like Pow.
 
 zkStark AIR & ALI convert arithmetic & boundary constraints into divisibility over a finite field that AIR use quotient polynomials verify trace $P={P_1(X^→, Y^→),...,P_s(X^→,Y^→)}$ and ALI diminish the time and space complexity to reduce polynomials into one as FRI.
 
-zkStark Fibonacci: F(X,Y)=Z, like zkSnark's Sigma H=wG, trace T to satisfy transition and boundary constraints by quotient polynomials $C_0(x)={P_1(x+1)-(P_0(x)+P_1(x))}/{∑^i_{0,...,n-1}(x-i)},C_1(x),C_2(x)={P_0(x)-X}/{x-0},C_3(x)$ combined into one f(x) for FRI.
+zkStark Fibonacci: F(X,Y)=Z, like zkSnark's Sigma H=wG, trace T to satisfy transition and boundary constraints by quotient polynomials $C_0(x) = {P_1(x+1) - (P_0(x)+P_1(x))} / {∑^i_{0,...,n-1}(x-i)}, C_1(x), C_2(x)={P_0(x)-X}/{x-0}, C_3(x)$ combined into one f(x) for FRI.
 
-zkStark FRI reduces a polynomial of degree d to two merged into one by random weights of Fait-Shamir for Merkle commitment, after log d steps, to create a constant $f_{log(d)}(x)=g_{log(d)}(x)+a_{log(d)}·h_{log(d)}(x) verified by f(z_1)=f(w), d/2^{log(d)} < 1.$
+zkStark FRI reduces a polynomial of degree d to two merged into one by random weights of Fait-Shamir for Merkle commitment, after log d steps, to create a constant $f_{log(d)}(x)=g_{log(d)}(x)+a_{log(d)}·h_{log(d)}(x)$ verified by $f(z_1)=f(w), d/2^{log(d)} < 1.$
