@@ -1,6 +1,28 @@
-# Elliptic Curves
+# ETAAcademy-ZKMeme: 1. Elliptic Curves
 
-Author: [Eta](https://twitter.com/pwhattie)
+<table>
+  <tr>
+    <th>title</th>
+    <th>tags</th>
+  </tr>
+  <tr>
+    <td>01. Elliptic Curves</td>
+    <td>
+      <table>
+        <tr>
+          <th>zk-meme</th>
+          <th>basic</th>
+          <th>quick_read</th>
+          <td>elliptic_curves</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
+[Github](https://github.com/ETAAcademy)｜[Twitter](https://twitter.com/ETAAcademy)｜[ETA-ZK-Meme](https://github.com/ETAAcademy/ETAAcademy-ZK-Meme)
+
+Authors: [Eta](https://twitter.com/pwhattie), looking forward to your joining
 
 In zk-SNARKs, points on an elliptic curve are obtained by encrypting polynomials with coefficients and values over a finite field. By converting polynomial equations in QAP to relationships between points on an elliptic curve, zero-knowledge proofs can be realized.
 
