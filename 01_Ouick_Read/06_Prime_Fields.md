@@ -1,4 +1,4 @@
-# ETAAcademy-ZKMeme: 6. Finite Fields
+# ETAAcademy-ZKMeme: 6. Prime Fields
 
 <table>
   <tr>
@@ -6,14 +6,14 @@
     <th>tags</th>
   </tr>
   <tr>
-    <td>06. Finite Fields</td>
+    <td>06. Prime Fields</td>
     <td>
       <table>
         <tr>
           <th>zk-meme</th>
           <th>basic</th>
           <th>quick_read</th>
-          <td>finite_fields</td>
+          <td>Prime_fields</td>
         </tr>
       </table>
     </td>
