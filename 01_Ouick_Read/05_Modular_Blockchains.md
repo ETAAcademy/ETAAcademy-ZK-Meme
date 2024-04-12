@@ -6,7 +6,7 @@
     <th>tags</th>
   </tr>
   <tr>
-    <td>04. Monolithic and Modular Blockchains</td>
+    <td>05. Monolithic and Modular Blockchains</td>
     <td>
       <table>
         <tr>
