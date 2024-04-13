@@ -26,9 +26,9 @@ Authors: [Eta](https://twitter.com/pwhattie), looking forward to your joining
 
 Finite fields are essential in cryptography because they work well with computers. To create one, start with a prime number p and define elements as {0, 1, ..., p-1}, using standard addition and multiplication operations modulo p. The extended Euclidean algorithm finds multiplicative inverses.
 
-For STARKs, we need fields with a subgroup of order $2^k$, achieved with prime fields of the form $p = f • 2^k + 1$. This structure ensures this subgroup of $2^k$ evenly spaced points on the complex unit circle within the field.
+For STARKs, we need fields with a subgroup of order $2^k$, achieved with prime fields of the form $p = f \cdot 2^k + 1$. This structure ensures this subgroup of $2^k$ evenly spaced points on the complex unit circle within the field.
 
-For example, a specific finite field with $1 + 407 • 2^{119}$ elements has a sufficiently large subgroup of power-of-two order, which ensures the existence of this subgroup $2^k$. Additionally, it provides the user with generators for both the entire multiplicative group and the power-of-two subgroups. A generator for a subgroup of order n is referred to as a primitive nth root.
+For example, a specific finite field with $1 + 407 \cdot 2^{119}$ elements has a sufficiently large subgroup of power-of-two order, which ensures the existence of this subgroup $2^k$. Additionally, it provides the user with generators for both the entire multiplicative group and the power-of-two subgroups. A generator for a subgroup of order n is referred to as a primitive nth root.
 
 ```python
     def generator( self ):
