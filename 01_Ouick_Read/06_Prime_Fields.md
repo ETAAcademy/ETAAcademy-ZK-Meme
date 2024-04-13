@@ -22,6 +22,8 @@
 
 [Github](https://github.com/ETAAcademy)｜[Twitter](https://twitter.com/ETAAcademy)｜[ETA-ZK-Meme](https://github.com/ETAAcademy/ETAAcademy-ZK-Meme)
 
+Authors: [Eta](https://twitter.com/pwhattie), looking forward to your joining
+
 Finite fields are essential in cryptography because they work well with computers. To create one, start with a prime number p and define elements as {0, 1, ..., p-1}, using standard addition and multiplication operations modulo p. The extended Euclidean algorithm finds multiplicative inverses.
 
 For STARKs, we need fields with a subgroup of order $2^k$, achieved with prime fields of the form $p = f • 2^k + 1$. This structure ensures this subgroup of $2^k$ evenly spaced points on the complex unit circle within the field.
