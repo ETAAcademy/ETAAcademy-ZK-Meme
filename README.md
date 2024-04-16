@@ -37,7 +37,7 @@ Direct Product, 🍬×🍤 <=> 🍱, is an operation that takes two groups G �
 
 ## E
 
-Elliptic Curve : $y^2 = x^3 + ax + b, a,b ∈ F,$ $char(F) ≠ 2,3,$ and $△ = 4a^3 + 27b^2 ≠ 0.$ => The points (x, y) in the curve known as P, Q, or R, and the infinity point O, forms a set E = {(x, y) | $y^2 = x^3$ + ax + b} ∪ {O} => E & add operation yields a group (E, +).
+[Elliptic Curve](https://github.com/ETAAcademy/ETAAcademy-ZK-Meme/blob/main/01_Ouick_Read/01_Elliptic_Curves.md) : $y^2 = x^3 + ax + b, a,b ∈ F,$ $char(F) ≠ 2,3,$ and $△ = 4a^3 + 27b^2 ≠ 0.$ => The points (x, y) in the curve known as P, Q, or R, and the infinity point O, forms a set E = {(x, y) | $y^2 = x^3$ + ax + b} ∪ {O} => E & add operation yields a group (E, +).
 
 Elliptic curve addition: For $P=(x_1, y_1),$ $Q=(x_2, y 2),$ P≠Q，P=Q, Both have intersection points, O or R: 1. Geometric ➕: P + Q = -O or R: P+Q+O=O⇒P+Q=O, P+Q+R=O⇒P+Q=−R. 2. Coordinate ➕：O= 0； $R (x3,−y3)=(λ2−x1−x2,−λ3+(x1+x2)λ−c),$ if the line y=λx+c.
 
