@@ -92,6 +92,8 @@ KZG obtains f(x): $[f(S)] = [a_0S^0 + a_1S^1 + a_2S^2] = a_0[S^0] + a_1[S^1] + a
 
 Merkle commitment: By computing the Merkle root' := Merkle(c, path(c)) based on the node and its verification path (c, path(c)), where root' = root, it ensures that c exists in the Merkle tree.
 
+[Modular blockchains](https://github.com/ETAAcademy/ETAAcademy-ZK-Meme/edit/main/README.md#:~:text=05_Modular_Blockchains) organize tasks into separate layers or modules, like consensus, execution, data availability, and settlement, offering enhanced flexibility and scalability compared to monolithic blockchains.
+
 ## P
 
 Pinocchio: 1) create elliptic curve generator for all operand to simplify constraints, $g_l  =g^{ρl};$ 2) let verifier & prover compute together $L(x)=L_v(x)+L_p(x);$ 3) obfuscate &random for zk proof $(L(s) + δ_l) ·(R(s) + δ_r) - (O(s) + δ_o) =t(s)·(h(s) + △).$
