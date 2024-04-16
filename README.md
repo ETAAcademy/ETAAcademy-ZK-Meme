@@ -155,7 +155,7 @@ zk Homomorphism in projective coordinates: For Φ: E(K) → E'(K), E(k) be $y^2 
 
 ZK Proof: For m = 0 <=> z = r, m = 1 <=> z = rx, validators verifie the quadratic residue directly by $c · x^{2b} ≡ z^2$ mod $N,$ compared to the GM algorithm. The zk proof ensures validators succesfully verify z when m = 0 even if they doesn't know x.
 
-zkStark: RS Codes improves 2^n Trace poly on AIR, not circuit PK & VK, immune to for loops. Unchanged order blowup root $2^kN$ poly, hash Poseidon2, combined by quotient poly, yields $DEEP(x) = a_0{s_0(x) - s_0(z)}/{x-z} + a_1{s_1(x) - s_1(z)}/{x-z} + a_2{CP(x)-CP(z)}/{x-z}.$ For FRI, along with folding n and Merkle commitments of verified by grinding factors like Pow.
+[zkStark](https://github.com/ETAAcademy/ETAAcademy-ZK-Meme/blob/main/README.md#:~:text=07_PRG.md-,08_zkStark,-.md): RS Codes improves 2^n Trace poly on AIR, not circuit PK & VK, immune to for loops. Unchanged order blowup root $2^kN$ poly, hash Poseidon2, combined by quotient poly, yields $DEEP(x) = a_0{s_0(x) - s_0(z)}/{x-z} + a_1{s_1(x) - s_1(z)}/{x-z} + a_2{CP(x)-CP(z)}/{x-z}.$ For FRI, along with folding n and Merkle commitments of verified by grinding factors like Pow.
 
 zkStark AIR & ALI convert arithmetic & boundary constraints into divisibility over a finite field that AIR use quotient polynomials verify trace $P={P_1(X^→, Y^→),...,P_s(X^→,Y^→)}$ and ALI diminish the time and space complexity to reduce polynomials into one as FRI.
 
