@@ -110,6 +110,8 @@ Polynomial Constraints, to increase randomness and prevent proving forgery, use 
 
 Polynomial ring R[x] has a and x from its base ring R, i.e., if R is a commutative or integral ring, the R[x] inherits these properties. But a field F[x] is different, e.g. $Q(x) = a_n^{-1} P(x)$ is a monic polynomial if P(x) ∈ F[x] with $Lc(P) = a_n.$
 
+[Pseudo-random](https://github.com/ETAAcademy/ETAAcademy-ZK-Meme/blob/main/01_Ouick_Read/07_PRG.md) sequences come in various forms, but in cryptography, a pseudo-random sequence is one that cannot be distinguished from a genuinely random sequence, Adv := | Pr[W_0] - Pr[W_1]|.
+
 ## Q
 
 QAP, the polynomial form of R1CS, relies on li (x) and ci, public instance and private witness to produces: $L(x)=Σ^n_{i=1}c_i×l_i(x),$ similar R(x), O(x),and then $p(x)=L(x) ⋅ R(x)-O(x)=(Σ^n_{i=1}c_i ⋅ l_i(x))×(Σ^n_{i=1}c_i ⋅ r_i(x))-(Σ^n_{i=1}c_i ⋅ o_i(x))=0 .🌍🥤🏇$
@@ -130,6 +132,8 @@ SHA256 constraints have expansion of $Wi=σ_1(W_{i−2})田W_{i−7}田σ_0(W_{i
 Simple extension K(a) is the smallest extension field of subfield K and “a”, the homomorphic image to be an isomorphism with the quotient ring ofits irreducible polynomial g(x), $Im(t) ≅ K[X]/Ker(t) ⇒ Im(t) ≅ K[X]/ (g(x)) ⇒ K(a) ≅ K[X]/ (g(x)).$
 
 Splitting field L，as simple extensions added by elements, is the minimal extension of field K and the roots of polynomial factors $f(x) = b(x-a_1)(x-a_2)...(x-a_m).$ The finite field of $p^n$ is isomorphic to its unique splitting field of $x^{p^n}−x$ over $Z_p.$
+
+[Stream Ciphers](https://github.com/ETAAcademy/ETAAcademy-ZK-Meme/blob/main/01_Ouick_Read/03_Stream_Cipher.md) use a PRG to generate a longer key from a shorter one. This extended key is then XORed with the plaintext to produce ciphertext, or with ciphertext to retrieve the original plaintext, $G: {0, 1}^s$ → ${0, 1}^n$, $K={0,1}^s$, $M=C={0, 1}^n$, E(k, m): G(k)⊕m = c, D(k, c): G(k)⊕c=m, (E, D) is a stream cipher defined on (K, M, C).
 
 ## T
 

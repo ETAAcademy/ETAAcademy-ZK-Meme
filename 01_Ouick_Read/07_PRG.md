@@ -1,4 +1,4 @@
-# ETAAcademy-ZKMeme: 6. PRG
+# ETAAcademy-ZKMeme: 7. PRG
 
 <table>
   <tr>
