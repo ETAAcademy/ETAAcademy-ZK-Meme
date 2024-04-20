@@ -1,4 +1,4 @@
-# ETAAcademy-ZKMeme: 8. zkStark
+# ETAAcademy-ZKMeme: 8. zkStark FRI
 
 <table>
   <tr>
@@ -6,14 +6,14 @@
     <th>tags</th>
   </tr>
   <tr>
-    <td>08. zkStark</td>
+    <td>08. zkStark FRI</td>
     <td>
       <table>
         <tr>
           <th>zk-meme</th>
           <th>basic</th>
           <th>quick_read</th>
-          <td>zkStark</td>
+          <td>zkStark_FRI</td>
         </tr>
       </table>
     </td>
