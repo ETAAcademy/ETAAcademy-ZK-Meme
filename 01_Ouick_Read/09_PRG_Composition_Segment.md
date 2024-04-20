@@ -45,10 +45,10 @@ It works by iteratively calling G on the seed:
 
 - Choose a random seed k.
 - Call G(k) and split its output into two parts.
-- The first part (length s) becomes the seed for the next call (k_1).
-- The second part (length n) becomes the first output segment (r_1).
+- The first part (length s) becomes the seed for the next call $(k_1)$.
+- The second part (length n) becomes the first output segment $(r_1)$.
 - Repeat this process (t times) until the last call to G.
-  Finally, output the last seed (k_t) and all the collected output segments (r_1 to r_t).
+  Finally, output the last seed $(k_t)$ and all the collected output segments ($r_1$ to $r_t$).
 
 ### Extracting Secure Randomness:
 
