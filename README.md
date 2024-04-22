@@ -25,6 +25,8 @@ Arithmetic circuits, using ➕ and ✖️ gates, asserts inputs instance(x) and 
 Bilinear pairing e:G1×G2→Gt for mult
 if elliptic curves $G_1, G_2,G_t$ are isomorphic, cyclic group, G=G1=G2 , generator g, prime p, a,b∈Fp finite field, then $e(g^a,g^b)=e(g,g)^{ab}, e(g,g)≠e_{Gt},$ addition $e(ag,bg)=e(g,g)^{ab},$ and key exchange $e(g^b,g^c)^a=g^{abc}.$
 
+Block ciphers merge the plaintext and ciphertext spaces into a block space. They serve not only for encryption but also as fundamental components in constructing various cryptographic tools like stream ciphers, hash functions, message authentication codes (MACs), and others.
+
 ## C
 
 Chinese Remainder states that coprime integers $n_1, ..., n_m ∈ N,$ with their product $n = Π_{i=1}^m n_i,$ and any integers $a_1, ...,a_m ∈ Z,$ there exists a unique residue x of a modulo n, a and (a mod $n_1,$ ..., a mod $n_m)$ break larger problem into smaller one.
