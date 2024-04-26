@@ -26,7 +26,7 @@ Authors: [Eta](https://twitter.com/pwhattie), looking forward to your joining
 
 ### PRF Pseudo-Random Function
 
-is similar to a block cipher PRP, where a random function resembles a random permutation, and attackers aim to distinguish between a randomly chosen function and a function based on a key. A block cipher can also be referred to as a PRP because it shares similarities with PRF in terms of definition and security models. Compared to PRF, PRP is a pseudo-random permutation with an inverse function. PRF is a deterministic function that takes a key and a data block as input and produces an output, y = F(k,x) ∈ Y. The security requirement for PRF is that, given a randomly generated key k, the function F(k,⋅) should appear "random" when mapped from X to Y. In the security model of PRF, attackers attempt to distinguish between randomly chosen functions and key-based functions.
+PRF is similar to a block cipher PRP, where a random function resembles a random permutation, and attackers aim to distinguish between a randomly chosen function and a function based on a key. A block cipher can also be referred to as a PRP because it shares similarities with PRF in terms of definition and security models. Compared to PRF, PRP is a pseudo-random permutation with an inverse function. PRF is a deterministic function that takes a key and a data block as input and produces an output, y = F(k,x) ∈ Y. The security requirement for PRF is that, given a randomly generated key k, the function F(k,⋅) should appear "random" when mapped from X to Y. In the security model of PRF, attackers attempt to distinguish between randomly chosen functions and key-based functions.
 
 ### Relationship between PRP (Block Cipher) and PRF:
 
