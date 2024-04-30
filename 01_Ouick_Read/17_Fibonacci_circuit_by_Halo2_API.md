@@ -6,14 +6,14 @@
     <th>tags</th>
   </tr>
   <tr>
-    <td>17. Fibonacci circuit by Halo2 API.md</td>
+    <td>17. Fibonacci circuit by Halo2 API</td>
     <td>
       <table>
         <tr>
           <th>zk-meme</th>
           <th>basic</th>
           <th>quick_read</th>
-          <td>Fibonacci_circuit_by_Halo2_API.md</td>
+          <td>Fibonacci_circuit_by_Halo2_API</td>
         </tr>
       </table>
     </td>
