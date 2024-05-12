@@ -28,7 +28,7 @@ Authors: [Eta](https://twitter.com/pwhattie), looking forward to your joining
 
 ElGamal encryption, a cornerstone of public-key cryptography, gets a boost when combined with elliptic curves. This article explores different ElGamal encryption variations on elliptic curves, highlighting their functionalities and security improvements.
 
-**Standard ElGamal Encryption:**
+### Standard ElGamal Encryption:
 
 Imagine a secure communication channel where you want to send a secret message (M) to someone. ElGamal encryption helps achieve this. Here's how it works on elliptic curves:
 
@@ -49,7 +49,7 @@ Imagine a secure communication channel where you want to send a secret message (
    - The receiver uses their private key a and the ciphertext $(C_1, C_2)$ to recover the message M.
      - $M = (M+ r·G_1)-ar·G = C_2 - a·C_1$
 
-**Hashed ElGamal Encryption:**
+### Hashed ElGamal Encryption:
 
 Standard ElGamal becomes cumbersome when dealing with lengthy messages. Hashed ElGamal offers a solution:
 
@@ -68,7 +68,7 @@ Standard ElGamal becomes cumbersome when dealing with lengthy messages. Hashed E
 
 3. Decryption involves combining the received hash values with the private key (_a_) to retrieve the original message digest.
 
-**ElGamal Encryption with Enhanced Security:**
+### ElGamal Encryption with Enhanced Security:
 
 This variant, inspired by Cramer-Shoup encryption, utilizes multiple private and public key elements for increased security:
 
