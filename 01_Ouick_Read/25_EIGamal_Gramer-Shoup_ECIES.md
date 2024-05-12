@@ -111,13 +111,13 @@ Elliptic Curve Integrated Encryption Scheme (ECIES) incorporates additional feat
      - **R:** This point is obtained by multiplying the generator point G by the random number k: R = k · G.
      - **Z:** This point is derived from the constant h, the public key point Q, and the new random number k: Z = hk · Q.
    - The x-coordinate (abscissa) of point Z is extracted denoted as $x_z$.
-     - This x-coordinate and the point R are used as inputs to a Key Derivation Function (KDF): $(k_1, k_2)$ = KDF$ (x_z, R)$
+     - This x-coordinate and the point R are used as inputs to a Key Derivation Function (KDF): $(k_1, k_2)$ = KDF$(x_z, R)$
      - The KDF outputs two important keys:
-     - **Encryption Key ($k_1$):** Used for encrypting the message m ∈ {0, 1} using the CTR mode of the AES (Advanced Encryption Standard) symmetric cipher, $C = CTR\_AES\_Enc{k_1}(m)$.
+     - **Encryption Key ($k_1$):** Used for encrypting the message m ∈ {0, 1} using the CTR mode of the AES (Advanced Encryption Standard) symmetric cipher, C = CTR_AES_$Enc{k_1}(m)$.
      - **MAC Key ($k_2$):** Used for generating a Message Authentication Code (MAC) to ensure message integrity, $t = MAC{k_2}(C)$.
 
 3. **Decryption:**
 
    - The receiver uses the private key to recover the encryption and MAC keys.
-     - They decrypt the message using CTR mode and the recovered key. The actual message m, represented as a sequence of bits (0s and 1s), is encrypted using the CTR mode of AES with the derived encryption key (k\*1): m = $CTR\_AES\_Dec_{k_1}(C)$, where Z = hk·Q=hkd·G = hd·R.
+     - They decrypt the message using CTR mode and the recovered key. The actual message m, represented as a sequence of bits (0s and 1s), is encrypted using the CTR mode of AES with the derived encryption key (k\*1): m = CTR_AES_$Dec_{k_1}(C)$, where Z = hk·Q=hkd·G = hd·R.
      - The MAC tag is verified to ensure message integrity.
