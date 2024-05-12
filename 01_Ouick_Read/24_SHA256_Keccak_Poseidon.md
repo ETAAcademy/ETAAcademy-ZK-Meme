@@ -58,7 +58,7 @@ SHA-2 (Secure Hash Algorithm 2) is a widely used and trusted hashing algorithm. 
   - SHA-2 pads the message with bits before processing.
   - Padding starts with a single '1' bit, followed by zeros until the message length (in bits) plus 64 is a multiple of 512.
   - Essentially, the message is padded to a specific size for efficient processing.
-- 4. Round Function:
+- 4. [Round Function](https://github.com/ETAAcademy/ETAAcademy-ZK-Meme/blob/main/01_Ouick_Read/22_AES.md):
   - The message is divided into 512-bit blocks, msg’= {msg, 1, 0,…0, msg-len-64bit}, and k zero bits calculated by (Len(msg)+1+k+64)/512=0.
   - Each block goes through multiple rounds of processing.
   - In each round:
