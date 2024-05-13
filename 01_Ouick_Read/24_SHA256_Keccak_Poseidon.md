@@ -26,7 +26,7 @@ Authors: [Eta](https://twitter.com/pwhattie), looking forward to your joining
 
 ## Hashing Showdown: SHA-2 vs Keccak vs Poseidon
 
-The digital world relies on secure ways to verify data integrity. Hash functions play a crucial role in this by creating unique "fingerprints" for any piece of information. This article explores three popular hash functions: SHA-2, BLAKE, Keccak (a variant of SHA-3), and Poseidon, highlighting their differences and suitability for specific tasks.
+The digital world relies on secure ways to verify data integrity. Hash functions play a crucial role in this by creating unique "fingerprints" for any piece of information. This article explores four popular hash functions: SHA-2, BLAKE, Keccak (a variant of SHA-3), and Poseidon, highlighting their differences and suitability for specific tasks.
 
 **SHA-2: The Robust Veteran**
 
