@@ -87,7 +87,18 @@ This variant, inspired by Cramer-Shoup encryption, utilizes multiple private and
      - $V= r·C+ ra ·D$.
 
 3. **Decryption:**
+<<<<<<< HEAD
    - The receiver uses the private key to verify the ciphertext's integrity through a mathematical check involving V= rC+raD = $r(x_1G_1 + x_2 ·G_2)+ra(y_1·G_1 + y_2 ·G_2)$ = $x_1r·G_1+ y_1ar·G_1+ x_2r·G_2+y_2ar·G_2$ = $(x_1 + y_1a)r·G_1+ (x_2+y_2a)r·G_2$ = $(x_1+ y_1a)·U_1 + (x_2 +y_2a)·U_2$.
+||||||| 3d85230
+   - The receiver uses the private key to verify the ciphertext's integrity through a mathematical check involving V= $rC+raD = r(x_1G_1 + x_2 ·G_2)+ra(y_1·G_1 + y_2 ·G_2) =x_1r·G_1+ y_1ar·G_1+ x_2r·G_2+y_2ar·G_2 = (x_1 + y_1a)r·G_1+ (x_2+y_2a)r·G_2 =(x_1+ y_1a)·U_1 + (x_2 +y_2a)·U_2$.
+=======
+   - The receiver uses the private key to verify the ciphertext's integrity through a mathematical check involving
+     V = rC+raD
+        = $r(x_1G_1 + x_2 ·G_2)+ra(y_1·G_1 + y_2 ·G_2)$
+        = $x_1r·G_1+ y_1ar·G_1+ x_2r·G_2+y_2ar·G_2$
+        = $(x_1 + y_1a)r·G_1+ (x_2+y_2a)r·G_2$
+        = $(x_1+ y_1a)·U_1 + (x_2 +y_2a)·U_2$.
+>>>>>>> eb9c6d32768655abfde913a339dcf810e1d23be6
    - If the verification succeeds, the message M is recovered by subtracting terms from E, $M = (r·H+M)-zr·G_1 = E -z·U_1$.
 
 **ECIES Encryption: A Modern Twist**
@@ -113,11 +124,11 @@ Elliptic Curve Integrated Encryption Scheme (ECIES) incorporates additional feat
    - The x-coordinate (abscissa) of point Z is extracted denoted as x.
      - This x-coordinate and the point R are used as inputs to a Key Derivation Function (KDF): $(k_1, k_2)$ = KDF(x, R)
      - The KDF outputs two important keys:
-     - **Encryption Key ($k_1$):** Used for encrypting the message $m ∈ \{0, 1\}^*$ using the CTR mode of the AES (Advanced Encryption Standard) symmetric cipher, $C = CTR\_AES\_Enc_{k_1}$(m).
-     - **MAC Key ($k_2$):** Used for generating a Message Authentication Code (MAC) to ensure message integrity, $t = MAC\_{k_2}(C)$.
+     - **Encryption Key ($k_1$):** Used for encrypting the message $m ∈ \{0, 1\}$ using the CTR mode of the AES (Advanced Encryption Standard) symmetric cipher, $C = CTR-AES-Enc_{k_1}$(m).
+     - **MAC Key ($k_2$):** Used for generating a Message Authentication Code (MAC) to ensure message integrity, $t = MAC_{k_2}(C)$.
 
 3. **Decryption:**
 
    - The receiver uses the private key to recover the encryption and MAC keys.
-     - They decrypt the message using CTR mode and the recovered key. The actual message m, represented as a sequence of bits $\{0, 1\}^*$, is encrypted using the CTR mode of AES with the derived encryption key ($k_1$): $m = CTR\_AES\_Dec_{k_1}(C)$, where Z = hk·Q=hkd·G = hd·R.
+     - They decrypt the message using CTR mode and the recovered key. The actual message m, represented as a sequence of bits $\{0, 1\}^*$, is encrypted using the CTR mode of AES with the derived encryption key ($k_1$): $m = CTR-AES-Dec_{k_1}(C)$, where Z = hk·Q=hkd·G = hd·R.
      - The MAC tag is verified to ensure message integrity.
