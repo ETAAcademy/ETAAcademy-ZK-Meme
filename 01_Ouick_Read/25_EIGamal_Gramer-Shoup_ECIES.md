@@ -42,8 +42,8 @@ Imagine a secure communication channel where you want to send a secret message (
    - The message (M) is converted into a point on the curve (a technical process, M ∈ G).
    - A random number $r ∈ Z_p$ is chosen.
    - The ciphertext consists of two parts:
-     - $C_1: G_1 = r · G$.
-     - $C_2: G_2 = M + r·G_1$.
+     - $C_1 = r · G$.
+     - $C_2 = M + r·G_1$.
 
 3. **Decryption:**
    - The receiver uses their private key a and the ciphertext $(C_1, C_2)$ to recover the message M.
@@ -87,7 +87,7 @@ This variant, inspired by Cramer-Shoup encryption, utilizes multiple private and
      - $V= r·C+ ra ·D$.
 
 3. **Decryption:**
-   - The receiver uses the private key to verify the ciphertext's integrity through a mathematical check involving V= $rC+raD = r(x_1G_1 + x_2 ·G_2)+ra(y_1·G_1 + y_2 ·G_2) =x_1r·G_1+ y_1ar·G_1+ x_2r·G+y_2ar·G_2 = (x_1 + y_1a)r·G_1+ (x_2+y_2a)r·G_2 =(x_1+ y_1a)·U_1 + (x_2 +y_2a)·U_2$.
+   - The receiver uses the private key to verify the ciphertext's integrity through a mathematical check involving V= $rC+raD = r(x_1G_1 + x_2 ·G_2)+ra(y_1·G_1 + y_2 ·G_2) =x_1r·G_1+ y_1ar·G_1+ x_2r·G_2+y_2ar·G_2 = (x_1 + y_1a)r·G_1+ (x_2+y_2a)r·G_2 =(x_1+ y_1a)·U_1 + (x_2 +y_2a)·U_2$.
    - If the verification succeeds, the message M is recovered by subtracting terms from E, $M = (r·H+M)-zr·G_1 = E -z·U_1$.
 
 **ECIES Encryption: A Modern Twist**
@@ -110,14 +110,14 @@ Elliptic Curve Integrated Encryption Scheme (ECIES) incorporates additional feat
    - Two points are calculated based on the chosen random numbers:
      - **R:** This point is obtained by multiplying the generator point G by the random number k: R = k · G.
      - **Z:** This point is derived from the constant h, the public key point Q, and the new random number k: Z = hk · Q.
-   - The x-coordinate (abscissa) of point Z is extracted denoted as $x_z$.
-     - This x-coordinate and the point R are used as inputs to a Key Derivation Function (KDF): $(k_1, k_2)$ = KDF($x_z$, R)
+   - The x-coordinate (abscissa) of point Z is extracted denoted as x.
+     - This x-coordinate and the point R are used as inputs to a Key Derivation Function (KDF): $(k_1, k_2)$ = KDF(x, R)
      - The KDF outputs two important keys:
-     - **Encryption Key ($k_1$):** Used for encrypting the message m ∈ {0, 1} using the CTR mode of the AES (Advanced Encryption Standard) symmetric cipher, C = CTR_AES_Enc $_{k_1}$(m).
-     - **MAC Key ($k_2$):** Used for generating a Message Authentication Code (MAC) to ensure message integrity, t = MAC $_{k_2}$(C).
+     - **Encryption Key ($k_1$):** Used for encrypting the message $m ∈ \{0, 1\}^*$ using the CTR mode of the AES (Advanced Encryption Standard) symmetric cipher, $C = CTR\_AES\_Enc_{k_1}$(m).
+     - **MAC Key ($k_2$):** Used for generating a Message Authentication Code (MAC) to ensure message integrity, $t = MAC\_{k_2}(C)$.
 
 3. **Decryption:**
 
    - The receiver uses the private key to recover the encryption and MAC keys.
-     - They decrypt the message using CTR mode and the recovered key. The actual message m, represented as a sequence of bits (0s and 1s), is encrypted using the CTR mode of AES with the derived encryption key ($k_1$): m = CTR_AES_Dec $_{k_1}$(C), where Z = hk·Q=hkd·G = hd·R.
+     - They decrypt the message using CTR mode and the recovered key. The actual message m, represented as a sequence of bits $\{0, 1\}^*$, is encrypted using the CTR mode of AES with the derived encryption key ($k_1$): $m = CTR\_AES\_Dec_{k_1}(C)$, where Z = hk·Q=hkd·G = hd·R.
      - The MAC tag is verified to ensure message integrity.
