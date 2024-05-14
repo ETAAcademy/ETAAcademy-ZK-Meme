@@ -113,7 +113,7 @@ Elliptic Curve Integrated Encryption Scheme (ECIES) incorporates additional feat
    - The x-coordinate (abscissa) of point Z is extracted denoted as x.
      - This x-coordinate and the point R are used as inputs to a Key Derivation Function (KDF): $(k_1, k_2)$ = KDF(x, R)
      - The KDF outputs two important keys:
-     - **Encryption Key ($k_1$):** Used for encrypting the message $m ∈ {0, 1}${^*}$ using the CTR mode of the AES (Advanced Encryption Standard) symmetric cipher, $C = CTR-AES-Enc_{k_1}$(m).
+     - **Encryption Key ($k_1$):** Used for encrypting the message $m ∈ \{0, 1\}$ using the CTR mode of the AES (Advanced Encryption Standard) symmetric cipher, $C = CTR-AES-Enc_{k_1}$(m).
      - **MAC Key ($k_2$):** Used for generating a Message Authentication Code (MAC) to ensure message integrity, $t = MAC_{k_2}(C)$.
 
 3. **Decryption:**
