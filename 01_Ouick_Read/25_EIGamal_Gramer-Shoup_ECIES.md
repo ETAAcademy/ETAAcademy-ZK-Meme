@@ -87,7 +87,7 @@ This variant, inspired by Cramer-Shoup encryption, utilizes multiple private and
      - $V= r·C+ ra ·D$.
 
 3. **Decryption:**
-   - The receiver uses the private key to verify the ciphertext's integrity through a mathematical check involving V= $rC+raD = r(x_1G_1 + x_2 ·G_2)+ra(y_1·G_1 + y_2 ·G_2) =x_1r·G_1+ y_1ar·G_1+ x_2r·G_2+y_2ar·G_2 = (x_1 + y_1a)r·G_1+ (x_2+y_2a)r·G_2 =(x_1+ y_1a)·U_1 + (x_2 +y_2a)·U_2$.
+   - The receiver uses the private key to verify the ciphertext's integrity through a mathematical check involving $V= rC+raD = r(x_1G_1 + x_2 ·G_2)+ra(y_1·G_1 + y_2 ·G_2) =x_1r·G_1+ y_1ar·G_1+ x_2r·G_2+y_2ar·G_2 = (x_1 + y_1a)r·G_1+ (x_2+y_2a)r·G_2 =(x_1+ y_1a)·U_1 + (x_2 +y_2a)·U_2$.
    - If the verification succeeds, the message M is recovered by subtracting terms from E, $M = (r·H+M)-zr·G_1 = E -z·U_1$.
 
 **ECIES Encryption: A Modern Twist**
