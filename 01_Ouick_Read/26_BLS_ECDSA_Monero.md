@@ -63,7 +63,7 @@ This guide explores three major signature families: BLS, ECDSA, and Monero, each
 
 - **Widely used:** ECDSA (Elliptic Curve Digital Signature Algorithm) and its variants like Schnorr, EdDSA, are prevalent for transaction signatures.
 - **Process:** Involves four steps - commitment, challenge, response, and verification.
-- **Schnorr Signature Example:**
+**Schnorr Signature Example:**
   - Private key (u ∈ [1, n - 1]), public key (Y = u · G), message (m), random number (k ∈ [1, n - 1]).
   - Commitment (R = k · G).
   - Challenge (e = hash(m, R)).
