@@ -1,9 +1,9 @@
 # ETAAcademy-ZK-Meme: Learn ZK in One Sentence
 
-🐬Recipe: ETA Academy ZKmeme
-💓Ingredients: Each ZK terms is explained in a short, easy-to-understand article, 75 ZK terms covered, with 25 articles already written. How many left to code💓
-🥰Tips: More terms and articles will be added. Dive in with us!🚀
-
+🐬Recipe: ETA Academy ZKmeme<br>
+💓Ingredients: Each ZK terms is explained in a short, easy-to-understand article, 75 ZK terms covered, with 25 articles already written. How many left to code💓<br>
+🥰Tips: More terms and articles will be added. Dive in with us 🚀
+<hr>
 ETA Academy is a research community dedicated to zero-knowledge proofs (zk). Fueled by a daily Twitter check-in summarizing one zk learning point, the ETAcademy-ZK-Meme series was born. With the initial 50 entries, we aim for this meme collection to become everyone's go-to pocket guide for understanding zk quickly. Join the movement and help us make zk accessible! [twitter](https://twitter.com/pwhattie/status/1744001346314134003)
 
 Here are some ways to participate in the ETAAcademy-ZK-Meme series:
