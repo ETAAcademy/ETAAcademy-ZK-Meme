@@ -39,7 +39,7 @@ This guide explores three major signature families: BLS, ECDSA, and Monero, each
   - Adding random bits (b ∈ {0, 1}) or random numbers (r ∈ $Z_p$) to the message (M') reduces reduction loss (potential vulnerability) to 2 bits and 1 bit respectively.
     - M’ = {M|b} 或 M’ = {M|b}
     - $σ = H(M')^x$
-    - e(σ, g_2) = e(H(m'), v)
+    - $e(σ, g_2) = e(H(m'), v)$
 
 **BLS Batch Verification:**
 
