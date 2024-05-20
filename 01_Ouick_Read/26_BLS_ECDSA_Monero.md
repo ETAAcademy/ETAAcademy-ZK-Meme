@@ -98,6 +98,6 @@ This guide explores three major signature families: BLS, ECDSA, and Monero, each
   - Signature (σ) includes key image, response values, and new random numbers, $σ  = \{I, c_1, ..., c_5, r_1, ..., r_5\}$
   - Verification: Ensures the consistency between the challenge, message, commitment points, and response values, $c_1+...+c_5 = H_s(m, L_1',...,L_5', R_1',...,R_5')$
 
-**In Conclusion:**
+**In Short:**
 
-BLS excels in blockchain consensus due to its efficient batch verification. ECDSA remains a
+BLS speeds up blockchain consensus with batch verification. ECDSA remains a secure and efficient choice for transactions. Monero prioritizes anonymity with unique signatures.
