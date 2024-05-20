@@ -39,7 +39,7 @@ This guide explores three major signature families: BLS, ECDSA, and Monero, each
   - Adding random bits (b ∈ {0, 1}) or random numbers (r ∈ $Z_p$) to the message (M') reduces reduction loss (potential vulnerability) to 2 bits and 1 bit respectively.
     - M’ = {M|b} 或 M’ = {M|b}
     - $σ = H(M')^x$
-    - e(σ, g_2) = e(H(m'), v)
+    - $e(σ, g_2) = e(H(m'), v)$
 
 **BLS Batch Verification:**
 
@@ -63,7 +63,8 @@ This guide explores three major signature families: BLS, ECDSA, and Monero, each
 
 - **Widely used:** ECDSA (Elliptic Curve Digital Signature Algorithm) and its variants like Schnorr, EdDSA, are prevalent for transaction signatures.
 - **Process:** Involves four steps - commitment, challenge, response, and verification.
-- **Schnorr Signature Example:**
+  
+**Schnorr Signature Example:**
   - Private key (u ∈ [1, n - 1]), public key (Y = u · G), message (m), random number (k ∈ [1, n - 1]).
   - Commitment (R = k · G).
   - Challenge (e = hash(m, R)).
@@ -85,7 +86,7 @@ This guide explores three major signature families: BLS, ECDSA, and Monero, each
 
 ### Monero Signatures: Prioritizing Anonymity
 
-- **Key Distinction:** Utilizes a "key image" ($I = x · H_p(P)$) that hides the public key (P), achieving anonymity.
+- **Key Distinction:** Utilizes a "key image" ( $I = x · H_p(P)$ ) that hides the public key (P), achieving anonymity.
 - **Process:**
   - Message (m) comprises five UTXOs (unspent transaction outputs), including user's UTXO.
   - Five random numbers ($q_i$) and four additional random numbers ($w_i$).
@@ -100,4 +101,10 @@ This guide explores three major signature families: BLS, ECDSA, and Monero, each
 
 **In Short:**
 
+<<<<<<< HEAD
 BLS speeds up blockchain consensus with batch verification. ECDSA remains a secure and efficient choice for transactions. Monero prioritizes anonymity with unique signatures.
+||||||| bcdfa77
+BLS excels in blockchain consensus due to its efficient batch verification. ECDSA remains a
+=======
+BLS speeds up blockchain consensus with batch verification. ECDSA remains a secure and efficient choice for transactions. Monero prioritizes anonymity with unique signatures. 
+>>>>>>> 83101421151a12ba06e7c86dc411340b199f5daf
