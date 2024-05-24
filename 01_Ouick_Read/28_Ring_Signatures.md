@@ -34,7 +34,7 @@ RSA is a widely-used cryptographic algorithm for encryption and digital signatur
 
 In RSA-based ring signatures, a group of users collaborates to create a signature, with one real user and others acting as decoys, typically involving 10 users with 1 being the real signer, and the probability of identity leakage is 1/10. Each user has their public and private keys, denoted as $(e_i, n_i)$. The signature involves multiple forward and reverse RSA and AES calculations to create a ring of plausible signers. The final signature is verified by recalculating commitments and challenges.
 
-![Ring_Signatures](images/28_ring.png){:height="50%" width="50%"}
+<img src="images/28_ring.png" width="200px" />
 
 - Assuming 5 users with their own public and private keys $(e_i, n_i)$, the signature involves 4 forward and 1 reverse RSA and AES computation.
 - With random numbers $c_4$ and $x_4$, RSA encryption is performed using user 4's public key $(e_4, n_4)$, followed by XOR operation and AES encryption.
