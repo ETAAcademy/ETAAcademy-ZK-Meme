@@ -69,7 +69,7 @@ There are techniques to improve the efficiency of Paillier encryption:
 
    - Choose primes p and q as Blum integers: $p = q = 3 \mod 4$ and $\text{gcd}(p-1, q-1) = 2$.
    - Choose a random number $x \in \mathbb{Z}^*_n$ and compute $h = -x^2 \mod n$ with Jacobi symbol -1 to ensure the existence of quadratic residues.
-   - Set $f = h^n \mod n$. The private key remains (p, q), but the public key is extended to (n, f), reducing the length of the random number a. If the factorization problem is hard, the computation of $f^a \mod n^2$, where $ a \in Z_{2^{n/2}} $, is indistinguishable from the original $r^n \mod n^2$. Thus, this adjustment maintains the same level of security.
+   - Set $f = h^n \mod n$. The private key remains (p, q), but the public key is extended to (n, f), reducing the length of the random number a. If the factorization problem is hard, the computation of $f^a \mod n^2$, where $a \in Z_{2^{n/2}}$, is indistinguishable from the original $r^n \mod n^2$. Thus, this adjustment maintains the same level of security.
 
 2. **Chinese Remainder Theorem (CRT)**: This mathematical concept can speed up both encryption and decryption by working with smaller numbers.
    - Leverage the isomorphism $\mathbb{Z}\_n \cong \mathbb{Z}\_p \times \mathbb{Z}\_q$ to accelerate encryption and decryption.
