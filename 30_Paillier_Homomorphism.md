@@ -48,7 +48,7 @@ Paillier encryption is a powerful tool for secure computations on encrypted data
 
 1. Given the ciphertext $c \in \mathbb{Z}_{n^2}$, compute the plaintext as $m := L(c^\lambda \mod n^2) \cdot \mu \mod n$.
 
-The decryption relies on the properties of the Carmichael function and the Taylor expansion $ (1 + n)^x \mod n^2 = 1 + nx \mod n^2$.
+The decryption relies on the properties of the Carmichael function and the Taylor expansion $(1 + n)^x \mod n^2 = 1 + nx \mod n^2$.
 
 **Homomorphism**:
 
