@@ -33,7 +33,7 @@ Paillier encryption is a powerful tool for secure computations on encrypted data
 1. We start with two large prime numbers, p and q, of the same length ensured by gcd(pq, (p-1)(q-1)) = 1.
 2. Compute n = pq and the least common multiple $\lambda = \text{lcm}(p-1, q-1)$.
 3. Define the division function $L(y) = \frac{y-1}{n}$.
-4. Choose a positive integer $g = 1 + n ∈ Z^*_{n^2}$, such that $\mu = (L(g^λ mod n^2))^{-1} \mod n$.
+4. Choose a positive integer $g = 1 + n ∈ Z^*_{n^2}$, such that $\mu = (L(g^λ \mod n^2))^{-1} \mod n$.
 5. Public Key: The public key is simply n = p\*q.
 6. private Keys: The private keys are the original prime numbers p and q and the key generation can be simplified:
 
@@ -59,7 +59,7 @@ Paillier encryption is special because it allows performing calculations directl
   $c_1 ⊕ c_2 = c_1c_2 \mod n^2 = (g^{m_1} · r^n_1 \mod n^2)(g^{m_1} · r^n_1 \mod n^2) = g^{m_1+m_2}·(r_1r_2)^n \mod n^2$, the homomorphic addition is:
   $c_1 ⊕ c_2 = c_1c_2 \mod n^2 = Enc_{pk}(m_1 + m_2 \mod n)$
 - **Scalar Multiplication**:
-  For $a \in \mathbb{Z}_n$ and $c=Enc_{pk}(m)$ :
+  For $a \in Z_n$ and $c=Enc_{pk}(m)$ :
   $a ⨂ c = c^a \mod n^2 = g^{am}· (r^a)^n \mod n^2 = Enc_{pk}(a·m \mod n)$
 
 **Optimizations**:
@@ -69,7 +69,7 @@ There are techniques to improve the efficiency of Paillier encryption:
 
    - Choose primes p and q as Blum integers: $p = q = 3 \mod 4$ and $\text{gcd}(p-1, q-1) = 2$.
    - Choose a random number $x \in \mathbb{Z}^*_n$ and compute $h = -x^2 \mod n$ with Jacobi symbol -1 to ensure the existence of quadratic residues.
-   - Set $f = h^n \mod n$. The private key remains (p, q), but the public key is extended to (n, f), reducing the length of the random number a. If the factorization problem is hard, the computation of $f^a \mod n^2$, where $ a \in Z\_{2^{[n/2]}} $, is indistinguishable from the original $r^n \mod n^2$. Thus, this adjustment maintains the same level of security.
+   - Set $f = h^n \mod n$. The private key remains (p, q), but the public key is extended to (n, f), reducing the length of the random number a. If the factorization problem is hard, the computation of $f^a \mod n^2$, where $ a \in Z_{2^{n/2}} $, is indistinguishable from the original $r^n \mod n^2$. Thus, this adjustment maintains the same level of security.
 
 2. **Chinese Remainder Theorem (CRT)**: This mathematical concept can speed up both encryption and decryption by working with smaller numbers.
    - Leverage the isomorphism $\mathbb{Z}\_n \cong \mathbb{Z}\_p \times \mathbb{Z}\_q$ to accelerate encryption and decryption.
