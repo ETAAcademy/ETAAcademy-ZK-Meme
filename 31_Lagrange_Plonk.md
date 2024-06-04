@@ -26,7 +26,7 @@ Authors: [Eta](https://twitter.com/pwhattie), looking forward to your joining
 
 ## Polynomial Commitment and Lagrange Interpolation
 
-The Prover can use polynomial encoding to compress multiple constraints into one, making it easier for the Verifier to check.
+Provers can combine multiple constraints into a single polynomial, which reduces communication and simplifies verification for Verifiers.
 
 ### Probabilistic Check of Polynomials
 
