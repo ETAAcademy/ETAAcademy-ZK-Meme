@@ -39,7 +39,7 @@ Provers can combine multiple constraints into a single polynomial, which reduces
 Multiplying polynomials can get messy. So, for checking if the element-wise product (think multiplication of corresponding entries) of two vectors equals a third vector, a special kind of polynomial encoding is used called Lagrange interpolation.
 
 - Using Lagrange Interpolation to validate $\vec{a} \circ \vec{b} \overset{?}{=} \vec{c}$, where terms $a_i \cdot b_i$ and $c_i$ do not correspond to the coefficients of $X^i$.
-- Instead, we use Lagrange interpolation polynomials ${L_i(X)}_{i \in [0, N-1]}$, where $L_i(w_i) = 1$ if $j = i$, and $L_i(w_j) = 0$ if $j \neq i$. Encoding $\vec{a}$, $\vec{b}$, and $\vec{c}$, such as
+- Instead, we use Lagrange interpolation polynomials $\{L_i(X)\}_{i\in[0,N-1]}$, where $L_i(w_i)=1$ if $j = i$, and $L_i(w_j) = 0$ if $j \neq i$. Encoding $\vec{a}$, $\vec{b}$, and $\vec{c}$, such as
   $a(X) = a_0 \cdot L_0(X) + a_1 \cdot L_1(X) + a_2 \cdot L_2(X) + \cdots + a_{N-1} \cdot L_{N-1}(X)$
 - The element-wise product of vectors $a_i \cdot b_i = c_i$ resulting in $a(w_i) \cdot b(w_i) = c(w_i)$. Similarly, $\vec{a} \circ \vec{b} = \vec{c}$ translates to functions $a(X) \cdot b(X) = c(X)$ for all $X \in H$.
 
