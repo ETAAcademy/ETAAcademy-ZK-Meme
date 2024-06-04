@@ -40,18 +40,24 @@ Multiplying polynomials can get messy. So, for checking if the element-wise prod
 
 - Using Lagrange Interpolation to validate $\vec{a} \circ \vec{b} \overset{?}{=} \vec{c}$, where terms $a_i \cdot b_i$ and $c_i$ do not correspond to the coefficients of $X^i$.
 - Instead, we use Lagrange interpolation polynomials $\{L_i(X)\}_{i\in[0,N-1]}$, where $L_i(w_i)=1$ if $j = i$, and $L_i(w_j) = 0$ if $j \neq i$. Encoding $\vec{a}$, $\vec{b}$, and $\vec{c}$, such as
-  $a(X) = a_0 \cdot L_0(X) + a_1 \cdot L_1(X) + a_2 \cdot L_2(X) + \cdots + a_{N-1} \cdot L_{N-1}(X)$
+  $$
+  a(X) = a_0 \cdot L_0(X) + a_1 \cdot L_1(X) + a_2 \cdot L_2(X) + \cdots + a_{N-1} \cdot L_{N-1}(X)
+  $$
 - The element-wise product of vectors $a_i \cdot b_i = c_i$ resulting in $a(w_i) \cdot b(w_i) = c(w_i)$. Similarly, $\vec{a} \circ \vec{b} = \vec{c}$ translates to functions $a(X) \cdot b(X) = c(X)$ for all $X \in H$.
 
 ### Single Challenge Verification
 
 To detect Prover’s cheating with a single challenge, transform the above equality by removing the specific \(X\) values (since \(X\) should cover a large range like \(\mathbb{F}\)):
 
-$$a(X) \cdot b(X) - c(X) = q(X) \cdot z_H(X), \quad \forall X \in \mathbb{F}$$
+$$
+a(X) \cdot b(X) - c(X) = q(X) \cdot z_H(X), \quad \forall X \in \mathbb{F}
+$$
 
 Since $f(X) = 0$ for all $X \in H$ and $f(X) = a(X) \cdot b(X) - c(X)$,H is the root set of f(X):
 
-$$f(X) = (X - w*0)(X - w_1) \cdots (X - w*{N-1}) \cdot q(X)$$
+$$
+f(X)=(X-w_0)(X-w_1)(X-w_2)\cdots(X-w_{N-1})\cdot q(X)
+$$
 
 Thus, f(X) is divisible by the vanishing polynomial $z_H(X) = (X - w_0)(X - w_1) \cdots (X - w_{N-1})$. The Prover computes \(q(X)\) and sends it to the Verifier. Since \(H\) is a known system parameter, the Verifier can compute \(z_H(X)\) and check:
 
@@ -61,14 +67,20 @@ $$a(\zeta) \cdot b(\zeta) - c(\zeta) \overset{?}{=} q(\zeta) \cdot z_H(\zeta)$$
 
 There's a clever way to choose the roots of unity to simplify calculations. The subgroup H is formed by the powers of $\omega$:
 
-$$H = (1, \omega, \omega^2, \ldots, \omega^{N-1})$$
+$$
+H = (1, \omega, \omega^2, \ldots, \omega^{N-1})
+$$
 
 These elements satisfy certain symmetries, e.g., $\omega = -\omega^{\frac{N}{2} + 1}$ and $\omega^i = -\omega^{\frac{N}{2} + i}$. Summing all roots of unity yields zero:
 
-$\sum\_{i=0}^{N-1} \omega^i = 0$
+$$
+\sum\_{i=0}^{N-1} \omega^i = 0
+$$
 
-In practical, we choose a large finite field with a large powers-of-2 multiplicative subgroup. Due to the symmetry of \(\omega^i\), on the subgroup \(H\), we have:
+In practical, we choose a large finite field with a large powers-of-2 multiplicative subgroup. Due to the symmetry of $\omega^i$, on the subgroup H, we have:
 
-$z*H(X) = \prod*{i=0}^{N-1} (X - \omega^i) = X^N - 1$
+$$
+z_H(X) = \prod*{i=0}^{N-1} (X - \omega^i) = X^N - 1
+$$
 
 In essence, polynomial encoding and Lagrange interpolation provide a powerful way to compress and verify complex relationships between data, simplifies many calculations and enhances efficiency in verification.
