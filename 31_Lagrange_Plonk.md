@@ -1,4 +1,4 @@
-# ETAAcademy-ZKMeme: 31. Polynomial Commitment and Lagrange Interpolation
+# ETAAcademy-ZKMeme: 31. Lagrange Interpolation
 
 <table>
   <tr>
@@ -6,14 +6,14 @@
     <th>tags</th>
   </tr>
   <tr>
-    <td>31. Polynomial Commitment and Lagrange Interpolation</td>
+    <td>31. Lagrange Interpolation</td>
     <td>
       <table>
         <tr>
           <th>zk-meme</th>
           <th>basic</th>
           <th>quick_read</th>
-          <td>Polynomial_Commitment_Lagrange_Interpolation</td>
+          <td>Lagrange_Interpolation</td>
         </tr>
       </table>
     </td>
@@ -24,7 +24,7 @@
 
 Authors: [Eta](https://twitter.com/pwhattie), looking forward to your joining
 
-## Polynomial Commitment and Lagrange Interpolation
+## Lagrange Interpolation
 
 Provers can combine multiple constraints into a single polynomial, which reduces communication and simplifies verification for Verifiers.
 
