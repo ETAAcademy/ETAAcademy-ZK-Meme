@@ -46,7 +46,7 @@ A verifier can verify multiple copy constraints within a table $\omega$ using ju
 
    Simplifying the Constraints:
 
-   - We add a row to the product table, setting $q_{n-1} = 1/p$ (note: p is the product of vector \(\vec{q}\)). Thus, \( r_n = r_0 = 1 \). The rightmost column is exactly a cyclic shift of \(\vec{r}\).
+   - We add a row to the product table, setting $q_{n-1} = 1/p$ (note: p is the product of vector $\vec{q}$. Thus, $r_n = r_0 = 1$. The rightmost column is exactly a cyclic shift of $vec{r}$.
    - The verifier can challenge the following polynomial equation:
      $L_0(X) \cdot (r(X) - 1) + \alpha \cdot (q(X) \cdot r(X) - r(\omega \cdot X)) = h(X) \cdot z_H(X).$
      Here, $\alpha$ is a random challenge number used to combine multiple polynomial constraints, and $h(X)$ represents the quotient polynomial, with $z_H(X) = (X-1)(X-\omega) \cdots (X-\omega^{n-1})$.
