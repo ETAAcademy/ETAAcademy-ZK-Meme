@@ -67,10 +67,7 @@ $$
 ### Using Grand Product to Prove Multiset Equality:
 
 1. If two polynomials p(X) and q(X) are equal, they must share the same set of roots { $q_i$ }.
-   For example:
-   $$
-   \prod_{i}(X - q_i) = q(X) = p(X) = \prod_{i}(X - p_i),
-   $$
+   For example:$\prod_{i}(X - q_i) = q(X) = p(X) = \prod_{i}(X - p_i),$
    $$
    \\{q_i\\}=_{multiset}\\{p_i\\}
    $$
