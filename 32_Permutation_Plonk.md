@@ -31,7 +31,7 @@ A verifier can verify multiple copy constraints within a table $\omega$ using ju
 ### Cold Start: Grand Product
 
 1. **Product Relation:**
-   The product $p = q_0 \cdot q_1 \cdot q_2 \cdot \cdots \cdot q_{n-2}$ is proved by converting a cumulative product calculation into multiple single multiplication. An auxiliary vector $\vec{r}$, acting as an accumulator, is introduced to represent the "intermediate values" after each multiplication, essentially capturing the entire calculation trace of the product process. The leftmost column represents the original vector to be multiplied {$q_i$}, the middle column {$r_i$} is the auxiliary variable that stores the intermediate value "before each single multiplication," and the rightmost column shows the value after each multiplication.
+   The product $p = q_0 \cdot q_1 \cdot q_2 \cdot \cdots \cdot q_{n-2}$ is proved by converting a cumulative product calculation into multiple single multiplication. An auxiliary vector $\vec{r}$, acting as an accumulator, is introduced to represent the "intermediate values" after each multiplication, essentially capturing the entire calculation trace of the product process. The leftmost column represents the original vector to be multiplied { $q_i$ }, the middle column { $r_i$ } is the auxiliary variable that stores the intermediate value "before each single multiplication," and the rightmost column shows the value after each multiplication.
 
    Interestingly, when we shift the "middle column" vector, r , up one row, it becomes almost identical to the "rightmost column," except for the last element.
 
