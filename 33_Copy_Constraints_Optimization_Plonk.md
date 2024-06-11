@@ -128,15 +128,11 @@ where:
 The σ vectors only need to use distinct values to mark the permutations, not necessarily increasing natural numbers. If we use H = (1, ω, $ω^2,$ ...), then the polynomial ${id_a}(X)$ will be greatly simplified:
 
 $$
-vec_id_a = (1, ω, ω^2, ω^3)
-$$
-
-$$
-vec_id_b = (k_1, k_1ω, k_1ω^2, k_1ω^3)
-$$
-
-$$
-vec_id_c = (k_2, k_2ω, k_2ω^2, k_2ω^3)
+\begin{split}
+\vec{id}_a &= (1,\omega,\omega^2,\omega^3)\\
+\vec{id}_b &= (k_1,k_1\omega,k_1\omega^2,k_1\omega^3)\\
+\vec{id}_c &= (k_2,k_2\omega,k_2\omega^2,k_2\omega^3)\\
+\end{split}
 $$
 
 where $k_i$ are distinct quadratic non-residues.
@@ -166,7 +162,7 @@ $q_C(X) - q_O(X)w_c(X) = 0$
 
 This method fixes the public values as constants, requiring recomputation of the $q_C(X)$ polynomial if values change, which is inefficient.
 
-Introduce a new column \(\phi\) for public parameters, which allow public input changes without affecting other parts of the circuit. The new arithmetic constraint is:
+Introduce a new column $\phi$ for public parameters, which allow public input changes without affecting other parts of the circuit. The new arithmetic constraint is:
 
 $q_L(X)w_a(X) + q_R(X)w_b(X) + q_M(X)w_a(X)w_b(X) - q_O(X)w_c(X) + q_C(X) + \phi(X) = 0$
 
