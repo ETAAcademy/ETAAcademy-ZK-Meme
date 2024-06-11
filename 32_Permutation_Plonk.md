@@ -31,7 +31,7 @@ A verifier can verify multiple copy constraints within a table $\omega$ using ju
 ### Cold Start: Grand Product
 
 1. **Product Relation:**
-   The product $p = q_0 \cdot q_1 \cdot q_2 \cdot \cdots \cdot q_{n-2}$ is proved by converting a cumulative product calculation into multiple single multiplication. An auxiliary vector $\vec{r}$, acting as an accumulator, is introduced to represent the "intermediate values" after each multiplication, essentially capturing the entire calculation trace of the product process. The leftmost column represents the original vector to be multiplied {$q_i$}, the middle column {$r_i$} is the auxiliary variable that stores the intermediate value "before each single multiplication," and the rightmost column shows the value after each multiplication.
+   The product $p = q_0 \cdot q_1 \cdot q_2 \cdot \cdots \cdot q_{n-2}$ is proved by converting a cumulative product calculation into multiple single multiplication. An auxiliary vector $\vec{r}$, acting as an accumulator, is introduced to represent the "intermediate values" after each multiplication, essentially capturing the entire calculation trace of the product process. The leftmost column represents the original vector to be multiplied { $q_i$ }, the middle column { $r_i$ } is the auxiliary variable that stores the intermediate value "before each single multiplication," and the rightmost column shows the value after each multiplication.
 
    Interestingly, when we shift the "middle column" vector, r , up one row, it becomes almost identical to the "rightmost column," except for the last element.
 
@@ -46,7 +46,7 @@ A verifier can verify multiple copy constraints within a table $\omega$ using ju
 
    Simplifying the Constraints:
 
-   - We add a row to the product table, setting $q_{n-1} = 1/p$ (note: p is the product of vector \(\vec{q}\)). Thus, \( r_n = r_0 = 1 \). The rightmost column is exactly a cyclic shift of \(\vec{r}\).
+   - We add a row to the product table, setting $q_{n-1} = 1/p$ (note: p is the product of vector $\vec{q}$. Thus, $r_n = r_0 = 1$. The rightmost column is exactly a cyclic shift of $vec{r}$.
    - The verifier can challenge the following polynomial equation:
      $L_0(X) \cdot (r(X) - 1) + \alpha \cdot (q(X) \cdot r(X) - r(\omega \cdot X)) = h(X) \cdot z_H(X).$
      Here, $\alpha$ is a random challenge number used to combine multiple polynomial constraints, and $h(X)$ represents the quotient polynomial, with $z_H(X) = (X-1)(X-\omega) \cdots (X-\omega^{n-1})$.
@@ -66,12 +66,13 @@ $$
 
 ### Using Grand Product to Prove Multiset Equality:
 
-1. If two polynomials p(X) and q(X) are equal, they must share the same set of roots { $q_i$ }. For example:
-   $\prod_{i}(X - q_i) = q(X) = p(X) = \prod_{i}(X - p_i),$
-   meaning ${q_i} ={_{\{multiset\}}} {p_i}$. By requesting a random number $\gamma$ from the verifier, the prover can prove that the vectors { $p_i$ } and { $q_i$} are equal in the multiset sense through the following equation:
-   $\prod_{i \in [n]}(\gamma - p_i) = \prod_{i \in [n]}(\gamma - q_i).$
+1. If two polynomials p(X) and q(X) are equal, they must share the same set of roots { $q_i$ }.
+   For example: $\prod_{i}(X - q_i) = q(X) = p(X) = \prod_{i}(X - p_i),$ $\\{q_i\\}=_{multiset}\\{p_i\\}$.
+   
+   By requesting a random number $\gamma$ from the verifier, the prover can prove that the vectors { $p_i$ } and { $q_i$} are equal in the multiset sense through the following equation:
+   $\prod_{i \in [n]}(\gamma - p_i) = \prod_{i \in [n]}(\gamma - q_i)$
 
-2. **Product Proof:**
+3. **Product Proof:**
    As mentioned earlier, the multiplication process is converted into a series of single multiplications using auxiliary vectors. Interestingly, two multiplications can be merged into one, as shown here:
    $\prod_{i \in [n]} \frac{(\gamma - p_i)}{(\gamma - q_i)} = 1.$
 
