@@ -125,7 +125,7 @@ where:
 
 ### Position Vector Optimization
 
-The σ vectors only need to use distinct values to mark the permutations, not necessarily increasing natural numbers. If we use H = (1, ω, ω^2, ...), then the polynomial ${id_a}(X)$ will be greatly simplified:
+The σ vectors only need to use distinct values to mark the permutations, not necessarily increasing natural numbers. If we use H = (1, ω, $ω^2,$ ...), then the polynomial ${id_a}(X)$ will be greatly simplified:
 
 $$
 vec_id_a = (1, ω, ω^2, ω^3)
@@ -142,10 +142,10 @@ $$
 where $k_i$ are distinct quadratic non-residues.
 
 $$
-id_a(X) = X, \quad id_b(X) = k_1 * X, \quad id_a(X) = k_2 * X
+id_a(X) = X, \quad id_b(X) = k_1 \cdot X, \quad id_a(X) = k_2 \cdot X
 $$
 
-If there are more columns in σ, then we need to choose multiple $k_1, k_2, k_3, ... = g^1, g^2, g^3, ...$ where g is a generator of the multiplicative subgroup T, and |T|\*2^λ = p-1.
+If there are more columns in σ, then we need to choose multiple $k_1, k_2, k_3, ... = g^1, g^2, g^3, ...$ where g is a generator of the multiplicative subgroup T, and $|T|\*2^λ = p-1.$
 
 ### Public Inputs
 
@@ -160,14 +160,14 @@ i & q_L & q_R & q_M & q_C & q_O \\
 \end{array}
 $$
 
-To prove that a circuit output equals a specific public value (e.g., out=99), the simplest method is to use the \( q_C \) column with constraints \( q_L = q_R = q_M = 0 \):
+To prove that a circuit output equals a specific public value (e.g., out=99), the simplest method is to use the $q_C$ column with constraints $q_L = q_R = q_M = 0:$
 
-\[ q_C(X) - q_O(X)w_c(X) = 0 \]
+$q_C(X) - q_O(X)w_c(X) = 0$
 
-This method fixes the public values as constants, requiring recomputation of the \( q_C(X) \) polynomial if values change, which is inefficient.
+This method fixes the public values as constants, requiring recomputation of the $q_C(X)$ polynomial if values change, which is inefficient.
 
 Introduce a new column \(\phi\) for public parameters, which allow public input changes without affecting other parts of the circuit. The new arithmetic constraint is:
 
-\[ q_L(X)w_a(X) + q_R(X)w_b(X) + q_M(X)w_a(X)w_b(X) - q_O(X)w_c(X) + q_C(X) + \phi(X) = 0 \]
+$q_L(X)w_a(X) + q_R(X)w_b(X) + q_M(X)w_a(X)w_b(X) - q_O(X)w_c(X) + q_C(X) + \phi(X) = 0$
 
 In summary, handling public inputs efficiently in the Plonk protocol involves introducing a dedicated column for public parameters to avoid frequent recalculations of constraint polynomials. Additionally, optimizing position vectors and managing copy constraints with auxiliary vectors and random merging helps ensure the integrity and efficiency of the proof system.
