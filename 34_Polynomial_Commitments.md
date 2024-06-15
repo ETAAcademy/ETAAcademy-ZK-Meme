@@ -115,15 +115,15 @@ $$
 - For a more complex case, consider the polynomial constraint $f_1(X) f_2(X) + h_1(X) h_2(X) h_3(X) + g(X) = 0.$
 - The straightforward approach involves the prover opening the commitments at $X = \zeta$ and sending the evaluations and corresponding proofs for each polynomial:
 
-  $$
-  (f*1(\zeta), \pi*{f*1}), (f_2(\zeta), \pi*{f*2}), (h_1(\zeta), \pi*{h*1}), (h_2(\zeta), \pi*{h*2}), (h_3(\zeta), \pi*{h*3}), (g(\zeta), \pi*{g})
-  $$
+$$
+(f_1(\zeta),\pi_{f_1}),(f_2(\zeta),\pi_{f_2}),(h_1(\zeta),\pi_{h_1}),(h_2(\zeta),\pi_{h_2}),(h_3(\zeta),\pi_{h_3}),(g(\zeta),\pi_{g})
+$$
 
 - The verifier then checks all six evaluation proofs and verifies the polynomial constraint:
 
-  $$
-  f_1(\zeta) f_2(\zeta) + h_1(\zeta) h_2(\zeta) h_3(\zeta) + g(\zeta) \overset{?}{=} 0
-  $$
+$$
+f_1(\zeta)f_2(\zeta) + h_1(\zeta)h_2(\zeta)h_3(\zeta) + g(\zeta) \overset{?}{=} 0
+$$
 
 ## Optimization Round Two 🍄🏰: Reducing the Number of Openings
 
