@@ -77,7 +77,7 @@ $$
 Using Groth's notation, where $[1]_1 \triangleq G$ and $[1]_2 \triangleq H$ are generators of two groups, we can express the verification equation as:
 
 $$
-e(C_{f(X)} - y[1]_1, [1]*2) \overset{?}{=} e(C*{q(X)}, [\chi]_2 - \zeta [1]_2)
+e(C\_{f(X)} - y[1]_1, [1]_2) \overset{?}{=} e(C\_{q(X)}, [\chi]_2 - \zeta [1]_2)
 $$
 
 To reduce the expensive operations on \(\mathbb{G}2\), we can simplify to:
@@ -89,7 +89,7 @@ $$
 Hence:
 
 $$
-e(C_{f(X)} + \zeta C_{q(X)} - y[1]_1, [1]_2) \overset{?}{=} e(C_{q(X)}, [\chi]_2)
+e(C\_{f(X)} + \zeta\cdot C\_{q(X)} -y\cdot[1]_1,\ [1]_2)\overset{?}{=} e(C\_{q(X)},\  [\chi]_2)
 $$
 
 This equation is equivalent to the original equation, but it reduces the number of operations in $\mathbb{G}\_2$.
