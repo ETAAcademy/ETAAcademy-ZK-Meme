@@ -68,16 +68,16 @@ $$
 f(X) = q(X) \cdot (X - \zeta) + y
 $$
 
-The prover provides the commitment to the polynomial \(q(X)\), \(C_q\), to prove \(f(\zeta) = y\). The verifier checks whether \([q(\chi)]\) satisfies the divisibility:
+The prover provides the commitment to the polynomial q(X), $C_q,$ to prove $f(\zeta) = y$. The verifier checks whether $[q(\chi)]$ satisfies the divisibility:
 
 $$
-(f(X)-y)\cdot 1 \overset{?}{=} q(X) \cdot (X-\zeta)
+(f(X)-y) \cdot 1 \overset{?}{=} q(X) \cdot (X - \zeta)
 $$
 
-And a bilinear mapping is used for verification:
+Using Groth's notation, where $[1]_1 \triangleq G$ and $[1]_2 \triangleq H$ are generators of two groups, we can express the verification equation as:
 
 $$
-e(C_{f(X)} - y[1]_1, [1]_2) \overset{?}{=} e(C_{q(X)}, [\chi]_2 - \zeta[1]_2)
+e(C_{f(X)} - y[1]_1, [1]*2) \overset{?}{=} e(C*{q(X)}, [\chi]_2 - \zeta [1]_2)
 $$
 
 To reduce the expensive operations on \(\mathbb{G}2\), we can simplify to:
