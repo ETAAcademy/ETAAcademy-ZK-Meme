@@ -98,10 +98,6 @@ This equation is equivalent to the original equation, but it reduces the number 
 
 One approach to batch verification is to use random linearization. Multiple polynomials can be combined into a larger polynomial using random numbers, allowing batch verification by opening at a single point:
 
-### Multiple Polynomial Commitments
-
-Multiple polynomials can be combined into a larger polynomial using random numbers, allowing batch verification by opening at a single point. Here's how it works:
-
 **Combining Two Polynomials**:
 
 - Given two polynomials $f_1(X)$ and $f_2(X)$, we can form a new polynomial $g(X) = f_1(X) + \nu \cdot f_2(X),$ where $\nu$ is a random number.
