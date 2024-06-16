@@ -48,7 +48,7 @@ $$
 
 ### Single Challenge Verification
 
-To detect Prover’s cheating with a single challenge, transform the above equality by removing the specific \(X\) values (since \(X\) should cover a large range like $\mathbb{F}:$
+To detect Prover’s cheating with a single challenge, transform the above equality by removing the specific X values (since X should cover a large range like $\mathbb{F}:$
 
 $$
 a(X) \cdot b(X) - c(X) = q(X) \cdot z_H(X), \quad \forall X \in \mathbb{F}
@@ -60,7 +60,7 @@ $$
 f(X)=(X-w_0)(X-w_1)(X-w_2)\cdots(X-w_{N-1})\cdot q(X)
 $$
 
-Thus, f(X) is divisible by the vanishing polynomial $z_H(X) = (X - w_0)(X - w_1) \cdots (X - w_{N-1})$. The Prover computes \(q(X)\) and sends it to the Verifier. Since \(H\) is a known system parameter, the Verifier can compute \(z_H(X)\) and check:
+Thus, f(X) is divisible by the vanishing polynomial $z_H(X) = (X - w_0)(X - w_1) \cdots (X - w_{N-1})$. The Prover computes q(X) and sends it to the Verifier. Since H is a known system parameter, the Verifier can compute $z_H(X)$ and check:
 
 $$a(\zeta) \cdot b(\zeta) - c(\zeta) \overset{?}{=} q(\zeta) \cdot z_H(\zeta)$$
 
