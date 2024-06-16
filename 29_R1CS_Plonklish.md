@@ -97,7 +97,7 @@ Instead of three tables (U,V,W) with potentially many columns, Plonk uses a sing
 
 Plonk can handle more than just addition and multiplication gates, such as comparisons, lookups, and even memory access (RAM).
 
-**Key Tables: $\mathsf{Plonkish}_0 \triangleq (Q, \sigma; W)$**
+**Key Tables: $\mathsf{Plonkish}_0 \triangleq (Q, \sigma;$ W)**
 
 - W table: Stores assignments (secret).
 - Q table (Selector): Defines operation for each row (addition or multiplication).
