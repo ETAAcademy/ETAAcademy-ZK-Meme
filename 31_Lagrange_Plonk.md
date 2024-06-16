@@ -48,7 +48,7 @@ $$
 
 ### Single Challenge Verification
 
-To detect Prover’s cheating with a single challenge, transform the above equality by removing the specific \(X\) values (since \(X\) should cover a large range like \(\mathbb{F}\)):
+To detect Prover’s cheating with a single challenge, transform the above equality by removing the specific \(X\) values (since \(X\) should cover a large range like $\mathbb{F}:$
 
 $$
 a(X) \cdot b(X) - c(X) = q(X) \cdot z_H(X), \quad \forall X \in \mathbb{F}
