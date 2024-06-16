@@ -103,7 +103,7 @@ Plonk can handle more than just addition and multiplication gates, such as compa
 - Q table (Selector): Defines operation for each row (addition or multiplication).
 - Permutation table: Ensures consistency when values are moved around in W.
 
-We define a matrix \(W\in\mathbb{F}^{n\times 3}\) to represent constraints (where \(n\) is the number of arithmetic gates):
+We define a matrix $W\in\mathbb{F}^{n\times 3}$ to represent constraints where n is the number of arithmetic gates):
 
 $$
 \begin{array}{c|c|c|c|}
@@ -116,7 +116,7 @@ i & w_a & w_b & w_c  \\
 \end{array}
 $$
 
-To distinguish addition and multiplication, we define a vector \(Q\in\mathbb{F}^{n\times 5}\) to represent operators:
+To distinguish addition and multiplication, we define a vector $Q\in\mathbb{F}^{n\times 5}$ to represent operators:
 
 $$
 \begin{array}{c|c|c|c|}
@@ -147,7 +147,7 @@ $$
   A = (b_1, b_2, \underline{a_1}, b_3, \underline{a_2}, b_4, \underline{a_3}) =  (b_1, b_2, \underline{a_3}, b_3, \underline{a_1}, b_2, \underline{a_2}) = A'
 $$
 
-To ensure that \(w_c\) in the first row equal to the out variable, an additional copy constraint is added to the \(\sigma\) matrix. In short, if the Prover is honest, then for \(i \in (1,2,3,4)\), the following arithmetic constraint equation holds:
+To ensure that $w_c$ in the first row equal to the out variable, an additional copy constraint is added to the $\sigma$ matrix. In short, if the Prover is honest, then for $i \in (1,2,3,4),$ the following arithmetic constraint equation holds:
 
 $$
 q_{L,i} \circ w_{a,i} + q_{R,i} \circ w_{b,i} + q_{M,i}\circ(w_{a,i}\cdot w_{b,i}) + q_{C,i} -  q_{O,i}\circ w_{c,i} = 0
