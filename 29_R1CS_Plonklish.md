@@ -36,7 +36,7 @@ R1CS, or Rank-1 Constraint Systems, **revolves around multiplication gates**, wh
 <img src="images/29_plonkish.png" width="50%" />
 </div>
 
-Consider a scenario where we have four input variables labeled \(x_1, x_2, x_3, x_4\). In this scenario, \(x_5\) acts as the output of the second multiplication gate and also functions as the right input of the first multiplication gate, while \(out\) represents the output of the first multiplication gate.
+Consider a scenario where we have four input variables labeled $(x_1, x_2, x_3, x_4).$ In this scenario, $x_5$ acts as the output of the second multiplication gate and also functions as the right input of the first multiplication gate, while \(out\) represents the output of the first multiplication gate.
 
 $$\vec{a} = (x_1, x_2, x_3,x_4,x_5,out)$$
 
