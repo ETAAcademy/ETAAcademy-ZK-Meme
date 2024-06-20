@@ -162,7 +162,7 @@ $$
 **Multi-Column Tables:**
 **Collapsing a multi-column table into a single column table using random challenge numbers.** 
 
-Suppose the computation table is ( $\vec{t}_1, \vec{t}_2, \vec{t}_3$ ), then the corresponding lookup record should also be a three-column table, denoted as ( $\vec{f}_1, \vec{f}_2, \vec{f}_3$ ). If we want to prove that ( $f_{1,i}, f_{2,i}, f_{3,i}) = (t_{1,j}, t_{2,j}, t_{3,j}$ ), we can ask the Verifier for a random challenge number $\eta$, and collapse the computation table horizontally as follows:
+Suppose the computation table is $(\vec{t}\_1, \vec{t}\_2, \vec{t}\_3)$， then the corresponding lookup record should also be a three-column table, denoted as $(\vec{f}\_1,\vec{f}\_2,\vec{f}\_3)$. If we want to prove that $(f_{1,i},f_{2,i},f_{3,i})=(t_{1,j},t_{2,j},f_{3,j})$， we can ask the Verifier for a random challenge number $\eta$, and collapse the computation table horizontally as follows:
 
 $$
 \vec{t} = \vec{t}_1+\eta\cdot\vec{t}_2+\eta^2\cdot\vec{t}_3
