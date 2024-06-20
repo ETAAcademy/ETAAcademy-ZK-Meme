@@ -64,20 +64,20 @@ $$
 
   - **Step 1.2:** Ensure $\vec{s}$ is sorted according to $\vec{t}$ by treating each element and its neighbor as a multiset:
 
-    $$
-    \begin{array}{ccccc}
-    S &  & T  & & F \\
-    \{(s_i, s\_{i+1})\} & =_{multiset} & \{(t_i, t\_{i+1})\} &\cup&\{(f_i,f_i)\}\\
-    \end{array}
-    $$
+$$
+\begin{array}{ccccc}
+S &  & T  & & F \\
+\{(s_i, s\_{i+1})\} & =_{multiset} & \{(t_i, t\_{i+1})\} &\cup&\{(f_i,f_i)\}\\
+\end{array}
+$$
 
     For example:
 
-    $$
-    \begin{array}{ccccc}
-    \{(1,1), (1,2),(2,2),(2,2),(2,3),(3,3),(3,4)\} & =\_{multiset} & \{(1,2),(2,3),(3,4)\} &\cup&\{(3,3),(2,2),(2,2),(1,1)\}\\
-    \end{array}
-    $$
+$$
+\begin{array}{ccccc}
+\{(1,1), (1,2),(2,2),(2,2),(2,3),(3,3),(3,4)\} & =\_{multiset} & \{(1,2),(2,3),(3,4)\} &\cup&\{(3,3),(2,2),(2,2),(1,1)\}\\
+\end{array}
+$$
 
 - **Step 1.3:** Using verifier-provided challenges \(\beta\) and \(\gamma\), fold these pairs into single values for permutation argument:
 
