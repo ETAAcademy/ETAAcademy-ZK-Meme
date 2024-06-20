@@ -68,11 +68,11 @@ $$
 
 1. If two polynomials p(X) and q(X) are equal, they must share the same set of roots { $q_i$ }.
    For example: $\prod_{i}(X - q_i) = q(X) = p(X) = \prod_{i}(X - p_i),$ $\\{q_i\\}=_{multiset}\\{p_i\\}$.
-   
+
    By requesting a random number $\gamma$ from the verifier, the prover can prove that the vectors { $p_i$ } and { $q_i$} are equal in the multiset sense through the following equation:
    $\prod_{i \in [n]}(\gamma - p_i) = \prod_{i \in [n]}(\gamma - q_i)$
 
-3. **Product Proof:**
+2. **Product Proof:**
    As mentioned earlier, the multiplication process is converted into a series of single multiplications using auxiliary vectors. Interestingly, two multiplications can be merged into one, as shown here:
    $\prod_{i \in [n]} \frac{(\gamma - p_i)}{(\gamma - q_i)} = 1.$
 

@@ -44,6 +44,7 @@ Multiplying polynomials can get messy. So, for checking if the element-wise prod
 $$
 a(X)=a_0\cdot L_0(X) + a_1\cdot L_1(X)+ a_2\cdot L_2(X) + \cdots + a_{N-1}\cdot L_{N-1}(X)
 $$
+
 - The element-wise product of vectors $a_i \cdot b_i = c_i$ resulting in $a(w_i) \cdot b(w_i) = c(w_i)$. Similarly, $\vec{a} \circ \vec{b} = \vec{c}$ translates to functions $a(X) \cdot b(X) = c(X)$ for all $X \in H$.
 
 ### Single Challenge Verification
