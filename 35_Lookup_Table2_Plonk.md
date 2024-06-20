@@ -47,7 +47,8 @@ $$
 L_0(X)\cdot(f'(X)-t'(X)) = 0, \quad \forall x\in H
 $$
       
-  2.  **Permutation Proof:** Ensures $(\vec{f}, \vec{f}')$ and $(\vec{t}, \vec{t}')$ satisfy certain permutation relations:
+  2.  **Permutation Proof:**
+  ** Ensures $(\vec{f}, \vec{f}')$ and $(\vec{t}, \vec{t}')$ satisfy certain permutation relations:
 
 $$
 \frac{z(\omega\cdot X)}{z(X)}=\frac{(f(X)+\gamma_1)(t(X)+\gamma_2)}{(f'(X)+\gamma_1)(t'(X)+\gamma_2)}
