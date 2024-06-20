@@ -40,8 +40,10 @@ Authors: [Eta](https://twitter.com/pwhattie), looking forward to your joining
 $$
 (f'(X)-f'(\omega^{-1}\cdot X))\cdot (f'(X)-t'(X)) = 0, \quad \forall x\in H
 $$
+
       
-      To prevent cyclic rollovers, $\vec{f}'$ and $\vec{t}'$ must start with the same element, $f'_0=t'_0:$
+      To prevent cyclic rollovers, $\vec{f}'$ and $\vec{t}'$ must start with the same element, $f'_0=t'_0$:
+      
       
 $$
 L_0(X)\cdot(f'(X)-t'(X)) = 0, \quad \forall x\in H
