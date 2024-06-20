@@ -35,27 +35,27 @@ Authors: [Eta](https://twitter.com/pwhattie), looking forward to your joining
 - The Halo2-lookup scheme demonstrates the implementation of lookup gates. It focuses on proving that a query vector's elements belong to a table vector, represented as $\vec{f} \subseteq \vec{t}$. The process involves:
 
   1.  **Sorting (Polynomial Proof):**
-      To ensure that the query vector $\vec{f}$ is sorted in the same order as the table vector $\vec{t},$ the Halo2-lookup scheme employs auxiliary vectors $\vec{f}'$ and $\vec{f}'.$ The rule is that each unmarked element in $\vec{f}'$ equals its left neighbor, and each marked element equals the corresponding element in $vec{t}'$, i.e., $f'_i=f'\_{i-1}$ or $f'_i=t'_i$. Using Lagrange Basis for polynomial encoding, we get:
+      To ensure that the query vector $\vec{f}$ is sorted in the same order as the table vector $\vec{t},$ the Halo2-lookup scheme employs auxiliary vectors $\vec{f}'$ and $\vec{f}'.$ The rule is that each unmarked element in $\vec{f}'$ equals its left neighbor, and each marked element equals the corresponding element in $\vec{t}'$, $f'_i=f'\_{i-1}$ or $f'_i=t'_i$. Using Lagrange Basis for polynomial encoding, we get:
       
-      $$
-      (f'(X)-f'(\omega^{-1}\cdot X))\cdot (f'(X)-t'(X)) = 0, \quad \forall x\in H
-      $$
+$$
+(f'(X)-f'(\omega^{-1}\cdot X))\cdot (f'(X)-t'(X)) = 0, \quad \forall x\in H
+$$
       
       To prevent cyclic rollovers, $\vec{f}'$ and $\vec{t}'$ must start with the same element, $f'_0=t'_0:$
       
-      $$
-      L_0(X)\cdot(f'(X)-t'(X)) = 0, \quad \forall x\in H
-      $$
+$$
+L_0(X)\cdot(f'(X)-t'(X)) = 0, \quad \forall x\in H
+$$
       
   3.  **Permutation Proof:** Ensures $(\vec{f}, \vec{f}')$ and $(\vec{t}, \vec{t}')$ satisfy certain permutation relations:
 
-      $$
-      \frac{z(\omega\cdot X)}{z(X)}=\frac{(f(X)+\gamma_1)(t(X)+\gamma_2)}{(f'(X)+\gamma_1)(t'(X)+\gamma_2)}
-      $$
+$$
+\frac{z(\omega\cdot X)}{z(X)}=\frac{(f(X)+\gamma_1)(t(X)+\gamma_2)}{(f'(X)+\gamma_1)(t'(X)+\gamma_2)}
+$$
 
-      $$
-      L_0(X)\cdot (z(X) - 1) = 0, \quad \forall x\in H
-      $$
+$$
+L_0(X)\cdot (z(X) - 1) = 0, \quad \forall x\in H
+$$
 
 ### Plookup
 
