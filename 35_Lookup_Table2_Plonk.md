@@ -35,14 +35,12 @@ Authors: [Eta](https://twitter.com/pwhattie), looking forward to your joining
 - The Halo2-lookup scheme demonstrates the implementation of lookup gates. It focuses on proving that a query vector's elements belong to a table vector, represented as $\vec{f} \subseteq \vec{t}$. The process involves:
 
   1.  **Sorting (Polynomial Proof):**
-      To ensure that the query vector $\vec{f}$ is sorted in the same order as the table vector $\vec{t},$ the Halo2-lookup scheme employs auxiliary vectors $\vec{f}'$ and $\vec{f}'.$ The rule is that each unmarked element in $\vec{f}'$ equals its left neighbor, and each marked element equals the corresponding element in $\vec{t}'$, $f'_i=f'\_{i-1}$ or $f'_i=t'_i$. Using Lagrange Basis for polynomial encoding, we get:
+      To ensure that the query vector $\vec{f}$ is sorted in the same order as the table vector $\vec{t},$ the Halo2-lookup scheme employs auxiliary vectors $\vec{f}'$ and $\vec{f}'.$ The rule is that each unmarked element in $\vec{f}'$ equals its left neighbor, and each marked element equals the corresponding element in $\vec{t}'$, $f'_i=f'\_{i-1}$ or $f'_i=t'_i$. To prevent cyclic rollovers, $\vec{f}'$ and $\vec{t}'$ must start with the same element, $f'_0=t'_0$. Using Lagrange Basis for polynomial encoding, we get:
       
 $$
 (f'(X)-f'(\omega^{-1}\cdot X))\cdot (f'(X)-t'(X)) = 0, \quad \forall x\in H
-$$
-
+$$   
       
-      To prevent cyclic rollovers, $\vec{f}'$ and $\vec{t}'$ must start with the same element, $f'_0=t'_0$:
       
       
 $$
