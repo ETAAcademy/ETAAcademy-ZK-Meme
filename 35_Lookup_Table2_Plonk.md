@@ -60,9 +60,9 @@ $$
 
 ### Plookup
 
-- **Step 1:** Define an auxiliary vector $\vec{s}$ as a permutation of elements from $\{f_i\} \cup \{t_i\}$.
+**Step 1:** Define an auxiliary vector $\vec{s}$ as a permutation of elements from $\{f_i\} \cup \{t_i\}$.
 
-  - **Step 1.2:** Ensure $\vec{s}$ is sorted according to $\vec{t}$ by treating each element and its neighbor as a multiset:
+**Step 2:** Ensure $\vec{s}$ is sorted according to $\vec{t}$ by treating each element and its neighbor as a multiset:
 
 $$
 \begin{array}{ccccc}
@@ -79,7 +79,7 @@ $$
 \end{array}
 $$
 
-- **Step 1.3:** Using verifier-provided challenges \(\beta\) and \(\gamma\), fold these pairs into single values for permutation argument:
+**Step 3:** Using verifier-provided challenges \(\beta\) and \(\gamma\), fold these pairs into single values for permutation argument:
 
 $$
 \{s_i + \beta s_{i+1}\}=\{t_i + \beta t_{i+1}\}\cup\{(1+\beta)f_i\}
@@ -111,7 +111,7 @@ $$
 \end{split}
 $$
 
-- **Step 1.4:** However, this introduces a new problem. The degree of the $\vec{s}$ polynomial exceeds the degree of $\vec{f}$ or $\vec{t}$. Plookup solves this by splitting $\vec{s}$ into two halves, $\vec{s}^{lo}$ and $\vec{s}^{hi}$, but the last element of $\vec{s}^{lo}$ must equal the first element of $\vec{s}^{hi}$:
+**Step 4:** However, this introduces a new problem. The degree of the $\vec{s}$ polynomial exceeds the degree of $\vec{f}$ or $\vec{t}$. Plookup solves this by splitting $\vec{s}$ into two halves, $\vec{s}^{lo}$ and $\vec{s}^{hi}$, but the last element of $\vec{s}^{lo}$ must equal the first element of $\vec{s}^{hi}$:
 
 $$
 \vec{s}^{lo}_{N-1} = \vec{s}^{hi}_0
