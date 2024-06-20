@@ -71,7 +71,7 @@ S &  & T  & & F \\
 \end{array}
 $$
 
-    For example:
+For example:
 
 $$
 \begin{array}{ccccc}
@@ -81,25 +81,25 @@ $$
 
 - **Step 1.3:** Using verifier-provided challenges \(\beta\) and \(\gamma\), fold these pairs into single values for permutation argument:
 
-  $$
-  \{s_i + \beta s_{i+1}\}=\{t_i + \beta t_{i+1}\}\cup\{(1+\beta)f_i\}
-  $$
+$$
+\{s_i + \beta s_{i+1}\}=\{t_i + \beta t_{i+1}\}\cup\{(1+\beta)f_i\}
+$$
 
-  Transform the multiset equality argument into a grand product argument:
+Transform the multiset equality argument into a grand product argument:
 
-  $$
-  \begin{split}
-  &\prod_i{((1+\beta)f_i+\gamma)(t_i+\beta\cdot t_{i+1}+\gamma)} \\
-  =&\prod_i
-  {(s_i+\beta\cdot s_{i+1}+\gamma)}
-  \end{split}
-  $$
+$$
+\begin{split}
+&\prod_i{((1+\beta)f_i+\gamma)(t_i+\beta\cdot t_{i+1}+\gamma)} \\
+=&\prod_i
+{(s_i+\beta\cdot s_{i+1}+\gamma)}
+\end{split}
+$$
 
-  In the Plookup scheme, this proof transformation is not used. Instead, the order of $\beta$ and $\gamma$ is swapped: first, $\gamma$ is used for the product permutation, and then $\beta$ is used for folding:
+In the Plookup scheme, this proof transformation is not used. Instead, the order of $\beta$ and $\gamma$ is swapped: first, $\gamma$ is used for the product permutation, and then $\beta$ is used for folding:
 
-  $$
-  \{(s_i+\gamma) + \beta (s_{i+1}+\gamma)\}=\{(t_i + \gamma) + \beta (t_{i+1}+\gamma)\}\cup\{(f_i+\gamma)+ \beta(f_i+\gamma)\}
-  $$
+$$
+\{(s_i+\gamma) + \beta (s_{i+1}+\gamma)\}=\{(t_i + \gamma) + \beta (t_{i+1}+\gamma)\}\cup\{(f_i+\gamma)+ \beta(f_i+\gamma)\}
+$$
 
 The relevant Grand Product constraint equation is:
 
