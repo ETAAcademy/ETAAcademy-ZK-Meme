@@ -79,7 +79,7 @@ $$
 \end{array}
 $$
 
-**Step 3:** Using verifier-provided challenges \(\beta\) and \(\gamma\), fold these pairs into single values for permutation argument:
+**Step 3:** Using verifier-provided challenges $\beta$ and $\gamma$, fold these pairs into single values for permutation argument:
 
 $$
 \{s_i + \beta s_{i+1}\}=\{t_i + \beta t_{i+1}\}\cup\{(1+\beta)f_i\}
