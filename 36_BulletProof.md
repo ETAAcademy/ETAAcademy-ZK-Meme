@@ -60,11 +60,11 @@ $t(X) = \langle l(X), r(X) \rangle = t_0 + t_1X + t_2X^2$
 
 ### Proof and Verification:
 
-The prover commits two polynomial coefficients $(t_1, t_2)$, sends these two commitments $(T_1, T_2)$, calculates a challenge x (a random point) and sends five responses $\tau_x, \mu, \hat{t}, \vec{l}, \vec{r}$.
+The prover commits two polynomial coefficients $(t_1, t_2)$, sends these two commitments $(T_1, T_2)$, calculates a challenge x (a random point) and sends five responses $\tau_x, \mu, \hat{t}, \vec{l}, \vec{r}$:
 
 <img src="images/36_bulletproof_prover.png" width="100%" />
 
-The verifier checks the inner product $\langle l, r \rangle$ to verify $t(x)$. The commitment A is a vector commitment to $(\alpha_L, \alpha_R \circ y^n)$ with generators $(g, h', h)$, where $h' = h^{(y^{-n})}$. Similarly, S is a commitment to $(s_L, s_R \circ y^n)$.
+The verifier checks the inner product $\langle l, r \rangle$ to verify $t(x)$. The commitment A is a vector commitment to $(\alpha_L, \alpha_R \circ y^n)$ with generators $(g, h', h)$, where $h' = h^{(y^{-n})}$. Similarly, S is a commitment to $(s_L, s_R \circ y^n)$:
 
 <img src="images/36_bulletproof_verifier.png" width="100%" />
 
