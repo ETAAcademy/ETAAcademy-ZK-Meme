@@ -96,7 +96,7 @@ $\begin{equation*} P=AS^{x}\cdot \mathbf{g}^{-z}\cdot \mathbf{h}^{\prime^{z\cdot
 
 ### Bonus: Diffie-Hellman Key Exchange
 
-The Diffie-Hellman key exchange allows two parties, Alice and Bob, to establish a shared secret key for secure communication even if they are communicating over an insecure public channel, $key = g^{\alpha \beta}$ or $key = Hash (g^{\alpha \beta})$. The basic Diffie-Hellman key exchange can lead to a constant shared key if the same randomness is used in multiple key generations. To address this, a random number $r$ can be included in the final shared key derivation. This is often done by hashing the product $g^(αβ)$ along with random values $r_1$ (chosen by Alice) and $r_2$ (chosen by Bob). The final key becomes $Hash(g^(αβ), r_1, r_2)$.
+The Diffie-Hellman key exchange allows two parties, Alice and Bob, to establish a shared secret key for secure communication even if they are communicating over an insecure public channel, $key = g^{\alpha \beta}$ or $key = Hash (g^{\alpha \beta})$. The basic Diffie-Hellman key exchange can lead to a constant shared key if the same randomness is used in multiple key generations. To address this, a random number $r$ can be included in the final shared key derivation. This is often done by hashing the product $g^{(αβ)}$ along with random values $r_1$ (chosen by Alice) and $r_2$ (chosen by Bob). The final key becomes $Hash(g^{(αβ)}, r_1, r_2)$.
 
 - Alice's private key: $SK_1 = \alpha$
 - Alice's public key: $PK_1 = g^\alpha$
