@@ -28,7 +28,7 @@ Confidential Transactions (CTs) leverage zero-knowledge proofs (ZKP) to ensure t
 
 ### Principle:
 
-This approach utilizes Pedersen commitments and their vector commitment variants. The operations of the range proof can be equated through several transformation steps, where the initial relation is intuitive but hard to prove, and the final relation is abstract but easier to prove. For example, the prover must needs to show knowledge of a secret value $\nu$ and a random value $\gamma$ that satisfies a Pedersen commitment and falls within a given range:
+This approach utilizes Pedersen commitments and their vector commitment variants. The operations of the range proof can be equated through several transformation steps, where the initial equation is intuitive but hard to prove, and the final one is abstract but easier to prove. For example, the prover must needs to show knowledge of a secret value $\nu$ and a random value $\gamma$ that satisfies a Pedersen commitment and falls within a given range:
 
 (1) $V = g^{\nu}h^{\gamma},$
 
