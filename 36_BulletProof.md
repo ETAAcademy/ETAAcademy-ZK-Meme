@@ -84,11 +84,11 @@ $\vec{\alpha_R} = \vec{\alpha_L} - 1 \in \mathbb{Z}_{p}^{n \cdot m}$
 
 $l(X) = (\vec{\alpha_L} - z \cdot \vec{1}^{n \cdot m}) + \vec{s}_{L} \cdot X \in \mathbb{Z}\_{p}^{n \cdot m}[X]$
 
-$r(X) = y^{n\cdot m} \circ (\vec{a_R}+z \cdot \vec{1}^{n \cdot m} + \vec{s_R} \cdot X) +\sum\nolimits\_{j=1}^{m}z^{1+j}\cdot \vec{0}^{(j-1)n} \Vert 2^{n} \Vert \vec{0}^{(m-j)n}$
+$r(X) = y^{n\cdot m} \circ (\vec{a_R}+z \cdot \vec{1}^{n \cdot m} + \vec{s_R} \cdot X) +\sum\nolimits\_{j=1}^{m}z^{1+j}( \vec{0}^{(j-1)n} \Vert 2^{n} \Vert \vec{0}^{(m-j)n})$
 
-$\delta (y, z) = (z -z^{2}) \cdot \langle 1^{n \cdot m}, y^{n \cdot m} \rangle-\sum\nolimits\_{j=1}^{m}z^{1+j} \cdot \langle 1^{n}, 2^{n}\rangle$
+$\delta (y, z) = (z -z^{2}) \langle 1^{n \cdot m}, y^{n \cdot m} \rangle-\sum\nolimits\_{j=1}^{m}(z^{1+j} \cdot \langle 1^{n}, 2^{n}\rangle)$
 
-$\begin{equation*} g^{t}h^{\tau*{x}}\mathop{=}^{?}g^{\delta (y,z)+z\langle 1^{n\cdot m},\mathbf{y}^{n\cdot m}\rangle}\cdot \mathbf{V}^{z^{3}\mathbf{z}^{m}}\cdot T*{1}^{x}\cdot T\_{2}^{x^{2}} \end{equation*}$
+$g^{t}h^{\tau_{x}}\mathop{=}^{?}g^{\delta (y,z)+z\langle 1^{n\cdot m},\mathbf{y}^{n\cdot m}\rangle}\cdot \mathbf{V}^{z^{3}\mathbf{z}^{m}}\cdot T_{1}^{x}\cdot T\_{2}^{x^{2}}$
 
 $\begin{equation*} P=AS^{x}\cdot \mathbf{g}^{-z}\cdot \mathbf{h}^{\prime^{z\cdot \mathbf{y}^{n\cdot m}}}\prod*{j=1}^{m}\mathbf{h}_{[(j-1)\cdot m:j\cdot m]}^{\prime^{z^{j+1}}\cdot 2^{n}} \end{equation_}$
 
