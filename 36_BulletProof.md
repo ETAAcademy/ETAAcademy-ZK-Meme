@@ -63,20 +63,12 @@ $t(X) = \langle l(X), r(X) \rangle = t_0 + t_1X + t_2X^2$
 The prover commits two polynomial coefficients $(t_1, t_2)$, sends these two commitments $(T_1, T_2)$, calculates a challenge x (a random point) and sends five responses $\tau_x, \mu, \hat{t}, \vec{l}, \vec{r}$.
 
 
-$$
-
-\begin{align*} \tau*{1}, \tau*{2}& \mathop{\leftarrow}^{\$}\mathbb{Z}{p} \tag{47}\\ T{i}& =g^{t*{i}}h^{\tau*{i}} i=\{1,2\}\qquad\qquad\quad \in \mathbb{G} \tag{48}\\ \mathcal{P}& \rightarrow \mathcal{V}:T*{1}, T*{2} \tag{49}\\ \mathcal{V}&: x \mathop{\leftarrow}^{\$}\mathbb{Z}{p}^{\star} \tag{50}\\ \mathcal{V}& \rightarrow \mathcal{P}:x \tag{51}\\ \tau{x}& =\tau*{1}\cdot x+\tau*{2}\cdot x^{2}+z^{2}\cdot\gamma\qquad \in \mathbb{Z}{p} \tag{52}\\ \mu& =\alpha+\rho\cdot x\qquad\qquad\qquad\qquad \in \mathbb{Z}{p} \tag{53}\\ t& =\langle 1, \mathrm{r}\rangle\qquad\qquad\qquad\qquad\qquad \in \mathbb{Z}{p} \tag{54}\\ 1& =l(x)=\mathbf{a}{L}-z\cdot 1^{n}+\mathbf{s}{L}\cdot x\quad \in \mathbb{Z}{p}^{n} \tag{55}\\ \mathbf{r}& =r(x)=\mathbf{y}^{n}\circ(\mathbf{a}{R}+z\cdot 1^{n}+\mathbf{s}{R}\cdot x) \tag{56}\\ & +z^{2}\cdot 2^{n}\qquad\qquad\qquad\qquad\qquad \in \mathbb{Z}{p}^{n} \tag{57}\\ \mathcal{P}& \rightarrow \mathcal{V}:\tau{x}, \mu, t, 1, \mathbf{r} \tag{58} \end{align*}
-
-$$
+$\begin{align*} \tau*{1}, \tau*{2}& \mathop{\leftarrow}^{\$}\mathbb{Z}{p} \tag{47}\\ T{i}& =g^{t*{i}}h^{\tau*{i}} i=\{1,2\}\qquad\qquad\quad \in \mathbb{G} \tag{48}\\ \mathcal{P}& \rightarrow \mathcal{V}:T*{1}, T*{2} \tag{49}\\ \mathcal{V}&: x \mathop{\leftarrow}^{\$}\mathbb{Z}{p}^{\star} \tag{50}\\ \mathcal{V}& \rightarrow \mathcal{P}:x \tag{51}\\ \tau{x}& =\tau*{1}\cdot x+\tau*{2}\cdot x^{2}+z^{2}\cdot\gamma\qquad \in \mathbb{Z}{p} \tag{52}\\ \mu& =\alpha+\rho\cdot x\qquad\qquad\qquad\qquad \in \mathbb{Z}{p} \tag{53}\\ t& =\langle 1, \mathrm{r}\rangle\qquad\qquad\qquad\qquad\qquad \in \mathbb{Z}{p} \tag{54}\\ 1& =l(x)=\mathbf{a}{L}-z\cdot 1^{n}+\mathbf{s}{L}\cdot x\quad \in \mathbb{Z}{p}^{n} \tag{55}\\ \mathbf{r}& =r(x)=\mathbf{y}^{n}\circ(\mathbf{a}{R}+z\cdot 1^{n}+\mathbf{s}{R}\cdot x) \tag{56}\\ & +z^{2}\cdot 2^{n}\qquad\qquad\qquad\qquad\qquad \in \mathbb{Z}{p}^{n} \tag{57}\\ \mathcal{P}& \rightarrow \mathcal{V}:\tau{x}, \mu, t, 1, \mathbf{r} \tag{58} \end{align*}$
 
 The verifier checks the inner product $\langle l, r \rangle$ to verify $t(x)$. The commitment A is a vector commitment to $(\alpha_L, \alpha_R \circ y^n)$ with generators $(g, h', h)$, where $h' = h^{(y^{-n})}$. Similarly, S is a commitment to $(s_L, s_R \circ y^n)$.
 
 
-$$
-
-\begin{align*} h*{i}^{\prime}& =h*{i}^{y^{-i+1}}\quad \forall i\in[1, n]\qquad\qquad \in \mathbb{G} \tag{59}\\ t& \mathop{=}^{?}\langle 1, \mathrm{r}\rangle\qquad\qquad\qquad\qquad\qquad \in \mathbb{Z}{p} \tag{60}\\ g^{t}h^{\tau{x}}& \mathop{=}^{?}g^{k(y,z)+z\langle 1^{n},\mathbf{y}^{n}\rangle}\cdot V^{z^{2}}\cdot T*{1}^{x}\cdot T*{2}^{x^{2}} \tag{61}\\ P& =AS^{x}\cdot \mathbf{g}^{-z}\cdot \mathbf{h}^{\prime z\cdot \mathbf{y}^{n}+z^{2}\cdot 2^{n}}\qquad\quad \in \mathbb{G} \tag{62}\\ P& \mathop{=}^{?}h^{\mu}\mathbf{g}^{1}\mathbf{h}^{\prime \mathbf{r}} \tag{63} \end{align*}
-
-$$
+$\begin{align*} h*{i}^{\prime}& =h*{i}^{y^{-i+1}}\quad \forall i\in[1, n]\qquad\qquad \in \mathbb{G} \tag{59}\\ t& \mathop{=}^{?}\langle 1, \mathrm{r}\rangle\qquad\qquad\qquad\qquad\qquad \in \mathbb{Z}{p} \tag{60}\\ g^{t}h^{\tau{x}}& \mathop{=}^{?}g^{k(y,z)+z\langle 1^{n},\mathbf{y}^{n}\rangle}\cdot V^{z^{2}}\cdot T*{1}^{x}\cdot T*{2}^{x^{2}} \tag{61}\\ P& =AS^{x}\cdot \mathbf{g}^{-z}\cdot \mathbf{h}^{\prime z\cdot \mathbf{y}^{n}+z^{2}\cdot 2^{n}}\qquad\quad \in \mathbb{G} \tag{62}\\ P& \mathop{=}^{?}h^{\mu}\mathbf{g}^{1}\mathbf{h}^{\prime \mathbf{r}} \tag{63} \end{align*}$
 
 ### Optimization:
 Using vector inner product commitments and halving responses to send $(L_1, R_1), \ldots, (L_k, R_k), (a, b)$, with a total length of $(2k + 2)$, where $k = \log_2 n$.
