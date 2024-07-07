@@ -82,9 +82,9 @@ $\vec{\alpha_L} = \{0,1\}^{n \cdot m}$
 
 $\vec{\alpha_R} = \vec{\alpha_L} - 1 \in \mathbb{Z}_{p}^{n \cdot m}$
 
-$l(X)=(\vec{\alpha_L} - z \cdot \vec{1}^{n \cdot m}) + \vec{s}_{L} \cdot X \in \mathbb{Z}\_{p}^{n \cdot m}[X]$
+$l(X) = (\vec{\alpha_L} - z \cdot \vec{1}^{n \cdot m}) + \vec{s}_{L} \cdot X \in \mathbb{Z}\_{p}^{n \cdot m}[X]$
 
-$\begin{align*} & r(X)=\mathbf{y}^{n\cdot m}\circ(\mathbf{a}*{R}+z\cdot 1^{n\cdot m}+\mathbf{s}_{R}\cdot X)\\ & +\sum\nolimits\_{j=1}^{m}z^{1+j}\cdot 0(j-1)n\Vert 2^{n}\Vert 0(m-j)n \tag{65} \end{align_}$
+$r(X) = \mathbf{y}^{n\cdot m}\circ(\mathbf{a}\_{R}+z\cdot \vec{1}^{n\cdot m}+\mathbf{\vec{s}}\_{R}\cdot X)\\ & +\sum\nolimits\_{j=1}^{m}z^{1+j}\cdot 0(j-1)n\Vert 2^{n}\Vert 0(m-j)n \tag{65}$
 
 $\begin{equation*} \delta (y, z)=-z^{2}\cdot\langle 1^{n\cdot m}, \mathbf{y}^{n\cdot m}\rangle-\sum\_{j=1}^{m}z^{j+2}\cdot\langle 1^{n}, 2^{n}\rangle \end{equation*}$
 
