@@ -72,9 +72,7 @@ The verifier checks the inner product $\langle l, r \rangle$ to verify $t(x)$. T
 
 Using vector inner product commitments and halving responses to send $(L_1, R_1), \ldots, (L_k, R_k), (a, b)$, with a total length of $(2k + 2)$, where $k = \log_2 n$.
 
-$\mathbf{a}[:k]=(a*1, \ldots, a_k) \in \mathbb{F}^k, \quad \mathbf{a}[k:] = (a*{k+1}, \ldots, a_n) \in \mathbb{F}^{n-k}$
-
-$\begin{equation*} \mathbf{a}{[:k]}=(a{1}, \ldots,a*{k})\in \mathbb{F}^{k},\quad \mathbf{a}{[k:]}=(a{k+1},\ldots, \alpha*{n})\in \mathbb{F}^{n-k}. \end{equation*}$
+$\mathbf{a}[:k]=(a_1, \ldots, a_k) \in \mathbb{F}^k, \quad \mathbf{a}[k:] = (a_{k+1}, \ldots, a_n) \in \mathbb{F}^{n-k}$
 
 ### Verification for Multiple Amounts:
 
