@@ -74,67 +74,36 @@ $\begin{align*} h*{i}^{\prime}& =h*{i}^{y^{-i+1}}\quad \forall i\in[1, n]\qquad\
 Using vector inner product commitments and halving responses to send $(L_1, R_1), \ldots, (L_k, R_k), (a, b)$, with a total length of $(2k + 2)$, where $k = \log_2 n$.
 
 
-$$
+$\mathbf{a}[:k]=(a*1, \ldots, a_k) \in \mathbb{F}^k, \quad \mathbf{a}[k:] = (a*{k+1}, \ldots, a_n) \in \mathbb{F}^{n-k}$
 
-\mathbf{a}[:k]=(a*1, \ldots, a_k) \in \mathbb{F}^k, \quad \mathbf{a}[k:] = (a*{k+1}, \ldots, a_n) \in \mathbb{F}^{n-k}
-
-$$
-
-
-$$
-
-\begin{equation*} \mathbf{a}{[:k]}=(a{1}, \ldots,a*{k})\in \mathbb{F}^{k},\quad \mathbf{a}{[k:]}=(a{k+1},\ldots, \alpha*{n})\in \mathbb{F}^{n-k}. \end{equation*}
-
-$$
+$\begin{equation*} \mathbf{a}{[:k]}=(a{1}, \ldots,a*{k})\in \mathbb{F}^{k},\quad \mathbf{a}{[k:]}=(a{k+1},\ldots, \alpha*{n})\in \mathbb{F}^{n-k}. \end{equation*}$
 
 ### Verification for Multiple Amounts:
 
 The previously described method verifies a single value. To handle verification for multiple amounts, the verification process is extended to operate on aggregates. For example, the inner product and commitment scheme are applied for m different values simultaneously.
 
 
-$$
+$\vec{\alpha_L} = \{0,1\}^{n \cdot m}$
 
-\vec{\alpha_L} = \{0,1\}^{n \cdot m}
+$\vec{\alpha*R} = \vec a_L - 1 \in \mathbb{Z}*{p}^{n \cdot m}$
 
-$$
+$l(x)=\mathbf{a}_{L}-z\cdot 1^{n \cdot m}+\mathbf{\vec s}_{L}\cdot X\quad \in \mathbb{Z}\_{p}^{n \cdot m}[X]$
 
+$\begin{align*} & r(X)=\mathbf{y}^{n\cdot m}\circ(\mathbf{a}*{R}+z\cdot 1^{n\cdot m}+\mathbf{s}_{R}\cdot X)\\ & +\sum\nolimits\_{j=1}^{m}z^{1+j}\cdot 0(j-1)n\Vert 2^{n}\Vert 0(m-j)n \tag{65} \end{align_}$
 
-$$
+$\begin{equation*} \delta (y, z)=-z^{2}\cdot\langle 1^{n\cdot m}, \mathbf{y}^{n\cdot m}\rangle-\sum\_{j=1}^{m}z^{j+2}\cdot\langle 1^{n}, 2^{n}\rangle \end{equation*}$
 
-\vec{\alpha*R} = \vec a_L - 1 \in \mathbb{Z}*{p}^{n \cdot m}
+$\begin{equation*} g^{t}h^{\tau*{x}}\mathop{=}^{?}g^{\delta (y,z)+z\langle 1^{n\cdot m},\mathbf{y}^{n\cdot m}\rangle}\cdot \mathbf{V}^{z^{3}\mathbf{z}^{m}}\cdot T*{1}^{x}\cdot T\_{2}^{x^{2}} \end{equation*}$
 
-$$
-
-
-$$
-
-l(x)=\mathbf{a}_{L}-z\cdot 1^{n \cdot m}+\mathbf{\vec s}_{L}\cdot X\quad \in \mathbb{Z}\_{p}^{n \cdot m}[X]
-
-$$
-
-
-$$
-
-\begin{align*} & r(X)=\mathbf{y}^{n\cdot m}\circ(\mathbf{a}*{R}+z\cdot 1^{n\cdot m}+\mathbf{s}_{R}\cdot X)\\ & +\sum\nolimits\_{j=1}^{m}z^{1+j}\cdot 0(j-1)n\Vert 2^{n}\Vert 0(m-j)n \tag{65} \end{align_}
-
-\begin{equation*} \delta (y, z)=-z^{2}\cdot\langle 1^{n\cdot m}, \mathbf{y}^{n\cdot m}\rangle-\sum\_{j=1}^{m}z^{j+2}\cdot\langle 1^{n}, 2^{n}\rangle \end{equation*}
-
-\begin{equation*} g^{t}h^{\tau*{x}}\mathop{=}^{?}g^{\delta (y,z)+z\langle 1^{n\cdot m},\mathbf{y}^{n\cdot m}\rangle}\cdot \mathbf{V}^{z^{3}\mathbf{z}^{m}}\cdot T*{1}^{x}\cdot T\_{2}^{x^{2}} \end{equation*}
-
-\begin{equation*} P=AS^{x}\cdot \mathbf{g}^{-z}\cdot \mathbf{h}^{\prime^{z\cdot \mathbf{y}^{n\cdot m}}}\prod*{j=1}^{m}\mathbf{h}_{[(j-1)\cdot m:j\cdot m]}^{\prime^{z^{j+1}}\cdot 2^{n}} \end{equation_}
+$\begin{equation*} P=AS^{x}\cdot \mathbf{g}^{-z}\cdot \mathbf{h}^{\prime^{z\cdot \mathbf{y}^{n\cdot m}}}\prod*{j=1}^{m}\mathbf{h}_{[(j-1)\cdot m:j\cdot m]}^{\prime^{z^{j+1}}\cdot 2^{n}} \end{equation_}$
 
 ### Bonus: Diffie-Hellman Key Exchange
 
-The Diffie-Hellman key exchange allows two parties, Alice and Bob, to establish a shared secret key for secure communication even if they are communicating over an insecure public channel, $key = g^{\alpha \beta}$ or $key = Hash (g^{\alpha \beta})$. The basic Diffie-Hellman key exchange can lead to a constant shared key if the same randomness is used in multiple key generations. To address this, a random number `r` can be included in the final shared key derivation. This is often done by hashing the product `g^(αβ)` along with random values `r_1` (chosen by Alice) and `r_2` (chosen by Bob). The final key becomes `Hash(g^(αβ), r_1, r_2)`.
+The Diffie-Hellman key exchange allows two parties, Alice and Bob, to establish a shared secret key for secure communication even if they are communicating over an insecure public channel, $key = g^{\alpha \beta}$ or $key = Hash (g^{\alpha \beta})$. The basic Diffie-Hellman key exchange can lead to a constant shared key if the same randomness is used in multiple key generations. To address this, a random number $r$ can be included in the final shared key derivation. This is often done by hashing the product $g^(αβ)$ along with random values $r_1$ (chosen by Alice) and $r_2$ (chosen by Bob). The final key becomes $Hash(g^(αβ), r_1, r_2)$.
 
 - Alice's private key: $SK_1 = \alpha$
 - Alice's public key: $PK_1 = g^\alpha$
 - Bob's private key: $SK_2 = \beta$
 - Bob's public key: $PK_2 = g^\beta$
 
-$$
-
-(PK_2)^{SK_1} = (g^{\beta})^{\alpha} = g^{\alpha \beta} = (g^{\alpha})^{\beta} = (PK_1)^{SK_2}
-
-
-$$
+$(PK_2)^{SK_1} = (g^{\beta})^{\alpha} = g^{\alpha \beta} = (g^{\alpha})^{\beta} = (PK_1)^{SK_2}$
