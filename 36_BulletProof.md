@@ -80,7 +80,7 @@ The previously described method verifies a single value. To handle verification 
 
 $\vec{\alpha_L} = \{0,1\}^{n \cdot m}$
 
-$\vec{\alpha*R} = \vec a_L - 1 \in \mathbb{Z}*{p}^{n \cdot m}$
+$\vec{\alpha_R} = \vec{\alpha_L} - 1 \in \mathbb{Z}_{p}^{n \cdot m}$
 
 $l(x)=\mathbf{a}_{L}-z\cdot 1^{n \cdot m}+\mathbf{\vec s}_{L}\cdot X\quad \in \mathbb{Z}\_{p}^{n \cdot m}[X]$
 
