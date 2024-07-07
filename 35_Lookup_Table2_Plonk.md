@@ -32,69 +32,74 @@ Authors: [Eta](https://twitter.com/pwhattie), looking forward to your joining
 
 ### Halo2 Lookup
 
-- The Halo2-lookup scheme demonstrates the implementation of lookup gates. It focuses on proving that a query vector's elements belong to a table vector, represented as $\vec{f} \subseteq \vec{t}$. The process involves:
+The Halo2-lookup scheme demonstrates the implementation of lookup gates. It focuses on proving that a query vector's elements belong to a table vector, represented as $\vec{f} \subseteq \vec{t}$. The process involves:
 
-  1.  **Sorting (Polynomial Proof):**
-      To ensure that the query vector $\vec{f}$ is sorted in the same order as the table vector $\vec{t},$ the Halo2-lookup scheme employs auxiliary vectors $\vec{f}'$ and $\vec{f}'.$ The rule is that each unmarked element in $\vec{f}'$ equals its left neighbor, and each marked element equals the corresponding element in $vec{t}',$ i.e., $f'_i=f'\_{i-1}$ or $f'_i=t'_i$. Using Lagrange Basis for polynomial encoding, we get:
-      $$
-      (f'(X)-f'(\omega^{-1}\cdot X))\cdot (f'(X)-t'(X)) = 0, \quad \forall x\in H
-      $$
-      To prevent cyclic rollovers, $\vec{f}'$ and $\vec{t}'$ must start with the same element, $f'_0=t'_0:$
-      $$
-      L_0(X)\cdot(f'(X)-t'(X)) = 0, \quad \forall x\in H
-      $$
-  2.  **Permutation Proof:** Ensures $(\vec{f}, \vec{f}')$ and $(\vec{t}, \vec{t}')$ satisfy certain permutation relations:
+  1. **Sorting (Polynomial Proof):**
+      To ensure that the query vector $\vec{f}$ is sorted in the same order as the table vector $\vec{t},$ the Halo2-lookup scheme employs auxiliary vectors $\vec{f}'$ and $\vec{f}'.$ The rule is that each unmarked element in $\vec{f}'$ equals its left neighbor, and each marked element equals the corresponding element in $\vec{t}'$, $f'_i=f'\_{i-1}$ or $f'_i=t'_i$. To prevent cyclic rollovers, $\vec{f}'$ and $\vec{t}'$ must start with the same element, $f'_0=t'_0$. Using Lagrange Basis for polynomial encoding, we get:
+      
+$$
+(f'(X)-f'(\omega^{-1}\cdot X))\cdot (f'(X)-t'(X)) = 0, \quad \forall x\in H
+$$   
+      
+      
+      
+$$
+L_0(X)\cdot(f'(X)-t'(X)) = 0, \quad \forall x\in H
+$$
+      
+  2. **Permutation Proof:**
+  Ensures $(\vec{f}, \vec{f}')$ and $(\vec{t}, \vec{t}')$ satisfy certain permutation relations:
 
-      $$
-      \frac{z(\omega\cdot X)}{z(X)}=\frac{(f(X)+\gamma_1)(t(X)+\gamma_2)}{(f'(X)+\gamma_1)(t'(X)+\gamma_2)}
-      $$
+$$
+\frac{z(\omega\cdot X)}{z(X)}=\frac{(f(X)+\gamma_1)(t(X)+\gamma_2)}{(f'(X)+\gamma_1)(t'(X)+\gamma_2)}
+$$
 
-      $$
-      L_0(X)\cdot (z(X) - 1) = 0, \quad \forall x\in H
-      $$
+$$
+L_0(X)\cdot (z(X) - 1) = 0, \quad \forall x\in H
+$$
 
 ### Plookup
 
-- **Step 1:** Define an auxiliary vector $\vec{s}$ as a permutation of elements from $\{f_i\} \cup \{t_i\}$.
+**Step 1:** Define an auxiliary vector $\vec{s}$ as a permutation of elements from $\{f_i\} \cup \{t_i\}$.
 
-  - **Step 1.2:** Ensure $\vec{s}$ is sorted according to $\vec{t}$ by treating each element and its neighbor as a multiset:
+**Step 2:** Ensure $\vec{s}$ is sorted according to $\vec{t}$ by treating each element and its neighbor as a multiset:
 
-    $$
-    \begin{array}{ccccc}
-    S &  & T  & & F \\
-    \{(s_i, s\_{i+1})\} & =_{multiset} & \{(t_i, t\_{i+1})\} &\cup&\{(f_i,f_i)\}\\
-    \end{array}
-    $$
+$$
+\begin{array}{ccccc}
+S &  & T  & & F \\
+\{(s_i, s\_{i+1})\} & =_{multiset} & \{(t_i, t\_{i+1})\} &\cup&\{(f_i,f_i)\}\\
+\end{array}
+$$
 
-    For example:
+For example:
 
-    $$
-    \begin{array}{ccccc}
-    \{(1,1), (1,2),(2,2),(2,2),(2,3),(3,3),(3,4)\} & =\_{multiset} & \{(1,2),(2,3),(3,4)\} &\cup&\{(3,3),(2,2),(2,2),(1,1)\}\\
-    \end{array}
-    $$
+$$
+\begin{array}{ccccc}
+\{(1,1), (1,2),(2,2),(2,2),(2,3),(3,3),(3,4),(4,1)\} & =\_{multiset} & \{(1,2),(2,3),(3,4),(4,1)\} &\cup&\{(3,3),(2,2),(2,2),(1,1)\}\\
+\end{array}
+$$
 
-- **Step 1.3:** Using verifier-provided challenges \(\beta\) and \(\gamma\), fold these pairs into single values for permutation argument:
+**Step 3:** Using verifier-provided challenges $\beta$ and $\gamma$, fold these pairs into single values for permutation argument:
 
-  $$
-  \{s_i + \beta s_{i+1}\}=\{t_i + \beta t_{i+1}\}\cup\{(1+\beta)f_i\}
-  $$
+$$
+\{s_i + \beta s_{i+1}\}=\{t_i + \beta t_{i+1}\}\cup\{(1+\beta)f_i\}
+$$
 
-  Transform the multiset equality argument into a grand product argument:
+Transform the multiset equality argument into a grand product argument:
 
-  $$
-  \begin{split}
-  &\prod_i{((1+\beta)f_i+\gamma)(t_i+\beta\cdot t_{i+1}+\gamma)} \\
-  =&\prod_i
-  {(s_i+\beta\cdot s_{i+1}+\gamma)}
-  \end{split}
-  $$
+$$
+\begin{split}
+&\prod_i{((1+\beta)f_i+\gamma)(t_i+\beta\cdot t_{i+1}+\gamma)} \\
+=&\prod_i
+{(s_i+\beta\cdot s_{i+1}+\gamma)}
+\end{split}
+$$
 
-  In the Plookup scheme, this proof transformation is not used. Instead, the order of $\beta$ and $\gamma$ is swapped: first, $\gamma$ is used for the product permutation, and then $\beta$ is used for folding:
+In the Plookup scheme, this proof transformation is not used. Instead, the order of $\beta$ and $\gamma$ is swapped: first, $\gamma$ is used for the product permutation, and then $\beta$ is used for folding:
 
-  $$
-  \{(s_i+\gamma) + \beta (s_{i+1}+\gamma)\}=\{(t_i + \gamma) + \beta (t_{i+1}+\gamma)\}\cup\{(f_i+\gamma)+ \beta(f_i+\gamma)\}
-  $$
+$$
+\{(s_i+\gamma) + \beta (s_{i+1}+\gamma)\}=\{(t_i + \gamma) + \beta (t_{i+1}+\gamma)\}\cup\{(f_i+\gamma)+ \beta(f_i+\gamma)\}
+$$
 
 The relevant Grand Product constraint equation is:
 
@@ -106,7 +111,7 @@ $$
 \end{split}
 $$
 
-- **Step 1.4:** However, this introduces a new problem. The degree of the $\vec{s}$ polynomial exceeds the degree of $\vec{f}$ or $\vec{t}$. Plookup solves this by splitting $\vec{s}$ into two halves, $\vec{s}^{lo}$ and $\vec{s}^{hi}$, but the last element of $\vec{s}^{lo}$ must equal the first element of $\vec{s}^{hi}$:
+**Step 4:** However, this introduces a new problem. The degree of the $\vec{s}$ polynomial exceeds the degree of $\vec{f}$ or $\vec{t}$. Plookup solves this by splitting $\vec{s}$ into two halves, $\vec{s}^{lo}$ and $\vec{s}^{hi}$, but the last element of $\vec{s}^{lo}$ must equal the first element of $\vec{s}^{hi}$:
 
 $$
 \vec{s}^{lo}_{N-1} = \vec{s}^{hi}_0
@@ -160,7 +165,9 @@ z_0 = 1,\quad z_{i+1}=z_i\cdot \frac{(1+\beta)(f_i+\gamma)(t_i+\beta\cdot t_{i+1
 $$
 
 **Multi-Column Tables:**
-**Collapsing a multi-column table into a single column table using random challenge numbers.** Suppose the computation table is $(\vec{t}_1, \vec{t}_2, \vec{t}_3)$, then the corresponding lookup record should also be a three-column table, denoted as $(\vec{f}_1, \vec{f}_2, \vec{f}_3)$. If we want to prove that $(f_{1,i}, f_{2,i}, f_{3,i}) = (t_{1,j}, t_{2,j}, t_{3,j})$, we can ask the Verifier for a random challenge number $\eta$, and collapse the computation table horizontally as follows:
+**Collapsing a multi-column table into a single column table using random challenge numbers.** 
+
+Suppose the computation table is $(\vec{t}\_1, \vec{t}\_2, \vec{t}\_3)$， then the corresponding lookup record should also be a three-column table, denoted as $(\vec{f}\_1,\vec{f}\_2,\vec{f}\_3)$. If we want to prove that $(f_{1,i},f_{2,i},f_{3,i})=(t_{1,j},t_{2,j},f_{3,j})$， we can ask the Verifier for a random challenge number $\eta$, and collapse the computation table horizontally as follows:
 
 $$
 \vec{t} = \vec{t}_1+\eta\cdot\vec{t}_2+\eta^2\cdot\vec{t}_3
