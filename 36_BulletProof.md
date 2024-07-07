@@ -30,7 +30,7 @@ Confidential Transactions (CTs) leverage zero-knowledge proofs (ZKP) to ensure t
 
 This approach utilizes Pedersen commitments and their vector commitment variants. The operations of the range proof can be equated through several transformation steps, where the initial relation is intuitive but hard to prove, and the final relation is abstract but easier to prove. For example, the prover must needs to show knowledge of a secret value $\nu$ and a random value $\gamma$ that satisfies a Pedersen commitment and falls within a given range:
 
-$(1) V = g^{\nu}h^{\gamma},$
+(1) $V = g^{\nu}h^{\gamma},$
 
 (2) $\nu \in [0, 2^n - 1]$
 
@@ -38,70 +38,25 @@ The amount vector $\vec{\alpha_L} = (\alpha_1,...,\alpha_n) \in \{0,1\}^n$ repre
 
 The prover calculates a vector commitment $A = h^{\alpha}\vec g^{\vec{\alpha_L}}\vec h^{\vec{\alpha_R}} \in G$, and transforms the operation (2) into (3) for the binary constraints of $\vec{\alpha_L}$, $\vec{\alpha_R}$. By choosing a random value $y \in \mathbb{Z_p}$, (3) can be expressed as an inner product (4). Introducing another random value $z \in \mathbb{Z_p}$, the equations combine into a single inner product (5). Applying the Hadamard product to the inner product (6), where $\delta(y, z) = (z - z^2) \langle \vec{1}^n, \vec{y}^n \rangle - z^3 \langle \vec{1}^n, \vec{2}^n \rangle \in \mathbb{Z_p}$, the prover only needs to send two vectors from equation (6) to the verifier for validation using the commitment V:
 
+(3) $\langle \vec{\alpha_L}, \vec 2^n \rangle = \nu, \vec \alpha_L \circ \vec \alpha_R = \vec 0^n, \vec \alpha_R = \vec \alpha_L - \vec 1^n$
 
-$$
+(4) $\langle \vec{\alpha_L}, \vec 2^n \rangle = \nu, \langle \vec \alpha_L, \vec \alpha_R \circ \vec y^n \rangle= 0, \langle \vec \alpha_L - \vec 1^n - \vec \alpha_R, \vec y^n \rangle$
 
-(3) \langle \vec{\alpha_L}, \vec 2^n \rangle = \nu, \vec \alpha_L \circ \vec \alpha_R = \vec 0^n, \vec \alpha_R = \vec \alpha_L - \vec 1^n
+(5) $z^2 \langle \vec{\alpha_L}, \vec 2^n \rangle + z \langle \vec \alpha_L - \vec 1^n - \vec \alpha_R, \vec y^n \rangle + \langle \vec \alpha_L, \vec \alpha_R \circ \vec y^n \rangle= z^2 \cdot \nu$
 
-$$
-
-
-$$
-
-(4) \langle \vec{\alpha_L}, \vec 2^n \rangle = \nu, \langle \vec \alpha_L, \vec \alpha_R \circ \vec y^n \rangle= 0, \langle \vec \alpha_L - \vec 1^n - \vec \alpha_R, \vec y^n \rangle
-
-$$
-
-
-$$
-
-(5) z^2 \langle \vec{\alpha_L}, \vec 2^n \rangle + z \langle \vec \alpha_L - \vec 1^n - \vec \alpha_R, \vec y^n \rangle + \langle \vec \alpha_L, \vec \alpha_R \circ \vec y^n \rangle= z^2 \cdot \nu
-
-$$
-
-
-$$
-
-(6) \langle \vec{\alpha_L}-z\cdot \vec 1^n, \vec y^n \circ(\vec a_R + z \cdot \vec 1^n) + z^2 \vec 2^n \rangle = z^2 \cdot \nu + \delta(y, z)
-
-$$
+(6) $\langle \vec{\alpha_L}-z\cdot \vec 1^n, \vec y^n \circ(\vec a_R + z \cdot \vec 1^n) + z^2 \vec 2^n \rangle = z^2 \cdot \nu + \delta(y, z)$
 
 To prevent leakage of $\vec{\alpha_L}$ information, two random vectors $\vec{s_L}$ and $\vec{s_R}$ are introduced. The amount vectors \(\vec{\alpha_L}, \vec{\alpha_R}\) and the random vectors \(\vec{s_L}, \vec{s_R}\) construct polynomials, leading to the final relationship (7): The amount vectors $\vec{\alpha_L}$ and $\vec{\alpha_R}$, along with the random vectors $\vec{s_L}$ and $\vec{s_R}$, are used to construct polynomials, resulting in the final equation (7):
 
+$l(X) = (\vec \alpha_L - z \cdot \vec 1^n) + \vec s_L \cdot X$
 
-$$
+$r(X) = \vec y^n \circ (\vec \alpha_R + z \cdot \vec 1^n + \vec s_R \cdot X) + z^2\vec 2^n$
 
-l(X) = (\vec \alpha_L - z \cdot \vec 1^n) + \vec s_L \cdot X
+$t(X) = \langle l(X), r(X) \rangle = t_0 + t_1X + t_2X^2$
 
-$$
+(1) $V = g^{\nu}h^{\gamma}$
 
-
-$$
-
-r(X) = \vec y^n \circ (\vec \alpha_R + z \cdot \vec 1^n + \vec s_R \cdot X) + z^2\vec 2^n
-
-$$
-
-
-$$
-
-t(X) = \langle l(X), r(X) \rangle = t_0 + t_1X + t_2X^2
-
-$$
-
-
-$$
-
-(1) V = g^{\nu}h^{\gamma}
-
-$$
-
-
-$$
-
-(7) t_0= z^2 \cdot \nu + \delta(y,z)
-
-$$
+(7) $t_0= z^2 \cdot \nu + \delta(y,z)$
 
 ### Proof and Verification:
 
