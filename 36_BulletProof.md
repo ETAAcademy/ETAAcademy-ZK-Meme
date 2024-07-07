@@ -63,8 +63,10 @@ $t(X) = \langle l(X), r(X) \rangle = t_0 + t_1X + t_2X^2$
 The prover commits two polynomial coefficients $(t_1, t_2)$, sends these two commitments $(T_1, T_2)$, calculates a challenge x (a random point) and sends five responses $\tau_x, \mu, \hat{t}, \vec{l}, \vec{r}$.
 
 
-$$
-\begin{align*} \tau*{1}, \tau*{2}& \mathop{\leftarrow}^{\$}\mathbb{Z}{p} \tag{47}\\ T{i}& =g^{t*{i}}h^{\tau*{i}} i=\{1,2\}\qquad\qquad\quad \in \mathbb{G} \tag{48}\\ \mathcal{P}& \rightarrow \mathcal{V}:T*{1}, T*{2} \tag{49}\\ \mathcal{V}&: x \mathop{\leftarrow}^{\$}\mathbb{Z}{p}^{\star} \tag{50}\\ \mathcal{V}& \rightarrow \mathcal{P}:x \tag{51}\\ \tau{x}& =\tau*{1}\cdot x+\tau*{2}\cdot x^{2}+z^{2}\cdot\gamma\qquad \in \mathbb{Z}{p} \tag{52}\\ \mu& =\alpha+\rho\cdot x\qquad\qquad\qquad\qquad \in \mathbb{Z}{p} \tag{53}\\ t& =\langle 1, \mathrm{r}\rangle\qquad\qquad\qquad\qquad\qquad \in \mathbb{Z}{p} \tag{54}\\ 1& =l(x)=\mathbf{a}{L}-z\cdot 1^{n}+\mathbf{s}{L}\cdot x\quad \in \mathbb{Z}{p}^{n} \tag{55}\\ \mathbf{r}& =r(x)=\mathbf{y}^{n}\circ(\mathbf{a}{R}+z\cdot 1^{n}+\mathbf{s}{R}\cdot x) \tag{56}\\ & +z^{2}\cdot 2^{n}\qquad\qquad\qquad\qquad\qquad \in \mathbb{Z}{p}^{n} \tag{57}\\ \mathcal{P}& \rightarrow \mathcal{V}:\tau{x}, \mu, t, 1, \mathbf{r} \tag{58} \end{align*}
+$\tau*{1}, \tau*{2}& \mathop{\leftarrow}^{\$}\mathbb{Z}{p}$
+$T{i}& =g^{t*{i}}h^{\tau*{i}} i=\{1,2\}$
+$\mathcal{P}& \rightarrow \mathcal{V}:T*{1}, T*{2}$
+\mathcal{V}&: x \mathop{\leftarrow}^{\$}\mathbb{Z}{p}^{\star} \tag{50}\\ \mathcal{V}& \rightarrow \mathcal{P}:x \tag{51}\\ \tau{x}& =\tau*{1}\cdot x+\tau*{2}\cdot x^{2}+z^{2}\cdot\gamma\qquad \in \mathbb{Z}{p} \tag{52}\\ \mu& =\alpha+\rho\cdot x\qquad\qquad\qquad\qquad \in \mathbb{Z}{p} \tag{53}\\ t& =\langle 1, \mathrm{r}\rangle\qquad\qquad\qquad\qquad\qquad \in \mathbb{Z}{p} \tag{54}\\ 1& =l(x)=\mathbf{a}{L}-z\cdot 1^{n}+\mathbf{s}{L}\cdot x\quad \in \mathbb{Z}{p}^{n} \tag{55}\\ \mathbf{r}& =r(x)=\mathbf{y}^{n}\circ(\mathbf{a}{R}+z\cdot 1^{n}+\mathbf{s}{R}\cdot x) \tag{56}\\ & +z^{2}\cdot 2^{n}\qquad\qquad\qquad\qquad\qquad \in \mathbb{Z}{p}^{n} \tag{57}\\ \mathcal{P}& \rightarrow \mathcal{V}:\tau{x}, \mu, t, 1, \mathbf{r} \tag{58} \end{align*}
 $$
 
 The verifier checks the inner product $\langle l, r \rangle$ to verify $t(x)$. The commitment A is a vector commitment to $(\alpha_L, \alpha_R \circ y^n)$ with generators $(g, h', h)$, where $h' = h^{(y^{-n})}$. Similarly, S is a commitment to $(s_L, s_R \circ y^n)$.
