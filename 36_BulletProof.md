@@ -46,7 +46,7 @@ The prover calculates a vector commitment $A = h^{\alpha}\vec g^{\vec{\alpha_L}}
 
 (6) $\langle \vec{\alpha_L}-z\cdot \vec 1^n, \vec y^n \circ(\vec a_R + z \cdot \vec 1^n) + z^2 \vec 2^n \rangle = z^2 \cdot \nu + \delta(y, z)$
 
-To prevent leakage of $\vec{\alpha_L}$ information, two random vectors $\vec{s_L}$ and $\vec{s_R}$ are introduced. The amount vectors \(\vec{\alpha_L}, \vec{\alpha_R}\) and the random vectors $\vec{s_L}$, $\vec{s_R}$ construct polynomials, leading to the final relationship (7): The amount vectors $\vec{\alpha_L}$ and $\vec{\alpha_R}$, along with the random vectors $\vec{s_L}$ and $\vec{s_R}$, are used to construct polynomials, resulting in the final equation (7):
+To prevent leakage of $\vec{\alpha_L}$ information, two random vectors $\vec{s_L}$ and $\vec{s_R}$ are introduced. The amount vectors $\vec{\alpha_L}$, $\vec{\alpha_R}$ and the random vectors $\vec{s_L}$, $\vec{s_R}$ construct polynomials, leading to the final relationship (7): The amount vectors $\vec{\alpha_L}$ and $\vec{\alpha_R}$, along with the random vectors $\vec{s_L}$ and $\vec{s_R}$, are used to construct polynomials, resulting in the final equation (7):
 
 $l(X) = (\vec \alpha_L - z \cdot \vec 1^n) + \vec s_L \cdot X$
 
