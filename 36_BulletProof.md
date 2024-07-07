@@ -30,16 +30,9 @@ Confidential Transactions (CTs) leverage zero-knowledge proofs (ZKP) to ensure t
 
 This approach utilizes Pedersen commitments and their vector commitment variants. The operations of the range proof can be equated through several transformation steps, where the initial relation is intuitive but hard to prove, and the final relation is abstract but easier to prove. For example, the prover must needs to show knowledge of a secret value $\nu$ and a random value $\gamma$ that satisfies a Pedersen commitment and falls within a given range:
 
-$$
-(1) V = g^{\nu}h^{\gamma}
-$$，
+$(1) V = g^{\nu}h^{\gamma},$
 
-
-$$
-
-(2) \nu \in [0, 2^n - 1]
-
-$$
+(2) $\nu \in [0, 2^n - 1]$
 
 The amount vector $\vec{\alpha_L} = (\alpha_1,...,\alpha_n) \in \{0,1\}^n$ represents $\nu$ in binary form, fulfilling the inner product of $\langle \vec{\alpha_L}, 2^n \rangle = \nu$.
 
