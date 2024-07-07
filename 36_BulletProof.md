@@ -84,7 +84,7 @@ $\vec{\alpha_R} = \vec{\alpha_L} - 1 \in \mathbb{Z}_{p}^{n \cdot m}$
 
 $l(X) = (\vec{\alpha_L} - z \cdot \vec{1}^{n \cdot m}) + \vec{s}_{L} \cdot X \in \mathbb{Z}\_{p}^{n \cdot m}[X]$
 
-$r(X) = y^{n\cdot m} \circ (\vec{a_R}+z \cdot \vec{1}^{n \cdot m} + \vec{s_R} \cdot X) +\sum\nolimits\_{j=1}^{m}z^{1+j}\cdot 0(j-1)n\Vert 2^{n}\Vert 0(m-j)n \tag{65}$
+$r(X) = y^{n\cdot m} \circ (\vec{a_R}+z \cdot \vec{1}^{n \cdot m} + \vec{s_R} \cdot X) +\sum\nolimits\_{j=1}^{m}z^{1+j}\cdot \vec{0^{(j-1)n}} \Vert 2^{n} \Vert \vec{0^{(m-j)n}}$
 
 $\begin{equation*} \delta (y, z)=-z^{2}\cdot\langle 1^{n\cdot m}, \mathbf{y}^{n\cdot m}\rangle-\sum\_{j=1}^{m}z^{j+2}\cdot\langle 1^{n}, 2^{n}\rangle \end{equation*}$
 
