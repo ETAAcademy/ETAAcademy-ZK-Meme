@@ -90,7 +90,7 @@ $\delta (y, z) = (z -z^{2}) \langle 1^{n \cdot m}, y^{n \cdot m} \rangle-\sum\no
 
 $g^{t}h^{\tau_{x}}\mathop{=}^{?}g^{\delta (y,z)+z\langle 1^{n\cdot m},\mathbf{y}^{n\cdot m}\rangle}\cdot \mathbf{V}^{z^{3}\mathbf{z}^{m}}\cdot T_{1}^{x}\cdot T\_{2}^{x^{2}}$
 
-$P=A \cdot S^{x} \cdot g^{-z} \cdot \vec{h'}^{z \cdot y^{n \cdot m}} \prod_\nolimits\_{j=1}^{m}\vec{h}_{[(j-1)\cdot m:j\cdot m]}^{\prime^{z^{j+1}}\cdot 2^{n}}$
+$P=A \cdot S^{x} \cdot g^{-z} \cdot \vec{h'}^{z \cdot y^{n \cdot m}} \prod_{j=1}^{m} \vec{h}_{[(j-1)\cdot m:j\cdot m]}^{\prime^{z^{j+1}}\cdot 2^{n}}$
 
 ### Bonus: Diffie-Hellman Key Exchange
 
