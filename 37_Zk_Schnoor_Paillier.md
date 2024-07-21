@@ -69,8 +69,7 @@ This protocol is used to prove knowledge of the Paillier key pair, specifically 
 
 - **Key Generation**: The prover generates a Paillier key pair and sends the public key N to the verifier.
 
-- **Nth Power Proof Protocol**: Using the Paillier public key, the prover calculates $t = g^N \mod N^2$. The prover then uses the Nth power proof protocol (with s=1) to demonstrate that they know the Nth root of t, which is g.
-  This Nth Root Proof Protocol is used to prove knowledge of a secret g such that $t \equiv g^{n^s} \mod n^{s+1}$ or to prove that t is the $n^s$th root of some value v. The protocol consists of four steps:
+- **Nth Power Proof Protocol**: Using the Paillier public key, the prover calculates $t = g^N \mod N^2$. The prover then uses the Nth power proof protocol (with s=1) to demonstrate that they know the Nth root of t, which is g, such that $t \equiv g^{n^s} \mod n^{s+1}$:
 
   - 1. Commitment: The prover selects a random number r and computes $a = r^{n^s} \mod n^{s+1}$ and sends a.
   - 2. Challenge: The verifier selects a random k-bit challenge e and sends it to the prover.
