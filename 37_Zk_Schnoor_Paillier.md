@@ -61,7 +61,7 @@ $\phi(p)$ should be the smallest such exponent.
 
 - **Modular Congruence**: If $\gcd(N, (p-1)) = 1$, the congruence $Ng \equiv t \mod (p-1)$ has a unique solution for g. Since $\gcd(N, (p-1)) = 1$, we can directly cancel N from the congruence, giving $Ng \mod (p-1) \equiv t \mod (p-1) \equiv Ng' \mod (p-1)$.
 
-- **Nth Residue**: If the congruence $g^N \equiv t \mod p$ has a solution g, t is an Nth residue modulo p, otherwise an Nth non-residue, where a unique g is the a primitive root modulo p. To solve this, construct the congruence and use the Baby-Step Giant-Step algorithm to find the unique solution, resolving the Nth residue problem.
+- **Nth Residue**: If the congruence $g^N \equiv t \mod p$ has a solution g, t is an Nth residue modulo p, otherwise an Nth non-residue, where a unique g is the a primitive root modulo p. To solve this, construct the congruence and use the BSGS algorithm to find the unique solution, resolving the Nth residue problem.
 
 **2. zk-Paillier-N Proof of Paillier Private Key**
 
