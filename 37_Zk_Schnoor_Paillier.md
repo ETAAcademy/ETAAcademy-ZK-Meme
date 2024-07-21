@@ -46,7 +46,7 @@ zk-Schnorr Proof Protocol is used to prove knowledge of an ECC private key witho
   3. Response is $z := r + c \cdot sk \mod |F_r|$, and send and send $(c, z)$.
   4. Verifier computes $R = z \cdot G - c \cdot PK$ and checks that $c = \text{hash}(PK, R) \mod |F_r|$.
 
-Both versions ensure that the private key sk remains confidential during the proof process.
+Both versions ensure that the private key $sk$ remains confidential during the proof process.
 
 ### zk-Paillier-N Proof
 
