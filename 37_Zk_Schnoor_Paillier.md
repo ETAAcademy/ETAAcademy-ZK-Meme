@@ -54,7 +54,8 @@ Both versions ensure that the private key sk remains confidential during the pro
 
 **1. Principles:**
 
-- **Primitive Roots**: For a prime p, there exists a primitive root g such that $g^{\phi(p)} \equiv 1 \mod p$. If $g^{\frac{p-1}{\Delta}} \neq 1 \mod p$ where $Delta$ is a prime factor of p-1, then $\frac{p-1}{\Delta} < \phi(p)$, contradicting the definition of primitive roots.
+- **Primitive Roots**: For a prime p, there exists a primitive root g such that $g^{\phi(p)} \equiv 1 \mod p$ and $g^{\frac{p-1}{\Delta}} \neq 1 \mod p$ where $Delta$ is a prime factor of p-1, because $\frac{p-1}{\Delta} < \phi(p)$, contradicting the definition of primitive roots where 
+$\phi(p)$ should be the smallest such exponent.
 
 - **Baby-Step Giant-Step Algorithm (BSGS)**: To solve $g^N \equiv t \mod p$, where g and p are coprime and g is a primitive root, use $A, B \in [0, \sqrt{p}]$. Set $N = A \sqrt{p} - B$. This converts the congruence to $g^{A \sqrt{p}} \equiv t g^B \mod p$. By brute force enumeration of A and B, solve the congruence to find N.
 
