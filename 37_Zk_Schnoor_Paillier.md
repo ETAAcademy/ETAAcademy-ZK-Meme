@@ -30,7 +30,7 @@ Zero-knowledge proofs (ZKPs) enable one party to prove to another that they poss
 
 ### zk-Schnorr Proof Protocol
 
-zk-Schnorr Proof Protocol is used to prove knowledge of an ECC private key without revealing it. There are two versions of this protocol: **${\color{pink} \text{send commitment or challenge and response => compute the challenge or commitment}}$**
+zk-Schnorr Proof Protocol is used to prove knowledge of an ECC private key without revealing it. There are two versions of this protocol: **send commitment or challenge and response => compute the challenge or commitment**
 
 **Setup**: Let G be the generator of an elliptic curve with scalar field $F_r$, and base field $F_q$. The prover’s private key is $sk$, and the public key is $PK$, satisfying the discrete logarithm relation $PK = sk \cdot G$.
 - 1. Prover selects a random number r and computes $R := r \cdot G$.
@@ -50,7 +50,7 @@ Both versions ensure that the private key $sk$ remains confidential during the p
 
 ### zk-Paillier-N Proof
 
-**zk-Paillier-N Proof**  is used to prove knowledge of the Paillier key pair, specifically that the public key $N$ and the private key $\phi(N)$ are coprime, i.e., $\gcd(N, \phi(N)) = 1$. ${\color{purple} \text{Here,}}$ $\Phi(n)$ ${\color{purple} \text{remains secret because}}$ $\Phi(n) = (p - 1)(q - 1)$${\color{purple} \text{. However,}}$ $N$ ${\color{purple} \text{can be public as it is known but does not reveal}}$ $p$ and $q$
+**zk-Paillier-N Proof**  is used to prove knowledge of the Paillier key pair, specifically that the public key $N$ and the private key $\phi(N)$ are coprime, i.e., $\gcd(N, \phi(N)) = 1$. **Here, $\Phi(n)}$ remains secret because $\Phi(n) = (p - 1)(q - 1)$. However, $N$ can be public as it is known but does not reveal $p$ and $q$.**
 
 **1. Principles:**
 
