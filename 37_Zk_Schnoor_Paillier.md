@@ -50,7 +50,7 @@ Both versions ensure that the private key $sk$ remains confidential during the p
 
 ### zk-Paillier-N Proof
 
-**zk-Paillier-N Proof**  is used to prove knowledge of the Paillier key pair, specifically that the public key $N$ and the private key $\phi(N)$ are coprime, i.e., $\gcd(N, \phi(N)) = 1$. **Here,** $\Phi(n)}$ **remains secret because** $\Phi(n) = (p - 1)(q - 1)$. **However,** $N$ **can be public as it is known but does not reveal** $p$ **and** $q$.
+**zk-Paillier-N Proof**  is used to prove knowledge of the Paillier key pair, specifically that the public key $N$ and the private key $\phi(N)$ are coprime, i.e., $\gcd(N, \phi(N)) = 1$. **Here, $\Phi(n)$ remains secret because $\Phi(n) = (p - 1)(q - 1)$. However, $N$ can be public as it is known but does not reveal $p$ and $q$.**
 
 **1. Principles:**
 
