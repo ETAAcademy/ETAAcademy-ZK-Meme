@@ -50,7 +50,7 @@ Both versions ensure that the private key $sk$ remains confidential during the p
 
 ### zk-Paillier-N Proof
 
-**zk-Paillier-N Proof** demonstrates that $N$ and $\Phi(n)$ are coprime. Here, $\Phi(n)$ remains secret because $\Phi(n) = (p - 1)(q - 1)$. However, $N$ can be public as it is known but does not reveal $p$ and $q$.
+**zk-Paillier-N Proof**  is used to prove knowledge of the Paillier key pair, specifically that the public key $N$ and the private key $\phi(N)$ are coprime, i.e., $\gcd(N, \phi(N)) = 1$. ${\color{purple} \text{Here,}}$ $\Phi(n)$ ${\color{purple} \text{remains secret because}}$ $\Phi(n) = (p - 1)(q - 1)$${\color{purple} \text{. However,}}$ $N$ ${\color{purple} \text{can be public as it is known but does not reveal}}$ $p$ and $q$
 
 **1. Principles:**
 
@@ -64,8 +64,6 @@ $\phi(p)$ should be the smallest such exponent.
 - **Nth Residue**: If the congruence $g^N \equiv t \mod p$ has a solution $g$, t is an $Nth$ residue modulo $p$, otherwise an $Nth$ non-residue, where a unique $g$ is the a primitive root modulo $p$. To solve this, construct the congruence and use the BSGS algorithm to find the unique solution, resolving the $Nth$ residue problem.
 
 **2. zk-Paillier-N Proof of Paillier Private Key**
-
-This protocol is used to prove knowledge of the Paillier key pair, specifically that the public key $N$ and the private key $\phi(N)$ are coprime, i.e., $\gcd(N, \phi(N)) = 1$.
 
 - **Key Generation**: The prover generates a Paillier key pair and sends the public key $N$ to the verifier.
 
