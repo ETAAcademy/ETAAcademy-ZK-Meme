@@ -50,9 +50,9 @@ Both versions ensure that the private key sk remains confidential during the pro
 
 ### zk-Paillier-N Proof
 
-**zk-Paillier-N Proof** demonstrates that N and $\Phi(n)$ are coprime. Here, $\Phi(n)$ remains secret because $\Phi(n) = (p - 1)(q - 1)$, so it cannot be publicly disclosed (since p - 1 and q - 1 are composites). However, N can be public as it is known but does not reveal p and q.
+**zk-Paillier-N Proof** demonstrates that N and $\Phi(n)$ are coprime. Here, $\Phi(n)$ remains secret because $\Phi(n) = (p - 1)(q - 1)$, t cannot be publicly disclosed. However, N can be public as it is known but does not reveal p and q.
 
-**1. The underlying principles are:**
+**1. Principles:**
 
 - **Primitive Roots**: For a prime p, there exists a primitive root g such that $g^{\phi(p)} \equiv 1 \mod p$. If $g^{\frac{p-1}{\Delta}} \neq 1 \mod p$ where $Delta$ is a prime factor of p-1, then $\frac{p-1}{\Delta} < \phi(p)$, contradicting the definition of primitive roots.
 
