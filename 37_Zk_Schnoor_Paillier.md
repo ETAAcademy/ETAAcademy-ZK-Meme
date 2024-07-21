@@ -50,7 +50,7 @@ Both versions ensure that the private key sk remains confidential during the pro
 
 ### zk-Paillier-N Proof
 
-**zk-Paillier-N Proof** demonstrates that N and $\Phi(n)$ are coprime. Here, $\Phi(n)$ remains secret because $\Phi(n) = (p - 1)(q - 1)$, t cannot be publicly disclosed. However, N can be public as it is known but does not reveal p and q.
+**zk-Paillier-N Proof** demonstrates that N and $\Phi(n)$ are coprime. Here, $\Phi(n)$ remains secret because $\Phi(n) = (p - 1)(q - 1)$, it cannot be publicly disclosed. However, N can be public as it is known but does not reveal p and q.
 
 **1. Principles:**
 
