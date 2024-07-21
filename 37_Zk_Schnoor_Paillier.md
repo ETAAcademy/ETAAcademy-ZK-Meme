@@ -33,7 +33,7 @@ Zero-knowledge proofs (ZKPs) enable one party to prove to another that they poss
 zk-Schnorr Proof Protocol is used to prove knowledge of an ECC private key without revealing it. There are two versions of this protocol: **send commitment or challenge and response => compute the challenge or commitment**
 
 **Setup**: Let G be the generator of an elliptic curve with scalar field $F_r$, and base field $F_q$. The prover’s private key is sk, and the public key is PK, satisfying the discrete logarithm relation $PK = sk \cdot G$.
-- 1. Prover selects a random number r and computes R := r \cdot G.
+- 1. Prover selects a random number r and computes $R := r \cdot G$.
 - 2. Prover then calculates the challenge $c = \text{hash}(PK, R) \mod |F_r|$.
 
 - **Version A**:
