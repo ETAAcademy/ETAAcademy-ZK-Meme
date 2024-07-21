@@ -57,11 +57,11 @@ Both versions ensure that the private key sk remains confidential during the pro
 - **Primitive Roots**: For a prime p, there exists a primitive root g such that $g^{\phi(p)} \equiv 1 \mod p$ and $g^{\frac{p-1}{\Delta}} \neq 1 \mod p$ where $\Delta$ is a prime factor of p-1, because $\frac{p-1}{\Delta} < \phi(p)$, contradicting the definition of primitive roots where 
 $\phi(p)$ should be the smallest such exponent.
 
-- **Baby-Step Giant-Step Algorithm (BSGS)**: To solve $g^N \equiv t \mod p$, where g and p are coprime and g is a primitive root, use $A, B \in [0, \sqrt{p}]$. Set $N = A \sqrt{p} - B$. This converts the congruence to $g^{A \sqrt{p}} \equiv t g^B \mod p$. By brute force enumeration of A and B, solve the congruence to find N.
+- **Baby-Step Giant-Step Algorithm (BSGS)**: To solve $g^N \equiv t \mod p$ where g and p are coprime and g is a primitive root, $A, B \in [0, \sqrt{p}]$, and $N = A \sqrt{p} - B$. This transforms the congruence $g^{A \sqrt{p} - B} \equiv t \mod p$ into $g^{A \sqrt{p}} \equiv t g^B \mod p$. By brute force enumeration of A and B, we could compute the values of both sides of the equation to determine N.
 
-- **Modular Congruence**: If $\gcd(N, (p-1)) = 1$, then the congruence $Ng \equiv t \mod (p-1)$ has a unique solution. Since $\gcd(N, (p-1)) = 1$, we can simplify $Ng \mod (p-1) \equiv t \mod (p-1)$ to find $N^{-1} = N^{\phi(p-1)-1}$ using Euler's theorem.
+- **Modular Congruence**: If $\gcd(N, (p-1)) = 1$, the congruence $Ng \equiv t \mod (p-1)$ has a unique solution for g. Since $\gcd(N, (p-1)) = 1$, we can directly cancel N from the congruence, giving $Ng \mod (p-1) \equiv t \mod (p-1) \equiv Ng' \mod (p-1)$.
 
-- **Nth Residue**: If the congruence $g^N \equiv t \mod p$ has a solution g, then t is an Nth residue modulo p; otherwise, t is an Nth non-residue. The theorem states that if g is a primitive root modulo p, then the congruence has a unique solution. To solve this, construct the congruence and use the Baby-Step Giant-Step algorithm to find the unique solution, resolving the Nth residue problem.
+- **Nth Residue**: If the congruence $g^N \equiv t \mod p$ has a solution g, t is an Nth residue modulo p, otherwise an Nth non-residue, where a unique g is the a primitive root modulo p. To solve this, construct the congruence and use the Baby-Step Giant-Step algorithm to find the unique solution, resolving the Nth residue problem.
 
 **2. zk-Paillier-N Proof of Paillier Private Key**
 
