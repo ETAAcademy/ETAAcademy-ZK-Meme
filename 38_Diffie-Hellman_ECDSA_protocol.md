@@ -32,9 +32,9 @@ A groundbreaking cryptographic protocol has been proposed, which introduces inno
 
 The Diffie-Hellman key exchange involves scalar multiplication of each party's private key with a base point on an elliptic curve to obtain a shared public key: $Q_{common} = x_1x_2G$. This is analogous to $p$ being a prime number and $g$ its primitive root, where $Q_2^{x_1} = (g^{x_2})^{x_1} = (g^{x_1})^{x_2} = Q_1^{x_2}$.
 
-To verify the authenticity of the shared secret, the protocol incorporates zero-knowledge proofs. Both parties employ [zk-Schnorr proofs](https://github.com/ETAAcademy/ETAAcademy-ZK-Meme/blob/main/37_Zk_Schnoor_Paillier.md) to demonstrate knowledge of their respective private keys without revealing them, i.e., for private key $x_1$, generating $proof_1$, sending $(proof_1, Q_1)$, and verifying $(proof_2, Q_2)$, and vice versa.
+To verify the authenticity of the shared secret, the protocol incorporates zero-knowledge proofs. Both parties employ [zk-Schnorr proofs](https://github.com/ETAAcademy/ETAAcademy-ZK-Meme/blob/main/37_Zk_Schnoor_Paillier.md) to demonstrate knowledge of their respective private keys without revealing them, i.e., for private key $x_1$, generating $proof_1$, sending $(proof_1, Q_1)$, verifying $(proof_2, Q_2)$, and vice versa.
 
-Additionally, [zk-Paillier-N proofs](https://github.com/ETAAcademy/ETAAcademy-ZK-Meme/blob/main/37_Zk_Schnoor_Paillier.md) are used to certify the validity of the Paillier key pairs involved in potential encryption schemes (pk, sk), meaning the public key $N$ and private key $\phi(N)$ are coprime,i.e., $gcd(N, \phi(N)) = 1$.
+Additionally, [zk-Paillier-N proofs](https://github.com/ETAAcademy/ETAAcademy-ZK-Meme/blob/main/37_Zk_Schnoor_Paillier.md) are used to certify the validity of the Paillier key pairs involved in potential encryption schemes $(pk, sk)$, meaning the public key $N$ and private key $\phi(N)$ are coprime,i.e., $gcd(N, \phi(N)) = 1$.
 
 To circumvent the complexities of key exchange and proofs, the protocol also considers:
 
