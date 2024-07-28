@@ -39,7 +39,7 @@ Additionally, [zk-Paillier-N proofs](https://github.com/ETAAcademy/ETAAcademy-ZK
 To circumvent the complexities of key exchange and proofs, the protocol also considers:
 
 - Trusted Third-Party Involvement: A trusted entity can collect private keys from both parties, compute the shared secret, and securely distribute it.
-- Ideal Function (Smart Contract): A smart contract can serve as a trusted intermediary, handling key exchange and secret computation in a verifiable and transparent manner. An ideal function can be considered as a smart contract on Ethereum that strictly enforces preset rules and maintains confidentiality.
+- Ideal Function (Smart Contract): A smart contract can serve as a trusted intermediary, handling key exchange and secret computation in a verifiable and transparent manner. 
 
 An alternative key combination method is proposed where private keys are added instead of multiplied. In this case, the shared public key is the sum of the individual public keys, and the shared private key is the sum of the individual private keys: $Q_{common} = Q_1 + Q_2$, with the common private key $x_{common} = x_1 + x_2$.
 
