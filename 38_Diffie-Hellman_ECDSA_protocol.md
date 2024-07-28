@@ -26,7 +26,7 @@ Authors: [Eta](https://twitter.com/pwhattie), looking forward to your joining
 
 ## A Novel Approach to Two-Party Cryptography
 
-A groundbreaking cryptographic protocol has been proposed that introduces innovative methods for key establishment, signature generation, and security enhancements in two-party interactions. This protocol leverages a combination of well-established cryptographic techniques and novel approaches to create a robust and secure framework.
+A groundbreaking cryptographic protocol has been proposed, which introduces innovative methods for key establishment, signature generation, and security enhancements in two-party interactions. This protocol leverages a combination of well-established cryptographic techniques and novel approaches to create a robust and secure framework.
 
 ### Two-Party Key
 
