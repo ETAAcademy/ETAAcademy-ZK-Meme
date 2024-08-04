@@ -62,7 +62,7 @@ Secret sharing protocols evolved from centralized approaches like Shamir's and F
 While Shamir's secret sharing provides a foundation for secure secret distribution, it lacks built-in error detection. Feldman's scheme addresses this by incorporating a verification mechanism that helps identify potential errors during the reconstruction process.
 
 1. Compute Feldman verification tuples: $A_0 := sk \cdot G, A_1 := a_1 \cdot G, ..., A_{t-1} := a\_{t-1} \cdot G$, and broadcast these discrete logarithms.
-2. Verification: Participant $j$ receives the polynomial value $p(j) := sk + a_1 j^1 + ... + a_{t-1} j^{t-1}$, and performs Feldman verification, ensuring $p(j) \cdot G = A_0 + j^1 \cdot A_1 + ... + j^t \cdot A_{t-1} = \sum\_{j=0}^{t-1} i^j A_t$.
+2. Verification: Participant $j$ receives the polynomial value $p(j) := sk + a_1 j^1 + ... + a_{t-1} j^{t-1}$, and performs Feldman verification, ensuring $p(j)\cdot G = (sk + a_1j^1 +...+a_{t-1}j^{t-1} \cdot G = A_0 + j^1 \cdot A_1 +...+j^t\cdot A_{t-1} = \sum\nolimits_{j=0}^{t-1}i^jA_t$.
 
 **Centralized Secret Refreshing Protocol**
 
