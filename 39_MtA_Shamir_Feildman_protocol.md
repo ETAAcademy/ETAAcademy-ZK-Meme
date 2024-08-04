@@ -69,7 +69,7 @@ While Shamir's secret sharing provides a foundation for secure secret distributi
 To mitigate the risk of compromised shares, secret refreshing techniques are employed. By periodically updating share values, the overall system's resilience against potential attacks is enhanced.
 
 1. Refreshing Method 1 constructs a new polynomial without a constant term: Choose new $t-1$ random numbers to form a new polynomial $p'(x)$, ensuring the constant term remains the secret $sk$. Construct Lagrange redundancy $p'(i)$, compute Feldman verification tuples $A_i'$, and verify $p’(j)\cdot G = \sum\nolimits_{j=0}^{t-1}i^jA’_t$. Participants then sum the polynomial values $p(j) + p'(j)$.
-2. Refreshing Method 2 involves the trusted third party constructing a new polynomial $f(x) = sk + (a_1 + a'_1)x^1 +...+ (a_{t-1}+a'_{t-1})x^{t-1}$, equivalent to Method 1 but the new polynomial is directly sent to participants.
+2. Refreshing Method 2 involves the trusted third party constructing a new polynomial $f(x) = p(j) + p'(j)$, equivalent to Method 1 but the new polynomial is directly sent to participants.
 
 Method 1 preserves the original data by updating it, while Method 2 requires creating new data, effectively discarding the old data.
 
