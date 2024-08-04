@@ -45,7 +45,7 @@ The **Multiplicative to Additive (MtA)** is fundamental to threshold signature s
 3. **Decryption and Additive Share by First Participant:**
    - Participant $P_1$ receives $c_2$ and the range proof, verifies the proof, and decrypts $c_2$ to obtain its additive share $\alpha$, where $\alpha = ab + \beta \mod n$.
 
-By the end of the protocol, both participants hold additive shares, $\alpha$ and $\beta$, without revealing their original inputs, $a$ and $b$, to each other. The magic lies in the relationship: $\alpah + \beta = ab$. This transformation from multiplication to addition is crucial, as it enables participants to securely combine their shares additively to produce the final signature.
+By the end of the protocol, both participants hold additive shares, $\alpha$ and $\beta$, without revealing their original inputs, $a$ and $b$, to each other. The magic lies in the relationship: $\alpha + \beta = ab$. This transformation from multiplication to addition is crucial, as it enables participants to securely combine their shares additively to produce the final signature.
 
 ### Secret Sharing Protocol
 
