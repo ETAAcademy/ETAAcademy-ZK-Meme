@@ -35,7 +35,7 @@ The **Multiplicative to Additive (MtA)** is fundamental to threshold signature s
 1. **Paillier Encryption and Range Proof:**
 
    - The Paillier public key $pk$ is $n$, and the private key $sk$ is $p$, $q$ or $\lambda$, where $n := p \cdot q$ and $\lambda := \text{lcm}(p-1, q-1)$.
-   - Participant $P_1$ selects a random number $a \in \mathbb{Z}\_n$ and computes the ciphertext $c_1 := \text{Enc}_{pk}(a)$ using Paillier homomorphic encryption. Then, $P_1$ sends the ciphertext $c_1$ along with the range proof zk-RangeProof $\{a \mid a < q^3, c_1 = \text{Enc}_{pk}(a)\}$.
+   - Participant $P_1$ selects a random number $a \in \mathbb{Z}\_n$ and computes the ciphertext $c_1 := Enc_{pk}(a)$ using Paillier homomorphic encryption. Then, $P_1$ sends the ciphertext $c_1$ along with the range proof zk-RangeProof $\{a | a < q^3, c_1 = Enc_{pk}(a)\}$.
 
 2. **Homomorphic Computation by Second Participant:**
 
