@@ -40,7 +40,7 @@ The **Multiplicative to Additive (MtA)** is fundamental to threshold signature s
 2. **Homomorphic Computation by Second Participant:**
 
    - Participant $P_2$ receives $c_1$ and the range proof zk-RangeProof $\{a \mid a < q^3, c_1 = \text{Enc}_{pk}(a)\}$. After verifying the range proof, $P_2$ uses $c_1$ for computation, selecting two random numbers $b$ and $\beta \in \mathbb{Z}\_n$.
-   - $P_2$ homomorphically computes $c_2 := (b ⨂ c_1）⊕ Enc_{pk} = Enc_{pk}(ab + \beta' \mod n), B ：= g^b$, and $B := g^b$. $P_2$ sets its additive share as $\beta$, with $\beta = -\beta' \mod n$. $P_2$ sends $c_2$ and the range proof zk-RangeProof $\{b, \beta' \mid b < q^3, \beta' < q^7, c_2 = (b \circ c_1) \oplus \text{Enc}_{pk}(\beta'), B = g^b\}$.
+   - $P_2$ homomorphically computes $c_2 := (b ⨂ c_1）⊕ Enc_{pk} = Enc_{pk}(ab + \beta' \mod n), B ：= g^b$, and $B := g^b$. $P_2$ sets its additive share as $\beta$, with $\beta = -\beta' \mod n$. $P_2$ sends $c_2$ and the range proof zk-RangeProof $\{b, \beta' \mid b < q^3, \beta' < q^7, c_2 = (b ⨂ c_1) \oplus \text{Enc}_{pk}(\beta'), B = g^b\}$.
 
 3. **Decryption and Additive Share by First Participant:**
    - Participant $P_1$ receives $c_2$ and the range proof, verifies the proof, and decrypts $c_2$ to obtain its additive share $\alpha$, where $\alpha = ab + \beta \mod n$.
