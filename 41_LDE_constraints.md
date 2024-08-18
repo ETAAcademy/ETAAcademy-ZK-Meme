@@ -118,6 +118,7 @@ f_merkle = MerkleTree(f_eval)
 ```
 
 **Channel**
+
 The Channel class in a STARK proof system replaces the verifier by transforming the interactive protocol into a non-interactive one using the Fiat-Shamir Heuristic. You'll use the Channel to send data, like the root of your Merkle Tree, and receive random numbers or FieldElement instances as if interacting with a verifier. Additionally, you can access the accumulated proof-so-far by printing the Channel.proof, which contains all the data passed through the channel up to that point.
 
 ```python
@@ -144,8 +145,9 @@ To simplify our proof, we combine the three polynomials $p_0(x)$, $p_1(x)$, and 
 
 <details><summary><b>🌰 Example & Code</b></summary>
 
+**Constraints**
 
-The first constraint involves ensuring that f(x) - 1 is divisible by (x - 1) to construct the polynomial  $p_0(x) = \frac{f(x) - 1}{x - 1}$, given that f(x) - 1 has a root at x = 1.
+The first constraint involves ensuring that f(x) - 1 is divisible by (x - 1) to construct the polynomial $p_0(x) = \frac{f(x) - 1}{x - 1}$, given that f(x) - 1 has a root at x = 1.
 
 ```python
 numer0 = f - 1
@@ -182,8 +184,18 @@ def get_CP(channel):
     return alpha0*p0 + alpha1*p1 + alpha2*p2
 ```
 
-Commit on the Composition Polynomial
+**Commit on the Composition Polynomial**
 Finally, evaluate the composition polynomial over the `eval_domain`, build a Merkle tree from the results, and send the root over the channel, just like the LDE trace commitment in part 1.
+
+```python
+def CP_eval(channel):
+    CP = get_CP(channel)
+    return [CP(d) for d in eval_domain]
+
+channel = Channel()
+CP_merkle = MerkleTree(CP_eval(channel))
+channel.send(CP_merkle.root)
+```
 
 </details>
 
