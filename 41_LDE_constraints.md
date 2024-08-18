@@ -52,7 +52,7 @@ A larger Hamming distance enables more efficient error detection and correction 
 
 When transitioning from a smaller to a larger domain (often referred to as "blowup"), it's crucial to avoid simple expansion. Instead, a specific subset or coset within the larger domain is chosen to mitigate the risk of collisions and redundant data. This is essential for maintaining security and efficiency.
 
-For instance, in the PLONK protocol, carefully selected vectors are used to optimize the placement of data points. To construct a specific domain, two elements, $w$ and $h$, are chosen from the underlying field $F$. This pair defines a sequence of points: $\{x_i'\} = w, w \cdot h, w \cdot h^2, \dots, w \cdot h^{8191}$, where $w$ and $h$ are elements from $F$. A polynomial is then evaluated at each of these points, resulting in a set of values: $\{f(x_i')\} = f(w), f(w \cdot h), f(w \cdot h^2)$, which constitutes a Reed-Solomon codeword. Finally, each point $w \cdot h$ is paired with its corresponding polynomial value $f(w \cdot h)$, and these pairs are used to interpolate a new polynomial$f(w \cdot h^i)$.
+For instance, in the PLONK protocol, carefully selected vectors are used to optimize the placement of data points. To construct a specific domain, two elements, $w$ and $h$, are chosen from the underlying field $F$. This pair defines a sequence of points: $\{x_i'\} = w, w \cdot h, w \cdot h^2, \dots, w \cdot h^{8191}$, where $w$ and $h$ are elements from $F$. A polynomial is then evaluated at each of these points, resulting in a set of values: $\{f(x_i')\} = f(w), f(w \cdot h), f(w \cdot h^2)$, which constitutes a Reed-Solomon codeword. Finally, each point $w \cdot h$ is paired with its corresponding polynomial value $f(w \cdot h)$, and these pairs are used to interpolate a new polynomial $f(w \cdot h^i)$.
 
 **Commit on LDE**
 
@@ -62,7 +62,7 @@ In the second step, commitment is made where the leaves of the Merkle tree are t
 
 **Fibonacci Sequence**
 
-Consider the **FibonacciSq (Fibonacci Square)** sequence, where each element is the sum of the squares of the two preceding elements, $a_{n+2} = a_{n+2}^2 + a_n^2$. Since the elements grow rapidly, they are taken modulo a prime number, $3 \cdot 2^{30} + 1$, which produces a finite field $\mathbb{F}_{3221225473}$. The Fibonacci sequence can be infinite, but in this example, it is computed up to the 1023rd element, starting with $a_0 = 1$, $a_1 = X$, with **$X = 3141592$** and $a_{1022} = 2338775057$. The sequence $a$ is called the trace of FibonacciSq or simply the trace when the context is clear.
+Consider the **FibonacciSq (Fibonacci Square)** sequence, where each element is the sum of the squares of the two preceding elements, $a_{n+2} = a_{n+2}^2 + a_n^2$. Since the elements grow rapidly, they are taken modulo a prime number, $3 \cdot 2^{30} + 1$, which produces a finite field $\mathbb{F}\_{3221225473}$. The Fibonacci sequence can be infinite, but in this example, it is computed up to the 1023rd element, starting with $a_0 = 1$, $a_1 = X$, with **$X = 3141592$** and $a_{1022} = 2338775057$. The sequence $a$ is called the trace of FibonacciSq or simply the trace when the context is clear.
 
 ```python
 from field import FieldElement
@@ -131,7 +131,8 @@ print(channel.proof)
 
 ### Polynomial Constraints
 
-The prover only needs to show that they know $x$, while the verifier only needs to confirm the existence of $x$. In this part, we will create a set of constraints on the trace $a$ and demonstrate that $a$ satisfies these constraints. These constraints are then expressed as rational functions, which are essentially polynomials divided by other polynomials. For example, just as dividing 4 by 2 results in an integer but dividing 3 by 2 does not, dividing one polynomial by another may result in a polynomial or may not.
+In a zero-knowledge proof, the prover aims to convince the verifier of their knowledge of a secret value $x$ without revealing any information about $x$. This is achieved by constructing a set of constraints that the computation trace $a$ must adhere to. These constraints are formulated as rational functions—essentially, divisions of polynomials. Similar to how integer division produces whole numbers only under specific conditions (e.g., 4 divided by 2), polynomial division might or might not result in a polynomial. 
+
 
 1. **Polynomial Representation of Constraints:** The initial step involves transforming constraints defined over the Fibonacci sequence into polynomial equations. This means expressing the sequence’s properties in terms of polynomial relationships.
 
@@ -142,6 +143,7 @@ The prover only needs to show that they know $x$, while the verifier only needs 
 To simplify our proof, we combine the three polynomials $p_0(x)$, $p_1(x)$, and $p_2(x)$ into a single composition polynomial $CP(x) = \alpha_0 \cdot p_0(x) + \alpha_1 \cdot p_1(x) + \alpha_2 \cdot p_2(x)$, using random field elements $\alpha_0$, $\alpha_1$, and $\alpha_2$ from the verifier or channel. Proving that $CP$ is a polynomial ensures that $p_0$, $p_1$, and $p_2$ are also polynomials.
 
 <details><summary><b>🌰 Example & Code</b></summary>
+
 
 The first constraint involves ensuring that f(x) - 1 is divisible by (x - 1) to construct the polynomial  $p_0(x) = \frac{f(x) - 1}{x - 1}$, given that f(x) - 1 has a root at x = 1.
 
