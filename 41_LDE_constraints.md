@@ -48,7 +48,7 @@ The **code rate** $\rho = k/n$ measures the efficiency of a code, representing t
 
 A larger Hamming distance enables more efficient error detection and correction for Reed-Solomon codes, reducing the number of checks required to verify an execution trace. However, excessively increasing the distance can negatively impact proof efficiency and security by imposing a heavier computational burden on the prover.
 
-**Concet: Expanding the Domain and Preventing Collisions**
+**Cocet: Expanding the Domain and Preventing Collisions**
 
 When transitioning from a smaller to a larger domain (often referred to as "blowup"), it's crucial to avoid simple expansion. Instead, a specific subset or coset within the larger domain is chosen to mitigate the risk of collisions and redundant data. This is essential for maintaining security and efficiency.
 
