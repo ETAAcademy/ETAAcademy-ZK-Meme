@@ -185,6 +185,7 @@ def get_CP(channel):
 ```
 
 **Commit on the Composition Polynomial**
+
 Finally, evaluate the composition polynomial over the `eval_domain`, build a Merkle tree from the results, and send the root over the channel, just like the LDE trace commitment in part 1.
 
 ```python
