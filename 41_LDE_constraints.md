@@ -37,7 +37,7 @@ Low Degree Extension (LDE) is a technique used in cryptographic protocols to eff
 3. **Extension**: LDE expands the domain of a vector by interpolating its values into a polynomial, similar to creating a Reed-Solomon error correction code by extending polynomial evaluations over a larger field. Starting with a set of data points (red dots), a polynomial is fitted to pass through them. Extending this polynomial to a larger domain (e.g., from K to 8K) generates new data points (green dots), representing the extended vector. Interpolation is key in LDE, enabling the transition from a smaller to a larger domain, allowing for vector evaluation over a much-expanded space.
 
 <div  align="center"> 
-<img src="images/41_LED_Constraint.png" width="100%" />
+<img src="images/41_LED_Constraints.png" width="100%" />
 </div>
 
 **Reed-Solomon Code**
@@ -62,7 +62,7 @@ In the second step, commitment is made where the leaves of the Merkle tree are t
 
 **Fibonacci Sequence**
 
-Consider the **FibonacciSq (Fibonacci Square)** sequence, where each element is the sum of the squares of the two preceding elements, $a*{n+2} = a*{n+2}^2 + a*n^2$. Since the elements grow rapidly, they are taken modulo a prime number, $3 \cdot 2^{30} + 1$, which produces a finite field $\mathbb{F}*{3221225473}$. The Fibonacci sequence can be infinite, but in this example, it is computed up to the 1023rd element, starting with $a*0 = 1$, $a_1 = X$, with **$X = 3141592$** and $a*{1022} = 2338775057$. The sequence $a$ is called the trace of FibonacciSq or simply the trace when the context is clear.
+Consider the **FibonacciSq (Fibonacci Square)** sequence, where each element is the sum of the squares of the two preceding elements, $a_{n+2} = a_{n+2}^2 + a_n^2$. Since the elements grow rapidly, they are taken modulo a prime number, $3 \cdot 2^{30} + 1$, which produces a finite field $\mathbb{F}_{3221225473}$. The Fibonacci sequence can be infinite, but in this example, it is computed up to the 1023rd element, starting with $a_0 = 1$, $a_1 = X$, with **$X = 3141592$** and $a_{1022} = 2338775057$. The sequence $a$ is called the trace of FibonacciSq or simply the trace when the context is clear.
 
 ```python
 from field import FieldElement
@@ -135,7 +135,7 @@ The prover only needs to show that they know $x$, while the verifier only needs 
 
 1. **Polynomial Representation of Constraints:** The initial step involves transforming constraints defined over the Fibonacci sequence into polynomial equations. This means expressing the sequence’s properties in terms of polynomial relationships.
 
-2. **Roots as Proof Verifiers:** A polynomial’s roots are values that produce zero when substituted into the polynomial. If a specific set of values (e.g., $g^0, g^1, g^2, \ldots, g^{1022}$) are roots of a constructed polynomial, it validates the original constraints.
+2. **Roots as Proof Verifiers:** A polynomial’s roots are values that produce zero when substituted into the polynomial. If a specific set of values (e.g., $g^0, g^1, g^2, ..., g^{1022}$) are roots of a constructed polynomial, it validates the original constraints.
 
 3. **Interpolation and Rational Functions:** To demonstrate that a value (g) is a root of a polynomial $f(x)$, it's necessary to prove that dividing $f(x)$ by $(x-g)$ yields another polynomial $\frac{f(x)}{x - g}$. In essence, if g is a root of the dividend polynomial and $x-g$ is a divisor, then $g$ must also be a root of the quotient polynomial. This process involves converting the identified roots into rational functions that represent polynomials if and only if the initial constraints are satisfied.
 
