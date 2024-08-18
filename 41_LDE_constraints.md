@@ -187,7 +187,7 @@ Finally, evaluate the composition polynomial over the `eval_domain`, build a Mer
 
 <details><summary><b>Source</b></summary>
 
-[Source](https://github.com/ETAAcademy)
+[Source](https://github.com/ETAAcademy/ETAAcademy-ZK-Meme/tree/main/Appendix/stark101)
 
 ```python
 from channel import Channel
