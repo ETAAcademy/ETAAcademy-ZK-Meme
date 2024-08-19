@@ -200,7 +200,7 @@ channel.send(CP_merkle.root)
 
 </details>
 
-<details><summary><b>🐿️Source</b></summary>
+<details><summary><b>🐿️ Source</b></summary>
 
 [Source](https://github.com/ETAAcademy/ETAAcademy-ZK-Meme/tree/main/Appendix/stark101)
 
