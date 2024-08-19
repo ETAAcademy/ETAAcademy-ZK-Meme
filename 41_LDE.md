@@ -28,7 +28,7 @@ Authors: [Eta](https://twitter.com/pwhattie), looking forward to your joining
 
 Low Degree Extension (LDE) is a technique used in cryptographic protocols to efficiently represent and manipulate data. It involves transforming a sequence of data points into a polynomial and then evaluating this polynomial over a larger domain. This process is akin to fitting a curve to a set of points and then extending that curve beyond the original data points.
 
-**Key steps involved in LDE:**
+**Key Steps in LDE:**
 
 1. **Generate Inputs**: Start with a sequence of inputs $y_0, y_1, y_2, ...$ (e.g., a Fibonacci sequence $a_0, a_1, a_2, ..., a_{1022}$). To make calculations easier, choose another sequence $x_0, x_1, x_2, ...$ (e.g., $g^0, g^1, g^2 ..., g^{1022}$), and pair $x$ and $y$ accordingly (like pairing $a$ with $g$).
 
