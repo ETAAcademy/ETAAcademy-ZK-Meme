@@ -80,9 +80,9 @@ The FRI Folding Operator updates polynomials by:
 2. Getting a random field element $\beta$ (by calling `Channel.receive_random_field_element()`).
 3. Multiplying odd coefficients by $\beta$ and summing consecutive pairs of coefficients(by calling `Polynomial.poly`) to form the next polynomial from a list of coefficients `l` (by calling `Polynomial(l)`).
 
-For a polynomial $p_{k}(x) := \sum _{i=0} ^{m-1} c_i x^i$ of degree < m, the next polynomial $p_{k+1}(x)$ has degree $< \frac{m}{2}$ and is:
+For a polynomial $p_{k}(x) := \sum_{i=0} ^{m-1} c_i x^i$ of degree < m, the next polynomial $p_{k+1}(x)$ has degree $< \frac{m}{2}$ and is:
 
-$p_{k+1}(x) := \sum _{i=0} ^{  m / 2 - 1 } (c_{2i} + \beta \cdot c_{2i + 1}) x^i$
+$p_{k+1}(x) := \sum_{i=0} ^{  m / 2 - 1 } (c_{2i} + \beta \cdot c_{2i + 1}) x^i$
 
 ```python
 def next_fri_polynomial(poly,  beta):
