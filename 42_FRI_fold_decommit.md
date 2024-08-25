@@ -135,7 +135,7 @@ def FriCommit(cp, domain, cp_eval, cp_merkle, channel):
 
 The proof consists of two main parts: **Commitment** and **Decommitment**.
 
-### [Commitment](https://github.com/ETAAcademy/ETAAcademy-ZK-Meme/blob/main/41_LDE.md)
+**[Commitment](https://github.com/ETAAcademy/ETAAcademy-ZK-Meme/blob/main/41_LDE.md)**
 
 The commitment process involves three key steps:
 
@@ -157,7 +157,7 @@ The commitment process involves three key steps:
 
 
 
-### Decommitment
+**Decommitment**
 
 Decommitment is the process by which the prover reveals their commitments to demonstrate to the verifier that the computation was carried out correctly. The procedure is as follows:
 
