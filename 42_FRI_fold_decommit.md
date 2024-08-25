@@ -180,7 +180,7 @@ Decommitment is the process by which the prover reveals their commitments to dem
    - Similarly, for each subsequent layer, the prover sends the corresponding values $CP_i(x)$, $CP_i(-x)$, along with the Merkle proof and the verifier checks the computation. This continues until the verifier computes $CP_{10}(x^{1024})$.
    - FRI needs to transform into a Polynomial Commitment Scheme (PCS) to enable queries at arbitrary random points using the Merkle tree, allowing for the verification of more points.
 
-### Data Transmission by the Prover
+**Data Transmission by the Prover**
 
 The prover needs to send $O(\log^2(n))$ information to the verifier for a trace length $n = 1023$.
 
