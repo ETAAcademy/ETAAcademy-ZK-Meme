@@ -51,7 +51,7 @@ First, a random value $\beta$ is received from the verifier. Then, the FRI opera
 
 1. **Polynomial Splitting:** Start with the function $CP_0(x)$ or $P_0(x)$ and decompose it into two parts: even and odd powers. The even terms are represented as $g(x^2)$, and the odd one as $xh(x^2)$. Therefore, the polinomial can be written as $P_0(x) = g(x^2) + xh(x^2)$.
 
-2. **Random β:** A random β is introduced to prevent the prover from cheating and to allow the verifier to be confident in the proof. The odd are factored out with $x$, and the polynomial is transformed into a new one $P_1(y) = g(y) + βh(y)$, where $ y = x^2$. This transformation effectively reduces the degree of the polynomial by half, as well as the size of the domain.
+2. **Random β:** A random β is introduced to prevent the prover from cheating and to allow the verifier to be confident in the proof. The odd are factored out with $x$, and the polynomial is transformed into a new one $P_1(y) = g(y) + βh(y)$, where $y = x^2$. This transformation effectively reduces the degree of the polynomial by half, as well as the size of the domain.
 
 3. **Degree Reduction:** The FRI folding process is repeated until the polynomial is reduced to a constant. After 10 rounds, for example, only 8 elements remain, which are then sent to the verifier. The goal is to reduce the degree of the polynomial until it becomes a constant polynomial, which is then provided to the verifier.
 
