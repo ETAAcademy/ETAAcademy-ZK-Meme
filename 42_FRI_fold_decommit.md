@@ -59,30 +59,6 @@ For instance, consider the polynomial $P_0(x) = 5x^5 + 3x^4 + 7x^3 + 2x^2 + x + 
 
 Starting with a polynomial of degree 5, the FRI operator reduces the degree of $P_1$ to at most half of the original polynomial $P_0$’s degree, i.e., $\text{deg}(P_1) \leq \text{deg}(P_0)/2$, which halves the degree bound at each step by repeating the process until it becomes a constant.
 
-<div style="text-align: center;">
-    <img src="images/42FRI_03Query.png" alt="Image 1" width="48%" style="display: inline-block;">
-    <img src="images/42FRI_04O(log(n)).png" alt="Image 2" width="48%" style="display: inline-block;">
-</div>
-
-### Decommitment: Prover Convinces the Verifier of the Correctness of the Computation
-
-The proof consists of two main parts: **Commitment** and **Decommitment**.
-
-### [Commitment](https://github.com/ETAAcademy/ETAAcademy-ZK-Meme/blob/main/41_LDE.md)
-
-The commitment process involves three key steps:
-
-1. **Commit to the Trace on Low Degree Extension (LDE):**
-
-   - The prover computes a trace over an LDE and commits to it by constructing a Merkle tree. The root of this Merkle tree is part of the commitment, and the prover sends only the root of the tree or trace to the verifier (without sending all the leaf nodes).
-
-2. **Commit to the Composition Polynomial (CP) on the LDE:**
-
-   - The prover calculates the composition polynomial (CP), which corresponds to a function $f(x)$ derived from the trace via linear combination. A Merkle tree is constructed for the CP values, and the root of this tree (the CP root) is sent to the verifier.
-
-3. **Perform FRI and Commit:**
-   - Using FRI (Fast Reed-Solomon Interactive Oracle Proofs of Proximity), the prover reduces the CP to smaller polynomials. For each reduced polynomial, a Merkle tree is constructed, and the roots of these trees are sent to the verifier. This sequence of roots serves as the complete commitment, demonstrating the correctness of the computation.
-
 <details><summary><b>🌰 Example & Code</b></summary>
 
 **FRI Folding** constructs layers by 1) generating a new domain, 2) creating a polynomial from the previous layer, and 3) evaluating it on the new domain to form the next FRI layer.
@@ -154,6 +130,32 @@ def FriCommit(cp, domain, cp_eval, cp_merkle, channel):
 ```
 
 </details>
+
+### Decommitment: Prover Convinces the Verifier of the Correctness of the Computation
+
+The proof consists of two main parts: **Commitment** and **Decommitment**.
+
+### [Commitment](https://github.com/ETAAcademy/ETAAcademy-ZK-Meme/blob/main/41_LDE.md)
+
+The commitment process involves three key steps:
+
+1. **Commit to the Trace on Low Degree Extension (LDE):**
+
+   - The prover computes a trace over an LDE and commits to it by constructing a Merkle tree. The root of this Merkle tree is part of the commitment, and the prover sends only the root of the tree or trace to the verifier (without sending all the leaf nodes).
+
+2. **Commit to the Composition Polynomial (CP) on the LDE:**
+
+   - The prover calculates the composition polynomial (CP), which corresponds to a function $f(x)$ derived from the trace via linear combination. A Merkle tree is constructed for the CP values, and the root of this tree (the CP root) is sent to the verifier.
+
+3. **Perform FRI and Commit:**
+   - Using FRI (Fast Reed-Solomon Interactive Oracle Proofs of Proximity), the prover reduces the CP to smaller polynomials. For each reduced polynomial, a Merkle tree is constructed, and the roots of these trees are sent to the verifier. This sequence of roots serves as the complete commitment, demonstrating the correctness of the computation.
+  
+<div style="text-align: center;">
+    <img src="images/42FRI_03Query.png" alt="Image 1" width="48%" style="display: inline-block;">
+    <img src="images/42FRI_04O(log(n)).png" alt="Image 2" width="48%" style="display: inline-block;">
+</div>
+
+
 
 ### Decommitment
 
