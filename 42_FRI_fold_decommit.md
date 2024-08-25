@@ -28,7 +28,7 @@ Authors: [Eta](https://twitter.com/pwhattie), looking forward to your joining
 
 Using the FRI protocol, the prover can demonstrate that the compositional polynomial (CP) is close to a low-degree polynomial. The FRI operator reduces the polynomial's degree and domain size through recursive folding, and the decommitment process ensures that the prover's computations are correct, convincing the verifier of the statement's validity.
 
-### FRI Commitment and Protocol: Composed Polynomial CP is a Polynomial
+## FRI Commitment and Protocol: Composed Polynomial CP is a Polynomial
 
 Instead of proving that CP is a Polynomial, the goal is to show that **the composed polynomial (CP) is close to a low-degree polynomial**, meaning a polynomial with a degree less than some agreed-upon bound, $D$. In the context of STARKs, "low degree" is defined relative to the size of the "small domain."
 
@@ -131,7 +131,7 @@ def FriCommit(cp, domain, cp_eval, cp_merkle, channel):
 
 </details>
 
-### Decommitment: Prover Convinces the Verifier of the Correctness of the Computation
+## Decommitment: Prover Convinces the Verifier of the Correctness of the Computation
 
 The proof consists of two main parts: **Commitment** and **Decommitment**.
 
