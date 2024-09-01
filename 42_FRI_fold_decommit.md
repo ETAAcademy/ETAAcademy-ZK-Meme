@@ -28,7 +28,7 @@ Authors: [Eta](https://twitter.com/pwhattie), looking forward to your joining
 
 Using the FRI protocol, the prover can demonstrate that the compositional polynomial (CP) is close to a low-degree polynomial. The FRI operator reduces the polynomial's degree and domain size through recursive folding, and the decommitment process ensures that the prover's computations are correct, convincing the verifier of the statement's validity.
 
-### FRI Commitment and Protocol: Composed Polynomial CP is a Polynomial
+## FRI Commitment and Protocol: Composed Polynomial CP is a Polynomial
 
 Instead of proving that CP is a Polynomial, the goal is to show that **the composed polynomial (CP) is close to a low-degree polynomial**, meaning a polynomial with a degree less than some agreed-upon bound, $D$. In the context of STARKs, "low degree" is defined relative to the size of the "small domain."
 
@@ -51,37 +51,13 @@ First, a random value $\beta$ is received from the verifier. Then, the FRI opera
 
 1. **Polynomial Splitting:** Start with the function $CP_0(x)$ or $P_0(x)$ and decompose it into two parts: even and odd powers. The even terms are represented as $g(x^2)$, and the odd one as $xh(x^2)$. Therefore, the polinomial can be written as $P_0(x) = g(x^2) + xh(x^2)$.
 
-2. **Random β:** A random β is introduced to prevent the prover from cheating and to allow the verifier to be confident in the proof. The odd are factored out with $x$, and the polynomial is transformed into a new one $P_1(y) = g(y) + βh(y)$, where $ y = x^2$. This transformation effectively reduces the degree of the polynomial by half, as well as the size of the domain.
+2. **Random β:** A random β is introduced to prevent the prover from cheating and to allow the verifier to be confident in the proof. The odd are factored out with $x$, and the polynomial is transformed into a new one $P_1(y) = g(y) + βh(y)$, where $y = x^2$. This transformation effectively reduces the degree of the polynomial by half, as well as the size of the domain.
 
 3. **Degree Reduction:** The FRI folding process is repeated until the polynomial is reduced to a constant. After 10 rounds, for example, only 8 elements remain, which are then sent to the verifier. The goal is to reduce the degree of the polynomial until it becomes a constant polynomial, which is then provided to the verifier.
 
 For instance, consider the polynomial $P_0(x) = 5x^5 + 3x^4 + 7x^3 + 2x^2 + x + 3$ can be split into even $g(x^2) = 3x^4 + 2x^2 + 3$ and odd $xh(x^2) = 5x^5 + 7x^3 + x$ parts. After applying the FRI operator, the poly nomial becomes $P_1(y) = (3 + 5\beta)y^2 + (2 + 7\beta)y + 3 + \beta$ by adding a random $\beta$, with the even $g(y) = 3y^2 + 2y + 3$ and the odd $h(y) = 5y^2 + 7y + 1$.
 
 Starting with a polynomial of degree 5, the FRI operator reduces the degree of $P_1$ to at most half of the original polynomial $P_0$’s degree, i.e., $\text{deg}(P_1) \leq \text{deg}(P_0)/2$, which halves the degree bound at each step by repeating the process until it becomes a constant.
-
-<div style="text-align: center;">
-    <img src="images/42FRI_03Query.png" alt="Image 1" width="48%" style="display: inline-block;">
-    <img src="images/42FRI_04O(log(n)).png" alt="Image 2" width="48%" style="display: inline-block;">
-</div>
-
-### Decommitment: Prover Convinces the Verifier of the Correctness of the Computation
-
-The proof consists of two main parts: **Commitment** and **Decommitment**.
-
-### [Commitment](https://github.com/ETAAcademy/ETAAcademy-ZK-Meme/blob/main/41_LDE.md)
-
-The commitment process involves three key steps:
-
-1. **Commit to the Trace on Low Degree Extension (LDE):**
-
-   - The prover computes a trace over an LDE and commits to it by constructing a Merkle tree. The root of this Merkle tree is part of the commitment, and the prover sends only the root of the tree or trace to the verifier (without sending all the leaf nodes).
-
-2. **Commit to the Composition Polynomial (CP) on the LDE:**
-
-   - The prover calculates the composition polynomial (CP), which corresponds to a function $f(x)$ derived from the trace via linear combination. A Merkle tree is constructed for the CP values, and the root of this tree (the CP root) is sent to the verifier.
-
-3. **Perform FRI and Commit:**
-   - Using FRI (Fast Reed-Solomon Interactive Oracle Proofs of Proximity), the prover reduces the CP to smaller polynomials. For each reduced polynomial, a Merkle tree is constructed, and the roots of these trees are sent to the verifier. This sequence of roots serves as the complete commitment, demonstrating the correctness of the computation.
 
 <details><summary><b>🌰 Example & Code</b></summary>
 
@@ -104,9 +80,9 @@ The FRI Folding Operator updates polynomials by:
 2. Getting a random field element $\beta$ (by calling `Channel.receive_random_field_element()`).
 3. Multiplying odd coefficients by $\beta$ and summing consecutive pairs of coefficients(by calling `Polynomial.poly`) to form the next polynomial from a list of coefficients `l` (by calling `Polynomial(l)`).
 
-For a polynomial $p_{k}(x) := \sum _{i=0} ^{m-1} c_i x^i$ of degree < m, the next polynomial $p_{k+1}(x)$ has degree $< \frac{m}{2}$ and is:
+For a polynomial $p_{k}(x) := \sum_{i=0} ^{m-1} c_i x^i$ of degree < m, the next polynomial $p_{k+1}(x)$ has degree $< \frac{m}{2}$ and is:
 
-$p_{k+1}(x) := \sum _{i=0} ^{  m / 2 - 1 } (c_{2i} + \beta \cdot c_{2i + 1}) x^i$
+$p_{k+1}(x) := \sum_{i=0} ^{  m / 2 - 1 } (c_{2i} + \beta \cdot c_{2i + 1}) x^i$
 
 ```python
 def next_fri_polynomial(poly,  beta):
@@ -155,7 +131,33 @@ def FriCommit(cp, domain, cp_eval, cp_merkle, channel):
 
 </details>
 
-### Decommitment
+## Decommitment: Prover Convinces the Verifier of the Correctness of the Computation
+
+The proof consists of two main parts: **Commitment** and **Decommitment**.
+
+**[Commitment](https://github.com/ETAAcademy/ETAAcademy-ZK-Meme/blob/main/41_LDE.md)**
+
+The commitment process involves three key steps:
+
+1. **Commit to the Trace on Low Degree Extension (LDE):**
+
+   - The prover computes a trace over an LDE and commits to it by constructing a Merkle tree. The root of this Merkle tree is part of the commitment, and the prover sends only the root of the tree or trace to the verifier (without sending all the leaf nodes).
+
+2. **Commit to the Composition Polynomial (CP) on the LDE:**
+
+   - The prover calculates the composition polynomial (CP), which corresponds to a function $f(x)$ derived from the trace via linear combination. A Merkle tree is constructed for the CP values, and the root of this tree (the CP root) is sent to the verifier.
+
+3. **Perform FRI and Commit:**
+   - Using FRI (Fast Reed-Solomon Interactive Oracle Proofs of Proximity), the prover reduces the CP to smaller polynomials. For each reduced polynomial, a Merkle tree is constructed, and the roots of these trees are sent to the verifier. This sequence of roots serves as the complete commitment, demonstrating the correctness of the computation.
+  
+<div style="text-align: center;">
+    <img src="images/42FRI_03Query.png" alt="Image 1" width="48%" style="display: inline-block;">
+    <img src="images/42FRI_04O(log(n)).png" alt="Image 2" width="48%" style="display: inline-block;">
+</div>
+
+
+
+**Decommitment**
 
 Decommitment is the process by which the prover reveals their commitments to demonstrate to the verifier that the computation was carried out correctly. The procedure is as follows:
 
@@ -178,7 +180,7 @@ Decommitment is the process by which the prover reveals their commitments to dem
    - Similarly, for each subsequent layer, the prover sends the corresponding values $CP_i(x)$, $CP_i(-x)$, along with the Merkle proof and the verifier checks the computation. This continues until the verifier computes $CP_{10}(x^{1024})$.
    - FRI needs to transform into a Polynomial Commitment Scheme (PCS) to enable queries at arbitrary random points using the Merkle tree, allowing for the verification of more points.
 
-### Data Transmission by the Prover
+**Data Transmission by the Prover**
 
 The prover needs to send $O(\log^2(n))$ information to the verifier for a trace length $n = 1023$.
 
