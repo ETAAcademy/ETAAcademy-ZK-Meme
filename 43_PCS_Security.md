@@ -61,8 +61,8 @@ IPA offers several advantages:
 - **Efficiency:** FRI works efficiently by proving the proximity of a function to a low-degree polynomial, using multiple queries and smaller domains, which improves polynomial operation efficiency and FFT performance.
 - **Complexity:** Both prover and verifier have relatively low computational costs, with the prover's cost being O(n log n) and the verifier's cost being O(t + log^2 n), where t is the number of queries and log^2 n is log n for both layers and authentication path,primarily due to the low-degree testing and Merkle tree verification.
 
-<div style="text-align: center;">
-    <img src="images/43_PCS_Security.webp" alt="Image 1" width="50%" style="display: inline-block;">
+<div  align="center"> 
+<img src="images/43_PCS_Security.webp" width="50%" />
 </div>
 
 ### FRI Security
@@ -103,5 +103,5 @@ FRI (Fast Reed-Solomon Interactive Oracle Proofs of Proximity) uses blowup and l
 
 🎟️ Bingo:
 
-- 🍧 [stark-anatomy]()
-- 🍡 [mimic-stark]()
+- 🍧 [stark-anatomy](https://github.com/ETAAcademy/ETAAcademy-ZK-Meme/tree/main/Appendix/stark-anatomy)
+- 🍡 [mimic-stark](https://github.com/ETAAcademy/ETAAcademy-ZK-Meme/tree/main/Appendix/mimc_stark)
