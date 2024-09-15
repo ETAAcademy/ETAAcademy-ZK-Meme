@@ -711,8 +711,8 @@ The `open_deep_composition_poly` function is designed to open the deep compositi
 
 </details>
 
-[STARKS_Recap](https://github.com/ETAAcademy/ETAAcademy-ZK-Meme/blob/main/41_LDE.md)
+[STARKS](https://github.com/ETAAcademy/ETAAcademy-ZK-Meme/tree/main/Appendix/stark)
 
 <div style="text-align: center;">
-    <img src="../04_WebService/images/crab007.webp" alt="Image 1" width="100%" style="display: inline-block;">
+    <img src="./images/44_bit_batch.png" alt="Image 1" width="100%" style="display: inline-block;">
 </div>
