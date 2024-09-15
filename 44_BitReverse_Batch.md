@@ -100,7 +100,10 @@ $$
 Transpose:
 
 $$
-\begin{array}{c|c|c|c|} trace_a & y_{a0}& y_{a1} & y_{a2}  \\ trace_b & y_{b0}& y_{b1} & y_{b2}   \\trace_c & y_{c0}& y_{c1} & y_{c2}   \\\end{array}
+\begin{array}{c|c|c|c|} trace_a & y_{a0}& y_{a1} & y_{a2}\\
+trace_b & y_{b0}& y_{b1} & y_{b2}\\
+trace_c & y_{c0}& y_{c1} & y_{c2}\\
+\end{array}
 $$
 
 - Code:
