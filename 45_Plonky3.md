@@ -664,10 +664,9 @@ The prover in FRI handles a batch of polynomials and needs to evaluate them over
 1. **Inputs**: The prover starts with a batch of polynomials $\{p_j(X)\}^{m}\_{j=1}$, their evaluations after a low-degree extension (LDE), and a set of open points $\{z_{jk}\}^{t_j}\_{k=0}$. The prover commits to these evaluated polynomials in each round $\{Commit_r\}_{r\in \text{all rounds}}$.
 
 2. **Batched Quotient Polynomial**: For each distinct degree $d$, the prover computes a batched quotient polynomial as follows:
-
-   <div style="text-align: center;">
-    <img src="./images/45_01_quotient.png" alt="Image 1" width="50%" style="display: inline-block;">
-   </div>
+    <div  align="center"> 
+    <img src="images/45_01_quotient.png" width="100%" />
+    </div>
 
    This results in a set of batched quotient polynomials for all degrees $d \in S$.
 
@@ -955,15 +954,15 @@ Once the reduced polynomials $\text{reduce}\_0(X)$ and $\text{reduce}\_1(X)$ are
    - These openings yield intermediate values used to compute the reduced polynomials.
 2. **Constructing the Reduced Polynomial**:
    - Compute the reduced trace polynomial:
-   <div style="text-align: center;">
-   <img src="./images/45_02_reduce01.png" alt="Image 1" width="50%" style="display: inline-block;">
+   <div  align="center"> 
+   <img src="images/45_02_reduce01.png" width="100%" />
    </div>
-    where $ldt_0(X)$ and $ldt_0'(X)$ are the Lagrange polynomials formed from the trace evaluations at $\zeta$ and $\zeta_{\text{next}}$.
+   where $ldt_0(X)$ and $ldt_0'(X)$ are the Lagrange polynomials formed from the trace evaluations at $\zeta$ and $\zeta_{\text{next}}$.
    - Similarly, compute the reduced quotient polynomial:
-   <div style="text-align: center;">
-   <img src="./images/45_03_reduce02.png" alt="Image 1" width="50%" style="display: inline-block;">
+   <div  align="center"> 
+   <img src="images/45_03_reduce02.png" width="100%" />
    </div>
-    where $ldt_2(X)$ and $ldt_3(X)$ are Lagrange polynomials derived from quotient evaluations.
+   where $ldt_2(X)$ and $ldt_3(X)$ are Lagrange polynomials derived from quotient evaluations.
 3. **Performing the Low-Degree Test**:
    - Both reduced polynomials $\text{reduce}\_0(X)$ and $\text{reduce}\_1(X)$ undergo a low-degree test to verify their degree bounds.
 
@@ -1124,6 +1123,6 @@ As demand for zk-SNARKs continues to grow, Plonky3's blend of FRI and UniStark t
 
 [Plonky3](https://github.com/ETAAcademy/ETAAcademy-ZK-Meme/tree/main/Appendix/Plonky3)
 
-<div style="text-align: center;">
-    <img src="./images/45_plonky3.jpg" alt="Image 1" width="100%" style="display: inline-block;">
+<div  align="center"> 
+<img src="images/45_plonky3.jpg" width="100%" />
 </div>
