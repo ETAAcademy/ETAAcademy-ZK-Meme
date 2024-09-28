@@ -665,7 +665,7 @@ The prover in FRI handles a batch of polynomials and needs to evaluate them over
 
 2. **Batched Quotient Polynomial**: For each distinct degree $d$, the prover computes a batched quotient polynomial as follows:
     <div  align="center"> 
-    <img src="images/45_01_quotient.png" width="100%" />
+    <img src="images/45_01_quotient.png" width="50%" />
     </div>
 
    This results in a set of batched quotient polynomials for all degrees $d \in S$.
@@ -955,12 +955,12 @@ Once the reduced polynomials $\text{reduce}\_0(X)$ and $\text{reduce}\_1(X)$ are
 2. **Constructing the Reduced Polynomial**:
    - Compute the reduced trace polynomial:
    <div  align="center"> 
-   <img src="images/45_02_reduce01.png" width="100%" />
+   <img src="images/45_02_reduce01.png" width="50%" />
    </div>
    where $ldt_0(X)$ and $ldt_0'(X)$ are the Lagrange polynomials formed from the trace evaluations at $\zeta$ and $\zeta_{\text{next}}$.
    - Similarly, compute the reduced quotient polynomial:
    <div  align="center"> 
-   <img src="images/45_03_reduce02.png" width="100%" />
+   <img src="images/45_03_reduce02.png" width="50%" />
    </div>
    where $ldt_2(X)$ and $ldt_3(X)$ are Lagrange polynomials derived from quotient evaluations.
 3. **Performing the Low-Degree Test**:
