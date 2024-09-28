@@ -1017,7 +1017,7 @@ In the query phase, the verifier confirms that the trace polynomial at $\zeta$ a
 if folded_constraints = sels.inv_zeroifier != quotient { ... }
 ```
 
-**Step 3.2: Addressing ZPS and Domain Shifts**
+**Step 2: Addressing ZPS and Domain Shifts**
 
 - The process of reconstructing $Q(\zeta)$ introduces a potential **Zero-Polynomial Shift (ZPS)** problem. When using Lagrange interpolation to reconstruct $Q(\zeta)$, errors can occur due to domain shrinking.
 - For example, $Q(X) = Q_1(X^2) + X \cdot Q_1(-X^2)$ has a smaller domain, so additional corrections are needed to account for the missing elements from the other coset domains. This is handled by computing a ZPS correction factor to adjust for these domain shifts.
