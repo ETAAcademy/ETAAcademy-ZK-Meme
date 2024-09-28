@@ -666,12 +666,12 @@ The prover in FRI handles a batch of polynomials and needs to evaluate them over
 2. **Batched Quotient Polynomial**: For each distinct degree $d$, the prover computes a batched quotient polynomial as follows:
 
    $$
-   q_d(\omega^i) = \sum_{j, k} \alpha^{k+j} \cdot \frac{p_j(\omega^i) - y_{jk}}{\omega^i - z_k}
+   \{\{q_d(\omega^i)\}_{i=0}^{d}\} =\{\{\sum_{j\in[m]|deg(p_j)=d}\sum_{k}\alpha^{k+j }\cdot \frac{p_{j}(\omega^i) - y_{jk}}{\omega^i-z_k} \}_{i=0}^{d}\}
    $$
 
    This results in a set of batched quotient polynomials for all degrees $d \in S$.
 
-3. **Folding and Batching**:
+4. **Folding and Batching**:
    - **Initialization**: Set $f = q_{dm}$, where $dm$ is the highest degree.
    - **Commitment**: Use MMCS to commit $f$ as a matrix.
    - **Folding**: Fold $f$ as $f = f_e + \beta f_o$, where $f_e$ and $f_o$ are the even and odd parts of the polynomial, and $\beta$ is a random challenge.
