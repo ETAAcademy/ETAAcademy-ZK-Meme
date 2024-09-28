@@ -531,7 +531,7 @@ The first step in handling FRI proofs involves setting up a data structure to ma
 This structure will be updated iteratively through the processing of multiple rounds of polynomial data. The core logic for calculating the quotient polynomials’ openings across all rounds follows the formula:
 
 $$
-\{q_d(x)\}_{d\in S}=\left\{\sum_{k}\sum_{j}\alpha^{k+j } \cdot \frac{p_{jk}(x) - y_{jk}}{x-z_k} \right\}_{d\in S}
+q_d(x)={\sum_{k}\sum_{j}\alpha^{k+j }\cdot \frac{p_{jk}(x) - y_{jk}}{x-z_k} }_{d\in S}
 $$
 
 Here, the indices are defined as:
@@ -661,13 +661,13 @@ In the Fast Reed-Solomon Interactive Oracle Proof of Proximity (FRI) protocol, b
 
 The prover in FRI handles a batch of polynomials and needs to evaluate them over specific points, compute quotient polynomials, and perform folding. The prover's input consists of the following elements:
 
-1. **Inputs**: The prover starts with a batch of polynomials $\{p_j(X)\}_{j=1}^{m}$, their evaluations after a low-degree extension (LDE), and a set of open points $\{z_{jk}\}_{k=0}^{t_j}$. The prover commits to these evaluated polynomials in each round $\{Commit_r\}_{r\in \text{all rounds}}$.
+1. **Inputs**: The prover starts with a batch of polynomials $\{p_j(X)\}^{m}\_{j=1}$, their evaluations after a low-degree extension (LDE), and a set of open points $\{z_{jk}\}^{t_j}\_{k=0}$. The prover commits to these evaluated polynomials in each round $\{Commit_r\}_{r\in \text{all rounds}}$.
 
 2. **Batched Quotient Polynomial**: For each distinct degree $d$, the prover computes a batched quotient polynomial as follows:
 
-   <div style="text-align: center;">
-   <img src="./images/45_01_quotient.png" alt="Image 1" width="50%" style="display: inline-block;">
-   </div>
+   $$
+   q)d(\omega^i) = \sum_{j, k} \alpha^{k+j} \cdot \frac{p_j(\omega^i) - y_{jk}}{\omega^i - z_k}
+   $$
 
    This results in a set of batched quotient polynomials for all degrees $d \in S$.
 
@@ -955,15 +955,15 @@ Once the reduced polynomials $\text{reduce}\_0(X)$ and $\text{reduce}\_1(X)$ are
    - These openings yield intermediate values used to compute the reduced polynomials.
 2. **Constructing the Reduced Polynomial**:
    - Compute the reduced trace polynomial:
-   <div style="text-align: center;">
-   <img src="./images/45_02_reduce01.png" alt="Image 1" width="50%" style="display: inline-block;">
-   </div>
-    where $ldt_0(X)$ and $ldt_0'(X)$ are the Lagrange polynomials formed from the trace evaluations at $\zeta$ and $\zeta_{\text{next}}$.
+     \[
+     \text{reduce}_0(X) = \sum \alpha^i \cdot ldt_0(X)\_i + \alpha^{i+1} \cdot ldt_0'(X)
+     \]
+     where $ldt_0(X)$ and $ldt_0'(X)$ are the Lagrange polynomials formed from the trace evaluations at $\zeta$ and $\zeta_{\text{next}}$.
    - Similarly, compute the reduced quotient polynomial:
-   <div style="text-align: center;">
-   <img src="./images/45_03_reduce02.png" alt="Image 1" width="50%" style="display: inline-block;">
-   </div>
-    where $ldt_2(X)$ and $ldt_3(X)$ are Lagrange polynomials derived from quotient evaluations.
+     \[
+     \text{reduce}\_1(X) = \sum \alpha^i \cdot ldt_2(X)\_i + \alpha^{i+1} \cdot ldt_3(X)
+     \]
+     where $ldt_2(X)$ and $ldt_3(X)$ are Lagrange polynomials derived from quotient evaluations.
 3. **Performing the Low-Degree Test**:
    - Both reduced polynomials $\text{reduce}\_0(X)$ and $\text{reduce}\_1(X)$ undergo a low-degree test to verify their degree bounds.
 
@@ -1017,7 +1017,7 @@ In the query phase, the verifier confirms that the trace polynomial at $\zeta$ a
 if folded_constraints = sels.inv_zeroifier != quotient { ... }
 ```
 
-**Step 3.2: Addressing ZPS and Domain Shifts**
+**Step 2: Addressing ZPS and Domain Shifts**
 
 - The process of reconstructing $Q(\zeta)$ introduces a potential **Zero-Polynomial Shift (ZPS)** problem. When using Lagrange interpolation to reconstruct $Q(\zeta)$, errors can occur due to domain shrinking.
 - For example, $Q(X) = Q_1(X^2) + X \cdot Q_1(-X^2)$ has a smaller domain, so additional corrections are needed to account for the missing elements from the other coset domains. This is handled by computing a ZPS correction factor to adjust for these domain shifts.
