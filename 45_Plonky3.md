@@ -955,14 +955,18 @@ Once the reduced polynomials $\text{reduce}\_0(X)$ and $\text{reduce}\_1(X)$ are
    - These openings yield intermediate values used to compute the reduced polynomials.
 2. **Constructing the Reduced Polynomial**:
    - Compute the reduced trace polynomial:
-     \[
-     \text{reduce}_0(X) = \sum \alpha^i \cdot ldt_0(X)\_i + \alpha^{i+1} \cdot ldt_0'(X)
-     \]
+     
+     $$
+     \text{reduce}_0(X) = \sum \alpha^i \cdot ldt_0(X)_i + \alpha^{i+1} \cdot ldt_0'(X)
+     $$
+     
      where $ldt_0(X)$ and $ldt_0'(X)$ are the Lagrange polynomials formed from the trace evaluations at $\zeta$ and $\zeta_{\text{next}}$.
    - Similarly, compute the reduced quotient polynomial:
-     \[
+     
+     $$
      \text{reduce}\_1(X) = \sum \alpha^i \cdot ldt_2(X)\_i + \alpha^{i+1} \cdot ldt_3(X)
-     \]
+     $$
+     
      where $ldt_2(X)$ and $ldt_3(X)$ are Lagrange polynomials derived from quotient evaluations.
 3. **Performing the Low-Degree Test**:
    - Both reduced polynomials $\text{reduce}\_0(X)$ and $\text{reduce}\_1(X)$ undergo a low-degree test to verify their degree bounds.
