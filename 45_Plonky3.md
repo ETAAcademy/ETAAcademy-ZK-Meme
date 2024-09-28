@@ -530,9 +530,7 @@ The first step in handling FRI proofs involves setting up a data structure to ma
 
 This structure will be updated iteratively through the processing of multiple rounds of polynomial data. The core logic for calculating the quotient polynomials’ openings across all rounds follows the formula:
 
-$$
-\{q_d(x)\}_{d\in S}=\left\{\sum_{k}\sum_{j}\alpha^{k+j } \cdot \frac{p_{jk}(x) - y_{jk}}{x-z_k} \right\}_{d\in S}
-$$
+$\{q_d(x)\}_{d \in S}=\{ \sum_{k} \sum_{j} \alpha^{k+j } \cdot \frac{p_{jk}(x) - y_{jk}}{x-z_k} \}_{d \in S}$
 
 Here, the indices are defined as:
 
