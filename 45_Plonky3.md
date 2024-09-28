@@ -666,7 +666,7 @@ The prover in FRI handles a batch of polynomials and needs to evaluate them over
 2. **Batched Quotient Polynomial**: For each distinct degree $d$, the prover computes a batched quotient polynomial as follows:
 
    $$
-   q)d(\omega^i) = \sum_{j, k} \alpha^{k+j} \cdot \frac{p_j(\omega^i) - y_{jk}}{\omega^i - z_k}
+   q_d(\omega^i) = \sum_{j, k} \alpha^{k+j} \cdot \frac{p_j(\omega^i) - y_{jk}}{\omega^i - z_k}
    $$
 
    This results in a set of batched quotient polynomials for all degrees $d \in S$.
@@ -957,7 +957,7 @@ Once the reduced polynomials $\text{reduce}\_0(X)$ and $\text{reduce}\_1(X)$ are
    - Compute the reduced trace polynomial:
      
      $$
-     reduce_0(X) = \sum \alpha^i \cdot ldt_0(X)_i + \alpha^{i+1} \cdot ldt_0'(X)
+     reduce_0(X) = \sum \alpha^i \cdot ldt_0(X)_i + \alpha^{i+1} \cdot ldt'_0(X)
      $$
      
      where $ldt_0(X)$ and $ldt_0'(X)$ are the Lagrange polynomials formed from the trace evaluations at $\zeta$ and $\zeta_{next}$.
