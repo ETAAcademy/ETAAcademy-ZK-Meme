@@ -1122,6 +1122,8 @@ pcs.verify(
 
 As demand for zk-SNARKs continues to grow, Plonky3's blend of FRI and UniStark technologies positions it as a cutting-edge tool for scaling cryptographic proofs, enabling faster, more secure, and more efficient decentralized ecosystems.
 
+[Plonky3](https://github.com/ETAAcademy/ETAAcademy-ZK-Meme/tree/main/Appendix/Plonky3)
+
 <div style="text-align: center;">
     <img src="./images/45_plonky3.jpg" alt="Image 1" width="100%" style="display: inline-block;">
 </div>
