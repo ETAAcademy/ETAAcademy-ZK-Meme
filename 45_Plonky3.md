@@ -530,7 +530,9 @@ The first step in handling FRI proofs involves setting up a data structure to ma
 
 This structure will be updated iteratively through the processing of multiple rounds of polynomial data. The core logic for calculating the quotient polynomials’ openings across all rounds follows the formula:
 
-$\{q_d(x)\}_{d \in S}=\{ \sum_{k} \sum_{j} \alpha^{k+j } \cdot \frac{p_{jk}(x) - y_{jk}}{x-z_k} \}_{d \in S}$
+$$
+q_d(x)={\sum_{k}\sum_{j}\alpha^{k+j }\cdot \frac{p_{jk}(x) - y_{jk}}{x-z_k} }_{d\in S}
+$$
 
 Here, the indices are defined as:
 
@@ -659,7 +661,7 @@ In the Fast Reed-Solomon Interactive Oracle Proof of Proximity (FRI) protocol, b
 
 The prover in FRI handles a batch of polynomials and needs to evaluate them over specific points, compute quotient polynomials, and perform folding. The prover's input consists of the following elements:
 
-1. **Inputs**: The prover starts with a batch of polynomials $\{p_j(X)\}_{j=1}^{m}$, their evaluations after a low-degree extension (LDE), and a set of open points $\{z_{jk}\}_{k=0}^{t_j}$. The prover commits to these evaluated polynomials in each round $\{Commit_r\}_{r\in \text{all rounds}}$.
+1. **Inputs**: The prover starts with a batch of polynomials $\{p_j(X)\}^{m}\_{j=1}$, their evaluations after a low-degree extension (LDE), and a set of open points $\{z_{jk}\}^{t_j}\_{k=0}$. The prover commits to these evaluated polynomials in each round $\{Commit_r\}_{r\in \text{all rounds}}$.
 
 2. **Batched Quotient Polynomial**: For each distinct degree $d$, the prover computes a batched quotient polynomial as follows:
 
