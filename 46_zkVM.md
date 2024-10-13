@@ -427,13 +427,13 @@ Each Cairo instruction is structured as follows:
 
 **Flag Definitions**
 
-- dst_reg=$f_{``DST_REG``}$
-- op0_reg=$f_{OP0_REG}$
-- op1_src=$f_{OP1\_IMM}+2⋅f_{OP1\_FP}+4⋅f_{OP1\_AP}$
-- res_logic=$f_{RES\_ADD}+2⋅f_{RES\_MUL}$
-- pc_update=$f_{PC\_JUMP_ABS}+2⋅f_{PC\_JUMP\_REL}+4⋅f_{PC\_JNZ}$
-- ap_update=$f_{AP\_ADD}+2⋅f_{AP\_ADD1}$
-- opcode=$f_{OPCODE\_CALL}+2⋅f_{OPCODE\_RET}+4⋅f_{OPCODE_ASSERT\_EQ}$
+- dst_reg = $f_{DST_REG}$
+- op0_reg = $f_{OP0_REG}$
+- op1_src = $f_{OP1 \_IMM}+2⋅f_{OP1\_FP}+4⋅f_{OP1\_AP}$
+- res_logic = $f_{RES\_ADD}+2⋅f_{RES\_MUL}$
+- pc_update = $f_{PC\_JUMP_ABS}+2⋅f_{PC\_JUMP\_REL}+4⋅f_{PC\_JNZ}$
+- ap_update = $f_{AP\_ADD}+2⋅f_{AP\_ADD1}$
+- opcode = $f_{OPCODE\_CALL}+2⋅f_{OPCODE\_RET}+4⋅f_{OPCODE_ASSERT\_EQ}$
 
 **Offset and Virtual Columns**
 
@@ -445,7 +445,7 @@ Instead of separate columns, we store all flag bits in one virtual column $\{ \t
 
 **Flag Extraction Formula**
 
-To extract a flag  $f_i \text{from} \tilde{f}i$:
+To extract a flag  $f_i from \tilde{f}i$:
 $f_i = \tilde{f}i - 2 \tilde{f}{i+1}$
 
 The constraint for each bit is:
@@ -535,7 +535,7 @@ Additionally, constraints for the instruction enforce that offset values lie wit
 
 **State Transition**
 
-Cairo’s state transition function, optimized for Algebraic Intermediate Representation (AIR) implementation, restricts certain flag groups like `op1_src` to values \{0, 1, 2, 4\}, ensuring that only one of the bits $f_{OP1\_IMM}, f_{OP1\_FP}, f_{OP1\_AP}$ can be set at any moment.
+Cairo’s state transition function, optimized for Algebraic Intermediate Representation (AIR) implementation, restricts certain flag groups like `op1_src` to values \{0, 1, 2, 4\}, ensuring that only one of the bits $f_{OP1\_IMM}$, $f_{OP1\_FP}$, $f_{OP1\_AP}$ can be set at any moment.
 
 This approach allows for efficiency during execution while maintaining strong integrity and security within the Cairo programming environment, thus enhancing its capability to manage complex computations in decentralized applications.
 
