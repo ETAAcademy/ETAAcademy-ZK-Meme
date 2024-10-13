@@ -427,7 +427,7 @@ Each Cairo instruction is structured as follows:
 
 **Flag Definitions**
 
-- $dst\_reg=f_{DST\_REG}$
+- $``dst\_reg``=f_{``DST\_REG``}$
 - $op0\_reg=f_{OP0\_REG}$
 - $op1\_src=f_{OP1\_IMM}+2⋅f_{OP1\_FP}+4⋅f_{OP1\_AP}$
 - $res\_logic=f_{RES\_ADD}+2⋅f_{RES\_MUL}$
@@ -445,7 +445,7 @@ Instead of separate columns, we store all flag bits in one virtual column $\{ \t
 
 **Flag Extraction Formula**
 
-To extract a flag  $f_i$ from $\tilde{f}i$:
+To extract a flag  $f_i \text{from} \tilde{f}i$:
 $f_i = \tilde{f}i - 2 \tilde{f}{i+1}$
 
 The constraint for each bit is:
