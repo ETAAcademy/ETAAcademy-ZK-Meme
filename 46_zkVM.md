@@ -445,7 +445,7 @@ Instead of separate columns, we store all flag bits in one virtual column $\{ \t
 
 **Flag Extraction Formula**
 
-To extract a flag  $f_i$ from $\tilde{f}i:$
+To extract a flag  fi from $\tilde{f}i:$
 $f_i = \tilde{f}i - 2 \tilde{f}{i+1}$
 
 The constraint for each bit is:
