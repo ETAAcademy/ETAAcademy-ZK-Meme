@@ -44,7 +44,7 @@ zkVM follows a similar process but with a critical difference: it guarantees the
 The proof is presented to a verifier, who uses it to confirm the correctness of the execution. This contrasts with traditional VMs, where verification requires the program to be executed from scratch to confirm the outcome.
 
 <div  align="center"> 
-<img src="images/46_01_zkVM.png" width="100%" />
+<img src="images/46_zkVM.png" width="100%" />
 </div>
 
 **Architecture Comparison: EVM vs. ZKVM**
