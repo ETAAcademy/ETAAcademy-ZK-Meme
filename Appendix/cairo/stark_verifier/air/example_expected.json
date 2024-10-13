@@ -1,0 +1,15 @@
+{
+    "public_input_test": {
+        "initial_hash_chain_seed": "0x03b5456803e21d8cb8a531ffd767e1ccc8dc775423e111c425881f46103da928"
+    },
+    "dynamic_layout_public_input_test": {
+        "initial_hash_chain_seed": "0x004d22ee097dd04b1228b765883e011e715c227d5a63aa16e32942bd303a5185"
+    },
+    "diluted_test": {
+        "spacing": 4,
+        "n_bits": 16,
+        "z": "0x12345678",
+        "alpha": "0x87654321",
+        "res": "0x3f070f6a2364e6900cc19fa78f05596c776f474786d6769a7b91410352ba644"
+    }
+}
