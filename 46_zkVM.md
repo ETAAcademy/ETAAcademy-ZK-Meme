@@ -268,7 +268,7 @@ The deterministic Cairo machine **validates a computation trace** by checking th
 - Memory function m: $F \to F$,
 - Sequence of states $S = \{S_0, \dots, S_T\}$ with $S_i = (pc_i, ap_i, fp_i) \in F^3$.
 
-It outputs **"accept"** if every transition $S*i \to S*{i+1}$ is valid, using the same memory function m.
+It outputs **"accept"** if every transition $S_i \to S_{i+1}$ is valid, using the same memory function m.
 
 - The memory is **immutable** during transitions (read-only).
 - Only a small subset of memory values is accessed during execution, making the memory function sparse.
@@ -278,7 +278,7 @@ Nondeterministic Cairo Machine
 The **nondeterministic Cairo machine** works with **partial memory** and only requires the **initial and final states**. It takes:
 
 - $T \in \mathbb{N}$: number of steps,
-- Partial memory $m^*$: $A^* \to F$ where $A^* \subseteq F_P$,
+- Partial memory $m^{\*}$: $A^{\*} \to F$ where $A^{\*} \subseteq F_P$,
 - Initial and final values: $(pc_I, pc_F, ap_I, ap_F)$.
 
 It accepts the input if there exists:
@@ -422,7 +422,7 @@ After the execution phase, a proof generation table is created. Once the program
 
 Each Cairo instruction is structured as follows:
 
-1. **First Word**: 15 flag bits $f^*$ and 3 offsets $\text{off}^*$.
+1. **First Word**: 15 flag bits $f^{\*}$ and 3 offsets $\text{off^{\*}}$.
 2. **Second Word (Optional)**: An immediate value (field element).
 
 **Flag Definitions**
@@ -535,9 +535,7 @@ Additionally, constraints for the instruction enforce that offset values lie wit
 
 **State Transition**
 
-Cairo’s state transition function, optimized for Algebraic Intermediate Representation (AIR) implementation, restricts certain flag groups like `op1_src` to values \{0, 1, 2, 4\}, ensuring that only one of the bits $
-
-f*{OP1_IMM}, f*{OP1_FP}, f\_{OP1_AP}$ can be set at any moment.
+Cairo’s state transition function, optimized for Algebraic Intermediate Representation (AIR) implementation, restricts certain flag groups like `op1_src` to values \{0, 1, 2, 4\}, ensuring that only one of the bits $f*{OP1_IMM}, f*{OP1_FP}, f\_{OP1_AP}$ can be set at any moment.
 
 This approach allows for efficiency during execution while maintaining strong integrity and security within the Cairo programming environment, thus enhancing its capability to manage complex computations in decentralized applications.
 
