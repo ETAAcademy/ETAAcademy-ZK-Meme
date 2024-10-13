@@ -422,7 +422,7 @@ After the execution phase, a proof generation table is created. Once the program
 
 Each Cairo instruction is structured as follows:
 
-1. **First Word**: 15 flag bits $f^{\*}$ and 3 offsets $\text{off^{\*}}$.
+1. **First Word**: 15 flag bits $f_{\*}$ and 3 offsets $\text{off_{\*}}$.
 2. **Second Word (Optional)**: An immediate value (field element).
 
 **Flag Definitions**
@@ -445,7 +445,7 @@ Instead of separate columns, we store all flag bits in one virtual column $\{ \t
 
 **Flag Extraction Formula**
 
-To extract a flag  $f_i$ from $\tilde{f}_i$:
+To extract a flag  $f_i$ from $\tilde{f}i$:
 $f_i = \tilde{f}i - 2 \tilde{f}{i+1}$
 
 The constraint for each bit is:
@@ -535,7 +535,7 @@ Additionally, constraints for the instruction enforce that offset values lie wit
 
 **State Transition**
 
-Cairo’s state transition function, optimized for Algebraic Intermediate Representation (AIR) implementation, restricts certain flag groups like `op1_src` to values \{0, 1, 2, 4\}, ensuring that only one of the bits $f*{OP1_IMM}, f*{OP1_FP}, f\_{OP1_AP}$ can be set at any moment.
+Cairo’s state transition function, optimized for Algebraic Intermediate Representation (AIR) implementation, restricts certain flag groups like `op1_src` to values \{0, 1, 2, 4\}, ensuring that only one of the bits $f_{OP1\_IMM}, f_{OP1\_FP}, f_{OP1\_AP}$ can be set at any moment.
 
 This approach allows for efficiency during execution while maintaining strong integrity and security within the Cairo programming environment, thus enhancing its capability to manage complex computations in decentralized applications.
 
