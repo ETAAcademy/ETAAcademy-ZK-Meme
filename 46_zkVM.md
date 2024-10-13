@@ -422,18 +422,18 @@ After the execution phase, a proof generation table is created. Once the program
 
 Each Cairo instruction is structured as follows:
 
-1. **First Word**: 15 flag bits $f_{\*}$ and 3 offsets $\text{off_{\*}}$.
+1. **First Word**: 15 flag bits $f_{\*}$ and 3 offsets $off_{\*}$.
 2. **Second Word (Optional)**: An immediate value (field element).
 
 **Flag Definitions**
 
-- $``dst\_reg``=f_{``DST\_REG``}$
-- $op0\_reg=f_{OP0\_REG}$
-- $op1\_src=f_{OP1\_IMM}+2⋅f_{OP1\_FP}+4⋅f_{OP1\_AP}$
-- $res\_logic=f_{RES\_ADD}+2⋅f_{RES\_MUL}$
-- $pc\_update=f_{PC\_JUMP_ABS}+2⋅f_{PC\_JUMP\_REL}+4⋅f_{PC\_JNZ}$
-- $ap\_update=f_{AP\_ADD}+2⋅f_{AP\_ADD1}$
-- $opcode=f_{OPCODE\_CALL}+2⋅f_{OPCODE\_RET}+4⋅f_{OPCODE\_ASSERT\_EQ}$
+- dst_reg=$f_{``DST_REG``}$
+- op0_reg=$f_{OP0_REG}$
+- op1_src=$f_{OP1\_IMM}+2⋅f_{OP1\_FP}+4⋅f_{OP1\_AP}$
+- res_logic=$f_{RES\_ADD}+2⋅f_{RES\_MUL}$
+- pc_update=$f_{PC\_JUMP_ABS}+2⋅f_{PC\_JUMP\_REL}+4⋅f_{PC\_JNZ}$
+- ap_update=$f_{AP\_ADD}+2⋅f_{AP\_ADD1}$
+- opcode=$f_{OPCODE\_CALL}+2⋅f_{OPCODE\_RET}+4⋅f_{OPCODE_ASSERT\_EQ}$
 
 **Offset and Virtual Columns**
 
