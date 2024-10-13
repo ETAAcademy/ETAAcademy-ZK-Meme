@@ -268,7 +268,7 @@ The deterministic Cairo machine **validates a computation trace** by checking th
 - Memory function m: $F \to F$,
 - Sequence of states $S = \{S_0, \dots, S_T\}$ with $S_i = (pc_i, ap_i, fp_i) \in F^3$.
 
-It outputs **"accept"** if every transition $S*i \to S*{i+1}$ is valid, using the same memory function m.
+It outputs **"accept"** if every transition $S_i \to S_{i+1}$ is valid, using the same memory function m.
 
 - The memory is **immutable** during transitions (read-only).
 - Only a small subset of memory values is accessed during execution, making the memory function sparse.
@@ -278,7 +278,7 @@ Nondeterministic Cairo Machine
 The **nondeterministic Cairo machine** works with **partial memory** and only requires the **initial and final states**. It takes:
 
 - $T \in \mathbb{N}$: number of steps,
-- Partial memory $m^*$: $A^* \to F$ where $A^* \subseteq F_P$,
+- Partial memory $m^{\*}$: $A^{\*} \to F$ where $A^{\*} \subseteq F_P$,
 - Initial and final values: $(pc_I, pc_F, ap_I, ap_F)$.
 
 It accepts the input if there exists:
@@ -422,18 +422,18 @@ After the execution phase, a proof generation table is created. Once the program
 
 Each Cairo instruction is structured as follows:
 
-1. **First Word**: 15 flag bits $f^*$ and 3 offsets $\text{off}^*$.
+1. **First Word**: 15 flag bits $f_{\*}$ and 3 offsets $off_{\*}$.
 2. **Second Word (Optional)**: An immediate value (field element).
 
 **Flag Definitions**
 
-- $dst\_reg=f_{DST\_REG}$
-- $op0\_reg=f_{OP0\_REG}$
-- $op1\_src=f_{OP1\_IMM}+2⋅f_{OP1\_FP}+4⋅f_{OP1\_AP}$
-- $res\_logic=f_{RES\_ADD}+2⋅f_{RES\_MUL}$
-- $pc\_update=f_{PC\_JUMP_ABS}+2⋅f_{PC\_JUMP\_REL}+4⋅f_{PC\_JNZ}$
-- $ap\_update=f_{AP\_ADD}+2⋅f_{AP\_ADD1}$
-- $opcode=f_{OPCODE\_CALL}+2⋅f_{OPCODE\_RET}+4⋅f_{OPCODE\_ASSERT\_EQ}$
+- dst_reg = $f_{DST_REG}$
+- op0_reg = $f_{OP0_REG}$
+- op1_src = $f_{OP1 \_IMM}+2⋅f_{OP1\_FP}+4⋅f_{OP1\_AP}$
+- res_logic = $f_{RES\_ADD}+2⋅f_{RES\_MUL}$
+- pc_update = $f_{PC\_JUMP_ABS}+2⋅f_{PC\_JUMP\_REL}+4⋅f_{PC\_JNZ}$
+- ap_update = $f_{AP\_ADD}+2⋅f_{AP\_ADD1}$
+- opcode = $f_{OPCODE\_CALL}+2⋅f_{OPCODE\_RET}+4⋅f_{OPCODE_ASSERT\_EQ}$
 
 **Offset and Virtual Columns**
 
@@ -445,7 +445,7 @@ Instead of separate columns, we store all flag bits in one virtual column $\{ \t
 
 **Flag Extraction Formula**
 
-To extract a flag  $f_i$ from $\tilde{f}_i$:
+To extract a flag  fi from $\tilde{f}i:$
 $f_i = \tilde{f}i - 2 \tilde{f}{i+1}$
 
 The constraint for each bit is:
@@ -535,9 +535,7 @@ Additionally, constraints for the instruction enforce that offset values lie wit
 
 **State Transition**
 
-Cairo’s state transition function, optimized for Algebraic Intermediate Representation (AIR) implementation, restricts certain flag groups like `op1_src` to values \{0, 1, 2, 4\}, ensuring that only one of the bits $
-
-f*{OP1_IMM}, f*{OP1_FP}, f\_{OP1_AP}$ can be set at any moment.
+Cairo’s state transition function, optimized for Algebraic Intermediate Representation (AIR) implementation, restricts certain flag groups like `op1_src` to values \{0, 1, 2, 4\}, ensuring that only one of the bits $f_{OP1\_IMM}$, $f_{OP1\_FP}$, $f_{OP1\_AP}$ can be set at any moment.
 
 This approach allows for efficiency during execution while maintaining strong integrity and security within the Cairo programming environment, thus enhancing its capability to manage complex computations in decentralized applications.
 
