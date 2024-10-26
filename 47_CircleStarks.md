@@ -42,7 +42,7 @@ In contrast, Mersenne31 is a prime field with a modulus of $2^{31} - 1$, resulti
 
 ## 2. Circle FRI
 
-The ingenuity of Circle STARKs lies in their construction over finite fields $F_p$ where $p \equiv 3 \mod 4$. Here, we define the circle curve $C$ with the equation $x^2 + y^2 = 1$. This curve has two points at infinity in the extended field $F_p(i)$, specifically $\infty = (1 : i : 0)$ and $\bar{\infty} = (1 : -i : 0)$, which play a crucial role in the circle STARK framework. We establish an isomorphism between the circle curve and the projective line $P^1(F_p)$, allowing us to simplify bivariate function fields to univariate ones, thereby facilitating computation. This isomorphism is defined through a mapping known as stereographic projection, which projects points on the circle curve onto the y-axis with the point \((-1, 0)\) as the center of projection. The mapping can be expressed as follows:
+The ingenuity of Circle STARKs lies in their construction over finite fields $F_p$ where $p \equiv 3 \mod 4$. Here, we define the circle curve $C$ with the equation $x^2 + y^2 = 1$. This curve has two points at infinity in the extended field $F_p(i)$, specifically $\infty = (1 : i : 0)$ and $\bar{\infty} = (1 : -i : 0)$, which play a crucial role in the circle STARK framework. We establish an isomorphism between the circle curve and the projective line $P^1(F_p)$, allowing us to simplify bivariate function fields to univariate ones, thereby facilitating computation. This isomorphism is defined through a mapping known as stereographic projection, which projects points on the circle curve onto the y-axis with the point $(-1, 0)$ as the center of projection. The mapping can be expressed as follows:
 
 $$
 t = \frac{y}{x + 1}, \quad (x, y) = \left( \frac{1 - t^2}{1 + t^2}, \frac{2t}{1 + t^2} \right).
@@ -56,19 +56,19 @@ $$
 (x_0, y_0) \cdot (x_1, y_1) := (x_0 \cdot x_1 - y_0 \cdot y_1, x_0 \cdot y_1 + y_0 \cdot x_1).
 $$
 
-The identity element of this group is \((1, 0)\), and the inverse of any element \((x, y)\) is given by $J(x, y) = (x, -y)$, indicating a symmetric operation within the group. We also define an isomorphic mapping $(x, y) \mapsto x + i \cdot y$, which maps $C(F_p)$ into a multiplicative subgroup of the extended field $F_p(i)$. The resulting cyclic group structure enables the definition of what are referred to as "standard position cosets" and "twin cosets," corresponding to the subgroup $G_n$ and its associated twin cosets, respectively. These cosets provide an evaluation domain for implementing Circle FFT, particularly benefiting from the ability of twin cosets to decompose into smaller cosets, facilitating rotation-invariant FFT processing for non-smooth structures. Lemmas also indicate that for primes $p$ that support FFT, the standard position coset can be further decomposed into smaller twin cosets, simplifying calculations to accommodate the varying dimensional requirements of FFT algorithms.
+The identity element of this group is $(1, 0)$, and the inverse of any element $(x, y)$ is given by $J(x, y) = (x, -y)$, indicating a symmetric operation within the group. We also define an isomorphic mapping $(x, y) \mapsto x + i \cdot y$, which maps $C(F_p)$ into a multiplicative subgroup of the extended field $F_p(i)$. The resulting cyclic group structure enables the definition of what are referred to as "standard position cosets" and "twin cosets," corresponding to the subgroup $G_n$ and its associated twin cosets, respectively. These cosets provide an evaluation domain for implementing Circle FFT, particularly benefiting from the ability of twin cosets to decompose into smaller cosets, facilitating rotation-invariant FFT processing for non-smooth structures. Lemmas also indicate that for primes $p$ that support FFT, the standard position coset can be further decomposed into smaller twin cosets, simplifying calculations to accommodate the varying dimensional requirements of FFT algorithms.
 
-The doubling form is as follows: given a prime $p$, we can construct a point set $G$ where $G = \{1, 2, \ldots, p-1\}$. This leads to a group of size $p + 1$ that exhibits a similar two-to-one property, represented by the set of points \((x, y)\) satisfying $x^2 + y^2 = 1$. These point sets obey an addition law akin to those found in trigonometry or complex multiplication. Within this point set $G$, there exists a special "doubling" mapping that takes a point \((x, y)\) and maps it to \((2x, 2y)\), which is known as the "doubling form." On the unit circle, a point \((x, y)\) can be expressed as $x = \cos(\theta)$ and $y = \sin(\theta)$. The purpose of this doubling form is to map one point to another, geometrically equivalent to doubling the angle.
+The doubling form is as follows: given a prime $p$, we can construct a point set $G$ where $G = \{1, 2, \ldots, p-1\}$. This leads to a group of size $p + 1$ that exhibits a similar two-to-one property, represented by the set of points $(x, y)$ satisfying $x^2 + y^2 = 1$. These point sets obey an addition law akin to those found in trigonometry or complex multiplication. Within this point set $G$, there exists a special "doubling" mapping that takes a point $(x, y)$ and maps it to $(2x, 2y)$, which is known as the "doubling form." On the unit circle, a point $(x, y)$ can be expressed as $x = \cos(\theta)$ and $y = \sin(\theta)$. The purpose of this doubling form is to map one point to another, geometrically equivalent to doubling the angle.
 
 According to the double angle formulas for trigonometric functions:
 
-- \(\cos(2\theta) = 2\cos^2(\theta) - 1\)
-- \(\sin(2\theta) = 2\sin(\theta)\cos(\theta)\)
+- $\cos(2\theta) = 2\cos^2(\theta) - 1$
+- $\sin(2\theta) = 2\sin(\theta)\cos(\theta)$
 
 If we replace \((x, y)\) with \((\cos(\theta), \sin(\theta))\), the results of the doubling mapping can be expressed as:
 
-- \(x' = \cos(2\theta) = 2\cos^2(\theta) - 1 = 2x^2 - 1\)
-- \(y' = \sin(2\theta) = 2\sin(\theta)\cos(\theta) = 2xy\)
+- $x' = \cos(2\theta) = 2\cos^2(\theta) - 1 = 2x^2 - 1$
+- $y' = \sin(2\theta) = 2\sin(\theta)\cos(\theta) = 2xy$
 
 Focusing on points on the circle that occupy "odd" positions, this forms a structure akin to a Fast Fourier Transform (FFT). This doubling mapping can be applied to FFT computations by merging point sets into a one-dimensional array, then taking random linear combinations, and continuously reducing the problem size through the doubling mapping to achieve efficient calculations.
 
