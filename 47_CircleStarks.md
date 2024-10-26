@@ -48,7 +48,7 @@ $$
 t = \frac{y}{x + 1}, \quad (x, y) = \left( \frac{1 - t^2}{1 + t^2}, \frac{2t}{1 + t^2} \right).
 $$
 
-Under this mapping, the point \((-1, 0)\) corresponds to a point at infinity on the projective line, while the points at infinity $\infty = (1 : +i : 0)$ and $\bar{\infty} = (1 : -i : 0)$ correspond to $t = \pm i$. This isomorphism, realized through stereographic projection, links points on the circle with those on the y-axis, forming the algebraic foundation for circle STARKs.
+Under this mapping, the point $(-1, 0)$ corresponds to a point at infinity on the projective line, while the points at infinity $\infty = (1 : +i : 0)$ and $\bar{\infty} = (1 : -i : 0)$ correspond to $t = \pm i$. This isomorphism, realized through stereographic projection, links points on the circle with those on the y-axis, forming the algebraic foundation for circle STARKs.
 
 In the context of a prime $p \equiv 3 \mod 4$, we can define a circle group using the circle curve $C(F_p)$. The set of points $C(F_p)$ forms a cyclic group under a specific operation defined as:
 
@@ -65,7 +65,7 @@ According to the double angle formulas for trigonometric functions:
 - $\cos(2\theta) = 2\cos^2(\theta) - 1$
 - $\sin(2\theta) = 2\sin(\theta)\cos(\theta)$
 
-If we replace \((x, y)\) with \((\cos(\theta), \sin(\theta))\), the results of the doubling mapping can be expressed as:
+If we replace $(x, y)$ with $(\cos(\theta), \sin(\theta))$, the results of the doubling mapping can be expressed as:
 
 - $x' = \cos(2\theta) = 2\cos^2(\theta) - 1 = 2x^2 - 1$
 - $y' = \sin(2\theta) = 2\sin(\theta)\cos(\theta) = 2xy$
@@ -657,7 +657,7 @@ To simplify and optimize the computation of vanishing polynomials, we focus on t
 In STARK proofs, the polynomial equation to be verified is akin to $C(P(x), P(next(x))) = Z(x) \cdot H(x)$, where the vanishing polynomial $Z(x)$ is utilized to confirm that the polynomial evaluates to zero at specific points (typically at all points in the evaluation domain). In conventional STARK protocols, the roots of unity satisfying $x^n = 1$ are represented by the vanishing polynomial $x^n - 1$, ensuring it takes values of zero at the domain composed of these roots. In Circle STARKs, the construction of the vanishing polynomial is based on a different recursive relationship, starting with $Z_1(x, y) = y$ and $Z_2(x, y) = x$, and subsequently generated through the folding function $x \rightarrow 2x^2 - 1$ in a recursive manner, expressed as:
 
 $$
-Z\_{n+1}(x, y) = (2 \cdot Z_n(x, y)^2) - 1.
+Z_{n+1}(x, y) = (2 \cdot Z_n(x, y)^2) - 1.
 $$
 
 This illustrates that the vanishing polynomial emerges from the folding function. In conventional STARKs, the folding function takes the form $x \rightarrow x^2$, while in Circle STARKs, it is adapted to suit the circular geometry. This structure guarantees that the vanishing polynomial has roots throughout the entire circular group, thus completing a vanishing operation akin to that in conventional STARKs, yet tailored to the unique properties of the geometric structure.
