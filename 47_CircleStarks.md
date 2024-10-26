@@ -972,7 +972,7 @@ bool executeProtocol(const BairInstance& instance, const BairWitness& witness,
     prn::printAcspInstanceSpec(*acspInstance);
     prn::printAprInstanceSpec(*acspInstance);
 
-    // ... (其余代码省略)
+    ...
 }
 
 void simulateProtocol(const BairInstance& instance,
