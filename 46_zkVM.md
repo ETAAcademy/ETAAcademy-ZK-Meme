@@ -427,12 +427,12 @@ Each Cairo instruction is structured as follows:
 
 **Flag Definitions**
 
-- dst_reg = $f_{DST_REG}$
-- op0_reg = $f_{OP0_REG}$
-- op1_src = $f_{OP1 \_IMM}+2⋅f_{OP1\_FP}+4⋅f_{OP1\_AP}$
-- res_logic = $f_{RES\_ADD}+2⋅f_{RES\_MUL}$
-- pc_update = $f_{PC\_JUMP_ABS}+2⋅f_{PC\_JUMP\_REL}+4⋅f_{PC\_JNZ}$
-- ap_update = $f_{AP\_ADD}+2⋅f_{AP\_ADD1}$
+- dst*reg = $f*{DST_REG}$
+- op0*reg = $f*{OP0_REG}$
+- op1*src = $f*{OP1 \_IMM}+2⋅f*{OP1_FP}+4⋅f*{OP1_AP}$
+- res*logic = $f*{RES_ADD}+2⋅f\_{RES_MUL}$
+- pc*update = $f*{PC_JUMP*ABS}+2⋅f*{PC_JUMP_REL}+4⋅f\_{PC_JNZ}$
+- ap*update = $f*{AP_ADD}+2⋅f\_{AP_ADD1}$
 - opcode = $f_{OPCODE\_CALL}+2⋅f_{OPCODE\_RET}+4⋅f_{OPCODE_ASSERT\_EQ}$
 
 **Offset and Virtual Columns**
