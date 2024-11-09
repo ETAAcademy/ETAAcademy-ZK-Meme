@@ -1,0 +1,18 @@
+[package]
+name = "binius_macros"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+
+[dependencies]
+syn.workspace = true
+quote.workspace = true
+proc-macro2.workspace = true
+
+[dev-dependencies]
+binius_core = { path = "../core" }
+binius_field = { path = "../field" }
+binius_math = { path = "../math" }
+
+[lib]
+proc-macro = true

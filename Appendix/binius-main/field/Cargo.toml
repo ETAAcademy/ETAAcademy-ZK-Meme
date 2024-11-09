@@ -1,0 +1,72 @@
+[package]
+name = "binius_field"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+
+[dependencies]
+binius_utils = { path = "../utils" }
+bytemuck.workspace = true
+bytes.workspace = true
+cfg-if.workspace = true
+derive_more.workspace = true
+p3-util.workspace = true
+rand.workspace = true
+rayon.workspace = true
+seq-macro.workspace = true
+subtle.workspace = true
+thiserror.workspace = true
+transpose.workspace = true
+tracing.workspace = true
+
+[dev-dependencies]
+criterion.workspace = true
+itertools.workspace = true
+paste.workspace = true
+proptest.workspace = true
+
+[features]
+trace_multiplications = []
+
+[lib]
+bench = false
+
+[[bench]]
+name = "binary_field"
+harness = false
+
+[[bench]]
+name = "binary_field_util"
+harness = false
+
+[[bench]]
+name = "packed_field_linear_transform"
+harness = false
+
+[[bench]]
+name = "packed_field_element_access"
+harness = false
+
+[[bench]]
+name = "packed_field_init"
+harness = false
+
+[[bench]]
+name = "packed_field_iter"
+harness = false
+
+[[bench]]
+name = "packed_field_multiply"
+harness = false
+
+[[bench]]
+name = "packed_field_mul_alpha"
+harness = false
+
+[[bench]]
+name = "packed_field_square"
+harness = false
+
+[[bench]]
+name = "packed_field_subfield_ops"
+harness = false

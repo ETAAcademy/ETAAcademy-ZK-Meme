@@ -1,0 +1,62 @@
+[package]
+name = "binius_core"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+
+[dependencies]
+assert_matches.workspace = true
+auto_impl.workspace = true
+binius_field = { path = "../field" }
+binius_hal = { path = "../hal" }
+binius_hash = { path = "../hash" }
+binius_math = { path = "../math" }
+binius_ntt = { path = "../ntt" }
+binius_utils = { path = "../utils" }
+bytes.workspace = true
+bytemuck = { workspace = true, features = ["extern_crate_alloc"] }
+derive_more.workspace = true
+digest.workspace = true
+either.workspace = true
+getset.workspace = true
+itertools.workspace = true
+p3-challenger.workspace = true
+p3-matrix.workspace = true
+p3-symmetric.workspace = true
+p3-util.workspace = true
+rand.workspace = true
+rayon.workspace = true
+stackalloc.workspace = true
+thiserror.workspace = true
+thread_local.workspace = true
+tracing.workspace = true
+trait-set.workspace = true
+transpose.workspace = true
+
+[dev-dependencies]
+anyhow.workspace = true
+binius_macros = { path = "../macros" }
+criterion.workspace = true
+groestl_crypto.workspace = true
+proptest.workspace = true
+tiny-keccak.workspace = true
+tracing-profile.workspace = true
+tracing-subscriber.workspace = true
+
+[lib]
+bench = false
+
+[[bench]]
+name = "composition_poly"
+harness = false
+
+[[bench]]
+name = "multilinear_query"
+harness = false
+
+[[bench]]
+name = "prodcheck"
+harness = false
+
+[features]
+debug_validate_sumcheck = []

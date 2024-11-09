@@ -1,0 +1,27 @@
+[package]
+name = "binius_ntt"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+
+[dependencies]
+binius_field = { path = "../field" }
+binius_math = { path = "../math"}
+binius_utils = { path = "../utils" }
+p3-util.workspace = true
+rand.workspace = true
+rayon.workspace = true
+thiserror.workspace = true
+
+[dev-dependencies]
+assert_matches.workspace = true
+criterion.workspace = true
+lazy_static.workspace = true
+proptest.workspace = true
+
+[lib]
+bench = false
+
+[[bench]]
+name = "additive_ntt"
+harness = false
