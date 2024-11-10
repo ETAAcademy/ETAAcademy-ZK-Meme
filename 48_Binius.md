@@ -599,7 +599,9 @@ The opening phase checks the integrity of the Merkle commitment, verifying if it
 
 The verification step can be formalized as $b \leftarrow \Pi.Open(params, c; t, u)$, where:
 
-- The verifier checks \( \Delta_{m_0}((u_i)_{i=0}^{m_0-1}, (Enc(t_i))_{i=0}^{m_0-1}) \) for correctness, ensuring that it meets the criteria.
+- The verifier checks <div  align="center">
+<img src="images/48_binus_open.png" width="50%" />
+</div> for correctness, ensuring that it meets the criteria.
 
 4. **Proof and Verification Protocol**
 
@@ -1181,11 +1183,10 @@ New constructions like packing, shifting, and saturation provide efficient tools
 1. **Packing Construction**: The packing operation `packκ` reduces a polynomial $t$ from dimension $ℓ$ to a lower dimension $ℓ-κ$. It processes adjacent $2κ$ elements, combining them into a new element.
    **Formula**: $\text{pack}_κ(t) := \sum t(v \parallel u) \cdot β_v$, where $u$ is a variable in the lower dimension $ℓ-κ$, and $v \in B_κ$. The resulting polynomial is multilinear and can be evaluated efficiently.
 
-3. **Shifting Construction**: The shifting operation `shiftb,o` divides the index set of polynomial $t$ into $b$-dimensional sub-cubes and cyclically shifts each sub-array.
+2. **Shifting Construction**: The shifting operation `shiftb,o` divides the index set of polynomial $t$ into $b$-dimensional sub-cubes and cyclically shifts each sub-array.
    **Formula**: $shift_{b,o}(t) := (t(s_{b,o}(v)))$, where $s_{b,o}$ defines the shift, $v \in B_ℓ$. The shifting indicator function `s-indb,o` checks for the shift relation between inputs. The resulting polynomial is multilinear and supports efficient evaluation.
-   
 
-5. **Saturation Construction**: The saturation operation `satb,o` divides the index set of polynomial $t$ into $b$-dimensional sub-cubes and "saturates" each block with a specific value.
+3. **Saturation Construction**: The saturation operation `satb,o` divides the index set of polynomial $t$ into $b$-dimensional sub-cubes and "saturates" each block with a specific value.
    **Formula**: $sat_{b,o}(t)(v) = t(o_0, \ldots, o_{b-1}, v_b, \ldots, v_{ℓ-1})$. The resulting polynomial is multilinear and allows for efficient evaluation.
 
 These new virtual polynomial constructions provide robust tools for handling complex polynomial computations efficiently, offering foundational support for subsequent polynomial algorithms and enhancing their performance across different dimensions and structures.
