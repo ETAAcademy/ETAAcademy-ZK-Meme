@@ -599,7 +599,7 @@ The opening phase checks the integrity of the Merkle commitment, verifying if it
 
 The verification step can be formalized as $b \leftarrow \Pi.Open(params, c; t, u)$, where:
 
-- The verifier checks $△^{m_0}((u_i)_{i=0}^{m_0-1}, Enc(t_i)_{i=0}^{m_0-1})$ for correctness, ensuring that it meets the criteria.
+- The verifier checks $△^{m_0}((u_i)_{i=0}^{m_0-1}, (Enc(t_i))_{i=0}^{m_0-1})$ for correctness, ensuring that it meets the criteria.
 
 4. **Proof and Verification Protocol**
 
