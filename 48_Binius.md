@@ -597,9 +597,7 @@ The opening phase checks the integrity of the Merkle commitment, verifying if it
 - The prover sends the committed polynomial and the Merkle proof paths to the verifier.
 - The verifier checks the Merkle paths and verifies that the commitment corresponds to the polynomial.
 
-The verification step can be formalized as $b \leftarrow \Pi.Open(params, c; t, u)$, where:
-
-- The verifier checks $△^{m_0}((u_i)_{i=0}^{m_0-1}, (Enc(t_i))^{m_0-1})_{i=0}$ for correctness, ensuring that it meets the criteria.
+The verification step can be formalized as $b \leftarrow \Pi.Open(params, c; t, u)$.
 
 4. **Proof and Verification Protocol**
 
