@@ -600,7 +600,7 @@ The opening phase checks the integrity of the Merkle commitment, verifying if it
 The verification step can be formalized as $b \leftarrow \Pi.Open(params, c; t, u)$, where:
 
 - The verifier checks <div  align="center">
-<img src="images/48_binus_open.png" width="20%" />
+<img src="images/48_binius_open.png" width="20%" />
 </div> for correctness, ensuring that it meets the criteria.
 
 4. **Proof and Verification Protocol**
