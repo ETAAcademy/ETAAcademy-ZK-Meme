@@ -1,0 +1,14 @@
+[package]
+name = "sumcheck"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+arith = { path = "../arith" }
+circuit = { path = "../circuit" }
+config = { path = "../config" }
+polynomials = { path = "../arith/polynomials" }
+transcript = { path = "../transcript" }
+
+env_logger.workspace = true
+log.workspace = true
