@@ -312,24 +312,24 @@ The GKR protocol, introduced in [GKR08], is a hierarchical proof system where th
 **Core Techniques in Distributed Proofs**
 
 1. **Multilinear Extension:**  
-    A **multilinear extension** transforms functions defined over binary inputs into polynomials over a continuous domain, enabling efficient computations and verification. For a function $V: \{0,1\}^\ell \to F$, its multilinear extension $ \tilde{V} $ is a unique polynomial satisfying $ \tilde{V}(x) = V(x) $ for all binary inputs $x \in \{0,1\}^\ell$.  
+    A **multilinear extension** transforms functions defined over binary inputs into polynomials over a continuous domain, enabling efficient computations and verification. For a function $V: \{0,1\}^\ell \to F$, its multilinear extension $\tilde{V}$ is a unique polynomial satisfying $\tilde{V}(x) = V(x)$ for all binary inputs $x \in \{0,1\}^\ell$.  
     **Formula:**
 
    $$
-    \tilde{V}(x) = \sum_{b \in \{0,1\}^\ell} \prod_{i=1}^\ell \big((1 - x_i)(1 - b_i) + x_i b_i\big) \cdot V(b)
+   \tilde{V}(x) = \sum_{b \in \{0,1\}^\ell} \prod_{i=1}^\ell \big((1 - x_i)(1 - b_i) + x_i b_i\big) \cdot V(b)
    $$
 
    This allows computations to extend from discrete binary inputs to continuous domains while retaining binary consistency, facilitating efficient operations in large-scale circuits.
 
 2. **Identity Function:**  
-    The **identity function** $ \beta(x, y) $ compares two inputs:
+    The **identity function** $\beta(x, y)$ compares two inputs:
 
    $$
-    \beta(x, y) =
-    \begin{cases}
-    1, & \text{if } x = y \\
-    0, & \text{otherwise}
-    \end{cases}
+   \beta(x, y) =
+   \begin{cases}
+   1, & \text{if } x = y \\
+   0, & \text{otherwise}
+   \end{cases}
    $$
 
    Its multilinear extension generalizes this comparison to polynomial evaluation, aiding in verifying connections between circuit nodes during complex computations.
@@ -337,7 +337,7 @@ The GKR protocol, introduced in [GKR08], is a hierarchical proof system where th
 3. **Sumcheck Protocol:**  
     The **Sumcheck Protocol** validates the correctness of polynomial computations, particularly for large-scale circuits such as data-parallel architectures. It works by recursively checking each layer of a circuit, aggregating inputs, and simplifying the problem. For a multivariable polynomial $f: F^\ell \to F$, the protocol confirms its sum over all binary inputs:
    $$
-    H = \sum_{b \in \{0,1\}^\ell} f(b)
+   H = \sum_{b \in \{0,1\}^\ell} f(b)
    $$
 
 **Execution of Distributed Sumcheck Protocol**
@@ -354,7 +354,7 @@ The protocol proceeds in phases:
 
 At the final step of the Sumcheck Protocol, the prover must prove to the verifier that $y = f(r_1, \dots, r_\ell)$. This step uses a **Polynomial Commitment (PC)** scheme, such as those in the Virgo protocol, to achieve efficient verification.
 
-In a distributed setting, each machine $\mathcal{P}_i$ holds a portion of the polynomial $f^{(i)}$. The goal is to compute and verify $f(r)$:  
+In a distributed setting, each machine $\mathcal{P_i}$ holds a portion of the polynomial $f^{(i)}$. The goal is to compute and verify $f(r)$:  
 $f(r) = \sum_{i=0}^{N-1} \tilde{\beta}(r[\ell-n+1:\ell], i) f^{(i)}(r[1:\ell-n]),$
 where $\tilde{\beta}$ is a multilinear interpolation function.
 
@@ -504,15 +504,17 @@ To ensure security, proof of public key validity is essential. Validators can de
 
 - **Accumulation Gates**:
   These gates enable efficient aggregation of inputs into a single output in fewer steps:
+  
   $$
   y = \text{Accumulate}(x_1, x_2, \ldots, x_n)
   $$
+  
   This reduces depth and complexity while preserving correctness.
 
 For instance, in recursive calculations:
 
 $$
-\widetilde{V}_i(g) = \sum_{x, y \in \{0,1\}} 2^{s_{i+1}^g} \Big(\widetilde{\text{addi}_t}(g, x, y) \cdot \big(V_{i+1}(x) + V_{i+1}(y)\big) + \text{mult}_i(g, x, y) \cdot \big(V_{i+1}(x) \cdot V_{i+1}(y)\big)\Big)
+\widetilde{V_i(g)} = \sum_{x, y \in \{0,1\}} 2^{s_{i+1}^g} \Big(\widetilde{\text{addi_t}}(g, x, y) \cdot \big(V_{i+1}(x) + V_{i+1}(y)\big) + \text{mult_i}(g, x, y) \cdot \big(V_{i+1}(x) \cdot V_{i+1}(y)\big)\Big)
 $$
 
 Here, $\text{addi}$ and $\text{mult}$ represent addition and multiplication gates, and $\widetilde{V}_i$ recursively aggregates results from layer $i+1$ to layer $i$.
