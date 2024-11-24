@@ -637,10 +637,6 @@ GPUs can process each $F(x_i)$ in parallel, dramatically reducing computation ti
 
 </details>
 
-### **Conclusion**
-
-Cross-chain technologies, like LayerZero and ZkBridge, utilize innovations such as zero-knowledge proofs (ZKPs) and oracles for secure, efficient blockchain interactions. ZkBridge employs zk-SNARKs for trustless synchronization, while distributed proofs and recursive SNARKs enhance scalability. Despite challenges like communication overhead, advancements in circuits and GPU acceleration drive ZKP bridges toward efficient, decentralized cross-chain solutions.
-
 [zkbridge](https://github.com/ETAAcademy/ETAAcademy-ZK-Meme/tree/main/Appendix/zkbridge)
 
 [sumcheck](https://github.com/ETAAcademy/ETAAcademy-ZK-Meme/tree/main/Appendix/sumcheck)
