@@ -639,11 +639,7 @@ GPUs can process each $F(x_i)$ in parallel, dramatically reducing computation ti
 
 ### **Conclusion**
 
-Cross-chain technologies enable seamless blockchain interaction using mechanisms like notary systems, hash time-lock contracts, and relay systems, with advanced protocols such as LayerZero, ZkBridge, HOP, and Across employing innovations like zero-knowledge proofs (ZKPs) and oracles for enhanced security and efficiency.
-
-ZkBridge stands out by leveraging zk-SNARKs to achieve trustless synchronization through block header relays and update contracts, offering a scalable inter-chain solution. Distributed proofs, incorporating techniques like GKR, Sumcheck, and polynomial transformations, provide scalable cryptographic computations for large-scale applications.
-
-With advancements in recursive SNARKs, public key aggregation, optimized circuits, and GPU acceleration, ZKP bridges are rapidly evolving to deliver secure, efficient, and decentralized cross-chain operations, despite challenges like communication overheads and computational intensity.
+Cross-chain technologies, like LayerZero and ZkBridge, utilize innovations such as zero-knowledge proofs (ZKPs) and oracles for secure, efficient blockchain interactions. ZkBridge employs zk-SNARKs for trustless synchronization, while distributed proofs and recursive SNARKs enhance scalability. Despite challenges like communication overhead, advancements in circuits and GPU acceleration drive ZKP bridges toward efficient, decentralized cross-chain solutions.
 
 [zkbridge](https://github.com/ETAAcademy/ETAAcademy-ZK-Meme/tree/main/Appendix/zkbridge)
 
