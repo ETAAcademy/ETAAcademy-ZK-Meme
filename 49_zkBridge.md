@@ -322,13 +322,12 @@ The GKR protocol, introduced in [GKR08], is a hierarchical proof system where th
 2. **Identity Function:**  
    The **identity function** $\beta(x, y)$ compares two inputs:
 
-\[
-\beta(x, y) =
-\begin{cases} 
+
+$\beta(x, y)$ =
+$\begin{cases} 
 1, & \text{if } x = y \\ 
 0, & \text{otherwise}
-\end{cases}
-\]
+\end{cases}$
 
    Its multilinear extension generalizes this comparison to polynomial evaluation, aiding in verifying connections between circuit nodes during complex computations.
 
