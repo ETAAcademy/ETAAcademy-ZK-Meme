@@ -502,7 +502,7 @@ To ensure security, proof of public key validity is essential. Validators can de
 For instance, in recursive calculations:
 
 <div  align="center"> 
-<img src="images/49_accumulation.png" width="20%" />
+<img src="images/49_accumulation.png" width="30%" />
 </div>
 
 Here, $\text{addi}$ and $\text{mult}$ represent addition and multiplication gates, and $\widetilde{V}_i$ recursively aggregates results from layer $i+1$ to layer $i$.
