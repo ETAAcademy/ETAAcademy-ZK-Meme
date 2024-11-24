@@ -322,14 +322,16 @@ The GKR protocol, introduced in [GKR08], is a hierarchical proof system where th
 2. **Identity Function:**  
    The **identity function** $\beta(x, y)$ compares two inputs:
 
-
 $\beta(x, y)$ =
-$$\begin{cases} 
-1, & \text{if} x = y\\ 
-0, & \text{otherwise}
-\end{cases}$$
 
-   Its multilinear extension generalizes this comparison to polynomial evaluation, aiding in verifying connections between circuit nodes during complex computations.
+$$
+\begin{cases}
+1, & \text{if} x = y\\
+0, & \text{otherwise}
+\end{cases}
+$$
+
+Its multilinear extension generalizes this comparison to polynomial evaluation, aiding in verifying connections between circuit nodes during complex computations.
 
 4. **Sumcheck Protocol:**  
     The **Sumcheck Protocol** validates the correctness of polynomial computations, particularly for large-scale circuits such as data-parallel architectures. It works by recursively checking each layer of a circuit, aggregating inputs, and simplifying the problem. For a multivariable polynomial $f: F^\ell \to F$, the protocol confirms its sum over all binary inputs:
@@ -497,15 +499,15 @@ To ensure security, proof of public key validity is essential. Validators can de
 
 - **Accumulation Gates**:
   These gates enable efficient aggregation of inputs into a single output in fewer steps:
-  
+
   $y = \text{Accumulate}(x_1, x_2, \ldots, x_n)$
-  
+
   This reduces depth and complexity while preserving correctness.
 
 For instance, in recursive calculations:
 
 \[
-\widetilde{V_i}(g) = \sum_{x, y \in \{0,1\}} 2^{s_{i+1}^g} \Big(\widetilde{\text{addi_t}}(g, x, y) \cdot \big(V_{i+1}(x) + V_{i+1}(y)\big) + \text{mult_i}(g, x, y) \cdot \big(V_{i+1}(x) \cdot V_{i+1}(y)\big)\Big)
+\widetilde{V*i}(g) = \sum*{x, y \in \{0,1\}} 2^{s*{i+1}^g} \Big(\widetilde{\text{addi_t}}(g, x, y) \cdot \big(V*{i+1}(x) + V*{i+1}(y)\big) + \text{mult_i}(g, x, y) \cdot \big(V*{i+1}(x) \cdot V\_{i+1}(y)\big)\Big)
 \]
 
 Here, $\text{addi}$ and $\text{mult}$ represent addition and multiplication gates, and $\widetilde{V}_i$ recursively aggregates results from layer $i+1$ to layer $i$.
