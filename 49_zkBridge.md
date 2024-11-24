@@ -320,17 +320,19 @@ The GKR protocol, introduced in [GKR08], is a hierarchical proof system where th
    This allows computations to extend from discrete binary inputs to continuous domains while retaining binary consistency, facilitating efficient operations in large-scale circuits.
 
 2. **Identity Function:**  
-    The **identity function** $\beta(x, y)$ compares two inputs:
+   The **identity function** $\beta(x, y)$ compares two inputs:
 
-   $\beta(x, y) =
+   $$
+   \beta(x, y) =
    \begin{cases}
    1, & \text{if } x = y \\
    0, & \text{otherwise}
-   \end{cases}$
+   \end{cases}
+   $$
 
    Its multilinear extension generalizes this comparison to polynomial evaluation, aiding in verifying connections between circuit nodes during complex computations.
 
-3. **Sumcheck Protocol:**  
+4. **Sumcheck Protocol:**  
     The **Sumcheck Protocol** validates the correctness of polynomial computations, particularly for large-scale circuits such as data-parallel architectures. It works by recursively checking each layer of a circuit, aggregating inputs, and simplifying the problem. For a multivariable polynomial $f: F^\ell \to F$, the protocol confirms its sum over all binary inputs:
    $H = \sum_{b \in \{0,1\}^\ell} f(b)$
 
