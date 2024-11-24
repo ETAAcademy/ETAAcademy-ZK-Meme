@@ -322,13 +322,13 @@ The GKR protocol, introduced in [GKR08], is a hierarchical proof system where th
 2. **Identity Function:**  
    The **identity function** $\beta(x, y)$ compares two inputs:
 
-   $$
-   \beta(x, y) =
-   \begin{cases}
-   1, & \text{if } x = y \\
-   0, & \text{otherwise}
-   \end{cases}
-   $$
+\[
+\beta(x, y) =
+\begin{cases} 
+1, & \text{if } x = y \\ 
+0, & \text{otherwise}
+\end{cases}
+\]
 
    Its multilinear extension generalizes this comparison to polynomial evaluation, aiding in verifying connections between circuit nodes during complex computations.
 
@@ -505,7 +505,9 @@ To ensure security, proof of public key validity is essential. Validators can de
 
 For instance, in recursive calculations:
 
-$\widetilde{V_i(g)} = \sum_{x, y \in \{0,1\}} 2^{s_{i+1}^g} \Big(\widetilde{\text{addi_t}}(g, x, y) \cdot \big(V_{i+1}(x) + V_{i+1}(y)\big) + \text{mult_i}(g, x, y) \cdot \big(V_{i+1}(x) \cdot V_{i+1}(y)\big)\Big)$
+\[
+\widetilde{V_i}(g) = \sum_{x, y \in \{0,1\}} 2^{s_{i+1}^g} \Big(\widetilde{\text{addi_t}}(g, x, y) \cdot \big(V_{i+1}(x) + V_{i+1}(y)\big) + \text{mult_i}(g, x, y) \cdot \big(V_{i+1}(x) \cdot V_{i+1}(y)\big)\Big)
+\]
 
 Here, $\text{addi}$ and $\text{mult}$ represent addition and multiplication gates, and $\widetilde{V}_i$ recursively aggregates results from layer $i+1$ to layer $i$.
 
