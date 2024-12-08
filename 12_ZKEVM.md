@@ -22,7 +22,7 @@
 
 [Github](https://github.com/ETAAcademy)｜[Twitter](https://twitter.com/ETAAcademy)｜[ETA-ZK-Meme](https://github.com/ETAAcademy/ETAAcademy-ZK-Meme)
 
-Authors: [Eta](https://twitter.com/pwhattie), looking forward to your joining
+Authors: [Evta](https://twitter.com/pwhattie), looking forward to your joining
 
 More Detail for zkEVM:
 [Plonk](https://github.com/zcash/halo2/blob/27c4187673a9c6ade13fbdbd4f20955530c22d7f/src/plonk/lookup/prover.rs)

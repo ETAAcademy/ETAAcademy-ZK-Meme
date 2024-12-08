@@ -22,7 +22,7 @@
 
 [Github](https://github.com/ETAAcademy)｜[Twitter](https://twitter.com/ETAAcademy)｜[ETA-ZK-Meme](https://github.com/ETAAcademy/ETAAcademy-ZK-Meme)
 
-Authors: [Eta](https://twitter.com/pwhattie), looking forward to your joining
+Authors: [Evta](https://twitter.com/pwhattie), looking forward to your joining
 
 # FRI Folding & Decommitment
 
@@ -149,13 +149,11 @@ The commitment process involves three key steps:
 
 3. **Perform FRI and Commit:**
    - Using FRI (Fast Reed-Solomon Interactive Oracle Proofs of Proximity), the prover reduces the CP to smaller polynomials. For each reduced polynomial, a Merkle tree is constructed, and the roots of these trees are sent to the verifier. This sequence of roots serves as the complete commitment, demonstrating the correctness of the computation.
-  
+
 <div style="text-align: center;">
     <img src="images/42FRI_03Query.png" alt="Image 1" width="48%" style="display: inline-block;">
     <img src="images/42FRI_04O(log(n)).png" alt="Image 2" width="48%" style="display: inline-block;">
 </div>
-
-
 
 **Decommitment**
 

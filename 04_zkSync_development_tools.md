@@ -22,7 +22,7 @@
 
 [Github](https://github.com/ETAAcademy)｜[Twitter](https://twitter.com/ETAAcademy)｜[ETA-ZK-Meme](https://github.com/ETAAcademy/ETAAcademy-ZK-Meme)
 
-Authors: [Eta](https://twitter.com/pwhattie), looking forward to your joining
+Authors: [Evta](https://twitter.com/pwhattie), looking forward to your joining
 
 More Details for ZKSync Development Tools: [English](https://docs.zksync.io/build/tooling/block-explorer/getting-started.html) [Chinese](https://github.com/WTFAcademy/WTF-zkSync/tree/main)
 

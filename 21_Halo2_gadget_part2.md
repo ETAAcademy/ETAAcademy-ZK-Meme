@@ -22,7 +22,7 @@
 
 [Github](https://github.com/ETAAcademy)｜[Twitter](https://twitter.com/ETAAcademy)｜[ETA-ZK-Meme](https://github.com/ETAAcademy/ETAAcademy-ZK-Meme)
 
-Authors: [Eta](https://twitter.com/pwhattie), looking forward to your joining
+Authors: [Evta](https://twitter.com/pwhattie), looking forward to your joining
 
 Constraint instance check for equality between assigned cells and specified values in a circuit. It covers accessing cells and columns within the circuit, considerations for enabling equality on columns, and integrating the constraint instance into the synthetic side of the design when assigning values to private inputs. Specifically, implementing an assigned cell to verify equality is crucial for ensuring accurate computations. Accessing cells within the circuit layout involves understanding absolute row numbers, which play a key role in applying constraints effectively. It's essential to manage circuit complexity by selectively enabling equality in layout constraints, balancing performance considerations. Enabling equality on all columns in circuit design entails trade-offs. While it simplifies certain operations, it can lead to increased complexity and potential performance issues, especially with permutations generating numerous columns. To optimize performance, it's advisable to disable equality on columns not involved in computations, reducing unnecessary constraints. Integrating a Fibonacci chip into the circuit requires meticulous planning. Considering previous values and private inputs ensures accurate computation. By carefully managing constraints and performance considerations, efficient circuit design can be achieved.
 

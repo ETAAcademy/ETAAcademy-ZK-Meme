@@ -22,7 +22,7 @@
 
 [Github](https://github.com/ETAAcademy)｜[Twitter](https://twitter.com/ETAAcademy)｜[ETA-ZK-Meme](https://github.com/ETAAcademy/ETAAcademy-ZK-Meme)
 
-Authors: [Eta](https://twitter.com/pwhattie), looking forward to your joining
+Authors: [Evta](https://twitter.com/pwhattie), looking forward to your joining
 
 Traditional blockchains, like Bitcoin and Solana, handle consensus (data is verified as authentic), execution (blockchain nodes process transactions,), data availability (block producers must publish the data of each block for others to download and store) and settlement (guaranteeing that transactions committed to chain history are irreversible or "immutable") within the same layer, known as monolithic blockchains. Solana prioritizes scalability over decentralization and security, achieving high transaction speeds but requiring high hardware requirements.
 

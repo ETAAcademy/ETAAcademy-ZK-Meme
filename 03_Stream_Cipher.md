@@ -22,7 +22,7 @@
 
 [Github](https://github.com/ETAAcademy)｜[Twitter](https://twitter.com/ETAAcademy)｜[ETA-ZK-Meme](https://github.com/ETAAcademy/ETAAcademy-ZK-Meme)
 
-Authors: [Eta](https://twitter.com/pwhattie), looking forward to your joining
+Authors: [Evta](https://twitter.com/pwhattie), looking forward to your joining
 
 Stream Cipher utilizes a pseudo-random generator (PRG) to extend a short key into a longer one. Subsequently, this extended key is combined bit by bit with the plaintext through XOR operations to produce the ciphertext. Conversely, it can also be XORed with the ciphertext to get the original plaintext.
 

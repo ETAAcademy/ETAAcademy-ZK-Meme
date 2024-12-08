@@ -22,7 +22,7 @@
 
 [Github](https://github.com/ETAAcademy)｜[Twitter](https://twitter.com/ETAAcademy)｜[ETA-ZK-Meme](https://github.com/ETAAcademy/ETAAcademy-ZK-Meme)
 
-Authors: [Eta](https://twitter.com/pwhattie), looking forward to your joining
+Authors: [Evta](https://twitter.com/pwhattie), looking forward to your joining
 
 Finite fields are essential in cryptography because they work well with computers. To create one, start with a prime number p and define elements as {0, 1, ..., p-1}, using standard addition and multiplication operations modulo p. The extended Euclidean algorithm finds multiplicative inverses.
 

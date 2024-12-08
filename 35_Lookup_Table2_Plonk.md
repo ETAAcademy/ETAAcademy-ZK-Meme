@@ -22,7 +22,7 @@
 
 [Github](https://github.com/ETAAcademy)｜[Twitter](https://twitter.com/ETAAcademy)｜[ETA-ZK-Meme](https://github.com/ETAAcademy/ETAAcademy-ZK-Meme)
 
-Authors: [Eta](https://twitter.com/pwhattie), looking forward to your joining
+Authors: [Evta](https://twitter.com/pwhattie), looking forward to your joining
 
 ## Lookup Arguments: Halo2 V.S. Plonk
 
@@ -34,21 +34,19 @@ Authors: [Eta](https://twitter.com/pwhattie), looking forward to your joining
 
 The Halo2-lookup scheme demonstrates the implementation of lookup gates. It focuses on proving that a query vector's elements belong to a table vector, represented as $\vec{f} \subseteq \vec{t}$. The process involves:
 
-  1. **Sorting (Polynomial Proof):**
-      To ensure that the query vector $\vec{f}$ is sorted in the same order as the table vector $\vec{t},$ the Halo2-lookup scheme employs auxiliary vectors $\vec{f}'$ and $\vec{f}'.$ The rule is that each unmarked element in $\vec{f}'$ equals its left neighbor, and each marked element equals the corresponding element in $\vec{t}'$, $f'_i=f'\_{i-1}$ or $f'_i=t'_i$. To prevent cyclic rollovers, $\vec{f}'$ and $\vec{t}'$ must start with the same element, $f'_0=t'_0$. Using Lagrange Basis for polynomial encoding, we get:
-      
+1. **Sorting (Polynomial Proof):**
+   To ensure that the query vector $\vec{f}$ is sorted in the same order as the table vector $\vec{t},$ the Halo2-lookup scheme employs auxiliary vectors $\vec{f}'$ and $\vec{f}'.$ The rule is that each unmarked element in $\vec{f}'$ equals its left neighbor, and each marked element equals the corresponding element in $\vec{t}'$, $f'_i=f'\_{i-1}$ or $f'_i=t'_i$. To prevent cyclic rollovers, $\vec{f}'$ and $\vec{t}'$ must start with the same element, $f'_0=t'_0$. Using Lagrange Basis for polynomial encoding, we get:
+
 $$
 (f'(X)-f'(\omega^{-1}\cdot X))\cdot (f'(X)-t'(X)) = 0, \quad \forall x\in H
-$$   
-      
-      
-      
+$$
+
 $$
 L_0(X)\cdot(f'(X)-t'(X)) = 0, \quad \forall x\in H
 $$
-      
-  2. **Permutation Proof:**
-  Ensures $(\vec{f}, \vec{f}')$ and $(\vec{t}, \vec{t}')$ satisfy certain permutation relations:
+
+2. **Permutation Proof:**
+   Ensures $(\vec{f}, \vec{f}')$ and $(\vec{t}, \vec{t}')$ satisfy certain permutation relations:
 
 $$
 \frac{z(\omega\cdot X)}{z(X)}=\frac{(f(X)+\gamma_1)(t(X)+\gamma_2)}{(f'(X)+\gamma_1)(t'(X)+\gamma_2)}
@@ -165,7 +163,7 @@ z_0 = 1,\quad z_{i+1}=z_i\cdot \frac{(1+\beta)(f_i+\gamma)(t_i+\beta\cdot t_{i+1
 $$
 
 **Multi-Column Tables:**
-**Collapsing a multi-column table into a single column table using random challenge numbers.** 
+**Collapsing a multi-column table into a single column table using random challenge numbers.**
 
 Suppose the computation table is $(\vec{t}\_1, \vec{t}\_2, \vec{t}\_3)$， then the corresponding lookup record should also be a three-column table, denoted as $(\vec{f}\_1,\vec{f}\_2,\vec{f}\_3)$. If we want to prove that $(f_{1,i},f_{2,i},f_{3,i})=(t_{1,j},t_{2,j},f_{3,j})$， we can ask the Verifier for a random challenge number $\eta$, and collapse the computation table horizontally as follows:
 

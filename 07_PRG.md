@@ -22,7 +22,7 @@
 
 [Github](https://github.com/ETAAcademy)｜[Twitter](https://twitter.com/ETAAcademy)｜[ETA-ZK-Meme](https://github.com/ETAAcademy/ETAAcademy-ZK-Meme)
 
-Authors: [Eta](https://twitter.com/pwhattie), looking forward to your joining
+Authors: [Evta](https://twitter.com/pwhattie), looking forward to your joining
 
 PRG (Pseudo-random Generator) is the fundamental component of a stream cipher, and the security of the stream cipher hinges entirely on the PRG. The security of PRG entails that its output should be indistinguishable from a sequence of random bits of the same length. Indistinguishability is measured by the difference in probabilities between an attacker correctly distinguishing the output of the PRG from truly random bits in various experiments, Adv := | Pr[W_0] - Pr[W_1]|, that is, the advantage is zero (|Pr[W0] – Pr[W1]|=0), or the advantage (Adv = |Pr[W0] – Pr[W1]|) is negligible.
 

@@ -22,7 +22,7 @@
 
 [Github](https://github.com/ETAAcademy)｜[Twitter](https://twitter.com/ETAAcademy)｜[ETA-ZK-Meme](https://github.com/ETAAcademy/ETAAcademy-ZK-Meme)
 
-Authors: [Eta](https://twitter.com/pwhattie), looking forward to your joining
+Authors: [Evta](https://twitter.com/pwhattie), looking forward to your joining
 
 Circle STARKs, a novel construction based on the circle curve over a Mersenne prime ($p = 2^{31} - 1$), aim to address limitations in field smoothness and improve efficiency. Circle STARKs leverage the Circle FFT, a Fourier transform based on the structure of the circle curve, allowing polynomial arithmetic without the need for elliptic curve-based setups or algebraic geometry expertise. The Circle FFT’s cyclic group structure and compatibility with polynomial transformations allow circle STARKs to be as efficient as classical STARKs while eliminating specific conversion complexities and dimension gaps. By adapting traditional STARK components to this setup, circle STARKs achieve similar proof efficiency with streamlined arithmetic on arbitrary primes with smooth properties, promising practical advantages in both performance and simplicity.
 

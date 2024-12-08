@@ -22,7 +22,7 @@
 
 [Github](https://github.com/ETAAcademy)｜[Twitter](https://twitter.com/ETAAcademy)｜[ETA-ZK-Meme](https://github.com/ETAAcademy/ETAAcademy-ZK-Meme)
 
-Authors: [Eta](https://twitter.com/pwhattie), looking forward to your joining
+Authors: [Evta](https://twitter.com/pwhattie), looking forward to your joining
 
 ## Zero-Knowledge Proofs
 
@@ -33,16 +33,17 @@ Zero-knowledge proofs (ZKPs) enable one party to prove to another that they poss
 zk-Schnorr Proof Protocol is used to prove knowledge of an ECC private key without revealing it. There are two versions of this protocol: **send commitment or challenge and response => compute the challenge or commitment**
 
 **Setup**: Let G be the generator of an elliptic curve with scalar field $F_r$, and base field $F_q$. The prover’s private key is $sk$, and the public key is $PK$, satisfying the discrete logarithm relation $PK = sk \cdot G$.
+
 - 1. Prover selects a random number r and computes $R := r \cdot G$.
 - 2. Prover then calculates the challenge $c = \text{hash}(PK, R) \mod |F_r|$.
 
 - **Version A**:
-  
+
   3. Response is $z = r + c \cdot sk \mod |F_r|$, and send $(R, z)$.
   4. Verifier calculates $c = \text{hash}(PK, R) \mod |F_r|$ and checks that $z \cdot G = R + c \cdot PK$.
 
 - **Version B**:
-  
+
   3. Response is $z := r + c \cdot sk \mod |F_r|$, and send and send $(c, z)$.
   4. Verifier computes $R = z \cdot G - c \cdot PK$ and checks that $c = \text{hash}(PK, R) \mod |F_r|$.
 
@@ -50,12 +51,12 @@ Both versions ensure that the private key $sk$ remains confidential during the p
 
 ### zk-Paillier-N Proof
 
-**zk-Paillier-N Proof**  is used to prove knowledge of the Paillier key pair, specifically that the public key $N$ and the private key $\phi(N)$ are coprime, i.e., $\gcd(N, \phi(N)) = 1$. **Here, $\Phi(n)$ remains secret because $\Phi(n) = (p - 1)(q - 1)$. However, $N$ can be public as it is known but does not reveal $p$ and $q$.**
+**zk-Paillier-N Proof** is used to prove knowledge of the Paillier key pair, specifically that the public key $N$ and the private key $\phi(N)$ are coprime, i.e., $\gcd(N, \phi(N)) = 1$. **Here, $\Phi(n)$ remains secret because $\Phi(n) = (p - 1)(q - 1)$. However, $N$ can be public as it is known but does not reveal $p$ and $q$.**
 
 **1. Principles:**
 
-- **Primitive Roots**: For a prime $p$, there exists a primitive root $g$ such that $g^{\phi(p)} \equiv 1 \mod p$ and $g^{\frac{p-1}{\Delta}} \neq 1 \mod p$ where $\Delta$ is a prime factor of $p-1$, because $\frac{p-1}{\Delta} < \phi(p)$, contradicting the definition of primitive roots where 
-$\phi(p)$ should be the smallest such exponent.
+- **Primitive Roots**: For a prime $p$, there exists a primitive root $g$ such that $g^{\phi(p)} \equiv 1 \mod p$ and $g^{\frac{p-1}{\Delta}} \neq 1 \mod p$ where $\Delta$ is a prime factor of $p-1$, because $\frac{p-1}{\Delta} < \phi(p)$, contradicting the definition of primitive roots where
+  $\phi(p)$ should be the smallest such exponent.
 
 - **Baby-Step Giant-Step Algorithm (BSGS)**: To solve $g^N \equiv t \mod p$ where $g$ and $p$ are coprime and $g$ is a primitive root, $A, B \in [0, \sqrt{p}]$, and $N = A \sqrt{p} - B$. This transforms the congruence $g^{A \sqrt{p} - B} \equiv t \mod p$ into $g^{A \sqrt{p}} \equiv t g^B \mod p$. By brute force enumeration of $A$ and $B$, we could compute the values of both sides of the equation to determine $N$.
 

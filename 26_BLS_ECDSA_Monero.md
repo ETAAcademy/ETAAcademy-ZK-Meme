@@ -22,7 +22,7 @@
 
 [Github](https://github.com/ETAAcademy)｜[Twitter](https://twitter.com/ETAAcademy)｜[ETA-ZK-Meme](https://github.com/ETAAcademy/ETAAcademy-ZK-Meme)
 
-Authors: [Eta](https://twitter.com/pwhattie), looking forward to your joining
+Authors: [Evta](https://twitter.com/pwhattie), looking forward to your joining
 
 ## Demystifying Digital Signatures: BLS, ECDSA, and Monero
 
@@ -63,14 +63,15 @@ This guide explores three major signature families: BLS, ECDSA, and Monero, each
 
 - **Widely used:** ECDSA (Elliptic Curve Digital Signature Algorithm) and its variants like Schnorr, EdDSA, are prevalent for transaction signatures.
 - **Process:** Involves four steps - commitment, challenge, response, and verification.
-  
+
 **Schnorr Signature Example:**
-  - Private key (u ∈ [1, n - 1]), public key (Y = u · G), message (m), random number (k ∈ [1, n - 1]).
-  - Commitment (R = k · G).
-  - Challenge (e = hash(m, R)).
-  - Response (z = k + e · u mod n).
-  - Signature (R, z).
-  - Verification: z · G = (k + e · u) · G = R + e · Y. (Leakage risk: Using the same k for different messages can reveal the private key).
+
+- Private key (u ∈ [1, n - 1]), public key (Y = u · G), message (m), random number (k ∈ [1, n - 1]).
+- Commitment (R = k · G).
+- Challenge (e = hash(m, R)).
+- Response (z = k + e · u mod n).
+- Signature (R, z).
+- Verification: z · G = (k + e · u) · G = R + e · Y. (Leakage risk: Using the same k for different messages can reveal the private key).
 
 **EdDSA:**
 
@@ -106,5 +107,6 @@ BLS speeds up blockchain consensus with batch verification. ECDSA remains a secu
 ||||||| bcdfa77
 BLS excels in blockchain consensus due to its efficient batch verification. ECDSA remains a
 =======
-BLS speeds up blockchain consensus with batch verification. ECDSA remains a secure and efficient choice for transactions. Monero prioritizes anonymity with unique signatures. 
->>>>>>> 83101421151a12ba06e7c86dc411340b199f5daf
+BLS speeds up blockchain consensus with batch verification. ECDSA remains a secure and efficient choice for transactions. Monero prioritizes anonymity with unique signatures.
+
+> > > > > > > 83101421151a12ba06e7c86dc411340b199f5daf

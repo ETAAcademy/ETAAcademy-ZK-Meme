@@ -22,7 +22,7 @@
 
 [Github](https://github.com/ETAAcademy)｜[Twitter](https://twitter.com/ETAAcademy)｜[ETA-ZK-Meme](https://github.com/ETAAcademy/ETAAcademy-ZK-Meme)
 
-Authors: [Eta](https://twitter.com/pwhattie), looking forward to your joining
+Authors: [Evta](https://twitter.com/pwhattie), looking forward to your joining
 
 E represents the encryption algorithm, and D represents its corresponding decryption algorithm. Together, (E, D) form a block cipher defined on (K, X), where K is the key space and X is the block space. Both the plaintext and ciphertext spaces of a block cipher are finite sets, denoted as X. This means that for ∀ k ∈ K and ∀ x ∈ X, the encryption E(k, x) produces a result within X. Each key k in the key space corresponds to a distinct encryption function, denoted as $f_k(.):= E(k, .)$, which transforms plaintext blocks into ciphertext blocks. Additionally, the inverse function of encryption, denoted as $D(k, .) := f_k^{-1}(.)$, serves as the decryption function.
 

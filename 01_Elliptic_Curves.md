@@ -22,7 +22,7 @@
 
 [Github](https://github.com/ETAAcademy)｜[Twitter](https://twitter.com/ETAAcademy)｜[ETA-ZK-Meme](https://github.com/ETAAcademy/ETAAcademy-ZK-Meme)
 
-Authors: [Eta](https://twitter.com/pwhattie), looking forward to your joining
+Authors: [Evta](https://twitter.com/pwhattie), looking forward to your joining
 
 In zk-SNARKs, points on an elliptic curve are obtained by encrypting polynomials with coefficients and values over a finite field. By converting polynomial equations in QAP to relationships between points on an elliptic curve, zero-knowledge proofs can be realized.
 

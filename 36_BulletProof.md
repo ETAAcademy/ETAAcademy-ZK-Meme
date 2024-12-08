@@ -22,7 +22,7 @@
 
 [Github](https://github.com/ETAAcademy)｜[Twitter](https://twitter.com/ETAAcademy)｜[ETA-ZK-Meme](https://github.com/ETAAcademy/ETAAcademy-ZK-Meme)
 
-Authors: [Eta](https://twitter.com/pwhattie), looking forward to your joining
+Authors: [Evta](https://twitter.com/pwhattie), looking forward to your joining
 
 Confidential Transactions (CTs) leverage zero-knowledge proofs (ZKP) to ensure transaction privacy. CTs typically provide two key privacy features: anonymity and confidentiality. Anonymity hides the identities of the sender and receiver in transactions, while confidentiality hides the transaction amounts. Existing ZKP-based CT solutions either require a trusted setup, like zk-SNARKs, or are computationally intensive, like zk-STARKs. Bulletproofs, however, offer an efficient solution for proving that a committed value lies within a specified range without the need for a trusted setup, based on the discrete logarithm (DLOG) assumption.
 

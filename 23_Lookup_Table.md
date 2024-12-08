@@ -22,7 +22,7 @@
 
 [Github](https://github.com/ETAAcademy)｜[Twitter](https://twitter.com/ETAAcademy)｜[ETA-ZK-Meme](https://github.com/ETAAcademy/ETAAcademy-ZK-Meme)
 
-Authors: [Eta](https://twitter.com/pwhattie), looking forward to your joining
+Authors: [Evta](https://twitter.com/pwhattie), looking forward to your joining
 
 Basic range check ensure that a given value stays within a specified range within the circuit. Additionally, expanding this range check configuration to include a lookup argument, beneficial for efficiently verifying larger ranges while maintaining low constraint degrees.
 

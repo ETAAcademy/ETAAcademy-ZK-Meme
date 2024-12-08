@@ -22,7 +22,7 @@
 
 [Github](https://github.com/ETAAcademy)｜[Twitter](https://twitter.com/ETAAcademy)｜[ETA-ZK-Meme](https://github.com/ETAAcademy/ETAAcademy-ZK-Meme)
 
-Authors: [Eta](https://twitter.com/pwhattie), looking forward to your joining
+Authors: [Evta](https://twitter.com/pwhattie), looking forward to your joining
 
 The Halo 2 proving system is structured around three key components: Plonkish Arithmetization, which efficiently expresses constraints and satisfying witnesses as low-degree polynomials, accommodating both local and global constraints; the Inner Product Argument, serving as the polynomial commitment scheme for efficient verification of proofs by committing to polynomials and checking against challenges from the verifier; and an Accumulation Scheme, derived from the polynomial commitment scheme, facilitating recursion by transforming the verification process into a constant-size accumulator, ensuring efficiency and scalability in proof verification.
 

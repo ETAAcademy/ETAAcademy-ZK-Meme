@@ -22,7 +22,7 @@
 
 [Github](https://github.com/ETAAcademy)｜[Twitter](https://twitter.com/ETAAcademy)｜[ETA-ZK-Meme](https://github.com/ETAAcademy/ETAAcademy-ZK-Meme)
 
-Authors: [Eta](https://twitter.com/pwhattie), looking forward to your joining
+Authors: [Evta](https://twitter.com/pwhattie), looking forward to your joining
 
 - **Hash Functions**: Hash functions play a critical role in cryptography, also known as one-way hash functions. They can be categorized into two types: hash functions without keys and hash functions with keys. A hash function accepts a long message as input and generates a fixed-length output. If h is a hash function with input space X and output space Y, it is defined on (X, Y).
 
