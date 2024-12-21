@@ -53,9 +53,7 @@ In **Centralized MPC**, a trusted central server securely aggregates data from m
 
 For two adjacent datasets $D$ and $D'$ differing by only one record, a random algorithm $M$ satisfies $\epsilon$-differential privacy if, for all subsets $S$ of the range of $M$:
 
-$$
-\Pr[M(D) \in S] \leq e^\epsilon \Pr[M(D') \in S] + \delta
-$$
+$\Pr[M(D) \in S] \leq e^\epsilon \Pr[M(D') \in S] + \delta$
 
 Here, $\epsilon > 0$ represents the privacy budget, with smaller values of $\epsilon$ providing stronger privacy guarantees.
 
@@ -146,17 +144,13 @@ Yao’s GC protocol is among the most prominent and efficient general MPC protoc
 1. **Function Representation:**  
    The function $F(x, y)$ is expressed as a lookup table $T$, where each entry corresponds to an output value:
 
-   $$
-   T_{x,y} = F(x,y)
-   $$
+   $T_{x,y} = F(x,y)$
 
 2. **Key Generation and Encryption:**
 
    - Party $P_1$ (holding $x$) generates random keys $k_x$ and $k_y$ for each input.
    - Each table entry is encrypted using these keys:
-     $$
-     \text{Enc}_{k_x, k_y}(T_{x, y})
-     $$
+     $\text{Enc}_{k_x, k_y}(T_{x, y})$
 
 3. **Key Distribution:**
 
@@ -165,9 +159,8 @@ Yao’s GC protocol is among the most prominent and efficient general MPC protoc
 
 4. **Decryption and Output:**  
    $P_2$ decrypts the corresponding table entry to obtain the output:
-   $$
-   F(x, y) = \text{Dec}_{k_x, k_y}(\text{Enc}_{k_x, k_y}(T_{x, y}))
-   $$
+   
+   $F(x, y) = \text{Dec}_{k_x, k_y}(\text{Enc}_{k_x, k_y}(T_{x, y}))$
 
 This ensures $P_2$ only decrypts the relevant output while other information remains hidden.
 
@@ -180,34 +173,26 @@ A crucial challenge in GC is how $P_2$ determines the correct table row to decry
 1. **Pointer Construction:**  
    The last bits of $k_x$ and $k_y$ serve as pointers to specific table rows:
 
-   $$
-   \text{Pointer}_x = k_x[\lceil \log|X| \rceil], \quad \text{Pointer}_y = k_y[\lceil \log|Y| \rceil]
-   $$
+   $\text{Pointer}_x = k_x[\lceil \log|X| \rceil], \quad \text{Pointer}_y = k_y[\lceil \log|Y| \rceil]$
 
 2. **Pointer Combination:**  
    These pointers are concatenated to form the final row identifier:
 
-   $$
-   \text{Pointer} = \text{Pointer}_x \parallel \text{Pointer}_y
-   $$
+   $\text{Pointer} = \text{Pointer}_x \parallel \text{Pointer}_y$
 
 3. **Key Preservation:**  
    Pointers are appended to keys, maintaining their original length for security:
-   $$
-   k'_x = k_x \parallel \text{Pointer}_x, \quad k'_y = k_y \parallel \text{Pointer}_y
-   $$
+   $k'_x = k_x \parallel \text{Pointer}_x, \quad k'_y = k_y \parallel \text{Pointer}_y$
 
 **Practical Implementation in Circuit Evaluation**
 
 Each gate in a circuit corresponds to a small lookup table (LUT) with four entries. For a gate $G$ with inputs $w_i, w_j$ and output $w_t$, the table $T_G$ contains:
 
-$$
-T_G =
+$T_G =
 \left[
-\text{Enc}_{k_0^i, k_0^j}(k_0^t), \text{Enc}_{k_0^i, k_1^j}(k_0^t),
-\text{Enc}_{k_1^i, k_0^j}(k_0^t), \text{Enc}_{k_1^i, k_1^j}(k_1^t)
-\right]
-$$
+Enc_{k^i_0, k^j_0}(k^t_0), Enc_{k_0^i, k_1^j}(k_0^t),
+Enc_{k_1^i, k_0^j}(k_0^t), Enc_{k_1^i, k_1^j}(k_1^t)
+\right]$
 
 This ensures that $P_2$ decrypts only the active path of the circuit without learning other information.
 
@@ -222,33 +207,25 @@ Participants in the GMW protocol hold additive shares of wire values rather than
 1. **Wire Label Generation**  
    For each wire $w_i$, two random labels are generated:
 
-   $$
-   w_0^i = (k_0^i, p_0^i), \quad w_1^i = (k_1^i, p_1^i)
-   $$
+   $w_0^i = (k_0^i, p_0^i), \quad w_1^i = (k_1^i, p_1^i)$
 
    Here, $p_0^i = 1 - p_1^i$ represents the pointer bit.
 
 2. **Encrypted Circuit Generation**  
    Each gate $G_i$ in the circuit, assuming a 2-input Boolean gate, has input labels:
 
-   $$
-   w_0^a = (k_0^a, p_0^a), \; w_1^a = (k_1^a, p_1^a) \quad \text{and} \quad w_0^b = (k_0^b, p_0^b), \; w_1^b = (k_1^b, p_1^b)
-   $$
+   $w_0^a = (k_0^a, p_0^a), \; w_1^a = (k_1^a, p_1^a) \quad \text{and} \quad w_0^b = (k_0^b, p_0^b), \; w_1^b = (k_1^b, p_1^b)$
 
    The output labels are $w_0^c = (k_0^c, p_0^c)$ and $w_1^c = (k_1^c, p_1^c)$.  
    For each input combination $v_a, v_b \in \{0, 1\}$, the protocol computes an entry in the encrypted truth table:
 
-   $$
-   e_{v_a, v_b} = H(k_{v_a}^a || k_{v_b}^b || i) \oplus w_{g(v_a, v_b)}^c
-   $$
+   $e_{v_a, v_b} = H(k_{v_a}^a || k_{v_b}^b || i) \oplus w_{g(v_a, v_b)}^c$
 
    where $H$ is a cryptographic hash function, and $g(v_a, v_b)$ is the gate's output function.
 
 3. **Output Decoding Table**  
    For each output wire $w_i$, the decoding table maps the output value $v \in \{0, 1\}$:
-   $$
-   e_v = H(k_v^i || \text{"out"} || j) \oplus v
-   $$
+   $e_v = H(k_v^i || \text{"out"} || j) \oplus v$
 
 #### **BGW Protocol**
 
@@ -264,17 +241,13 @@ In the BGW protocol, each participant holds shares of secret values represented 
 2. **Addition Gates**  
    For input wires $\alpha$ and $\beta$ with shared values $[v_\alpha]$ and $[v_\beta]$, the output is $v_\alpha + v_\beta$. Each participant computes locally:
 
-   $$
-   p_\gamma(i) = p_\alpha(i) + p_\beta(i)
-   $$
+   $p_\gamma(i) = p_\alpha(i) + p_\beta(i)$
 
    resulting in a new polynomial $p_\gamma(x) = p_\alpha(x) + p_\beta(x)$ that represents the sum.
 
 3. **Multiplication Gates**  
    For input wires $\alpha$ and $\beta$ with shared values $[v_\alpha]$ and $[v_\beta]$, the product $v_\alpha \times v_\beta$ is computed. After locally calculating the product, the resulting polynomial $q(x) = p_\alpha(x) \cdot p_\beta(x)$ has degree $2t$. A degree reduction step is performed to adjust $q(x)$ to degree $t$:
-   $$
-   q(0) = \sum_{i=1}^{2t+1} \lambda_i q(i)
-   $$
+   $q(0) = \sum_{i=1}^{2t+1} \lambda_i q(i)$
    where $\lambda_i$ are Lagrange coefficients, and $q(i)$ are the shares held by participants. This ensures the correct sharing of the product.
 
 #### Constant-Round Multiparty Computation: The BMR Protocol
@@ -285,9 +258,7 @@ The BMR protocol extends Yao’s GC to multiparty settings by generating encrypt
 
 For a gate $G_i$, the encrypted table entry for inputs $w_a$ and $w_b$ that produces output $w_c$ is calculated as:
 
-$$
-e_{v_a, v_b} = w_c \oplus f_c \oplus \bigoplus_{j=1}^n \left( F(i, w_a \oplus f_a) \oplus F(i, w_b \oplus f_b) \right)
-$$
+$e_{v_a, v_b} = w_c \oplus f_c \oplus \bigoplus_{j=1}^n \left( F(i, w_a \oplus f_a) \oplus F(i, w_b \oplus f_b) \right)$
 
 Here, $F$ is a pseudorandom function (PRF), $\oplus$ represents XOR, and $f_a, f_b, f_c$ are flip bits derived by XORing the shared flip bit values from all parties. The encrypted rows for each gate are organized using XOR operations to produce the final encrypted circuit. By leveraging these techniques, BMR achieves both efficiency and security in multiparty computation, regardless of circuit depth.
 
@@ -955,32 +926,26 @@ The process of modulus switching can be described as follows:
 
 1. **Initial Encryption Formula**:
 
-   $$
-   \langle c, k \rangle = m + 2e
-   $$
+   $\langle c, k \rangle = m + 2e$
 
    where $m \in \{0, 1\}$, $c$ is the ciphertext, $k$ is the key, and $e$ is the error term.
 
 2. **Dividing by 2 (mod $p$)**:
 
-   $$
-   \langle c', k \rangle = m \cdot \frac{p}{2} + e \pmod{p}
-   $$
+   $\langle c', k \rangle = m \cdot \frac{p}{2} + e \pmod{p}$
 
    where $c'$ is the new ciphertext after dividing by 2, and $e$ is the new error term.
 
 3. **Multiplying by $\frac{q}{p}$** (integer floor):
 
-   $$
-   \langle c'', k \rangle = m \cdot \frac{q}{2} + e' + e_2 \pmod{q}
-   $$
+   $\langle c'', k \rangle = m \cdot \frac{q}{2} + e' + e_2 \pmod{q}$
 
    where $e' = e \cdot \frac{p}{q}$, and $e_2$ is a small rounding error.
 
 4. **Multiplying by 2 (mod $q$)**:
-   $$
-   \langle c''', k \rangle = m \cdot 1 + 2e' + 2e_2 \pmod{q}
-   $$
+   
+   $\langle c''', k \rangle = m \cdot 1 + 2e' + 2e_2 \pmod{q}$
+   
    where $c'''$ is the final transformed ciphertext with error $2e' + 2e_2$, which is smaller than the original error.
 
 This process reduces the magnitude of the error and prevents it from growing exponentially, ensuring the ciphertext remains stable during complex computations.
@@ -991,14 +956,12 @@ Another approach to homomorphic encryption involves representing ciphertexts as 
 
 1. **Addition**:
 
-   $$
-   k \times (C_1 + C_2) = (m_1 + m_2) \times k + (e_1 + e_2)
-   $$
+   $k \times (C_1 + C_2) = (m_1 + m_2) \times k + (e_1 + e_2)$
 
 2. **Multiplication**:
-   $$
-   k \times C_1 \times C_2 = (m_1 \times k + e_1) \times C_2 = m_1 \times m_2 \times k + m_1 \times e_2 + e_1 \times C_2
-   $$
+   
+   $k \times C_1 \times C_2 = (m_1 \times k + e_1) \times C_2 = m_1 \times m_2 \times k + m_1 \times e_2 + e_1 \times C_2$
+   
    In this calculation, the first term $m_1 \times m_2 \times k$ represents the expected result, while the second and third terms $m_1 \times e_2$ and $e_1 \times C_2$ represent error terms. Multiplication causes the error terms to increase, especially with squared growth.
 
 ---
