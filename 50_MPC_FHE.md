@@ -150,7 +150,7 @@ Yao’s GC protocol is among the most prominent and efficient general MPC protoc
 
    - Party $P_1$ (holding $x$) generates random keys $k_x$ and $k_y$ for each input.
    - Each table entry is encrypted using these keys:
-     $\text{Enc}_{k_x, k_y}(T_{x, y})$
+     $Enc_{k_x, k_y}(T_{x, y})$
 
 3. **Key Distribution:**
 
@@ -160,7 +160,7 @@ Yao’s GC protocol is among the most prominent and efficient general MPC protoc
 4. **Decryption and Output:**  
    $P_2$ decrypts the corresponding table entry to obtain the output:
    
-   $F(x, y) = \text{Dec}_{k_x, k_y}(\text{Enc}_{k_x, k_y}(T_{x, y}))$
+   $F(x, y) = Dec_{k_x, k_y}(Enc_{k_x, k_y}(T_{x, y}))$
 
 This ensures $P_2$ only decrypts the relevant output while other information remains hidden.
 
@@ -857,9 +857,9 @@ FHE ciphertexts typically contain a small amount of noise. As long as the noise 
 
 - **Partial Homomorphic Encryption (PHE):** PHE supports a single operation, either addition or multiplication, making it simple to implement but with limited functionality.
 - **Somewhat Homomorphic Encryption (SHE):** SHE supports a limited number of addition and multiplication operations, making it suitable for basic polynomial computations. However, each operation increases the noise in the ciphertext, which limits the number of operations before the noise becomes too large to decrypt properly. The homomorphic properties for addition and multiplication in SHE are expressed as follows:
-  $$
-  E(a + b) = E(a) \oplus E(b), \quad E(a \times b) = E(a) \cdot E(b)
-  $$
+  
+  $E(a + b) = E(a) \oplus E(b), \quad E(a \times b) = E(a) \cdot E(b)$
+  
 - **Fully Homomorphic Encryption (FHE):** FHE, in contrast, supports arbitrarily complex computations, making it the most powerful encryption scheme. However, FHE is also the most difficult to implement and optimize, requiring significant computational resources to achieve.
 
 4. **Recryption Mechanism**
@@ -921,8 +921,6 @@ The result is a value of the form $k_i \times k_j \times 2^d + 2e$, where $i, j$
 #### 4. **Modulus Switching for Error Reduction**
 
 **Modulus switching** is a technique used to reduce errors by decreasing the modulus of the ciphertext, thus mitigating the error growth. This method involves dividing the ciphertext by 2 (mod $p$), shrinking the modulus, and performing integer floor operations to reduce the absolute size of the errors. Each multiplication operation causes a constant increase in error, preventing exponential error growth and stabilizing the ciphertext for subsequent computations. This method is particularly important for preserving the correctness and precision of ciphertexts in complex operations such as exponentiation.
-
-The process of modulus switching can be described as follows:
 
 1. **Initial Encryption Formula**:
 
@@ -1460,19 +1458,6 @@ int main(int argc, char* argv[]) {
 </details>
 
 </details>
-
-### Conclusion
-
-Homomorphic encryption is a powerful tool for privacy-preserving computations, enabling direct operations on encrypted data. However, the challenges of error management, particularly during multiplication, pose significant hurdles. Techniques such as relinearization, modulus switching, and matrix representations offer solutions to manage these errors, but there is still room for improvement. As research and optimization efforts continue, the future of homomorphic encryption holds great potential for secure, efficient, and scalable encrypted computation in various domains, particularly in privacy-sensitive fields.
-
-MPC is a powerful technology bridging privacy and computational integrity. Its applications range from secure data aggregation in centralized setups to decentralized collaboration for tasks like federated learning. By integrating complementary techniques like FHE and ZKP, MPC is poised to play a transformative role in privacy-centric domains like finance, healthcare, and decentralized applications.
-Yao’s GC protocol, supported by innovations like Point-and-Permute, achieves a balance between privacy and efficiency. By leveraging techniques such as random oracle models and oblivious transfer, it ensures secure and practical multi-party computation. These advances enable collaborative computation across various domains without compromising individual data privacy.
-
-Both GMW and BGW protocols offer robust mechanisms for secure computation, catering to different circuit types and scalability requirements. Their design principles continue to underpin advancements in secure multiparty computation and cryptographic protocols.
-
-In conclusion, FHE presents a groundbreaking approach to privacy-preserving computations, offering a robust solution for secure data analysis, privacy-preserving queries, and encrypted computation across a wide variety of domains. Despite its challenges in terms of implementation and optimization, FHE’s resistance to quantum attacks and its ability to handle deep computational circuits make it a crucial technology for the future of cryptography.
-
-The three main FHE schemes—BFV, CKKS, and BGV—offer different strengths depending on the application. **BFV** is suited for precise integer calculations, **CKKS** excels in scenarios requiring approximate real-number computations, and **BGV** provides the flexibility needed for multi-party secure computations. Each scheme has its own set of optimizations that enhance its efficiency, and their selection should be based on the specific computational needs and the nature of the data involved in the application. As FHE continues to evolve, these schemes provide a robust foundation for privacy-preserving computations across a range of industries.
 
 [MPC](https://github.com/ETAAcademy/ETAAcademy-ZK-Meme/tree/main/Appendix/MPC)
 
