@@ -1,4 +1,4 @@
-# ETAAcademy-ZKMeme: 49. ZK Bridge
+# ETAAcademy-ZKMeme: 50. MPC & FHE
 
 <table>
   <tr>
