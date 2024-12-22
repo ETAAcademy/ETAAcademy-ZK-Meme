@@ -131,7 +131,7 @@ Numerous protocols address the trade-offs between communication, computation, an
 - **PSI**
 - **SPDZ, PFK, ADMM, etc.**
 
-These protocols often employ techniques like encryption and secret sharing to protect data during computation. Notably, encryption can be viewed as a specialized form of secret sharing. For example, encrypting a message $m$ using a key $k$ ($Enc_k(m)$) divides $m$ into two components: $k$ and $Enc_k(m)$.
+These protocols often employ techniques like encryption and secret sharing to protect data during computation. Notably, encryption can be viewed as a specialized form of secret sharing. For example, encrypting a message $m$ using a key k ($Enc_k(m)$) divides $m$ into two components: k and $Enc_k(m)$.
 
 #### **Yao’s Garbled Circuits (GC) Protocol**
 
