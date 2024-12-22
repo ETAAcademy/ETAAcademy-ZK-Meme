@@ -49,7 +49,7 @@ MPC can be broadly classified into two categories:
 
 In **Centralized MPC**, a trusted central server securely aggregates data from multiple participants. To protect privacy, participants first obfuscate their data locally before sharing it with the server. A key technique in this domain is **Differential Privacy (DP)**, which ensures that individual contributions remain indistinguishable in the aggregated data.
 
-**Differential Privacy (DP)** works by adding random noise to the shared data, making it statistically difficult for adversaries to infer whether specific data points are present in the dataset. The privacy guarantee is formally defined as follows:
+**Differential Privacy (DP)** works by adding random noise to the shared data, making it statistically difficult for adversaries to infer whether specific data points are present in the dataset:
 
 For two adjacent datasets $D$ and $D'$ differing by only one record, a random algorithm $M$ satisfies $\epsilon$-differential privacy if, for all subsets $S$ of the range of $M$:
 
@@ -75,8 +75,6 @@ Unlike centralized methods, decentralized MPC is inherently more resilient to ce
 
 3. **Homomorphic Encryption (HE)**:  
    Homomorphic Encryption enables computations on encrypted data without the need for decryption. This ensures data remains secure throughout the computation process. For example, participants can compute encrypted results collaboratively and share the final encrypted output, preserving data privacy while enabling collaborative analysis.
-
----
 
 ### Comparing Centralized and Decentralized MPC
 
@@ -133,13 +131,11 @@ Numerous protocols address the trade-offs between communication, computation, an
 - **PSI**
 - **SPDZ, PFK, ADMM, etc.**
 
-These protocols often employ techniques like encryption and secret sharing to protect data during computation. Notably, encryption can be viewed as a specialized form of secret sharing. For example, encrypting a message $m$ using a key $k$ ($\text{Enc}_k(m)$) divides $m$ into two components: $k$ and $\text{Enc}_k(m)$.
+These protocols often employ techniques like encryption and secret sharing to protect data during computation. Notably, encryption can be viewed as a specialized form of secret sharing. For example, encrypting a message $m$ using a key $k$ ($\text{Enc}_k(m)$) divides $m$ into two components: $k$ and $Enc_k(m)$.
 
 #### **Yao’s Garbled Circuits (GC) Protocol**
 
 Yao’s GC protocol is among the most prominent and efficient general MPC protocols. It transforms function evaluation into an encrypted lookup problem, maintaining a constant number of communication rounds regardless of circuit depth. While its communication complexity is not optimal, its stable round count makes it highly practical.
-
-**Key Steps in Yao’s GC Protocol:**
 
 1. **Function Representation:**  
    The function $F(x, y)$ is expressed as a lookup table $T$, where each entry corresponds to an output value:
@@ -159,12 +155,10 @@ Yao’s GC protocol is among the most prominent and efficient general MPC protoc
 
 4. **Decryption and Output:**  
    $P_2$ decrypts the corresponding table entry to obtain the output:
-   
+
    $F(x, y) = Dec_{k_x, k_y}(Enc_{k_x, k_y}(T_{x, y}))$
 
 This ensures $P_2$ only decrypts the relevant output while other information remains hidden.
-
----
 
 **Enhancements: Point-and-Permute Technique**
 
@@ -196,13 +190,13 @@ Enc_{k_1^i, k_0^j}(k_0^t), Enc_{k_1^i, k_1^j}(k_1^t)
 
 This ensures that $P_2$ decrypts only the active path of the circuit without learning other information.
 
+---
+
 #### **GMW Protocol**
 
 The **GMW (Goldreich-Micali-Wigderson) protocol** is a foundational method in secure multiparty computation (MPC). Unlike Yao's Garbled Circuits (GC), which typically handle values using encrypted wire labels, the GMW protocol employs additive secret sharing to manage the circuit's values. While Yao's GC is inherently a two-party protocol (though it can be extended to multiparty settings with additional techniques), the GMW protocol is naturally multiparty-friendly and offers superior scalability for such computations.
 
 Participants in the GMW protocol hold additive shares of wire values rather than encrypted labels as in Yao's GC. The key steps of the GMW protocol include generating random wire labels, constructing encrypted circuits, transmitting input labels via Oblivious Transfer (OT), evaluating the circuit using encrypted truth tables and pointer bits, and decoding the final output through decryption tables. By leveraging hashing and XOR operations, the protocol ensures secure computation while effectively concealing the plaintext values of inputs and outputs.
-
-**Key Components of the GMW Protocol**
 
 1. **Wire Label Generation**  
    For each wire $w_i$, two random labels are generated:
@@ -227,13 +221,13 @@ Participants in the GMW protocol hold additive shares of wire values rather than
    For each output wire $w_i$, the decoding table maps the output value $v \in \{0, 1\}$:
    $e_v = H(k_v^i || \text{"out"} || j) \oplus v$
 
+---
+
 #### **BGW Protocol**
 
 The **BGW (Ben-Or, Goldwasser, Wigderson) protocol** is another essential MPC protocol designed for secure multiparty computation. It is well-suited for arithmetic circuits and uses **Shamir’s secret sharing** as its foundation. The protocol ensures security as long as $2t + 1 \leq n$, where $t$ is the threshold for tolerated adversarial participants, and $n$ is the total number of participants.
 
 In the BGW protocol, each participant holds shares of secret values represented as points on a polynomial. The protocol supports both addition and multiplication gates, with addition being computed locally and multiplication requiring an additional degree reduction step. The protocol guarantees correctness and privacy even with malicious participants.
-
-**Key Components of the BGW Protocol**
 
 1. **Shamir’s Secret Sharing**  
    A secret $v$ is represented using a polynomial $p(x)$ such that $p(0) = v$. Each participant receives a share $p(i)$. With a threshold $t$, any $t$ shares reveal no information about the secret.
@@ -250,6 +244,8 @@ In the BGW protocol, each participant holds shares of secret values represented 
    $q(0) = \sum_{i=1}^{2t+1} \lambda_i q(i)$
    where $\lambda_i$ are Lagrange coefficients, and $q(i)$ are the shares held by participants. This ensures the correct sharing of the product.
 
+---
+
 #### Constant-Round Multiparty Computation: The BMR Protocol
 
 In the field of secure multiparty computation (MPC), early protocols such as Yao’s Garbled Circuits (GC), Goldreich-Micali-Wigderson (GMW), Ben-Or-Goldwasser-Wigderson (BGW), and Chaum-Crepeau-Damgård (CCD) all have computation rounds proportional to the circuit depth $C$. However, the **Beaver-Micali-Rogaway (BMR) protocol** broke new ground by enabling constant-round MPC that is independent of circuit depth. BMR achieves this while tolerating corruption of any number of parties, provided fewer than $n$ participants are malicious.
@@ -262,6 +258,8 @@ $e_{v_a, v_b} = w_c \oplus f_c \oplus \bigoplus_{j=1}^n \left( F(i, w_a \oplus f
 
 Here, $F$ is a pseudorandom function (PRF), $\oplus$ represents XOR, and $f_a, f_b, f_c$ are flip bits derived by XORing the shared flip bit values from all parties. The encrypted rows for each gate are organized using XOR operations to produce the final encrypted circuit. By leveraging these techniques, BMR achieves both efficiency and security in multiparty computation, regardless of circuit depth.
 
+---
+
 #### Information-Theoretic Garbled Circuits (IT GC)
 
 The **Information-Theoretic Garbled Circuit (IT GC)** is a secure computation paradigm implemented in the OT-hybrid model. Unlike traditional approaches such as Yao’s GC or the GMW protocol, IT GC encrypts the circuit wires rather than directly encrypting participants' data. This reduces communication costs and replaces cryptographic primitives with lightweight XOR operations and bit-mixing techniques. IT GC encrypts gates incrementally, eliminating the need for conventional encrypted tables.
@@ -273,11 +271,13 @@ The **GESS (Gate-Enabling Secret Sharing)** scheme, which underpins IT GC, uses 
 3. **Incremental Gate Encryption**: Gates are encrypted step by step without requiring plaintext reconstruction during computation.
 4. **Workflow**: For a Boolean gate $G$, output labels $s_0, s_1$ are shared secrets. Input labels $(sh_{1,0}, sh_{1,1})$ and $(sh_{2,0}, sh_{2,1})$ are designed such that any valid combination of input labels uniquely reconstructs $G(i, j)$ while keeping all other information private.
 
+---
+
 #### Private Set Intersection (PSI)
 
 Customized protocols are designed for specific use cases, significantly enhancing efficiency in scenarios requiring high performance, such as **Private Set Intersection (PSI)**. These specialized protocols trade generality for performance, often requiring additional security proofs and implementation complexity. PSI protocols enable parties to compute the intersection of their input sets without exposing any other information.
 
-Modern PSI schemes, such as the **PSSZ protocol**, leverage techniques like Oblivious Pseudo-Random Functions (OPRF) and hashing. In PSSZ, sets are mapped into fixed-size buckets using a 3-way Cuckoo hashing scheme. The protocol involves:
+Modern PSI schemes, such as the **PSSZ protocol**, leverage techniques like Oblivious Pseudo-Random Functions (OPRF) and hashing. In PSSZ, sets are mapped into fixed-size buckets using a 3-way Cuckoo hashing scheme:
 
 1. **Hashing Input Elements**: Party $P_2$ hashes its set into buckets and computes OPRF outputs for multiple hash iterations.
 2. **Candidate Computation**: Party $P_1$ computes a candidate PRF output set, shuffles it, and sends it to $P_2$.
@@ -285,11 +285,13 @@ Modern PSI schemes, such as the **PSSZ protocol**, leverage techniques like Obli
 
 The PSSZ protocol relies on the pseudorandomness of PRFs and carefully chosen hash parameters to minimize collisions, ensuring correctness and security under a semi-honest model. Despite requiring multiple communication rounds, it significantly improves efficiency compared to general-purpose MPC frameworks.
 
+---
+
 #### Advances
 
 Recent advancements in MPC incorporate techniques like OT extension and visual cryptography to improve efficiency. Customized PSI protocols often outperform general-purpose MPC in specific applications. For example, **Google’s secure aggregation protocol** uses secret sharing to aggregate gradients without revealing individual contributions, enabling efficient and privacy-preserving machine learning.
 
-Other innovations include decentralized MPC frameworks like SPDZ, which use Shamir’s $k$-out-of-$n$ secret sharing under a semi-honest model. Privacy-preserving approaches such as **PFK-Means** transmit shared gradients instead of raw encrypted data, while methods like **ADMM (Alternating Direction Method of Multipliers)** optimize communication patterns among data owners.
+Other innovations include decentralized MPC frameworks like SPDZ, which use Shamir’s $k-out-of-n$ secret sharing under a semi-honest model. Privacy-preserving approaches such as **PFK-Means** transmit shared gradients instead of raw encrypted data, while methods like **ADMM (Alternating Direction Method of Multipliers)** optimize communication patterns among data owners.
 
 While domain-specific protocols continue to push boundaries, cases where customized schemes vastly outperform optimized general-purpose MPC remain rare. This reflects the maturity and robustness of modern MPC frameworks in diverse applications.
 
@@ -836,7 +838,7 @@ Here, the operation in $\mathbb{G}_2$ applies to the image of $f(x)$ and $f(y)$.
 
 2. **Homomorphism in Cryptography**
 
-- **RSA Encryption:** Homomorphism in RSA encryption allows operations on ciphertexts to yield the same result as performing the operation on plaintexts and then encrypting the outcome. For example:
+- **RSA Encryption:** Homomorphism in RSA encryption allows operations on ciphertexts to yield the same result as performing the operation on plaintexts and then encrypting the outcome:
   $$E(m_1) \cdot E(m_2) = (m_1^e \cdot m_2^e) \mod n = E(m_1 \cdot m_2).$$
 - **KZG Commitments:** The Kate-Zaverucha-Goldberg (KZG) commitment scheme demonstrates additive homomorphism, enabling operations like:
   $$\text{cm}(p_1(x) + p_2(x)) = \text{cm}(p_1(x)) \oplus \text{cm}(p_2(x)).$$
@@ -857,9 +859,9 @@ FHE ciphertexts typically contain a small amount of noise. As long as the noise 
 
 - **Partial Homomorphic Encryption (PHE):** PHE supports a single operation, either addition or multiplication, making it simple to implement but with limited functionality.
 - **Somewhat Homomorphic Encryption (SHE):** SHE supports a limited number of addition and multiplication operations, making it suitable for basic polynomial computations. However, each operation increases the noise in the ciphertext, which limits the number of operations before the noise becomes too large to decrypt properly. The homomorphic properties for addition and multiplication in SHE are expressed as follows:
-  
+
   $E(a + b) = E(a) \oplus E(b), \quad E(a \times b) = E(a) \cdot E(b)$
-  
+
 - **Fully Homomorphic Encryption (FHE):** FHE, in contrast, supports arbitrarily complex computations, making it the most powerful encryption scheme. However, FHE is also the most difficult to implement and optimize, requiring significant computational resources to achieve.
 
 4. **Recryption Mechanism**
@@ -941,9 +943,9 @@ The result is a value of the form $k_i \times k_j \times 2^d + 2e$, where $i, j$
    where $e' = e \cdot \frac{p}{q}$, and $e_2$ is a small rounding error.
 
 4. **Multiplying by 2 (mod $q$)**:
-   
+
    $\langle c''', k \rangle = m \cdot 1 + 2e' + 2e_2 \pmod{q}$
-   
+
    where $c'''$ is the final transformed ciphertext with error $2e' + 2e_2$, which is smaller than the original error.
 
 This process reduces the magnitude of the error and prevents it from growing exponentially, ensuring the ciphertext remains stable during complex computations.
@@ -957,9 +959,9 @@ Another approach to homomorphic encryption involves representing ciphertexts as 
    $k \times (C_1 + C_2) = (m_1 + m_2) \times k + (e_1 + e_2)$
 
 2. **Multiplication**:
-   
+
    $k \times C_1 \times C_2 = (m_1 \times k + e_1) \times C_2 = m_1 \times m_2 \times k + m_1 \times e_2 + e_1 \times C_2$
-   
+
    In this calculation, the first term $m_1 \times m_2 \times k$ represents the expected result, while the second and third terms $m_1 \times e_2$ and $e_1 \times C_2$ represent error terms. Multiplication causes the error terms to increase, especially with squared growth.
 
 ---
@@ -1004,12 +1006,6 @@ Here’s a comparison of the three FHE schemes based on their characteristics, a
 | **Precision of Computation** | Exact computations             | Approximate computations                        | Exact computations                        |
 | **Typical Applications**     | Statistical analysis, counting | Machine learning, signal processing             | Multi-party computation, database queries |
 | **Technical Optimizations**  | Ring-LWE, modulus switching    | Complex number encoding, approximate encryption | Ring-LWE, batch encoding                  |
-
-#### The Future of FHE
-
-FHE holds tremendous promise for privacy-preserving computations, enabling secure data analytics, encrypted database queries, and privacy-aware machine learning. Despite current challenges in efficiency, continuous research and optimization are paving the way for broader adoption.
-
-By bridging the gap between data security and computational functionality, FHE is poised to revolutionize industries reliant on sensitive data processing.
 
 <details><summary><b> Code</b></summary>
 
