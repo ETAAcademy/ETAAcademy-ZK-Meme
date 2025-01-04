@@ -103,7 +103,7 @@ Jolt is a zero-knowledge virtual machine (zkVM) tailored for the RISC-V architec
 
 **Core Components of Jolt Proofs**
 
-**Lasso** handles localized validation of simple operations, such as additions and comparisons.**Offline Memory Checking** optimizes memory verification across the program, minimizing proof-generation costs. **R1CS** builds global constraints to validate the overall program logic.
+Lasso provides localized validation for simple operations, such as additions and comparisons, which feeds into the broader verification framework. Offline Memory Checking complements this by ensuring the integrity of memory operations across the program, creating a seamless connection between localized validations and memory consistency. Together, these components integrate with R1CS, which establishes global constraints to validate the overall program logic, ensuring a cohesive and efficient proof-generation process.
 
 1. **Lasso Lookup**: This is a table-based lookup technique for efficiently verifying simple operations, such as equality and comparison. For instance, in the BEQ instruction, `EQ[x || y] = 1` verifies whether x and y are equal.
 
@@ -147,7 +147,7 @@ The core function of R1CS in Jolt is to connect all VM processes—fetching, dec
 
 **Fundamentals of R1CS**
 
-R1CS is represented by three matrices, $A$, $B$, and $C$, in $\mathbb{F}^{m \times m}$. Its satisfiability is determined by the equation: $(A \cdot z) \circ (B \cdot z) - (C \cdot z) = 0$
+R1CS is represented by three matrices, $A, B, C \in \mathbb{F}^{m \times m}$. Its satisfiability is determined by the equation: $(A \cdot z) \circ (B \cdot z) - (C \cdot z) = 0$
 
 Here, $z$ is the witness, which the prover must supply to demonstrate knowledge of a $z$ that satisfies the equation. Each individual constraint can be expressed as: $a \cdot b - c = 0$
 
@@ -162,11 +162,11 @@ Bitflags in Jolt consist of 64 bits divided into two categories:
 
 **Example: Verifying the Consistency of `rd` Values**
 
-To verify that the value written to `rd` matches the output of the instruction lookup, an auxiliary variable is defined as: $\text{condition} \gets rd\_bytecode \cdot flag_7$
+To verify that the value written to `rd` matches the output of the instruction lookup, an auxiliary variable is defined as: $condition \cdot$ rd_bytecode $\cdot flag_7$
 
-The following constraint is added to ensure the validity of the condition: $rd\_bytecode \cdot flag_7 - \text{condition} = 0$
+The following constraint is added to ensure the validity of the condition: rd_bytecode $\cdot flag_7 - \text{condition} = 0$
 
-The main constraint then enforces consistency: $\text{condition} \cdot (rd\_write - lookup\_output) = 0$
+The main constraint then enforces consistency: $condition \cdot$ (rd_write - lookup_output) = 0
 
 Where:
 
@@ -346,11 +346,11 @@ This vector satisfies the equation: $v = \sum_{i=0}^{m-1} h_i \cdot e_i$
 
 1. **Sumcheck Reduction:**  
    The prover reduces the summation verification to an equation:
-   
+
    $v' = h(\vec{\rho}) \cdot e(\vec{\rho})$  
    Here, $\vec{\rho}$ represents a folding point chosen by the verifier. The prover generates a proof for this equation, reducing the complexity to $O(m)$.
 
-3. **Validation of Auxiliary Vector:**  
+2. **Validation of Auxiliary Vector:**  
    The correctness of $\vec{e}$, where each $e_i$ corresponds to $\lambda_{k_i}$, is proven using a memory-checking approach. In this context, $\vec{\lambda}$ (calculated from $\vec{u}$) is treated as public memory. The prover demonstrates that $\vec{e}$ is derived correctly from $\vec{\lambda}$.
 
 **Memory Checking: Linking Spark to Lookup Arguments**
@@ -432,9 +432,7 @@ The **EQ table** determines whether two numbers are equal. For instance, in a 2-
 
 For larger bit-widths (e.g., $W$), the EQ table is decomposed into multiple smaller **EQ sub-tables**. Each sub-table processes a segment of the bits, and the results from these sub-tables are multiplied to produce the final equality result.
 
-**Example:**
-
-If $W = 4$, the EQ table is divided into two 2-bit sub-tables. Each sub-table verifies equality for its segment, and the final EQ result is obtained by multiplying the results from the sub-tables.
+**For Example:** If $W = 4$, the EQ table is divided into two 2-bit sub-tables. Each sub-table verifies equality for its segment, and the final EQ result is obtained by multiplying the results from the sub-tables.
 
 **LTU Table (Less-Than Relationship Check)**
 
