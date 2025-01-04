@@ -1,0 +1,116 @@
+[package]
+name = "jolt-core"
+version = "0.1.0"
+authors = [
+    # author of original Spartan paper and code base
+    "Srinath Setty <srinath@microsoft.com>",
+    # authors who contributed to the Arkworks Spartan fork
+    "Zhenfei Zhang <zhenfei.zhang@hotmail.com>",
+    # authors who contributed to Lasso/Jolt
+    "Michael Zhu <mzhu@a16z.com>",
+    "Sam Ragsdale <sragsdale@a16z.com>",
+    "Noah Citron <ncitron@a16z.com>",
+    "Arasu Arun <arasu.arun5@gmail.com>",
+]
+edition = "2021"
+description = "The lookup singularity. Based on Spartan; built on Arkworks."
+documentation = "https://github.com/a16z/jolt/README.md"
+repository = "https://github.com/a16z/jolt"
+license-file = "LICENSE"
+keywords = ["SNARK", "cryptography", "proofs"]
+
+[dependencies]
+ark-bn254 = "0.4.0"
+ark-ec = { version = "0.4.2", default-features = false }
+ark-ff = { version = "0.4.2", default-features = false }
+ark-serialize = { version = "0.4.2", default-features = false, features = [
+    "derive",
+] }
+ark-std = { version = "0.4.0" }
+binius-field = { git = "https://gitlab.com/UlvetannaOSS/binius", package = "binius_field" }
+clap = { version = "4.3.10", features = ["derive"] }
+enum_dispatch = "0.3.12"
+fixedbitset = "0.5.0"
+itertools = "0.10.0"
+num-integer = "0.1.45"
+postcard = { version = "1.0.8", default-features = false, features = [
+    "use-std",
+] }
+rand = "0.7.3"
+rand_chacha = { version = "0.3.0", default-features = false }
+rand_core = { version = "0.6.4", default-features = false }
+rayon = { version = "^1.8.0", optional = true }
+serde = { version = "1.0.*", default-features = false }
+sha3 = "0.10.8"
+strum = "0.26.3"
+strum_macros = "0.26.4"
+thiserror = "1.0.58"
+tracing = "0.1.37"
+tracing-chrome = "0.7.1"
+tracing-flame = "0.2.0"
+tracing-subscriber = "0.3.18"
+tracing-texray = "0.2.0"
+target-lexicon = "0.12.14"
+reqwest = { version = "0.12.3", features = [
+    "json",
+    "blocking",
+], optional = true }
+dirs = "5.0.1"
+eyre = "0.6.12"
+indicatif = "0.17.8"
+common = { path = "../common" }
+tracer = { path = "../tracer" }
+bincode = "1.3.3"
+bytemuck = "1.19.0"
+tokio = { version = "1.38.0", optional = true }
+alloy-primitives = "0.7.6"
+alloy-sol-types = "0.7.6"
+
+[dev-dependencies]
+criterion = { version = "0.5.1", features = ["html_reports"] }
+iai-callgrind = "0.10.2"
+
+[build-dependencies]
+common = { path = "../common" }
+
+[[bench]]
+name = "iai"
+harness = false
+
+[[bench]]
+name = "grand_product"
+harness = false
+
+[[bench]]
+name = "commit"
+harness = false
+
+[[bench]]
+name = "binding"
+harness = false
+
+[[bench]]
+name = "compute_cubic"
+harness = false
+
+[lib]
+name = "jolt_core"
+path = "src/lib.rs"
+
+[features]
+default = [
+    "ark-ec/parallel",
+    "ark-ff/parallel",
+    "ark-std/parallel",
+    "ark-ff/asm",
+    "host",
+    "rayon",
+]
+host = ["dep:reqwest", "dep:tokio"]
+
+[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+memory-stats = "1.0.0"
+tokio = { version = "1.38.0", optional = true, features = ["rt-multi-thread"] }
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+getrandom = { version = "0.2", features = ["js"] }
