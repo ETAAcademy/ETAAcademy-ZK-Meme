@@ -212,7 +212,7 @@ Where:
 
 **Implementation of Indexed Lookup Arguments** involves commitments to three vectors: the table vector $t$, the query vector $f$, and the index vector $a$. The proof verifies the relationship:
 
-$\mathcal{R}_{\text{indexed-lkup}} = (\mathsf{cm}(\vec{t}), \mathsf{cm}(\vec{f}), \mathsf{cm}(\vec{a}); \vec{t}, \vec{f}, \vec{a}) \mid \forall i \in [0, m), f_i = t_{a_i}$
+$R_{indexed-lkup} = (cm(\vec{t}), cm}(\vec{f}), cm(\vec{a}); \vec{t}, \vec{f}, \vec{a}) \mid \forall i \in [0, m), f_i = t_{a_i}$
 
 **3. Methods for Constructing Indexed Lookup Proofs**
 
@@ -293,7 +293,7 @@ The protocol enforces constraints to ensure:
 **3. Protocol Flow**
 
 - **First Round:** The prover generates VM execution logs and commits to the counter values and memory states.
-- **Second Round:** The verifier sends random challenges $\beta$ and $\gamma$. The prover calculates updated logs and state commitments and uses **Grand Product Argument** to prove consistency: $\prod_{i=0}^{n-1} S^{\mathsf{init}}_i \cdot \prod_{j=0}^{m-1} R_j = \prod_{i=0}^{n-1} S^{\mathsf{final}}_i \cdot \prod_{j=0}^{m-1} W_j$
+- **Second Round:** The verifier sends random challenges $\beta$ and $\gamma$. The prover calculates updated logs and state commitments and uses **Grand Product Argument** to prove consistency: $\prod_{i=0}^{n-1} S_i^{init} \cdot \prod_{j=0}^{m-1} R_j = \prod_{i=0}^{n-1} S_i^{final} \cdot \prod_{j=0}^{m-1} W_j$
 - The verifier checks the commitments and ensures all equations hold.
 
 **Comparison with Plookup**
@@ -345,13 +345,12 @@ This vector satisfies the equation: $v = \sum_{i=0}^{m-1} h_i \cdot e_i$
 **Proof Workflow**
 
 1. **Sumcheck Reduction:**  
-   The prover reduces the summation verification to an equation:  
-   $
-   v' = h(\vec{\rho}) \cdot e(\vec{\rho})
-   $  
+   The prover reduces the summation verification to an equation:
+   
+   $v' = h(\vec{\rho}) \cdot e(\vec{\rho})$  
    Here, $\vec{\rho}$ represents a folding point chosen by the verifier. The prover generates a proof for this equation, reducing the complexity to $O(m)$.
 
-2. **Validation of Auxiliary Vector:**  
+3. **Validation of Auxiliary Vector:**  
    The correctness of $\vec{e}$, where each $e_i$ corresponds to $\lambda_{k_i}$, is proven using a memory-checking approach. In this context, $\vec{\lambda}$ (calculated from $\vec{u}$) is treated as public memory. The prover demonstrates that $\vec{e}$ is derived correctly from $\vec{\lambda}$.
 
 **Memory Checking: Linking Spark to Lookup Arguments**
@@ -413,7 +412,7 @@ This decomposition reduces a high-dimensional problem into low-dimensional sub-t
 
 **Efficient RangeCheck Lookup Argument**
 
-Lasso enhances the efficiency of RangeCheck lookups using MLE polynomials, such as $\tilde{t}_{\text{range2}}(\vec{X})$ and $\tilde{T}_{\text{range4}}(\vec{X})$, to define relationships: $\tilde{T}_{\text{range4}}(X_0, X_1, X_2, X_3) = 4 \cdot \tilde{t}_{\text{range2}}(X_0, X_1) + \tilde{t}_{\text{range2}}(X_2, X_3)$
+Lasso enhances the efficiency of RangeCheck lookups using MLE polynomials, such as $\tilde{t_{range2}}(\vec{X})$ and $\tilde{T_{range4}}(\vec{X})$, to define relationships: $\tilde{T_{range4}}(X_0, X_1, X_2, X_3) = 4 \cdot \tilde{t_{range2}}(X_0, X_1) + \tilde{t_{range2}}(X_2, X_3)$
 
 This structure enables efficient lookup arguments and reduces verification costs. Unlike traditional approaches that require precomputing the entire table, this method allows dynamic proof generation for large tables, making it ideal for applications in zero-knowledge proofs where flexibility is key.
 
@@ -457,9 +456,7 @@ The **Generalized Lasso framework** extends the classic Lasso approach by enabli
 
 This method is particularly suited for scenarios involving complex computations over large data structures, where traditional approaches might be computationally prohibitive. A key feature of the Generalized Lasso is its use of the **Indexed Lookup Argument**, which enables the query process to be represented by the following equation:
 
-$
-\tilde{f}(\vec{X}) = \sum_{\vec{y} \in \{0,1\}^{\log N}} \tilde{M}(\vec{X}, \vec{y}) \cdot \tilde{t}(\vec{y}),
-$
+$\tilde{f}(\vec{X}) = \sum_{\vec{y} \in \{0,1\}^{\log N}} \tilde{M}(\vec{X}, \vec{y}) \cdot \tilde{t}(\vec{y}),$
 
 where:
 
