@@ -131,7 +131,7 @@ Numerous protocols address the trade-offs between communication, computation, an
 - **PSI**
 - **SPDZ, PFK, ADMM, etc.**
 
-These protocols often employ techniques like encryption and secret sharing to protect data during computation. Notably, encryption can be viewed as a specialized form of secret sharing. For example, encrypting a message $m$ using a key $k$ ($\text{Enc}_k(m)$) divides $m$ into two components: $k$ and $Enc_k(m)$.
+These protocols often employ techniques like encryption and secret sharing to protect data during computation. Notably, encryption can be viewed as a specialized form of secret sharing. For example, encrypting a message $m$ using a key k $(Enc_k(m))$ divides $m$ into two components: k and $Enc_k(m)$.
 
 #### **Yao’s Garbled Circuits (GC) Protocol**
 
@@ -291,7 +291,7 @@ The PSSZ protocol relies on the pseudorandomness of PRFs and carefully chosen ha
 
 Recent advancements in MPC incorporate techniques like OT extension and visual cryptography to improve efficiency. Customized PSI protocols often outperform general-purpose MPC in specific applications. For example, **Google’s secure aggregation protocol** uses secret sharing to aggregate gradients without revealing individual contributions, enabling efficient and privacy-preserving machine learning.
 
-Other innovations include decentralized MPC frameworks like SPDZ, which use Shamir’s $k-out-of-n$ secret sharing under a semi-honest model. Privacy-preserving approaches such as **PFK-Means** transmit shared gradients instead of raw encrypted data, while methods like **ADMM (Alternating Direction Method of Multipliers)** optimize communication patterns among data owners.
+Other innovations include decentralized MPC frameworks like SPDZ, which use Shamir’s k-out-of-n secret sharing under a semi-honest model. Privacy-preserving approaches such as **PFK-Means** transmit shared gradients instead of raw encrypted data, while methods like **ADMM (Alternating Direction Method of Multipliers)** optimize communication patterns among data owners.
 
 While domain-specific protocols continue to push boundaries, cases where customized schemes vastly outperform optimized general-purpose MPC remain rare. This reflects the maturity and robustness of modern MPC frameworks in diverse applications.
 
@@ -1454,6 +1454,8 @@ int main(int argc, char* argv[]) {
 </details>
 
 </details>
+
+---
 
 [MPC](https://github.com/ETAAcademy/ETAAcademy-ZK-Meme/tree/main/Appendix/MPC)
 
