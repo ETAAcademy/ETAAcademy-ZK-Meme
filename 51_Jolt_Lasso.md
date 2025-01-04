@@ -105,7 +105,7 @@ Jolt is a zero-knowledge virtual machine (zkVM) tailored for the RISC-V architec
 
 **Lasso** handles localized validation of simple operations, such as additions and comparisons.**Offline Memory Checking** optimizes memory verification across the program, minimizing proof-generation costs. **R1CS** builds global constraints to validate the overall program logic.
 
-1. **Lasso Lookup**: This is a table-based lookup technique for efficiently verifying simple operations, such as equality and comparison. For instance, in the BEQ instruction, `EQ[x || y] = 1` verifies whether xx and yy are equal.
+1. **Lasso Lookup**: This is a table-based lookup technique for efficiently verifying simple operations, such as equality and comparison. For instance, in the BEQ instruction, `EQ[x || y] = 1` verifies whether x and y are equal.
 
 2. **Offline Memory Checking**: Ensures memory consistency during random access in zero-knowledge proofs. This approach uses commitments to verify memory access correctness, significantly reducing computational overhead during proof generation.
 
@@ -212,7 +212,7 @@ Where:
 
 **Implementation of Indexed Lookup Arguments** involves commitments to three vectors: the table vector $t$, the query vector $f$, and the index vector $a$. The proof verifies the relationship:
 
-$R_{indexed-lkup} = (cm(\vec{t}), cm}(\vec{f}), cm(\vec{a}); \vec{t}, \vec{f}, \vec{a}) \mid \forall i \in [0, m), f_i = t_{a_i}$
+$R_{indexed-lkup} = (cm(\vec{t}), cm(\vec{f}), cm(\vec{a}); \vec{t}, \vec{f}, \vec{a}) \mid \forall i \in [0, m), f_i = t_{a_i}$
 
 **3. Methods for Constructing Indexed Lookup Proofs**
 
