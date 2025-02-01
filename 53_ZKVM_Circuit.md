@@ -188,11 +188,13 @@ Let’s consider an example to illustrate how Halo2 circuits encode program logi
 
 The constraints for the circuit are given as:
 
-$C(cur) =
+$$
+C(cur) =
 \begin{cases}
 s_{cur} \times (acc_{cur} + operand_{cur} - acc_{cur+1}) = 0 \\
 s_{cur} \times (1 - s_{cur}) = 0
-\end{cases}$
+\end{cases}
+$$
 
 - **Addition Constraint**: When `s = 1`, it enforces $acc_{cur+1} = acc_{cur} + operand_{cur}$, implementing the summation logic. When `s = 0`, it ensures that the final value of `acc` remains unchanged, signaling the end of the loop.
 - **Binary Constraint**: The value of the `s` column must be either 0 or 1, ensuring the correctness of the loop control.
