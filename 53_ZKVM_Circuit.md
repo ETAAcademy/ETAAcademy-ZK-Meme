@@ -188,7 +188,7 @@ Let’s consider an example to illustrate how Halo2 circuits encode program logi
 
 The constraints for the circuit are given as:
 
-$\mathcal{C}(cur) =
+$C(cur) =
 \begin{cases}
 s_{cur} \times (acc_{cur} + operand_{cur} - acc_{cur+1}) = 0 \\
 s_{cur} \times (1 - s_{cur}) = 0
