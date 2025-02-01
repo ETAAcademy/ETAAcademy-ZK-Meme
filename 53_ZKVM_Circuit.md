@@ -306,7 +306,7 @@ Since the WASM specification does not natively support zero-knowledge input and 
 
 ---
 
-### 1.3 Instruction Circuits\*\*
+### 1.3 Instruction Circuits
 
 Once the architecture circuits are defined, the next step is to build corresponding circuits $C_{op}$ for each opcode (operation code) supported by the WASM specification. Since constraints are applied row by row in the execution trace circuit and each opcode's constraints may span multiple rows, we use **c.(curr + k)** to denote the cell in column **c** at row $curr + k$, which refers to the k-th row after the current row.
 
@@ -370,7 +370,7 @@ The goal of custom instructions is to optimize the circuit by reducing the total
 
 ---
 
-### 1.4. Sharding and Batching\*\*
+### 1.4. Sharding and Batching
 
 The Halo2 proof system has a **limit on the total number of rows** in the arithmetic circuit. When the scale of the WASM program grows too large, the full execution trace cannot fit into the circuit table (e.g., the $T_E$ table) all at once. The **solution** is to divide the execution trace into multiple sub-sequences (shards), generate independent proofs for each sub-sequence, and then merge them through **batching** to validate all sub-proofs. This approach **overcomes the row limit** and supports large-scale WASM program verification. The correctness of the full proof $P$ is guaranteed by the following conditions:
 
@@ -384,9 +384,9 @@ The Halo2 proof system has a **limit on the total number of rows** in the arithm
   $t[a_0,b_0], t[a_1,b_1], \dots$, where each sub-block contains a sequence of contiguous instructions (for example, $t_0 - t_{100}$ is the first block, and $t_{101} - t_{200}$ is the second block). Each sub-block $t_{[a,b]}$ corresponds to independent memory access logs $M_{[a,b]}$, stack logs $SP_{[a,b]}$, and global variable logs $G_{[a,b]}$.
 
 - **Sub-proof Generation**: A **sub-proof** $P_{[a,b]}$ is generated for each sub-block $t_{[a,b]}$ using the ZAWA circuit, verifying that the sub-block is valid within the context:
-  $
-  (F, M_{[a,b]}, SP_{[a,b]}, I(C,H), IO)
-  $
+  
+  $(F, M_{[a,b]}, SP_{[a,b]}, I(C,H), IO)$
+  
   where $F$ is the frame table, $I$ is the initial data from the image, and $IO$ represents input/output. The goal is that the logical conjunction of all sub-proofs $P_{[0,k]}, P_{[k,2k]}, \dots$ is equivalent to the proof for the entire execution trace $P$.
 
 #### Equivalence Constraints
@@ -396,7 +396,7 @@ The Halo2 proof system has a **limit on the total number of rows** in the arithm
 
   $t_{b_{k+1}}.iaddr = t_{a_k}.iaddr$
 
-- **Polynomial Lookup Equivalence**: The memory access log $T_M$ is split into sub-tables $T_M_1, T_M_2, \dots$, and these must satisfy global uniqueness constraints upon merging. **Solution**: Introduce a **glue table** $T_{GM}$ to track the boundary relationships between sub-tables. Constraints ensure that $T_{GM}$ and all $T_{M_k}$ tables satisfy global uniqueness constraints, ensuring the consistency of the memory access log across all sub-blocks.
+- **Polynomial Lookup Equivalence**: The memory access log $T_M$ is split into sub-tables $TM_1, TM_2, ...$, and these must satisfy global uniqueness constraints upon merging. **Solution**: Introduce a **glue table** $T_{GM}$ to track the boundary relationships between sub-tables. Constraints ensure that $T_{GM}$ and all $T_{M_k}$ tables satisfy global uniqueness constraints, ensuring the consistency of the memory access log across all sub-blocks.
 
 #### Batch Processing Verification
 
@@ -1195,13 +1195,13 @@ fn assign_entries(
 
 ---
 
-## 2. SP1: A Zero-Knowledge Virtual Machine (zkVM) for RISC-V\*\*
+## 2. SP1: A Zero-Knowledge Virtual Machine (zkVM) for RISC-V
 
 SP1 is a **Zero-Knowledge Virtual Machine (zkVM)** developed and maintained by **Succinct**. It is designed to generate **zero-knowledge proofs** for RISC-V programs. Developers can write code in Rust, specify inputs and outputs, and use SP1 to generate a proof that validates the correctness of the output. The proof generated follows the **Scalable Transparent Argument of Knowledge (STARK)** format.
 
 SP1 is built on **plonky3**, an open-source modular proof system toolkit developed by the **Polygon Zero** team. The system leverages standard **STARK** technology, which includes **Algebraic Intermediate Representations (AIR)** for arithmetic program logic, **polynomial commitments** based on batch-encoded Reed-Solomon coding, and **cross-table lookups** based on the LogUp lookup protocol.
 
-The operations in SP1 are based on the **Baby Bear finite field** 𝔽 (with prime order \(15 \times 2^{27} + 1\)) and its 4th-degree extension field 𝔽(4).
+The operations in SP1 are based on the **Baby Bear finite field** 𝔽 (with prime order $15 \times 2^{27} + 1$) and its 4th-degree extension field 𝔽(4).
 
 **SP1 Workflow**
 
@@ -1213,7 +1213,7 @@ The operations in SP1 are based on the **Baby Bear finite field** 𝔽 (with pri
 
 ---
 
-### 2.1 SP1 Multi-table Architecture\*\*
+### 2.1 SP1 Multi-table Architecture
 
 SP1 employs a **multi-table collaborative architecture** to generate execution proofs. Each table has a specific role, and they are coordinated via the **LogUp protocol**. The core modules include:
 
@@ -1260,7 +1260,7 @@ SP1 employs a **multi-table collaborative architecture** to generate execution p
 
 #### **Sharding and Recursive Proofs**
 
-**Sharding**: SP1 can handle large-scale programs (e.g., Tendermint light client verification, which involves about 30 million cycles) by splitting the execution trace into multiple shards, each with a maximum height of \(2^{22}\) (around 2 million rows).
+**Sharding**: SP1 can handle large-scale programs (e.g., Tendermint light client verification, which involves about 30 million cycles) by splitting the execution trace into multiple shards, each with a maximum height of $2^{22}$ (around 2 million rows).
 
 - **Independent Proofs**: For each shard, an individual STARK proof is generated.
 - **Cross-shard Coordination**: The LogUp protocol is used to ensure the consistency of interactions between shards.
@@ -1304,13 +1304,13 @@ Consider the task of verifying that a program correctly computes the 5th Fibonac
   - $𝑋_0 − 1 = 0$
   - $𝑋_1 − 1 = 0$
 - **Transition Conditions**:
-  - $𝑋_{𝑖+2} − 𝑋_{𝑖+1} − 𝑋_𝑖 = 0 for 𝑖 ∈ {0, 1, 2, 3}$
+  - $𝑋_{𝑖+2} − 𝑋_{𝑖+1} − 𝑋_𝑖 = 0, for 𝑖 ∈ {0, 1, 2, 3}$
 
 These constraints ensure that the sequence $x_0, ..., x_5$ adheres to the Fibonacci sequence definition.
 
 **Polynomial Transformation**
 
-1. **Multi-variable to Single-variable**: Choose a generator 𝑜 for the field 𝕂 and construct a univariate polynomial 𝑝 such that $𝑝(𝑜^i) = 𝑥ᵢ$.
+1. **Multi-variable to Single-variable**: Choose a generator o for the field 𝕂 and construct a univariate polynomial 𝑝 such that $𝑝(𝑜^i) = 𝑥ᵢ$.
 2. **Polynomial Constraints**: Convert the boundary and transition conditions into a single-variable polynomial $f(𝑥) = p(o^2𝑥) − p(0𝑥) − p(x)$ and verify that its values in the specific domain are zero.
 3. **Low-degree Polynomial Verification**: Define the quotient polynomial as $f(x) = \frac{p(o^2x) − p(ox) − p(x)}{(x−1)(x−o)(x−o^2)(x−o^3)}$, and use FRI to validate the low-degree nature of f(x).
 
