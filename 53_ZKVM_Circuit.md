@@ -386,9 +386,9 @@ The Halo2 proof system has a **limit on the total number of rows** in the arithm
   $t[a_0,b_0], t[a_1,b_1], \dots$, where each sub-block contains a sequence of contiguous instructions (for example, $t_0 - t_{100}$ is the first block, and $t_{101} - t_{200}$ is the second block). Each sub-block $t_{[a,b]}$ corresponds to independent memory access logs $M_{[a,b]}$, stack logs $SP_{[a,b]}$, and global variable logs $G_{[a,b]}$.
 
 - **Sub-proof Generation**: A **sub-proof** $P_{[a,b]}$ is generated for each sub-block $t_{[a,b]}$ using the ZAWA circuit, verifying that the sub-block is valid within the context:
-  
+
   $(F, M_{[a,b]}, SP_{[a,b]}, I(C,H), IO)$
-  
+
   where $F$ is the frame table, $I$ is the initial data from the image, and $IO$ represents input/output. The goal is that the logical conjunction of all sub-proofs $P_{[0,k]}, P_{[k,2k]}, \dots$ is equivalent to the proof for the entire execution trace $P$.
 
 #### Equivalence Constraints
