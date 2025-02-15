@@ -48,7 +48,7 @@ LWE is a generalization of the SIS problem, where noise is added to the lattice 
 
 The **BDLOP (Baum et al.)** commitment scheme is an additive homomorphic commitment scheme widely used in quantum-resistant zero-knowledge proofs (ZKPs). The BDLOP commitment scheme ensures **statistical binding** and **hiding**, and it is constructed based on the **MLWE** (Matrix Learning With Errors) and **MSIS** (Minimum Short Independent Vectors) problems. The BDLOP scheme is designed to provide smaller commitment sizes and lower **robustness errors**, addressing the shortcomings of earlier schemes.
 
-Prior to BDLOP, many cryptographic schemes were based on protocols using the **Decoding Problem** (a generalization of SIS). However, these protocols suffered from large robustness errors, leading to large proof sizes and inefficiencies. Later, researchers introduced improvements by incorporating **Learning Parity with Noise (LPN)** and **Ring-LWE** problems, but these schemes still exhibited significant error probabilities. The BDLOP scheme, however, overcame these challenges and became the leading lattice-based commitment scheme.
+Prior to BDLOP, many cryptographic schemes were based on protocols using the ** syndrome decoding problem** (a generalization of SIS). However, these protocols suffered from large robustness errors, leading to large proof sizes and inefficiencies. Later, researchers introduced improvements by incorporating **Learning Parity with Noise (LPN)** and **Ring-LWE** problems, but these schemes still exhibited significant error probabilities. The BDLOP scheme, however, overcame these challenges and became the leading lattice-based commitment scheme.
 
 BDLOP is particularly effective in quantum-resistant applications, providing strong security while maintaining efficient proof sizes. It supports applications such as **set membership proofs**, **verifiable decryption**, and **zero-knowledge proofs for short solutions to linear equations**.
 
@@ -66,9 +66,9 @@ Lattice-based cryptographic schemes like BDLOP offer several advantages:
 
 ---
 
-## 1. Core Concepts in Lattice-Based Cryptography and Zero-Knowledge Proofs
+## 1. Core Concepts
 
-In lattice-based cryptographic protocols and zero-knowledge proofs (ZKPs), **polynomial rings** (such as $R$ and $R_q$) are fundamental structures used to handle polynomial operations and vector calculations. For example, the polynomial rings $R = Z[X] / (X^d + 1)$ and $R_q = Z_q[X] / (X^d + 1)$, where $d$ is a power of 2, are used in lattice cryptography. Here, $q$ is an odd prime number, and $Z$ represents the set of integers, while $Z_q = Z / qZ$ is the ring of integers modulo $q$, where elements are in the range $[-\frac{q-1}{2}, \frac{q-1}{2}]$. Vectors and matrices are represented as $v \in Z_q^m$ and $A \in Z_q^{m \times n}$, respectively. A polynomial $a = \sum_{i=0}^{d-1} a_i X^i \in R_q$ can be represented by its coefficient vector $a = (a_0, a_1, ..., a_{d-1})^T$.
+In lattice-based cryptographic protocols and zero-knowledge proofs (ZKPs), **polynomial rings** (such as $R$ and $R_q$) are fundamental structures used to handle polynomial operations and vector calculations. For example, the polynomial rings $R = Z[X] / (X^d + 1)$ and $R_q = Z_q[X] / (X^d + 1)$, where $d$ is a power of 2, are used in lattice cryptography. Here, $q$ is an odd prime number, and $Z$ represents the set of integers, while $Z_q = Z / qZ$ is the ring of integers modulo $q$, where elements are in the range $[-\frac{q-1}{2}, \frac{q-1}{2}]$. Vectors and matrices are represented as $v \in Z_q^m$ and $A \in Z_q^{m \times n}$, respectively. A polynomial $a = \sum_{i=0}^{d-1} a_i X^i \in R_q$ can be represented by its coefficient vector $\vec{a} = (a_0, a_1, ..., a_{d-1})^T$.
 
 **Toeplitz matrices** are often used in $R_q$ to efficiently represent and compute polynomial coefficients, optimizing the computational process. A Toeplitz matrix transforms polynomial coefficients into a matrix form, where multiplying the matrix by a vector is equivalent to the polynomial operation. **Norms** (such as $l_{\infty}$ and $l_p$) are used to quantify the size of vectors, much like conventional vector norms. These norms help measure error and noise, contributing to the security and efficiency of algorithms. The **automorphism group** (including automorphisms like $\sigma_i(X) = X^i$) is used to optimize mappings and symmetry, improving the computational efficiency of encryption and proof systems. Together, these concepts form the foundation for building efficient and secure lattice-based cryptographic protocols.
 
@@ -98,19 +98,19 @@ where $\rho_{a,\sigma}(x)$ is the probability density of the normal distribution
 
 Lattice-based zero-knowledge proofs employ **rejection sampling** to hide the randomness of secret commitments $\mathbf{r}$. Rejection sampling involves introducing a combination of masking vectors and challenge vectors to ensure no information about the randomness is leaked.
 
-1. **Uniform Distribution Rejection Sampling**: The prover samples a masking vector $\mathbf{y}$ from the interval $[-\delta + 1, \delta]$, and then computes the masked vector $\mathbf{z} = \mathbf{y} + c\mathbf{r}$ based on the challenge $c$. If $|z|_∞$ is less than a threshold (e.g., $|z|_∞ < \delta - \beta$), the prover proceeds; otherwise, the process is rejected and restarted. The expected retry count $M$ is related to $\delta$ and $\beta$ and is approximately given by:
+1. **Uniform Distribution Rejection Sampling**: The prover samples a masking vector $\mathbf{y}$ from the interval $[-\delta + 1, \delta]$, and then computes the masked vector $\mathbf{z} = \mathbf{y} + c\mathbf{r}$ based on the challenge $c$. If $|\vec{z}|_∞$ is less than a threshold (e.g., $|\vec{z}|_∞ < \delta - \beta$), the prover proceeds; otherwise, the process is rejected and restarted. The expected retry count $M$ is related to $\delta$ and $\beta$ and is approximately given by:
 
 $$
-\frac{1}{M} = \frac{(2(\delta - \beta) - 1)}{(2\delta - 1)}\kappa d \approx e^{-\kappa d \beta / \delta}
+\frac{1}{M} = \frac{(2(\delta - \beta) - 1)}{(2\delta - 1)}^{\kappa d} \approx e^{-\kappa d \beta / \delta}
 $$
 
-2. **Discrete Gaussian Distribution Rejection Sampling**: When the masking vector $\mathbf{y}$ is sampled from a discrete Gaussian distribution, two types of rejection sampling methods exist: Rej 0 and Rej 1. In Rej 0, a condition is checked:
+2. **Discrete Gaussian Distribution Rejection Sampling**: When the masking vector $\mathbf{y}$ is sampled from a discrete Gaussian distribution, two types of rejection sampling methods exist: $Rej_0$ and $Rej_1$. In $Rej_0$, a condition is checked:
 
 $$
-u > \frac{1}{M} \exp\left( -2 \langle \mathbf{z}, c\mathbf{r} \rangle + \frac{\| c\mathbf{r} \|^2}{2\sigma^2} \right)
+u > \frac{1}{M} \exp\left( -2 \langle \vec{z}, c\vec{r} \rangle + \frac{\| c\vec{r} \|^2_2}{2\sigma^2} \right)
 $$
 
-If this condition is not satisfied, the process is rejected. Rej 1 adds an additional step to check whether the inner product $\langle \mathbf{z}, c\mathbf{r} \rangle$ is negative. If either condition fails, the prover rejects and restarts. By adjusting parameters, the expected retry count can be controlled.
+If this condition is not satisfied, the process is rejected. $Rej_1$ adds an additional step to check whether the inner product $\langle \mathbf{z}, c\mathbf{r} \rangle$ is negative. If either condition fails, the prover rejects and restarts. By adjusting parameters, the expected retry count can be controlled.
 
 ---
 
@@ -120,29 +120,37 @@ The security of lattice-based cryptographic protocols relies on the computationa
 
 The **BDLOP scheme** (an extension of the traditional SIS commitment scheme) combines high-dimensional random vectors $\mathbf{r}$ with message vectors $\mathbf{s}$ to generate a commitment. Specifically, the commitment is generated by first committing to a part related to the random vector, $t_0 = B_0 \mathbf{r}$, and then hiding the message using a second part, $t_1 = B_1 \mathbf{r} + \mathbf{s}$. Due to the indistinguishability of $t_0$ and $t_1$ under the **Module-LWE** assumption, the scheme ensures both **hiding** and **binding** properties. The binding property guarantees that, for different message vectors $\mathbf{s_0}$, different random vectors $\mathbf{r_0}$ are required, which leads to a solution of **Module-SIS**, ensuring that the commitment cannot be forged without solving this difficult problem.
 
-For example, in a variant of the BDLOP commitment scheme, let $B_0 \in R^{\mu \times (\mu + \lambda + \epsilon)}_q$ be a matrix, and let $\vec{b}_1, \dots, \vec{b}_ε \in R_q^{\mu + \lambda + \epsilon}$ 
-be vectors and $\vec{r} \leftarrow \chi^{(\mu + \lambda + \epsilon)d}$ where $\chi$ is a discrete Gaussian distribution. For a polynomial vector $m \in R^\epsilon_q$, its commitment is a tuple $(\vec{t}_0, t_1, \dots, t_ε)$, where $\vec{t}_0 = B_0 \vec{r}$, and for each $i = 1, \dots, \epsilon$, $t_i = \langle \vec{b}_i, \vec{r} \rangle + m_i$. This commitment scheme is both **computationally binding** and **hiding**, with binding derived from the difficulty of **$MSIS$_μ$** and hiding from the difficulty of **$MLWE$_λ$**. In essence, without solving these hard problems, one cannot find the committed message or alter the committed value.
+For example, in a variant of the BDLOP commitment scheme, let $B_0 \in R^{\mu \times (\mu + \lambda + \epsilon)}_q$ be a matrix, and let $\vec{b}_1, \dots, \vec{b}_ε \in R_q^{\mu + \lambda + \epsilon}$
+be vectors and $\vec{r} \leftarrow \chi^{(\mu + \lambda + \epsilon)d}$ where $\chi$ is a discrete Gaussian distribution. For a polynomial vector $m \in R^\epsilon_q$, its commitment is a tuple $(\vec{t}_0, t_1, \dots, t_ε)$, where $\vec{t}_0 = B_0 \vec{r}$, and for each $i = 1, \dots, \epsilon$, $t_i = \langle \vec{b}_i, \vec{r} \rangle + m_i$. This commitment scheme is both **computationally binding** and **hiding**, with binding derived from the difficulty of **$MSIS_μ$** and hiding from the difficulty of **$MLWE_λ$**. In essence, without solving these hard problems, one cannot find the committed message or alter the committed value.
 
 The **BGV Encryption Scheme** (Brakerski-Gentry-Vaikuntanathan) is a lattice-based encryption scheme that ensures encryption security through noise and the hardness of the RLWE problem, while also supporting **additive homomorphic operations**. The key steps in the BGV encryption scheme are as follows:
 
 1. **Encryption Process:**
    The scheme is based on a plaintext space (ring $R_p$) and a noise distribution $\chi$. Encryption uses the public key and secret key to encrypt the message. The public key, $pk$, consists of a matrix
-   $A = \begin{pmatrix} a & p & 0 \\ b & 0 & p \end{pmatrix},$
-   where $a$ and $b$ are generated by multiplying random vectors with the noise distribution $\chi$. When encrypting a message $m$ with a random vector $\vec{r} = (r_1, r_2, r_3) \leftarrow \chi^{3d}$, the ciphertext is computed as: $\vec{c} = \vec{m} + A\vec{r} = \begin{pmatrix} a r_1 + p r_2 \\ b r_1 + p r_3 + m \end{pmatrix}$
-3. **Decryption Process:**
+   $$
+   \begin{array}{|c|c|c|}
+   \hline
+   a & p & 0 \\
+   \hline
+   b & 0 & p\\
+   \hline
+   \end{array}
+   $$
+   where $a$ and $b$ are generated by multiplying random vectors with the noise distribution $\chi$. When encrypting a message $m$ with a random vector $\vec{r} = (r_1, r_2, r_3) \leftarrow \chi^{3d}$, the ciphertext is computed as: $\vec{c} = \vec{m} + A\vec{r} = \frac{a r_1 + p r_2}{b r_1 + p r_3 + m}$
+2. **Decryption Process:**
    During decryption, the ciphertext is dot-multiplied with the secret key, then reduced modulo $q$ and $p$, resulting in the original message: $[[\langle \mathbf{c}, \mathbf{sk} \rangle]_q ]_p = m + p (r_1 e + r_3 - s r_2) \mod p = m$
-4. **Security:**
+3. **Security:**
    The security of the BGV scheme is based on the difficulty of the **$RLWE_{\chi}$** problem, which ensures **CPA (Chosen Plaintext Attack) security**. This means that breaking the ciphertext is very difficult even with knowledge of the public key.
 
-5. **Homomorphic Properties:**
+4. **Homomorphic Properties:**
    The BGV scheme is **additively homomorphic**, meaning that two encrypted messages can be added together to obtain a new valid ciphertext. If the noise in the ciphertext is below a certain threshold, the decryption of the sum will correctly yield the sum of the original messages.
 
-6. **Correctness:**
+5. **Correctness:**
    The BGV encryption scheme is **$\tau$-correct**, meaning that the sum of multiple honestly generated ciphertexts will, with very high probability, decrypt to the correct sum of the original messages.
 
 ---
 
-## 2. Zero-Knowledge Proofs Based on Commitment Schemes in Lattice Cryptography
+## 3. Zero-Knowledge Proofs Based on Commitment Schemes in Lattice Cryptography
 
 A **Zero-Knowledge Proof (ZKP)** is a two-party protocol where the prover demonstrates to the verifier that they know the solution to a problem, without revealing any information beyond the solution itself. In lattice cryptography, zero-knowledge proofs are commonly used in encryption signatures and privacy-preserving protocols. By converting a zero-knowledge proof into a signature scheme (such as the **Fiat-Shamir transformation**), the verifier can confirm that the prover knows a secret key without disclosing the key itself.
 
@@ -170,7 +178,7 @@ To prove more complex functions, methods for proving **extended linear relations
 
 ### 3.1 Two Types of Zero-Knowledge Proof Protocols: Multiplicative and Linear Relations
 
-Zero-Knowledge Proofs (ZKPs) are cryptographic protocols that allow one party (the **prover**) to convince another party (the **verifier**) that they know a certain piece of information, without revealing anything about the information itself. In lattice-based cryptography, ZKPs are often used to demonstrate knowledge of secrets while maintaining privacy. Two fundamental types of zero-knowledge proof protocols—**Multiplicative Relations** and **Linear Relations**—are essential in lattice-based cryptographic systems. Here we explore these two types of protocols, along with the corresponding commitment schemes and optimizations.
+Two fundamental types of zero-knowledge proof protocols—**Multiplicative Relations** and **Linear Relations**—are essential in lattice-based cryptographic systems. Here we explore these two types of protocols, along with the corresponding commitment schemes and optimizations.
 
 #### 1) Multiplicative Relation Zero-Knowledge Proof
 
