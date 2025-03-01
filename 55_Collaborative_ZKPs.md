@@ -146,7 +146,7 @@ In the original GKR protocol, the prover \(P\) needs to submit two values, $\til
 
 Instead of relying on FFT, a novel approach utilizes SIMD (Single Instruction, Multiple Data) structures and the dMSM protocol for distributed computation. This ensures an efficient and scalable process for polynomial commitment generation. For a polynomial $f$, the commitment is given by:
 
-$\text{com}_f = g^{f(s)} = \prod_{b \in \{0,1\}^\ell} g^{\prod_{i=1}^\ell \beta_{b_i}(s_i) \cdot V(b)}$
+$com_f = g^{f(s)} = \prod_{b \in \{0,1\}^\ell} g^{\prod_{i=1}^\ell \beta_{b_i}(s_i) \cdot V(b)}$
 
 where:
 
@@ -158,7 +158,7 @@ This commitment can be computed using multi-scalar multiplication (MSM). However
 
 #### Opening Proof Generation
 
-In a multivariate polynomial commitment scheme, to prove that $f(u) = z$, the prover needs to compute a series of quotient polynomials and remainder polynomials. The **polynomial division** process is as follows: through $\ell$ rounds of polynomial division, the quotient polynomials $\{Q_i\}_{i \in [\ell]}$ and remainder polynomials $\{R_i\}_{i \in [\ell]}$ are computed:
+In a multivariate polynomial commitment scheme, to prove that $f(u) = z$, the prover needs to compute a series of quotient polynomials and remainder polynomials. The **polynomial division** process is as follows: through $\ell$ rounds of polynomial division, the quotient polynomials $Q_i$ and remainder polynomials $R_i$ are computed ($i \in [\ell]$):
 
 $R_{i-1}(x_i, x_{i+1}, ..., x_\ell) = Q_i(x_{i+1}, ..., x_\ell) \cdot (x_i - u_i) + R_i(x_{i+1}, ..., x_\ell)$
 
