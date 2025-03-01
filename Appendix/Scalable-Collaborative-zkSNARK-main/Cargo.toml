@@ -1,0 +1,15 @@
+[workspace]
+resolver = "2"
+members = [
+    "secret-sharing",
+    "dist-primitive",
+    "mpc-net",
+    "gkr",
+    "hyperplonk"
+]
+
+[profile.bench]
+opt-level = 3
+
+[profile.release]
+debug = true
