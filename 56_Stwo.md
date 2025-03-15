@@ -228,7 +228,12 @@ $D_j = \pi(D_{j+1}), \quad j = n-1, n-2, ..., 1$
 
 until it shrinks to the final set $D_1$, which contains only a single $J$-orbit (i.e., $|D_1 / \varphi_J| = 1$). Each projection $\pi$ is a **2-to-1 mapping**, exponentially reducing the set size from $2^n$ down to $2^1$. This structure can be represented as a **hierarchical projection diagram**:
 
-$\begin{array}{cccccc} D_n & \to & D_{n-1} & \to & D_{n-2} & \to \dots \to D_1 \\ \downarrow & & \downarrow & & \downarrow & \\ D_n/J & \to & D_{n-1}/J & \to & D_{n-2}/J & \to \dots \to D_1/J \end{array}$
+$$
+\begin{array}{cccccc} D_n & \to & D_{n-1} & \to & D_{n-2} & \to \dots \to D_1 \\
+\downarrow & & \downarrow & & \downarrow & \\ 
+D_n/J & \to & D_{n-1}/J & \to & D_{n-2}/J & \to \dots \to D_1/J 
+\end{array}
+$$
 
 In the quotient space $S_j = D_j / J$, this recursive mapping simplifies to an **x-axis transformation**, ultimately equivalent to a **quadratic transformation**:
 
