@@ -38,7 +38,7 @@ Stwo will integrate into StarkWare’s **SHARP (Shared Proving) framework**, bec
 
 All STARK proof systems rely on **finite fields**, mathematical structures containing a **finite number of elements**, ensuring that computations do not involve floating points, fractions, or excessively large integers. The simplest finite fields are **prime fields**, where the number of elements is a prime number **p**, and arithmetic operations follow modulo p rules. If $p < 2^{32}$, each number can be efficiently stored in a **32-bit word**, making computation significantly faster.
 
-Traditional STARK proof systems like Stone, BSBHR18b, BSCR+19, and COS20 use large prime numbers (~2^{252}), requiring **eight 32-bit words** for storage and averaging **38 CPU cycles** per multiplication operation, leading to high computational costs. Stwo improves efficiency by utilizing the **Mersenne prime** $M31 = 2^{31} - 1$, allowing each number to fit in a single 32-bit word. Thanks to **SIMD vectorization**, multiplication operations in M31 achieve an unprecedented speed of **0.3 CPU cycles**, making it **125 times faster** than Stone.
+Traditional STARK proof systems like Stone, BSBHR18b, BSCR+19, and COS20 use large prime numbers $(~2^{252}),$ requiring **eight 32-bit words** for storage and averaging **38 CPU cycles** per multiplication operation, leading to high computational costs. Stwo improves efficiency by utilizing the **Mersenne prime** $M31 = 2^{31} - 1$, allowing each number to fit in a single 32-bit word. Thanks to **SIMD vectorization**, multiplication operations in M31 achieve an unprecedented speed of **0.3 CPU cycles**, making it **125 times faster** than Stone.
 
 M31 is particularly suited for STARK proofs due to its mathematical properties. The congruence relation **2³¹ ≡ 1 mod M31** enables computational optimizations. Compared to **Babybear** $(2^{31} - 2^{27} + 1)$, the prime used by **Risc0**, M31 achieves **1.3x faster** multiplication under vectorized computation.
 
@@ -46,7 +46,7 @@ M31 is particularly suited for STARK proofs due to its mathematical properties. 
 
 Finite field arithmetic exhibits **cyclic structures** in both addition and multiplication. In a prime field $F_p$, addition cycles through all elements modulo **p**. However, multiplication is more complex, as its periodicity depends on the chosen generator’s order, ideally a power of 2 for efficient **FFT (Fast Fourier Transform)** and **FRI (Fast Recursive Interpolation)** computations.
 
-Most traditional STARK systems operate in prime fields where a **cyclic group of smooth order** exists, enabling **efficient FFT-based interpolation** and constraint writing. However, Mersenne prime fields like F\_{2^{31}-1} present a unique challenge: the maximum power-of-2 factor in $p - 1 = 2^{31} - 2$ is just **2**, making it impossible to find a generator **g** with the required $2^20$ or higher periodicity for STARK computations. This limitation necessitates alternative solutions.
+Most traditional STARK systems operate in prime fields where a **cyclic group of smooth order** exists, enabling **efficient FFT-based interpolation** and constraint writing. However, Mersenne prime fields like $F_{2^{31}-1}$ present a unique challenge: the maximum power-of-2 factor in $p - 1 = 2^{31} - 2$ is just **2**, making it impossible to find a generator **g** with the required $2^{20}$ or higher periodicity for STARK computations. This limitation necessitates alternative solutions.
 
 #### Alternative Solutions: ECFFT and Circle STARKs
 
@@ -132,7 +132,7 @@ On the circular curve $C(F_p)$, an important polynomial space $L_N(F)$ is define
 
 From an algebraic geometry perspective, this structure corresponds to the Riemann-Roch space on the circular curve, describing all rational functions that have poles only at the points $\infty$ and $\bar{\infty}$, with pole orders at most $N/2$. Unlike elliptic curves, the geometry of the circular curve allows its function space to be represented directly using polynomials without requiring more complex rational functions. This characteristic makes computations more intuitive and is particularly critical for the implementation of STARK proof systems. In the context of STARK proofs, $L_N(F)$ plays a role similar to the low-degree extension (LDE) in traditional univariate STARK proofs. One of its key properties is **rotation invariance**: for any $f \in L_N(F)$ and any point $P \in C(F_p)$, the function $f \circ T_P$ still belongs to $L_N(F)$. This property ensures computational stability and is essential for efficient encoding and adjacency relations. Additionally, $L_N(F)$ exhibits strong divisibility properties, enabling the construction of Maximum Distance Separable (MDS) codes, which are crucial for data validation, error correction, and efficient proof systems.
 
-#### Properties of $L_N(F)
+#### Properties of $L_N(F)$
 
 The polynomial space $L_N(F)$, defined on the circular curve, has several key properties:
 
@@ -210,6 +210,60 @@ The concept of Deep Quotients (DEEP) further extends this approach. By utilizing
 
 ---
 
+## 2. Circle FFT
+
+The theoretical framework of the Circular Fast Fourier Transform (CFFT) and its applications in the STARK proving system are explored in this section. Let $p$ be a CFFT-friendly prime that supports a subgroup $G_n$ of order $N = 2^n$ on a circular curve. Given a twin-coset set $D$, CFFT maps functions from an extended field $F$ to the polynomial space $L_N(F)$ through polynomial interpolation. The FFT basis $B_n$ is an $N$-dimensional basis formed by polynomials structured according to the field size. Each basis polynomial is given by:
+
+$b_j^{(n)}(x, y) = y^{j_0} \cdot v_1(x)^{j_1} \cdots v_{n-1}(x)^{j_{n-1}}$
+
+where $v_k(x)$ represents the vanishing polynomials corresponding to the standard position coset. The theorem states that coefficients of a given function with respect to $B_n$ can be efficiently computed using a specific algorithm with relatively low computational cost. CFFT is a non-harmonic FFT whose construction is closely related to two group homomorphisms on the circular curve: the group squaring map $\pi$ and the inversion map $J$. To achieve interpolation in low-degree function spaces, the dimensionality must closely match the field size. While this adaptation is perfect for elliptic curves, a slight dimensional discrepancy exists in the case of Circular FFT.
+
+The recursive structure of the _twin-coset_ domain and its quotient space mappings simplify computation. The twin-coset domain $D = Q \cdot G_{n-1} \cup Q^{-1} \cdot G_{n-1}$ consists of two cosets, $Q \cdot G_{n-1}$ and $Q^{-1} \cdot G_{n-1}$, and remains invariant under the involution $J(D) = D$. Each $J$-orbit contains exactly two points. This leads to a **2-to-1 quotient mapping**:
+
+$\varphi_J : D \to D/J, \quad P \mapsto \{P, J(P)\}$
+
+which collapses each orbit into a single point, meaning that each point in the quotient space corresponds to two points in $D$. Recursively applying this process from the initial twin-coset domain $D_n$, each projection step reduces the domain size:
+
+$D_j = \pi(D_{j+1}), \quad j = n-1, n-2, ..., 1$
+
+until it shrinks to the final set $D_1$, which contains only a single $J$-orbit (i.e., $|D_1 / \varphi_J| = 1$). Each projection $\pi$ is a **2-to-1 mapping**, exponentially reducing the set size from $2^n$ down to $2^1$. This structure can be represented as a **hierarchical projection diagram**:
+
+$\begin{array}{cccccc} D_n & \to & D_{n-1} & \to & D_{n-2} & \to \dots \to D_1 \\ \downarrow & & \downarrow & & \downarrow & \\ D_n/J & \to & D_{n-1}/J & \to & D_{n-2}/J & \to \dots \to D_1/J \end{array}$
+
+In the quotient space $S_j = D_j / J$, this recursive mapping simplifies to an **x-axis transformation**, ultimately equivalent to a **quadratic transformation**:
+
+$x \mapsto 2x^2 - 1$
+
+which holds special significance in the Circular FFT. Due to the twin-coset structure and the 2-to-1 projection mappings, this framework provides an **efficient data structure reduction method**. It significantly reduces computational costs in FFT calculations while maintaining mathematical integrity and algebraic properties. This framework is not only applicable to Circular FFT but may also be useful in other computations involving twin-coset domains, projection mappings, and recursive reduction, facilitating optimized polynomial computation, Fourier transforms, and algebraic calculations.
+
+### Recursive Structure of Circle FFT
+
+Circle FFT is a recursive FFT algorithm based on the twin-coset structure, particularly suited for finite field computations under CFFT-friendly primes. Its core idea is to reduce an interpolation problem from a two-dimensional domain step by step via projection mappings, ultimately transforming it into a one-dimensional computation. The algorithm employs an "even-odd decomposition" to split the input function $f$ into an even part $f_0$ and an odd part $f_1$. Using the reference odd function $t_0(x, y) = y$, which satisfies the self-invariance property $t_0(J(x, y)) = -t_0(x, y)$, the function $f$ is decomposed as follows:
+
+$f_0(x) = \frac{f(x, y) + f(x, -y)}{2}, \quad f_1(x) = \frac{f(x, y) - f(x, -y)}{2 \cdot y}$
+
+so that the original function can be reconstructed as:
+
+$f(x,y) = f_0(x) + y \cdot f_1(x)$
+
+Following this, at each projection step $\pi(x)$, the functions $f_0$ and $f_1$ are further decomposed recursively until they yield coefficients associated with the FFT basis $B_n$. The computational complexity is comparable to classical FFT, i.e., $O(N \log N)$, but it adapts better to circular domain structures such as twin-cosets in Riemann-Roch spaces. The inverse Circular FFT (Inverse CFFT) follows a symmetric recursive structure in the opposite direction, starting from the minimal single-point domain $S_1$ and iteratively merging computations into larger domains to reconstruct the original function $f(x, y)$. This symmetry ensures efficient data recovery, making CFFT computationally balanced and numerically stable in certain special domains compared to traditional FFT methods.
+
+### FFT Space Properties in Circle STARK
+
+The decomposition of FFT space and its behavior at infinity are crucial in the Interactive Oracle Proof (IOP) system of Circle STARK. Specifically, the FFT space is decomposed as:
+
+$L_N(F) = L'_N(F) + \langle v_n \rangle$
+
+where $L'_N(F)$ is a special subspace and $v_n$ is a vanishing polynomial. Despite Circle FFT being non-harmonic, $L'_N(F)$ remains invariant under rotational actions. This is demonstrated using the vanishing polynomial $v_G(x, y)$ of subgroup $G_n$ and its linear independence properties. Moreover, $v_n$ is orthogonal within $L'_N(F)$, a result derived from FFT decomposition and $J$-invariance.
+
+At infinity, defined as $\infty = (1 : i : 0)$ and $\bar{\infty} = (1 : -i : 0)$, polynomials in $L'_N(F)$ exhibit antisymmetric limits, whereas $v_n$ has identical limits at both points. This leads to the definition of two subspaces:
+
+$L^-_N(F) = \{ f \in L_N(F) \mid f(\infty) = - f(\bar{\infty}) \}, \quad L^+_N(F) = \{ f \in L_N(F) \mid f(\infty) = f(\bar{\infty}) \}$
+
+Further analysis reveals that products of polynomials in $L^-$ and $L^+$ behave predictably, ensuring that $L'_N(F) = L^-_N(F)$, meaning it consists entirely of polynomials with antisymmetric limits at infinity. This property is essential in Circle STARK proofs, which frequently involve polynomials with rotational symmetry and controlled vanishing behavior.
+
+---
+
 ## 3. Circle STARK
 
 Circle STARK is a zero-knowledge proof protocol based on circular curves. Unlike traditional one-dimensional STARKs, Circle STARK operates within a two-dimensional polynomial space defined over a circular curve, specifically $F_p[x, y] / (x^2 + y^2 - 1)$, rather than a one-dimensional polynomial space. This protocol is particularly advantageous for arithmetic circuits over large prime fields $F_p$ where $p-1$ lacks smoothness, but $p+1$ meets the conditions required for Circular Fast Fourier Transform (CFFT). Under such conditions, witness data is encoded as a two-dimensional polynomial, and constraints are transformed into algebraic relations via CFFT. The interactive proof process in Circle STARK follows a structure similar to that of traditional STARKs. However, due to the dimensional gap between the output space of the circular FFT and the polynomial space, constraints must be adjusted accordingly.
@@ -250,7 +304,7 @@ This method extends to selectors based on linear tangent polynomials, allowing f
 
 ### Low-Degree Testing in Circle STARK
 
-The low-degree test in Circle STARK employs an interactive oracle proof of proximity (IOPP) to verify whether a function $f$ is close to a codeword in the circular code. Specifically, the goal is to show that the relative Hamming distance $d(f, C)$ is below a threshold $\theta$. This is achieved by decomposing $f$ into an FFT-space component $g$ and a vanishing polynomial component $v_n$, followed by successive folding steps that reduce the function space dimension.
+The low-degree test in Circle STARK employs an interactive oracle proof of proximity (IOP) to verify whether a function $f$ is close to a codeword in the circular code. Specifically, the goal is to show that the relative Hamming distance $d(f, C)$ is below a threshold $\theta$. This is achieved by decomposing $f$ into an FFT-space component $g$ and a vanishing polynomial component $v_n$, followed by successive folding steps that reduce the function space dimension.
 
 The key to circular low-degree testing is a series of projection steps that iteratively reduce the polynomial space from high-degree polynomials to constant functions. The final objective is to efficiently verify that $f$ adheres to the low-degree polynomial proximity standard. Circular codes closely relate to Reed-Solomon codes, and their two-variable representation enables folding mechanisms that simplify polynomial spaces, making proximity testing more efficient. The robustness of circular proximity proofs relies on the geometric structure of the folding process, ensuring the reliability of the low-degree test.
 
@@ -1024,5 +1078,5 @@ impl LogupTraceGenerator {
 [Stwo-dev](https://github.com/ETAAcademy/ETAAcademy-ZK-Meme/tree/main/Appendix/stwo-dev)
 
 <div  align="center">
-<img src="https://github.com/ETAAcademy/ETAAcademy-Images/blob/main/ETAAcademy-ZK-Meme/56_stwo.gif?raw=true" width="50%" />
+<img src="https://github.com/ETAAcademy/ETAAcademy-Images/blob/main/ETAAcademy-ZKmeme/56_stwo.gif?raw=true" width="50%" />
 </div>
