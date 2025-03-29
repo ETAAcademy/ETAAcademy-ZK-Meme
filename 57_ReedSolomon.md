@@ -48,7 +48,9 @@ $c = (f(x_0), f(x_1), ..., f(x_{n-1}))$
 
 At the receiver’s end, any k received symbols $f(x_{i_1}), f(x_{i_2}), ..., f(x_{i_k})$ can be used to reconstruct the original polynomial coefficients via matrix inversion. This reconstruction is feasible because the corresponding Vandermonde matrix:
 
-$V = \begin{pmatrix} 1 & x_0 & x_0^2 & \dots & x_0^{k-1} \\ 1 & x_1 & x_1^2 & \dots & x_1^{k-1} \\ \vdots & \vdots & \vdots & \ddots & \vdots \\ 1 & x_{k-1} & x_{k-1}^2 & \dots & x_{k-1}^{k-1} \end{pmatrix}$
+$$
+V = \begin{pmatrix} 1 & x_0 & x_0^2 & \dots & x_0^{k-1} \\ 1 & x_1 & x_1^2 & \dots & x_1^{k-1} \\ \vdots & \vdots & \vdots & \ddots & \vdots \\ 1 & x_{k-1} & x_{k-1}^2 & \dots & x_{k-1}^{k-1} \end{pmatrix}
+$$
 
 is invertible as long as all $x_i$ are distinct. The determinant of this Vandermonde matrix is:
 
@@ -68,8 +70,6 @@ $k_1 \vec{y}_m + k_2 \vec{y}_n$
 
 remains a valid codeword, confirming that RS codes form a linear code.
 
-**Geometric Interpretation and Systematic Encoding**
-
 From a geometric perspective, each received symbol $(x_i, y_i)$ represents a constraint that defines a hyperplane in k-dimensional space. The interpolation process reconstructs the polynomial coefficients by finding the unique intersection point of these hyperplanes. The Vandermonde matrix rows define the normal vectors of these hyperplanes, ensuring that the intersection point (the original message) is uniquely determined when k equations (received symbols) are available.
 
 In practical applications, it is often desirable for the first k symbols of the codeword to be the original message itself. This property, known as **systematic encoding**, eliminates the need for decoding if no errors occur in the first k symbols. In systematic RS encoding, the encoding matrix is structured such that the first k columns form an identity matrix, directly preserving the original message in the codeword.
@@ -80,9 +80,9 @@ Reed-Solomon (RS) codes are powerful error-correcting codes, typically represent
 
 The strength of RS codes lies in their ability to reconstruct the original data even when some points are erroneous. As long as enough correct points remain, the original polynomial can be determined, enabling data recovery. RS codes are significant due to their:
 
-1. **Error tolerance** – They can handle a certain proportion of errors with theoretical guarantees.
-2. **Efficiency** – Encoding and decoding processes are computationally efficient.
-3. **Security** – They provide mathematical proof mechanisms, making them useful in cryptographic systems.
+- **Error tolerance** – They can handle a certain proportion of errors with theoretical guarantees.
+- **Efficiency** – Encoding and decoding processes are computationally efficient.
+- **Security** – They provide mathematical proof mechanisms, making them useful in cryptographic systems.
 
 RS codes integrate with concepts such as **quotients** and **proximity gaps**, making them vital not only in data storage and transmission but also in modern cryptographic proof systems.
 
@@ -96,7 +96,7 @@ A key property of this quotient operation is that if all sufficiently close code
 - **Cryptographic proofs** – Establishing reliable verification mechanisms.
 
 **Proximity Gaps and Bulk Verification**
-Proximity gaps leverage approximation errors (computed based on field **F**, degree **d**, code rate **\rho**, distance parameter **\delta**, and variable count **m**) and combination functions (which merge multiple functions $f_1, ..., f_m$ with specific weightings **r**).
+Proximity gaps leverage approximation errors (computed based on field **F**, degree **d**, code rate $\rho$, distance parameter $\delta$, and variable count **m**) and combination functions (which merge multiple functions $f_1, ..., f_m$ with specific weightings **r**).
 
 The core idea is that if the combined function is sufficiently "complex" and cannot be closely approximated by simple RS codewords, then each individual function in the set must be close to a valid RS codeword within a sufficiently large subset. This method offers:
 
@@ -104,7 +104,8 @@ The core idea is that if the combined function is sufficiently "complex" and can
 - **Enhanced security** – Ensuring robustness against forgery and approximation attacks.
 
 **Linear Codes and Reed-Solomon Theory in DeepFold**
-The principles of **linear codes** and RS theory provide a foundation for **DeepFold**. The **Hamming distance** $Ham(\vec{u}, \vec{v})$ measures the proportion of differing positions between two vectors. An **(n, k, \delta)-linear code** is a linear subspace defined by an injective mapping $E: F^k \to F^n$, where an RS code encodes a message as a polynomial of degree at most **\rho |L|** and evaluates it over **L**.
+
+The principles of **linear codes** and RS theory provide a foundation for **DeepFold**. The **Hamming distance** $Ham(\vec{u}, \vec{v})$ measures the proportion of differing positions between two vectors. An **(n, k, $\delta$)-linear code** is a linear subspace defined by an injective mapping $E: F^k \to F^n$, where an RS code encodes a message as a polynomial of degree at most $\rho |L|$ and evaluates it over **L**.
 
 RS decoding operates within two critical bounds:
 
@@ -113,7 +114,7 @@ RS decoding operates within two critical bounds:
 
 A widely accepted conjecture suggests that the list decoding radius can reach $1 - \rho - \varepsilon$. The **consistency principle** asserts that if a random linear combination of two vectors is $\delta$-close to an RS codeword with a non-negligible probability, then both vectors must be $\delta$-close to some RS codeword over the same position set.
 
-Research on **distance preservation bounds** has evolved from the original **(1 - \rho)/2** bound to the optimal **1 - \rho - \varepsilon** bound achieved in **Deep-FRI**. This advancement allows **DeepFold** to significantly reduce the number of queries needed by leveraging the **list decoding radius** rather than the **unique decoding radius**.
+Research on **distance preservation bounds** has evolved from the original $(1 - \rho)/2$ bound to the optimal $1 - \rho - \varepsilon$ bound achieved in **Deep-FRI**. This advancement allows **DeepFold** to significantly reduce the number of queries needed by leveraging the **list decoding radius** rather than the **unique decoding radius**.
 
 ---
 
@@ -174,11 +175,11 @@ Interactive Oracle Reductions (IOR) extend existing proof paradigms by incorpora
 - **Knowledge Reductions:** Where a problem instance and its proof are transformed into an equivalent new instance and proof.
 - **Interactive Oracle Reductions:** Where the prover supplies additional information (e.g., oracle string instances), and the verifier can access the prover’s messages.
 
-IOR’s key innovation lies in its ability to support oracle string instances and allow the verifier to interact with prover messages. This enables non-interactive conversion in the random oracle model via the BCS transformation. IOR is particularly useful in constructing accumulation schemes—these require reductions from an instance $R$ to $R_{ACC}$ and from $R^*_{ACC}$ to $R_{ACC}$ in a many-to-one manner. When $R$ is NP-complete, IOR enables the construction of proof-carrying data (PCD) systems.
+IOR’s key innovation lies in its ability to support oracle string instances and allow the verifier to interact with prover messages. This enables non-interactive conversion in the random oracle model via the BCS transformation. IOR is particularly useful in constructing accumulation schemes—these require reductions from an instance $R$ to $R_{ACC}$ and from $R_{ACC}^{\*}$ to $R_{ACC}$ in a many-to-one manner. When $R$ is NP-complete, IOR enables the construction of proof-carrying data (PCD) systems.
 
 #### Reed-Solomon Accumulation for Approximate Proximity Statements
 
-The fundamental goal of Reed-Solomon (RS) accumulation is to reduce two vector proximity claims $f_1$ and $f_2$ with respect to an RS code $C$ into a single proximity claim about a new vector $f$. This process combines the two proximity statements—$f_1$ close to an RS code and $f_2$ close to an RS code—into a unified claim without doubling the storage size.
+The fundamental goal of Reed-Solomon (RS) accumulation is to reduce two vector proximity claims $f_1$ and $f_2$ with respect to an RS code $C$ into a single proximity claim about a new vector $f$. This process combines the two proximity statements— $f_1$ close to an RS code and $f_2$ close to an RS code—into a unified claim without doubling the storage size.
 
 Traditional methods employing random linear combinations suffer from an exponential growth in statement size, while prior work that mitigated size growth resulted in degraded proximity guarantees, reducing proximity from $\delta$ to $\delta - \varepsilon$, thereby restricting accumulation depth. To address this, a novel approach using quotient operations was introduced:
 
@@ -259,7 +260,7 @@ $\hat{p}(Y_1, \dots, Y_m, Z_1, \dots, Z_N) = \sum_{i=1}^{M} eq(i-1, Y_1, \dots, 
 
 and defines an accumulator relation containing two main components: index information (including the finite field $F$, evaluation domain $L$, maximum degree $d_{max}$, and distance parameters $\delta, \gamma$) and instance composition (including two rational constraints, vector $v$, error term $e$, and two oracle strings $f, g$).
 
-The system establishes two relations: the exact relation $R_{ACC}$, which requires $f$ to be an RS codeword, $c_f(f)$ and $c_g(g)$ to be RS codewords, and $\hat{P}(v||\vec{f}) = e$; and the approximate relation $\tilde{R}_{ACC}$, which allows $c_g(g)$ to be close to an RS codeword while requiring the existence of $u$ within $f$'s list satisfying specific conditions. The core of the scheme is the construction of two components: the reduction from $R_{R1CS}$ to the intermediate relation $R_{ACC}$ and the many-to-one reduction within $R_{ACC}$.
+The system establishes two relations: the exact relation $R_{ACC}$, which requires $f$ to be an RS codeword, $c_f(f)$ and $c_g(g)$ to be RS codewords, and $\hat{P}(v||\vec{f}) = e$; and the approximate relation $R̃_{ACC}$, which allows $c_g(g)$ to be close to an RS codeword while requiring the existence of $u$ within $f$'s list satisfying specific conditions. The core of the scheme is the construction of two components: the reduction from $R_{R1CS}$ to the intermediate relation $R_{ACC}$ and the many-to-one reduction within $R_{ACC}$.
 
 #### Reduction from $R_{R1CS}$ to $R_{ACC}$
 
@@ -267,7 +268,7 @@ The key idea behind this reduction is encoding the R1CS problem as an algebraic 
 
 The reduction procedure constructs special polynomial systems to convert R1CS constraints into an ACC problem. It starts by defining $M$ (a power of two) and $m = \log M$. For each index $i$, it constructs a multilinear polynomial:
 
-$pow_i(Y_1, \dots, Y_m) = Y_1^{b_1} \cdot \dots \cdot Y_m^{b_m},$
+$\pow_i(Y_1, \dots, Y_m) = Y_1^{b_1} \cdot \dots \cdot Y_m^{b_m},$
 
 where $(b_1, \dots, b_m)$ represents the binary expansion of $i$, ensuring that $\pow_i(y, y^2, y^4, \dots, y^{2^{m-1}}) = y^i$. Then, it encodes the R1CS matrix constraints into a polynomial $P$ of total degree $m+2$. The reduction protocol involves the prover sending $f$ (which encodes the witness $w$ in the honest case), the verifier randomly sampling $r$, and generating a new statement $(e, v, f) \in L(R_{ACC})$, where $e := 0$, and $v := (r, r^2, r^4, \dots, r^{2^{m-1}}, x) \in F^k$.
 
@@ -286,7 +287,7 @@ $F(X) := P\left(\sum_{i=1}^{m} L_i(X) \cdot (v_i, \vec{f_i})\right) - Q(X) \cdot
 
 The new statement ensures $R_{ACC}$ membership, proximity to an RS codeword, and quotient correctness. By leveraging off-domain sampling techniques, the scheme improves security and allows list decoding.
 
-###E Proof-Carrying Data (PCD) System Construction
+#### Proof-Carrying Data (PCD) System Construction
 
 To build a PCD system, two components are employed:
 
@@ -299,8 +300,6 @@ The process follows two steps:
 - **ACC Construction:** It processes $m$ accumulator instances and $n$ predicate instances using $VCAST$, generating $m+n$ new accumulator instances, then merges them via $RDX_{FOLD}$ into a final accumulator $acc$ and proof $\pi_{FOLD}$.
 
 Extending this to PCD and IVC requires $R$ to be NP-complete and the reduction verifier to be succinct. The framework unifies reduction, accumulation, and PCD, offering a flexible and efficient construction method for distributed computation verification.
-
-#### Integrity and Reliability Analysis
 
 Integrity is ensured by proving all components ($f_i$, $c_f(i(f_i))$, $c_g(i(g_i))$) remain valid codewords. The reliability analysis bounds the total round error probability through:
 
@@ -339,8 +338,6 @@ The primary contribution of DeepFold is the reduction of query numbers in BaseFo
 
 - **Commitment phase**: The prover performs $\mu$ rounds of folding, reducing polynomial length by half in each round while sending Merkle commitments.
 - **Query phase**: The verifier randomly queries the vectors at each round to check the consistency of the folding process. To ensure security, the queries must be repeated $s$ times.
-
-**Innovations in DeepFold**
 
 BaseFold's key insight was that the last-round polynomial $f^{(\mu)}$ in FRI is equivalent to the evaluation of a multilinear polynomial $\tilde{f}$ at a random challenge point $(r_1, \dots, r_\mu)$. This property enables an efficient multilinear polynomial commitment scheme (PCS) by running FRI in parallel with the sumcheck protocol to verify multilinear polynomial evaluations. However, BaseFold operates only within the unique decoding radius $(1-\rho)/2$, leading to excessive queries—over 120 to ensure 100-bit security—resulting in a proof size exceeding 600KB.
 
@@ -382,7 +379,7 @@ This method is reflected in key modifications to the protocol:
 
 - The verification step is adjusted to check:
 
-  $g_{\vec{w}}(r_i) + \gamma_i \cdot c_{\vec{w}_{[2:]}} = g_{\vec{w}_{[2:]}}$
+  $g_{\vec{w}}(r_i) + \gamma_i \cdot$ c_{w⃗_{[2:]}} = g_{w⃗_{[2:]}}$
 
 This batch processing method enables DeepFold to efficiently verify multiple multilinear polynomial evaluations of different sizes while keeping proof size and verification time nearly identical to the independent evaluation of the largest polynomial. Prover complexity scales only linearly with the total size of all polynomials, making it a practical solution for handling irregularly sized inputs (e.g., vectors of length $2^{2n} + 2^n$). Furthermore, these optimizations lay the foundation for a zero-knowledge version of DeepFold, making it a powerful tool for real-world applications requiring compact and efficient polynomial commitment schemes.
 
@@ -394,9 +391,9 @@ DeepFold’s zero-knowledge extension (zkDeepFold) addresses the unique challeng
 
 The zkDeepFold framework introduces two key modifications to prevent information leakage:
 
-- **Extension of the Multilinear Polynomial:** The original multilinear polynomial $\tilde{f}$ with $\mu$ variables is extended to a new polynomial $\tilde{f}_{ext}$ with $\mu + 1$ variables. This extension introduces $2^u$ random coefficients such that $\tilde{f}_{ext}(\vec{z}||0) = \tilde{f}(\vec{z})$, while for any $x \neq 0$, $f_{ext}$ evaluates to a random value. This ensures that the original polynomial's information remains hidden during evaluations.
+- **Extension of the Multilinear Polynomial:** The original multilinear polynomial $\tilde{f}$ with $\mu$ variables is extended to a new polynomial $f̃_{ext}$ with $\mu + 1$ variables. This extension introduces $2^u$ random coefficients such that $f̃_{ext}(\vec{z}||0) = \tilde{f}(\vec{z})$, while for any $x \neq 0$, $f_{ext}$ evaluates to a random value. This ensures that the original polynomial's information remains hidden during evaluations.
 
-- **Batch Processing for Additional Masking:** Despite the polynomial extension, the last few evaluation rounds still pose a risk of leakage, as the verifier could interpolate the polynomial using the $s$ queried points and infer information about the original coefficients. To address this, zkDeepFold introduces batch evaluation of $\tilde{f}_{ext}$ alongside a smaller random polynomial $\tilde{g}$, which is designed to mask potential leakage in the final $\ell$ rounds. Specifically, during the commitment phase, a random vector $\vec{r}$ is sampled to construct $\tilde{f}_{ext}$ and $\tilde{g}$. During the evaluation phase, the BatchEval protocol is used to jointly verify $y = \tilde{f}_{ext}(\vec{z}||0)$ and $\tilde{g}(\vec{z}[\mu - \ell + 2:]||0)$. This design effectively guarantees zero-knowledge while minimizing computational overhead, as $\tilde{g}$ can remain significantly smaller than $\tilde{f}_{ext}$, ensuring that zkDeepFold does not incur excessive proof size or verification costs.
+- **Batch Processing for Additional Masking:** Despite the polynomial extension, the last few evaluation rounds still pose a risk of leakage, as the verifier could interpolate the polynomial using the $s$ queried points and infer information about the original coefficients. To address this, zkDeepFold introduces batch evaluation of $f̃_{ext}$ alongside a smaller random polynomial $\tilde{g}$, which is designed to mask potential leakage in the final $\ell$ rounds. Specifically, during the commitment phase, a random vector $\vec{r}$ is sampled to construct $f̃_{ext}$ and $\tilde{g}$. During the evaluation phase, the BatchEval protocol is used to jointly verify $y = f̃_{ext}(\vec{z}||0)$ and $\tilde{g}(\vec{z}[\mu - \ell + 2:]||0)$. This design effectively guarantees zero-knowledge while minimizing computational overhead, as $\tilde{g}$ can remain significantly smaller than $\tilde{f}_{ext}$, ensuring that zkDeepFold does not incur excessive proof size or verification costs.
 
 **Integration into zk-SNARK Systems**
 Modern zk-SNARK frameworks such as Libra and HyperPlonk typically integrate multilinear polynomial commitment schemes (PCS) with polynomial interactive oracle proofs (PIOP) to construct efficient proof systems. DeepFold, with its transparent setup (requiring no trusted setup), compact proof sizes, and efficient proving process, presents a viable alternative to existing schemes such as mKZG and Virgo. By replacing these commitment schemes with DeepFold, zk-SNARK systems can immediately benefit from reduced proof sizes and improved performance.
