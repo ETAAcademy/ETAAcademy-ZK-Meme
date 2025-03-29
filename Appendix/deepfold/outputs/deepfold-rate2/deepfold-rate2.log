@@ -1,0 +1,65 @@
+
+running 1 test
+i
+test result: ok. 0 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+deepfold commit 05      time:   [12.819 µs 12.859 µs 12.907 µs]
+
+deepfold commit 06      time:   [27.439 µs 27.981 µs 28.680 µs]
+
+deepfold commit 07      time:   [57.714 µs 66.587 µs 87.212 µs]
+
+deepfold commit 08      time:   [108.53 µs 108.71 µs 108.90 µs]
+
+deepfold commit 09      time:   [267.21 µs 283.14 µs 297.49 µs]
+
+deepfold commit 10      time:   [449.76 µs 476.16 µs 547.33 µs]
+
+deepfold commit 11      time:   [915.26 µs 918.27 µs 920.51 µs]
+
+deepfold commit 12      time:   [1.8890 ms 2.3719 ms 3.0900 ms]
+
+deepfold commit 13      time:   [3.9090 ms 3.9137 ms 3.9173 ms]
+
+deepfold commit 14      time:   [8.3172 ms 8.3933 ms 8.4324 ms]
+
+deepfold open 05        time:   [33.045 µs 35.337 µs 42.029 µs]
+
+deepfold open 06        time:   [55.219 µs 55.307 µs 55.411 µs]
+
+deepfold open 07        time:   [97.905 µs 98.101 µs 98.480 µs]
+
+deepfold open 08        time:   [179.25 µs 180.24 µs 181.48 µs]
+
+deepfold open 09        time:   [319.48 µs 320.34 µs 322.58 µs]
+
+deepfold open 10        time:   [573.45 µs 651.10 µs 730.78 µs]
+
+deepfold open 11        time:   [1.0544 ms 1.0857 ms 1.1562 ms]
+
+deepfold open 12        time:   [1.9434 ms 1.9472 ms 1.9527 ms]
+
+deepfold open 13        time:   [3.6838 ms 3.6888 ms 3.6950 ms]
+
+deepfold open 14        time:   [7.0756 ms 7.0873 ms 7.1050 ms]
+
+deepfold verify 05      time:   [31.793 µs 34.583 µs 42.216 µs]
+
+deepfold verify 06      time:   [57.805 µs 57.979 µs 58.099 µs]
+
+deepfold verify 07      time:   [96.539 µs 96.911 µs 97.313 µs]
+
+deepfold verify 08      time:   [158.23 µs 158.74 µs 159.39 µs]
+
+deepfold verify 09      time:   [230.18 µs 230.60 µs 231.14 µs]
+
+deepfold verify 10      time:   [341.49 µs 373.89 µs 453.18 µs]
+
+deepfold verify 11      time:   [444.48 µs 445.20 µs 446.38 µs]
+
+deepfold verify 12      time:   [571.12 µs 572.75 µs 576.26 µs]
+
+deepfold verify 13      time:   [735.66 µs 737.88 µs 741.91 µs]
+
+deepfold verify 14      time:   [921.75 µs 923.19 µs 925.18 µs]
+

@@ -1,0 +1,14 @@
+
+running 3 tests
+iii
+test result: ok. 0 passed; 0 failed; 3 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+naive mat mult for size 150
+                        time:   [28.100 s 28.352 s 28.660 s]
+
+naive mat mult for size 300
+                        time:   [30.778 s 31.039 s 31.315 s]
+
+naive mat mult for size 600
+                        time:   [33.191 s 33.794 s 34.607 s]
+

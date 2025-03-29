@@ -1,0 +1,83 @@
+
+running 1 test
+i
+test result: ok. 0 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+polyfrim commit 10      time:   [1.6839 ms 1.7006 ms 1.7269 ms]
+
+polyfrim commit 11      time:   [3.7474 ms 3.7903 ms 3.9339 ms]
+
+polyfrim commit 12      time:   [8.7390 ms 8.7664 ms 8.7887 ms]
+
+polyfrim commit 13      time:   [17.551 ms 20.196 ms 23.773 ms]
+
+polyfrim commit 14      time:   [39.748 ms 39.836 ms 40.010 ms]
+
+polyfrim commit 15      time:   [78.521 ms 78.689 ms 78.912 ms]
+
+polyfrim commit 16      time:   [166.91 ms 167.51 ms 168.21 ms]
+
+polyfrim commit 17      time:   [351.70 ms 353.67 ms 356.17 ms]
+
+polyfrim commit 18      time:   [824.09 ms 894.77 ms 1.0233 s]
+
+polyfrim commit 19      time:   [1.7340 s 1.8109 s 1.9447 s]
+
+polyfrim commit 20      time:   [3.5235 s 3.6173 s 3.7400 s]
+
+polyfrim commit 21      time:   [7.5917 s 7.7471 s 7.9259 s]
+
+polyfrim commit 22      time:   [15.597 s 15.798 s 15.992 s]
+
+polyfrim open 10        time:   [2.7650 ms 2.7693 ms 2.7776 ms]
+
+polyfrim open 11        time:   [5.3078 ms 5.3153 ms 5.3342 ms]
+
+polyfrim open 12        time:   [10.346 ms 10.371 ms 10.403 ms]
+
+polyfrim open 13        time:   [20.428 ms 20.464 ms 20.506 ms]
+
+polyfrim open 14        time:   [41.303 ms 47.691 ms 61.096 ms]
+
+polyfrim open 15        time:   [85.804 ms 86.927 ms 89.080 ms]
+
+polyfrim open 16        time:   [174.74 ms 176.06 ms 177.48 ms]
+
+polyfrim open 17        time:   [361.12 ms 367.04 ms 373.43 ms]
+
+polyfrim open 18        time:   [723.45 ms 785.30 ms 898.03 ms]
+
+polyfrim open 19        time:   [1.5474 s 1.6448 s 1.7935 s]
+
+polyfrim open 20        time:   [3.6015 s 3.8001 s 4.0140 s]
+
+polyfrim open 21        time:   [8.4614 s 8.7172 s 9.0011 s]
+
+polyfrim open 22        time:   [17.800 s 18.009 s 18.199 s]
+
+polyfrim verify 10      time:   [429.37 µs 430.47 µs 431.42 µs]
+
+polyfrim verify 11      time:   [532.84 µs 633.64 µs 800.97 µs]
+
+polyfrim verify 12      time:   [652.05 µs 653.64 µs 655.76 µs]
+
+polyfrim verify 13      time:   [773.58 µs 775.23 µs 776.34 µs]
+
+polyfrim verify 14      time:   [906.54 µs 908.42 µs 909.96 µs]
+
+polyfrim verify 15      time:   [1.0416 ms 1.0436 ms 1.0464 ms]
+
+polyfrim verify 16      time:   [1.1953 ms 1.3392 ms 1.5497 ms]
+
+polyfrim verify 17      time:   [1.3890 ms 1.3925 ms 1.3955 ms]
+
+polyfrim verify 18      time:   [1.5896 ms 1.7594 ms 2.0611 ms]
+
+polyfrim verify 19      time:   [1.7957 ms 1.7982 ms 1.8013 ms]
+
+polyfrim verify 20      time:   [1.9979 ms 2.0016 ms 2.0070 ms]
+
+polyfrim verify 21      time:   [2.1931 ms 2.1986 ms 2.2061 ms]
+
+polyfrim verify 22      time:   [2.3925 ms 2.3955 ms 2.3986 ms]
+

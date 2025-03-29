@@ -1,0 +1,77 @@
+
+running 1 test
+i
+test result: ok. 0 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+basefold Mersenne61Ext commit 10
+                        time:   [1.7030 ms 1.7324 ms 1.7695 ms]
+
+basefold Mersenne61Ext commit 11
+                        time:   [3.7789 ms 3.8613 ms 3.9695 ms]
+
+basefold Mersenne61Ext commit 12
+                        time:   [8.4976 ms 8.5636 ms 8.6733 ms]
+
+basefold Mersenne61Ext commit 13
+                        time:   [18.052 ms 18.636 ms 19.082 ms]
+
+basefold Mersenne61Ext commit 14
+                        time:   [44.796 ms 45.568 ms 46.854 ms]
+
+basefold Mersenne61Ext commit 15
+                        time:   [85.839 ms 87.357 ms 89.350 ms]
+
+basefold Mersenne61Ext commit 16
+                        time:   [179.86 ms 182.70 ms 185.86 ms]
+
+basefold Mersenne61Ext commit 17
+                        time:   [371.71 ms 377.45 ms 384.73 ms]
+
+basefold Mersenne61Ext open 10
+                        time:   [1.7133 ms 1.7809 ms 1.9049 ms]
+
+basefold Mersenne61Ext open 11
+                        time:   [3.1117 ms 3.1741 ms 3.2601 ms]
+
+basefold Mersenne61Ext open 12
+                        time:   [6.0486 ms 6.1856 ms 6.3300 ms]
+
+basefold Mersenne61Ext open 13
+                        time:   [11.958 ms 12.336 ms 12.686 ms]
+
+basefold Mersenne61Ext open 14
+                        time:   [24.311 ms 24.671 ms 25.281 ms]
+
+basefold Mersenne61Ext open 15
+                        time:   [47.991 ms 48.750 ms 49.612 ms]
+
+basefold Mersenne61Ext open 16
+                        time:   [108.07 ms 110.02 ms 113.31 ms]
+
+basefold Mersenne61Ext open 17
+                        time:   [213.67 ms 218.42 ms 223.49 ms]
+
+basefold Mersenne61Ext verify 10
+                        time:   [668.29 µs 693.98 µs 714.12 µs]
+
+basefold Mersenne61Ext verify 11
+                        time:   [837.22 µs 870.84 µs 898.19 µs]
+
+basefold Mersenne61Ext verify 12
+                        time:   [1.0579 ms 1.0996 ms 1.1388 ms]
+
+basefold Mersenne61Ext verify 13
+                        time:   [1.4808 ms 1.8838 ms 2.1253 ms]
+
+basefold Mersenne61Ext verify 14
+                        time:   [2.5370 ms 3.4458 ms 4.3440 ms]
+
+basefold Mersenne61Ext verify 15
+                        time:   [1.7493 ms 1.7625 ms 1.7901 ms]
+
+basefold Mersenne61Ext verify 16
+                        time:   [2.1242 ms 2.1501 ms 2.2013 ms]
+
+basefold Mersenne61Ext verify 17
+                        time:   [2.4812 ms 2.8067 ms 3.4082 ms]
+

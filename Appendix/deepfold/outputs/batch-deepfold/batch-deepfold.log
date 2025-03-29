@@ -1,0 +1,57 @@
+
+running 1 test
+i
+test result: ok. 0 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+batch open 10           time:   [1.5003 ms 1.5061 ms 1.5139 ms]
+
+batch open 11           time:   [3.2672 ms 3.6215 ms 4.4638 ms]
+
+batch open 12           time:   [6.0023 ms 6.1211 ms 6.2697 ms]
+
+batch open 13           time:   [11.914 ms 12.574 ms 13.606 ms]
+
+batch open 14           time:   [23.240 ms 23.494 ms 23.792 ms]
+
+batch open 15           time:   [48.264 ms 53.276 ms 66.324 ms]
+
+batch open 16           time:   [95.521 ms 95.992 ms 96.357 ms]
+
+batch open 17           time:   [193.97 ms 194.66 ms 195.60 ms]
+
+batch open 18           time:   [403.41 ms 409.81 ms 415.78 ms]
+
+batch open 19           time:   [834.28 ms 855.36 ms 879.00 ms]
+
+batch open 20           time:   [1.9859 s 2.1138 s 2.2429 s]
+
+batch open 21           time:   [4.9145 s 5.0823 s 5.2852 s]
+
+batch open 22           time:   [10.367 s 10.540 s 10.713 s]
+
+batch verify 10         time:   [479.79 µs 494.07 µs 513.03 µs]
+
+batch verify 11         time:   [594.23 µs 647.16 µs 714.58 µs]
+
+batch verify 12         time:   [726.27 µs 841.84 µs 1.0373 ms]
+
+batch verify 13         time:   [844.12 µs 855.83 µs 870.12 µs]
+
+batch verify 14         time:   [1.0103 ms 1.0631 ms 1.2003 ms]
+
+batch verify 15         time:   [1.1546 ms 1.1626 ms 1.1723 ms]
+
+batch verify 16         time:   [1.3212 ms 1.3320 ms 1.3458 ms]
+
+batch verify 17         time:   [1.5932 ms 1.6732 ms 1.8984 ms]
+
+batch verify 18         time:   [1.7302 ms 1.7630 ms 1.8138 ms]
+
+batch verify 19         time:   [1.9286 ms 1.9427 ms 1.9692 ms]
+
+batch verify 20         time:   [2.1655 ms 2.1801 ms 2.1959 ms]
+
+batch verify 21         time:   [2.3594 ms 2.3863 ms 2.4568 ms]
+
+batch verify 22         time:   [2.6209 ms 2.6443 ms 2.6957 ms]
+

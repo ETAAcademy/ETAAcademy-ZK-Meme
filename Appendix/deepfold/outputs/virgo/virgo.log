@@ -1,0 +1,35 @@
+
+running 1 test
+i
+test result: ok. 0 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+bench virgo commit 10   time:   [1.7490 ms 1.7585 ms 1.7705 ms]
+
+bench virgo commit 11   time:   [4.2549 ms 4.8146 ms 6.0770 ms]
+
+bench virgo commit 12   time:   [8.7550 ms 8.9193 ms 9.1327 ms]
+
+bench virgo commit 13   time:   [18.397 ms 18.637 ms 19.100 ms]
+
+bench virgo commit 14   time:   [43.960 ms 49.860 ms 63.484 ms]
+
+virgo prove 10          time:   [5.7922 ms 5.9341 ms 6.1000 ms]
+
+virgo prove 11          time:   [11.557 ms 12.872 ms 15.185 ms]
+
+virgo prove 12          time:   [23.828 ms 23.947 ms 24.119 ms]
+
+virgo prove 13          time:   [50.397 ms 51.193 ms 52.954 ms]
+
+virgo prove 14          time:   [108.62 ms 110.24 ms 111.97 ms]
+
+virgo verify 10         time:   [305.99 µs 308.62 µs 311.21 µs]
+
+virgo verify 11         time:   [358.23 µs 390.25 µs 456.97 µs]
+
+virgo verify 12         time:   [435.56 µs 440.24 µs 443.44 µs]
+
+virgo verify 13         time:   [517.05 µs 522.86 µs 529.55 µs]
+
+virgo verify 14         time:   [583.52 µs 589.76 µs 597.17 µs]
+
