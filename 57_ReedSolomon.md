@@ -86,8 +86,7 @@ The strength of RS codes lies in their ability to reconstruct the original data 
 
 RS codes integrate with concepts such as **quotients** and **proximity gaps**, making them vital not only in data storage and transmission but also in modern cryptographic proof systems.
 
-**Quotients in Reed-Solomon Codes**
-Quotients are an essential technique in RS codes, operating on original data **f**, a special point set **S**, an expected value function **Ans**, and a padding function **Fill**. For special points in **S**, the Fill function provides direct values; for others, the quotient operation computes the difference between the original and expected values, dividing by a vanishing polynomial.
+**Quotients** are an essential technique in RS codes, operating on original data **f**, a special point set **S**, an expected value function **Ans**, and a padding function **Fill**. For special points in **S**, the Fill function provides direct values; for others, the quotient operation computes the difference between the original and expected values, dividing by a vanishing polynomial.
 
 A key property of this quotient operation is that if all sufficiently close codewords at special points satisfy the expected values, then the quotient result maintains a minimum distance from any lower-degree RS codeword. This ensures that after quotient processing, the result remains "complex" and cannot be easily forged using simpler polynomials. This feature makes quotient operations critical in:
 
@@ -95,17 +94,14 @@ A key property of this quotient operation is that if all sufficiently close code
 - **Error detection** – Identifying inconsistencies in transmitted or stored data.
 - **Cryptographic proofs** – Establishing reliable verification mechanisms.
 
-**Proximity Gaps and Bulk Verification**
-Proximity gaps leverage approximation errors (computed based on field **F**, degree **d**, code rate $\rho$, distance parameter $\delta$, and variable count **m**) and combination functions (which merge multiple functions $f_1, ..., f_m$ with specific weightings **r**).
+**Proximity gaps** leverage approximation errors (computed based on field **F**, degree **d**, code rate $\rho$, distance parameter $\delta$, and variable count **m**) and combination functions (which merge multiple functions $f_1, ..., f_m$ with specific weightings **r**).
 
 The core idea is that if the combined function is sufficiently "complex" and cannot be closely approximated by simple RS codewords, then each individual function in the set must be close to a valid RS codeword within a sufficiently large subset. This method offers:
 
 - **Improved verification efficiency** – Avoiding the need for individual function verification.
 - **Enhanced security** – Ensuring robustness against forgery and approximation attacks.
 
-**Linear Codes and Reed-Solomon Theory in DeepFold**
-
-The principles of **linear codes** and RS theory provide a foundation for **DeepFold**. The **Hamming distance** $Ham(\vec{u}, \vec{v})$ measures the proportion of differing positions between two vectors. An **(n, k, $\delta$)-linear code** is a linear subspace defined by an injective mapping $E: F^k \to F^n$, where an RS code encodes a message as a polynomial of degree at most $\rho |L|$ and evaluates it over **L**.
+**Linear Codes and Reed-Solomon Theory** provide a foundation for **DeepFold**. The **Hamming distance** $Ham(\vec{u}, \vec{v})$ measures the proportion of differing positions between two vectors. An **(n, k, $\delta$)-linear code** is a linear subspace defined by an injective mapping $E: F^k \to F^n$, where an RS code encodes a message as a polynomial of degree at most $\rho |L|$ and evaluates it over **L**.
 
 RS decoding operates within two critical bounds:
 
@@ -264,13 +260,13 @@ The system establishes two relations: the exact relation $R_{ACC}$, which requir
 
 #### Reduction from $R_{R1CS}$ to $R_{ACC}$
 
-The key idea behind this reduction is encoding the R1CS problem as an algebraic proximity statement. It ensures that $f$ must be $\delta$-close to a codeword $u$ satisfying $P(v, \vec{u}) = e$, where $P$ is a multivariate polynomial of total degree $c$ with $k + d$ variables, and $\vec{u}$ represents the coefficient vector of $u$. The distance parameter $\delta$ does not exceed the unique decoding radius of the code.
+The core of the reduction from $R_{R1CS}$ to $R_{ACC}$ involves constructing specialized polynomial systems that transform R1CS problems (which verify satisfaction of multiplication constraints) into ACC problems (which verify proximity between functions and specific polynomials). It ensures that $f$ must be $\delta$-close to a codeword $u$ satisfying $P(v, \vec{u}) = e$, where $P$ is a multivariate polynomial of total degree $c$ with $k + d$ variables, and $\vec{u}$ represents the coefficient vector of $u$. The distance parameter $\delta$ does not exceed the unique decoding radius of the code.
 
 The reduction procedure constructs special polynomial systems to convert R1CS constraints into an ACC problem. It starts by defining $M$ (a power of two) and $m = \log M$. For each index $i$, it constructs a multilinear polynomial:
 
-$\pow_i(Y_1, \dots, Y_m) = Y_1^{b_1} \cdot \dots \cdot Y_m^{b_m},$
+$pow_i(Y_1, \dots, Y_m) = Y_1^{b_1} \cdot \dots \cdot Y_m^{b_m},$
 
-where $(b_1, \dots, b_m)$ represents the binary expansion of $i$, ensuring that $\pow_i(y, y^2, y^4, \dots, y^{2^{m-1}}) = y^i$. Then, it encodes the R1CS matrix constraints into a polynomial $P$ of total degree $m+2$. The reduction protocol involves the prover sending $f$ (which encodes the witness $w$ in the honest case), the verifier randomly sampling $r$, and generating a new statement $(e, v, f) \in L(R_{ACC})$, where $e := 0$, and $v := (r, r^2, r^4, \dots, r^{2^{m-1}}, x) \in F^k$.
+where $(b_1, \dots, b_m)$ represents the binary expansion of $i$, ensuring that $pow_i(y, y^2, y^4, \dots, y^{2^{m-1}}) = y^i$. Then, it encodes the R1CS matrix constraints into a polynomial $P$ of total degree $m+2$. The reduction protocol involves the prover sending $f$ (which encodes the witness $w$ in the honest case), the verifier randomly sampling $r$, and generating a new statement $(e, v, f) \in L(R_{ACC})$, where $e := 0$, and $v := (r, r^2, r^4, \dots, r^{2^{m-1}}, x) \in F^k$.
 
 The security of this reduction is ensured by bounding $\delta$ within the unique decoding radius, and by analyzing the constructed univariate polynomial $F(X)$. If $x$ is not a valid R1CS instance, the probability that the new statement belongs to $L(R_{ACC})$ is negligible.
 
@@ -301,7 +297,7 @@ The process follows two steps:
 
 Extending this to PCD and IVC requires $R$ to be NP-complete and the reduction verifier to be succinct. The framework unifies reduction, accumulation, and PCD, offering a flexible and efficient construction method for distributed computation verification.
 
-Integrity is ensured by proving all components ($f_i$, $c_f(i(f_i))$, $c_g(i(g_i))$) remain valid codewords. The reliability analysis bounds the total round error probability through:
+Integrity is ensured by proving all components ( $f_i$, $c_f(i(f_i))$, $c_g(i(g_i))$ ) remain valid codewords. The reliability analysis bounds the total round error probability through:
 
 $\kappa_{rbr} = \max\left(
   \varepsilon_{prox}(d_{max}, \rho, \delta, m \cdot (2t + 6)),
@@ -379,7 +375,7 @@ This method is reflected in key modifications to the protocol:
 
 - The verification step is adjusted to check:
 
-  $g_{\vec{w}}(r_i) + \gamma_i \cdot$ c*{w⃗*{[2:]}} = g*{w⃗*{[2:]}}$
+  $g_{\vec{w}}(r_i) + \gamma_i \cdot c_{\vec{w}[2:]} = g_{\vec{w}[2:]}$
 
 This batch processing method enables DeepFold to efficiently verify multiple multilinear polynomial evaluations of different sizes while keeping proof size and verification time nearly identical to the independent evaluation of the largest polynomial. Prover complexity scales only linearly with the total size of all polynomials, making it a practical solution for handling irregularly sized inputs (e.g., vectors of length $2^{2n} + 2^n$). Furthermore, these optimizations lay the foundation for a zero-knowledge version of DeepFold, making it a powerful tool for real-world applications requiring compact and efficient polynomial commitment schemes.
 
