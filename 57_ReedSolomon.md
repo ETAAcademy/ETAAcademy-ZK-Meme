@@ -48,9 +48,9 @@ $c = (f(x_0), f(x_1), ..., f(x_{n-1}))$
 
 At the receiver’s end, any k received symbols $f(x_{i_1}), f(x_{i_2}), ..., f(x_{i_k})$ can be used to reconstruct the original polynomial coefficients via matrix inversion. This reconstruction is feasible because the corresponding Vandermonde matrix:
 
-$$
-V = \begin{pmatrix} 1 & x_0 & x_0^2 & \dots & x_0^{k-1} \\ 1 & x_1 & x_1^2 & \dots & x_1^{k-1} \\ \vdots & \vdots & \vdots & \ddots & \vdots \\ 1 & x_{k-1} & x_{k-1}^2 & \dots & x_{k-1}^{k-1} \end{pmatrix}
-$$
+<div  align="center">
+<img src="https://github.com/ETAAcademy/ETAAcademy-Images/blob/main/ETAAcademy-ZKmeme/57_Vandermonde.png?raw=true" width="30%" />
+</div>
 
 is invertible as long as all $x_i$ are distinct. The determinant of this Vandermonde matrix is:
 
@@ -379,7 +379,7 @@ This method is reflected in key modifications to the protocol:
 
 - The verification step is adjusted to check:
 
-  $g_{\vec{w}}(r_i) + \gamma_i \cdot$ c_{w⃗_{[2:]}} = g_{w⃗_{[2:]}}$
+  $g_{\vec{w}}(r_i) + \gamma_i \cdot$ c*{w⃗*{[2:]}} = g*{w⃗*{[2:]}}$
 
 This batch processing method enables DeepFold to efficiently verify multiple multilinear polynomial evaluations of different sizes while keeping proof size and verification time nearly identical to the independent evaluation of the largest polynomial. Prover complexity scales only linearly with the total size of all polynomials, making it a practical solution for handling irregularly sized inputs (e.g., vectors of length $2^{2n} + 2^n$). Furthermore, these optimizations lay the foundation for a zero-knowledge version of DeepFold, making it a powerful tool for real-world applications requiring compact and efficient polynomial commitment schemes.
 
