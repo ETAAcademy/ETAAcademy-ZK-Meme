@@ -101,7 +101,7 @@ The core idea is that if the combined function is sufficiently "complex" and can
 - **Improved verification efficiency** – Avoiding the need for individual function verification.
 - **Enhanced security** – Ensuring robustness against forgery and approximation attacks.
 
-**Linear Codes and Reed-Solomon Theory** provide a foundation for **DeepFold**. The **Hamming distance** $Ham(\vec{u}, \vec{v})$ measures the proportion of differing positions between two vectors. An **(n, k, $\delta$)-linear code** is a linear subspace defined by an injective mapping $E: F^k \to F^n$, where an RS code encodes a message as a polynomial of degree at most $\rho |L|$ and evaluates it over **L**.
+**Linear Codes and Reed-Solomon Theory** provide a foundation for **DeepFold**. The **Hamming distance** $Ham(\vec{u}, \vec{v})$ measures the proportion of differing positions between two vectors. An (n, k, $\delta$)-linear code is a linear subspace defined by an injective mapping $E: F^k \to F^n$, where an RS code encodes a message as a polynomial of degree at most $\rho |L|$ and evaluates it over **L**.
 
 RS decoding operates within two critical bounds:
 
@@ -391,7 +391,6 @@ The zkDeepFold framework introduces two key modifications to prevent information
 
 - **Batch Processing for Additional Masking:** Despite the polynomial extension, the last few evaluation rounds still pose a risk of leakage, as the verifier could interpolate the polynomial using the $s$ queried points and infer information about the original coefficients. To address this, zkDeepFold introduces batch evaluation of $f̃_{ext}$ alongside a smaller random polynomial $\tilde{g}$, which is designed to mask potential leakage in the final $\ell$ rounds. Specifically, during the commitment phase, a random vector $\vec{r}$ is sampled to construct $f̃_{ext}$ and $\tilde{g}$. During the evaluation phase, the BatchEval protocol is used to jointly verify $y = f̃_{ext}(\vec{z}||0)$ and $\tilde{g}(\vec{z}[\mu - \ell + 2:]||0)$. This design effectively guarantees zero-knowledge while minimizing computational overhead, as $\tilde{g}$ can remain significantly smaller than $\tilde{f}_{ext}$, ensuring that zkDeepFold does not incur excessive proof size or verification costs.
 
-**Integration into zk-SNARK Systems**
 Modern zk-SNARK frameworks such as Libra and HyperPlonk typically integrate multilinear polynomial commitment schemes (PCS) with polynomial interactive oracle proofs (PIOP) to construct efficient proof systems. DeepFold, with its transparent setup (requiring no trusted setup), compact proof sizes, and efficient proving process, presents a viable alternative to existing schemes such as mKZG and Virgo. By replacing these commitment schemes with DeepFold, zk-SNARK systems can immediately benefit from reduced proof sizes and improved performance.
 
 DeepFold’s efficiency extends to verifiable computation, particularly in matrix multiplication proofs. When combined with Thaler’s $O(n^2)$ complexity proof method, DeepFold enables efficient verification of matrix multiplication correctness. In this approach, matrices $A, B,$ and $C$ are encoded as multilinear polynomials, and the sumcheck protocol is used to validate the relation:
@@ -435,7 +434,7 @@ pub struct Proof<T: MyField> {
 
 </details>
 
-<details><summary><b> Code </b></summary>
+<details><summary><b> deepfold/src/prover.rs </b></summary>
 
 ```rust
 
@@ -512,7 +511,7 @@ impl<T: MyField> Prover<T> {
 
 </details>
 
-<details><summary><b> Code </b></summary>
+<details><summary><b> deepfold/src/verifier.rs </b></summary>
 
 ```rust
 
