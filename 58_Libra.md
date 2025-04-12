@@ -64,7 +64,7 @@ By combining these techniques, **Libra achieves a practical, scalable, and secur
 
 ## 1. The Evolution and Foundations of Modern Succinct Argument Systems
 
-The evolution of cryptographic proof systems traces back to the pioneering work of Goldreich, Micali, and Wigderson in the 1980s. Since then, the field has developed significantly, particularly in the direction of **succinct non-interactive arguments of knowledge (SNARKs)**—systems that enable a prover to convince a verifier of the correctness of a statement $R(x, w) = 1$ with **sublinear communication complexity** (proof size $O_λ(log t)$ ) and **efficient verification** ($O_λ(n + \log t)$). These systems are foundational to public-key cryptography, digital signatures, secure multiparty computation, and widely used privacy-preserving cryptocurrencies like ZCash and Monero.
+The evolution of cryptographic proof systems traces back to the pioneering work of Goldreich, Micali, and Wigderson in the 1980s. Since then, the field has developed significantly, particularly in the direction of **succinct non-interactive arguments of knowledge (SNARKs)**—systems that enable a prover to convince a verifier of the correctness of a statement $R(x, w) = 1$ with **sublinear communication complexity** (proof size $O_λ(log t)$ ) and **efficient verification** ( $O_λ(n + log t)$ ). These systems are foundational to public-key cryptography, digital signatures, secure multiparty computation, and widely used privacy-preserving cryptocurrencies like ZCash and Monero.
 
 Modern SNARKs typically follow a **modular design**, composed of information-theoretic components (e.g., PCPs, linear PCPs, IOPs, and PIOPs) and cryptographic compilers (e.g., polynomial commitment schemes, or PCS). Based on the underlying PCS design, SNARKs can be divided into:
 
@@ -112,7 +112,7 @@ PCS guarantees three critical properties:
 
 By applying the **Fiat-Shamir transform**, these interactive protocols can be made non-interactive in the **Random Oracle Model (ROM)**. The key advantage of PCS is its **succinctness**—the size of the commitment and proof depends only on the security parameter, not on the polynomial's degree. This makes PCS the perfect cryptographic compiler to transform idealized information-theoretic PIOPs into practical SNARKs.
 
-The security of many PCS constructions—especially **KZG-based PCS**—relies on the **q-DLOG assumption**: given powers of a secret $\tau$ in two groups $g₁^τ, g₁^τ², ..., g₁^τᵍ, g₂^τ, g₂^τ², ..., g₂^τᵍ$, computing $\tau$ is infeasible.
+The security of many PCS constructions—especially **KZG-based PCS**—relies on the **q-DLOG assumption**: given powers of a secret $\tau$ in two groups $g_1^{\tau}, g_1^{\tau^2}, ..., g_1^{\tau^g}, g_2^{\tau^g}, g_2^{\tau^2}, ..., g_2^{\tau ^g}$, computing $\tau$ is infeasible.
 
 #### Polynomial Interactive Oracle Proofs (PIOP)
 
@@ -245,7 +245,7 @@ This method uses a linear combination of a commitment $H + \rho G$, where $G$ is
 
 The GKR protocol still has potential information leakage points. At the end of the zero-knowledge and checking phases, the verifier (V) must query an oracle at random points to evaluate polynomials, which leads to the leakage of evaluation values for the polynomials $\tilde{V}_i$ defined by the i-th layer of two circuits, specifically $\tilde{V}_i(u)$ and $\tilde{V}_i(v)$. The Libra system’s zero-knowledge GKR protocol addresses the information leakage issue present in the GKR protocol through a series of innovative techniques. Even after applying the zero-knowledge and checking protocols, the verifier can still gain information about the circuits by querying polynomial evaluation values $\tilde{V}_i(u)$ and $\tilde{V}_i(v)$.
 
-Libra builds on the low-degree extension idea proposed by Chiesa et al., where the polynomial $V̇ᵢ(z)=Ṽᵢ(z)+Zᵢ(z)∑_{w∈{0,1}^λ}Rᵢ(z,w)$, with $Z(z) = ∏{i=1}^{sᵢ} zᵢ(1-zᵢ)$, guarantees that $Z(z) = 0$ for all $z \in {0,1}^{s_i}$. Here, $R_i(z,w)$ is a random low-degree polynomial, and $\lambda$ is the security parameter. However, the key innovation in Libra’s approach is the proof that the mask polynomial $R_i$ can be drastically simplified to a small polynomial containing only two variables, each with degree 2, as opposed to the original approach that requires a polynomial with $s_i + 2s_{i+1} + \lambda$ variables.
+Libra builds on the low-degree extension idea proposed by Chiesa et al., where the polynomial $V̇_i(z)=Ṽ_i(z)+Z_i(z)∑_{w∈{0,1}^λ}R_i(z,w)$, with $Z(z) = ∏{i=1}^{s_i} z_i(1-z_i)$, guarantees that $Z(z) = 0$ for all $z \in {0,1}^{s_i}$. Here, $R_i(z,w)$ is a random low-degree polynomial, and $\lambda$ is the security parameter. However, the key innovation in Libra’s approach is the proof that the mask polynomial $R_i$ can be drastically simplified to a small polynomial containing only two variables, each with degree 2, as opposed to the original approach that requires a polynomial with $s_i + 2s_{i+1} + \lambda$ variables.
 
 The complete protocol flow includes initialization, output layer processing, zero-knowledge and checking execution, intermediate layer recursive verification, and final input layer verification. The protocol rigorously proves its zero-knowledge property by constructing a simulator $S$ that uses a zero-knowledge and checking simulator as a subroutine. It then proves that the view generated by this simulator is indistinguishable from the real protocol. The critical proof steps are based on row-reduction analysis of the matrix formed by the four evaluation values of $R_i$, ensuring that the matrix is full rank when $u_1 \neq v_1$ and $2c^2 - 1 \neq 0 \mod p$, which guarantees the linear independence and uniform distribution of the four evaluation values.
 
@@ -263,7 +263,7 @@ The full protocol follows a layered verification process, from the output layer 
 
   - The prover (P) and verifier (V) perform zero-knowledge checks and verify the relationship between the output layer and the first layer:
 
-  $V̇₀(g^{(0)}) = ∑_{x,y∈{0,1}^s₁} m̃ult₁(g^{(0)},x,y)(V̇₁(x)·V̇₁(y)) + ãdd₁(g^{(0)},x,y)(V̇₁(x)+V̇₁(y))$
+  $V̇_0(g^{(0)}) = ∑_{x,y∈{0,1}^s_1} m̃ult_1(g^{(0)},x,y)(V̇_1(x)·V̇_1(y)) + ãdd_1(g^{(0)},x,y)(V̇1(x)+V̇_1(y))$
 
   - The verifier (V) receives the evaluation values for two points $\dot{V}_1(u^{(1)})$ and $\dot{V}_1(v^{(1)})$.
   - The verifier (V) computes the gate function values and verifies consistency:
@@ -280,18 +280,18 @@ The full protocol follows a layered verification process, from the output layer 
   $\left. + I((x,y),0̄)(\alpha^{(i)} \cdot Z_i(u^{(i)}) \cdot R_i(u_1^{(i)},w) + \beta^{(i)} \cdot Z_i(v^{(i)}) \cdot R_i(v_1^{(i)},w)) \right)$
 
   - The prover (P) sends the evaluation values for the next layer's two points
-    $\dot{V}_{i+1}(u^{(i+1)})$ and $\dot{V}_{i+1}(v^{(i+1)})$.
+    $V̇_{i+1}(u^{(1)})$ and $V̇_{i+1}(v^{(1)})$.
 
   - The verifier (V) computes necessary coefficients and performs local validation:
 
-    - $aᵢ₊₁ = α^{(i)}·m̃ultᵢ₊₁(u^{(i)},u^{(i+1)},v^{(i+1)}) + β^{(i)}·m̃ultᵢ₊₁(v^{(i)},u^{(i+1)},v^{(i+1)})$
-    - $bᵢ₊₁ = α^{(i)}·ãddᵢ₊₁(u^{(i)},u^{(i+1)},v^{(i+1)}) + β^{(i)}·ãddᵢ₊₁(v^{(i)},u^{(i+1)},v^{(i+1)})$
+    - $a_{i+1}= α^{(i)}·m̃ult_{i+1}(u^{(i)},u^{(i+1)},v^{(i+1)}) + β^{(i)}·m̃ult_{i+1}(v^{(i)},u^{(i+1)},v^{(i+1)})$
+    - $b_{i+1} = α^{(i)}·ãdd_{i+1}(u^{(i)},u^{(i+1)},v^{(i+1)}) + β^{(i)}·ãdd_{i+1}(v^{(i)},u^{(i+1)},v^{(i+1)})$
     - $Z_i(u^{(i)}), Z_i(v^{(i)}), I(0̄,c^{(i)}), I((u^{(i+1)}, v^{(i+1)}),0̄)$
 
   - The value of $R_i$ at specific two points is opened for verification:
 
-  $I(0̄,c^{(i)})(aᵢ₊₁(V̇ᵢ₊₁(u^{(i+1)})·V̇ᵢ₊₁(v^{(i+1)}))+bᵢ₊₁(V̇ᵢ₊₁(u^{(i+1)})+V̇ᵢ₊₁(v^{(i+1)})))+
-I((u^{(i+1)},v^{(i+1)}),0̄)(α^{(i)}·Zᵢ(u^{(i)})·Rᵢ(u₁^{(i)},c^{(i)}) + β^{(i)}·Zᵢ(v^{(i)})·Rᵢ(v₁^{(i)},c^{(i)}))$
+  $I(0̄,c^{(i)})(a_{i+1}(V̇_{i+1}(u^{(i+1)})·V̇_{i+1}(v^{(i+1)}))+b_{i+1}(V̇_{i+1}(u^{(i+1)})+V̇_{i+1}(v^{(i+1)})))+
+I((u^{(i+1)},v^{(i+1)}),0̄)(α^{(i)}·Z_i(u^{(i)})·R_i(u₁^{(i)},c^{(i)}) + β^{(i)}·Z_i(v^{(i)})·R_i(v_1^{(i)},c^{(i)}))$
 
   $+ I((u^{(i+1)}, v^{(i+1)}),0̄)(\alpha^{(i)} \cdot Z_i(u^{(i)}) \cdot R_i(u_1^{(i)}, c^{(i)}) + \beta^{(i)} \cdot Z_i(v^{(i)}) \cdot R_i(v_1^{(i)}, c^{(i)}))$
 
@@ -303,7 +303,7 @@ I((u^{(i+1)},v^{(i+1)}),0̄)(α^{(i)}·Zᵢ(u^{(i)})·Rᵢ(u₁^{(i)},c^{(i)}) +
   - The values of $R_k$ at four points are opened.
   - The mask form is verified for consistency with the actual inputs:
 
-  $V̇ₖ(u^{(d)}) = Ṽₖ(u^{(d)}) + Zₖ(u^{(d)})∑_{w∈{0,1}} Rₖ(u₁^{(d)},w)  V̇ₖ(v^{(d)}) = Ṽₖ(v^{(d)}) + Zₖ(v^{(d)})∑_{w∈{0,1}} Rₖ(v₁^{(d)},w)$
+  $V̇_k(u^{(d)}) = Ṽ_k(u^{(d)}) + Z_k(u^{(d)})∑_{w∈{0,1}} R_k(u_1^{(d)},w)  V̇_k(v^{(d)}) = Ṽ_k(v^{(d)}) + Z_k(v^{(d)})∑_{w∈{0,1}} R_k(v₁^{(d)},w)$
 
   - Based on the verification results, the proof is either accepted or rejected.
 
@@ -313,7 +313,7 @@ The zero-knowledge Verifiable Polynomial Delegation (zkVPD) protocol of the Libr
 
 The complete implementation includes key generation based on bilinear pairings, commitment calculation, opening protocols, and verification steps, ensuring its completeness, reliability, and zero-knowledge properties. Additionally, an algorithm for multilinear extension commitments and openings with $O(2^ℓ)$ linear time complexity and a verification algorithm with $O(ℓ)$ complexity are provided in the appendix. Through these targeted optimizations and efficient implementations, the zkVPD protocol ensures that the entire Libra system achieves efficient, feasible proof generation and verification while maintaining zero-knowledge properties.
 
-The input layer zkVPD protocol specifically handles polynomials of the form $V̇(x) = Ṽ(x) + Z(x)R(x₁)$. This protocol is realized through bilinear pairing cryptography, and its main steps are as follows:
+The input layer zkVPD protocol specifically handles polynomials of the form $V̇(x) = Ṽ(x) + Z(x)R(x_1)$. This protocol is realized through bilinear pairing cryptography, and its main steps are as follows:
 
 - **Key Generation (KeyGen)**:
 
