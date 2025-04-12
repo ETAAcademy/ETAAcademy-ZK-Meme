@@ -275,7 +275,7 @@ The full protocol follows a layered verification process, from the output layer 
   - The verifier (V) selects random coefficients $\alpha^{(i)}, \beta^{(i)}$ for the linear combination.
   - Zero-knowledge checks are performed, and the relationship between the current layer and the next layer is verified:
 
-  $α^{(i)}·V̇ᵢ(u^{(i)}) + β^{(i)}·V̇ᵢ(v^{(i)}) = ∑_{x,y∈{0,1}^sᵢ₊₁,w∈{0,1}} ( I(0̄,w)·Multᵢ₊₁(x,y)(V̇ᵢ₊₁(x)·V̇ᵢ₊₁(y)) + Addᵢ₊₁(x,y)(V̇ᵢ₊₁(x)+V̇ᵢ₊₁(y)) + I((x,y),0̄)(α⁽ⁱ⁾·Zᵢ(u^{(i)})·Rᵢ(u₁^{(i)},w) + β^{(i)}·Zᵢ(v^{(i)})·Rᵢ(v₁^{(i)},w)))$
+  $α^{(i)}·V̇_i(u^{(i)}) + β^{(i)}·V̇_i(v^{(i)}) = ∑_{x,y∈{0,1}^s_{i+1},w∈{0,1}} ( I(0̄,w)·Mult_{i+1}(x,y)(V̇_{i+1}(x)·V̇_{i+1}(y)) + Add_{i+1}(x,y)(V̇_{i+1}(x)+V̇_{i+1}(y)) + I((x,y),0̄)(α^{(i)}·Z_i(u^{(i)})·R_i(u_1^{(i)},w) + β^{(i)}·Z_i(v^{(i)})·R_i(v_1^{(i)},w)))$
 
   $\left. + I((x,y),0̄)(\alpha^{(i)} \cdot Z_i(u^{(i)}) \cdot R_i(u_1^{(i)},w) + \beta^{(i)} \cdot Z_i(v^{(i)}) \cdot R_i(v_1^{(i)},w)) \right)$
 
@@ -290,10 +290,7 @@ The full protocol follows a layered verification process, from the output layer 
 
   - The value of $R_i$ at specific two points is opened for verification:
 
-  $I(0̄,c^{(i)})(a_{i+1}(V̇_{i+1}(u^{(i+1)})·V̇_{i+1}(v^{(i+1)}))+b_{i+1}(V̇_{i+1}(u^{(i+1)})+V̇_{i+1}(v^{(i+1)})))+
-I((u^{(i+1)},v^{(i+1)}),0̄)(α^{(i)}·Z_i(u^{(i)})·R_i(u₁^{(i)},c^{(i)}) + β^{(i)}·Z_i(v^{(i)})·R_i(v_1^{(i)},c^{(i)}))$
-
-  $+ I((u^{(i+1)}, v^{(i+1)}),0̄)(\alpha^{(i)} \cdot Z_i(u^{(i)}) \cdot R_i(u_1^{(i)}, c^{(i)}) + \beta^{(i)} \cdot Z_i(v^{(i)}) \cdot R_i(v_1^{(i)}, c^{(i)}))$
+  $I(0̄,c^{(i)})(a_{i+1}(V̇_{i+1}(u^{(i+1)})·V̇_{i+1}(v^{(i+1)}))+b_{i+1}(V̇_{i+1}(u^{(i+1)})+V̇_{i+1}(v^{(i+1)})))+ I((u^{(i+1)},v^{(i+1)}),0̄)(α^{(i)}·Z_i(u^{(i)})·R_i(u₁^{(i)},c^{(i)}) + β^{(i)}·Z_i(v^{(i)})·R_i(v_1^{(i)},c^{(i)})) + I((u^{(i+1)}, v^{(i+1)}),0̄)(\alpha^{(i)} \cdot Z_i(u^{(i)}) \cdot R_i(u_1^{(i)}, c^{(i)}) + \beta^{(i)} \cdot Z_i(v^{(i)}) \cdot R_i(v_1^{(i)}, c^{(i)}))$
 
   - After completing the final consistency check, the process moves to the next layer.
 
