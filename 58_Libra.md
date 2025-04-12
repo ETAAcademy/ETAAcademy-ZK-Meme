@@ -64,7 +64,7 @@ By combining these techniques, **Libra achieves a practical, scalable, and secur
 
 ## 1. The Evolution and Foundations of Modern Succinct Argument Systems
 
-The evolution of cryptographic proof systems traces back to the pioneering work of Goldreich, Micali, and Wigderson in the 1980s. Since then, the field has developed significantly, particularly in the direction of **succinct non-interactive arguments of knowledge (SNARKs)**—systems that enable a prover to convince a verifier of the correctness of a statement $R(x, w) = 1$ with **sublinear communication complexity** (proof size  $O_λ(log t) ) and **efficient verification** ($O_λ(n + \log t)$). These systems are foundational to public-key cryptography, digital signatures, secure multiparty computation, and widely used privacy-preserving cryptocurrencies like ZCash and Monero.
+The evolution of cryptographic proof systems traces back to the pioneering work of Goldreich, Micali, and Wigderson in the 1980s. Since then, the field has developed significantly, particularly in the direction of **succinct non-interactive arguments of knowledge (SNARKs)**—systems that enable a prover to convince a verifier of the correctness of a statement $R(x, w) = 1$ with **sublinear communication complexity** (proof size $O_λ(log t)$ ) and **efficient verification** ($O_λ(n + \log t)$). These systems are foundational to public-key cryptography, digital signatures, secure multiparty computation, and widely used privacy-preserving cryptocurrencies like ZCash and Monero.
 
 Modern SNARKs typically follow a **modular design**, composed of information-theoretic components (e.g., PCPs, linear PCPs, IOPs, and PIOPs) and cryptographic compilers (e.g., polynomial commitment schemes, or PCS). Based on the underlying PCS design, SNARKs can be divided into:
 
@@ -91,7 +91,7 @@ Two core properties are required for soundness and utility:
 - **Completeness**: Honest provers always convince the verifier.
 - **Knowledge Soundness**: If a malicious prover can convince the verifier, then it is possible to extract a valid witness.
 
-The defining feature of _succinctness_ ensures that both communication and verification complexity are polylogarithmic in the size of the computation ($poly(λ, \log |w|)$), making the proof system practical even for large computations. This "proofs much smaller than computation" property enables powerful applications in verifiable computation, privacy-preserving systems, and blockchain scalability.
+The defining feature of _succinctness_ ensures that both communication and verification complexity are polylogarithmic in the size of the computation (poly(λ, log |w|)), making the proof system practical even for large computations. This "proofs much smaller than computation" property enables powerful applications in verifiable computation, privacy-preserving systems, and blockchain scalability.
 
 #### Polynomial Commitment Schemes (PCS)
 
@@ -263,7 +263,7 @@ The full protocol follows a layered verification process, from the output layer 
 
   - The prover (P) and verifier (V) perform zero-knowledge checks and verify the relationship between the output layer and the first layer:
 
-  $V̇₀(g⁽⁰⁾) = ∑_{x,y∈{0,1}^s₁} m̃ult₁(g⁽⁰⁾,x,y)(V̇₁(x)·V̇₁(y)) + ãdd₁(g⁽⁰⁾,x,y)(V̇₁(x)+V̇₁(y))$
+  $V̇₀(g^{(0)}) = ∑_{x,y∈{0,1}^s₁} m̃ult₁(g^{(0)},x,y)(V̇₁(x)·V̇₁(y)) + ãdd₁(g^{(0)},x,y)(V̇₁(x)+V̇₁(y))$
 
   - The verifier (V) receives the evaluation values for two points $\dot{V}_1(u^{(1)})$ and $\dot{V}_1(v^{(1)})$.
   - The verifier (V) computes the gate function values and verifies consistency:
@@ -275,7 +275,7 @@ The full protocol follows a layered verification process, from the output layer 
   - The verifier (V) selects random coefficients $\alpha^{(i)}, \beta^{(i)}$ for the linear combination.
   - Zero-knowledge checks are performed, and the relationship between the current layer and the next layer is verified:
 
-  $α⁽ⁱ⁾·V̇ᵢ(u⁽ⁱ⁾) + β⁽ⁱ⁾·V̇ᵢ(v⁽ⁱ⁾) =     ∑_{x,y∈{0,1}^sᵢ₊₁,w∈{0,1}} (      I(0̄,w)·Multᵢ₊₁(x,y)(V̇ᵢ₊₁(x)·V̇ᵢ₊₁(y)) +       Addᵢ₊₁(x,y)(V̇ᵢ₊₁(x)+V̇ᵢ₊₁(y)) +       I((x,y),0̄)(α⁽ⁱ⁾·Zᵢ(u⁽ⁱ⁾)·Rᵢ(u₁⁽ⁱ⁾,w) + β⁽ⁱ⁾·Zᵢ(v⁽ⁱ⁾)·Rᵢ(v₁⁽ⁱ⁾,w)))$
+  $α^{(i)}·V̇ᵢ(u^{(i)}) + β^{(i)}·V̇ᵢ(v^{(i)}) = ∑_{x,y∈{0,1}^sᵢ₊₁,w∈{0,1}} ( I(0̄,w)·Multᵢ₊₁(x,y)(V̇ᵢ₊₁(x)·V̇ᵢ₊₁(y)) + Addᵢ₊₁(x,y)(V̇ᵢ₊₁(x)+V̇ᵢ₊₁(y)) + I((x,y),0̄)(α⁽ⁱ⁾·Zᵢ(u^{(i)})·Rᵢ(u₁^{(i)},w) + β^{(i)}·Zᵢ(v^{(i)})·Rᵢ(v₁^{(i)},w)))$
 
   $\left. + I((x,y),0̄)(\alpha^{(i)} \cdot Z_i(u^{(i)}) \cdot R_i(u_1^{(i)},w) + \beta^{(i)} \cdot Z_i(v^{(i)}) \cdot R_i(v_1^{(i)},w)) \right)$
 
@@ -284,14 +284,14 @@ The full protocol follows a layered verification process, from the output layer 
 
   - The verifier (V) computes necessary coefficients and performs local validation:
 
-    - $aᵢ₊₁ = α⁽ⁱ⁾·m̃ultᵢ₊₁(u⁽ⁱ⁾,u⁽ⁱ⁺¹⁾,v⁽ⁱ⁺¹⁾) + β⁽ⁱ⁾·m̃ultᵢ₊₁(v⁽ⁱ⁾,u⁽ⁱ⁺¹⁾,v⁽ⁱ⁺¹⁾)$
-    - $bᵢ₊₁ = α⁽ⁱ⁾·ãddᵢ₊₁(u⁽ⁱ⁾,u⁽ⁱ⁺¹⁾,v⁽ⁱ⁺¹⁾) + β⁽ⁱ⁾·ãddᵢ₊₁(v⁽ⁱ⁾,u⁽ⁱ⁺¹⁾,v⁽ⁱ⁺¹⁾)$
+    - $aᵢ₊₁ = α^{(i)}·m̃ultᵢ₊₁(u^{(i)},u^{(i+1)},v^{(i+1)}) + β^{(i)}·m̃ultᵢ₊₁(v^{(i)},u^{(i+1)},v^{(i+1)})$
+    - $bᵢ₊₁ = α^{(i)}·ãddᵢ₊₁(u^{(i)},u^{(i+1)},v^{(i+1)}) + β^{(i)}·ãddᵢ₊₁(v^{(i)},u^{(i+1)},v^{(i+1)})$
     - $Z_i(u^{(i)}), Z_i(v^{(i)}), I(0̄,c^{(i)}), I((u^{(i+1)}, v^{(i+1)}),0̄)$
 
   - The value of $R_i$ at specific two points is opened for verification:
 
-  $I(0̄,c⁽ⁱ⁾)(aᵢ₊₁(V̇ᵢ₊₁(u⁽ⁱ⁺¹⁾)·V̇ᵢ₊₁(v⁽ⁱ⁺¹⁾))+bᵢ₊₁(V̇ᵢ₊₁(u⁽ⁱ⁺¹⁾)+V̇ᵢ₊₁(v⁽ⁱ⁺¹⁾)))+
-I((u⁽ⁱ⁺¹⁾,v⁽ⁱ⁺¹⁾),0̄)(α⁽ⁱ⁾·Zᵢ(u⁽ⁱ⁾)·Rᵢ(u₁⁽ⁱ⁾,c⁽ⁱ⁾) + β⁽ⁱ⁾·Zᵢ(v⁽ⁱ⁾)·Rᵢ(v₁⁽ⁱ⁾,c⁽ⁱ⁾))$
+  $I(0̄,c^{(i)})(aᵢ₊₁(V̇ᵢ₊₁(u^{(i+1)})·V̇ᵢ₊₁(v^{(i+1)}))+bᵢ₊₁(V̇ᵢ₊₁(u^{(i+1)})+V̇ᵢ₊₁(v^{(i+1)})))+
+I((u^{(i+1)},v^{(i+1)}),0̄)(α^{(i)}·Zᵢ(u^{(i)})·Rᵢ(u₁^{(i)},c^{(i)}) + β^{(i)}·Zᵢ(v^{(i)})·Rᵢ(v₁^{(i)},c^{(i)}))$
 
   $+ I((u^{(i+1)}, v^{(i+1)}),0̄)(\alpha^{(i)} \cdot Z_i(u^{(i)}) \cdot R_i(u_1^{(i)}, c^{(i)}) + \beta^{(i)} \cdot Z_i(v^{(i)}) \cdot R_i(v_1^{(i)}, c^{(i)}))$
 
@@ -303,7 +303,7 @@ I((u⁽ⁱ⁺¹⁾,v⁽ⁱ⁺¹⁾),0̄)(α⁽ⁱ⁾·Zᵢ(u⁽ⁱ⁾)·Rᵢ(u�
   - The values of $R_k$ at four points are opened.
   - The mask form is verified for consistency with the actual inputs:
 
-  $V̇ₖ(u⁽ᵈ⁾) = Ṽₖ(u⁽ᵈ⁾) + Zₖ(u⁽ᵈ⁾)∑_{w∈{0,1}} Rₖ(u₁⁽ᵈ⁾,w)  V̇ₖ(v⁽ᵈ⁾) = Ṽₖ(v⁽ᵈ⁾) + Zₖ(v⁽ᵈ⁾)∑_{w∈{0,1}} Rₖ(v₁⁽ᵈ⁾,w)$
+  $V̇ₖ(u^{(d)}) = Ṽₖ(u^{(d)}) + Zₖ(u^{(d)})∑_{w∈{0,1}} Rₖ(u₁^{(d)},w)  V̇ₖ(v^{(d)}) = Ṽₖ(v^{(d)}) + Zₖ(v^{(d)})∑_{w∈{0,1}} Rₖ(v₁^{(d)},w)$
 
   - Based on the verification results, the proof is either accepted or rejected.
 
