@@ -28,7 +28,7 @@ Authors: [Evta](https://twitter.com/pwhattie), looking forward to your joining
 
 # Libra
 
-Modern SNARKs employ modular designs combining theoretical primitives with cryptographic compilers, categorized by their polynomial commitment schemes (univariate-based like Plonk or multilinear-based like Libra and Spartan). Recent research has shifted from optimizing proof size toward prover efficiency, exemplified by Libra's breakthrough in simultaneously achieving linear-time proving and succinct verification—resolving the longstanding tension between these competing goals. Libra revolutionizes zero-knowledge proofs by integrating GKR protocol with multilinear extensions and sumcheck, transforming circuit verification into efficient polynomial operations with linear complexity. It achieves linear-time proving by exploiting circuit sparsity, implementing dynamic programming techniques, and dividing sumcheck into independent phases—reducing complexity from O(C log C) to O(C). The system adds zero-knowledge through logarithmic-sized masking polynomials, random linear combinations, and low-degree extensions that prevent information leakage while enabling verification, making large-scale privacy-preserving computations practical while minimizing computational overhead.
+Modern SNARKs employ modular designs combining theoretical primitives (PCPs, IOPs, PIOPs) with cryptographic compilers, categorized by their polynomial commitment schemes (univariate-based like Plonk or multilinear-based like Libra and Spartan). Recent research has shifted from optimizing proof size toward prover efficiency, exemplified by Libra's breakthrough in simultaneously achieving linear-time proving and succinct verification—resolving the longstanding tension between these competing goals. Libra revolutionizes zero-knowledge proofs by integrating GKR protocol with multilinear extensions and sumcheck, transforming circuit verification into efficient polynomial operations with linear complexity. It achieves linear-time proving by exploiting circuit sparsity, implementing dynamic programming techniques, and dividing sumcheck into independent phases—reducing complexity from O(C log C) to O(C). The system adds zero-knowledge through logarithmic-sized masking polynomials, random linear combinations, and low-degree extensions that prevent information leakage while enabling verification, making large-scale privacy-preserving computations practical while minimizing computational overhead.
 
 ---
 
@@ -64,7 +64,7 @@ By combining these techniques, **Libra achieves a practical, scalable, and secur
 
 ## 1. The Evolution and Foundations of Modern Succinct Argument Systems
 
-The evolution of cryptographic proof systems traces back to the pioneering work of Goldreich, Micali, and Wigderson in the 1980s. Since then, the field has developed significantly, particularly in the direction of **succinct non-interactive arguments of knowledge (SNARKs)**—systems that enable a prover to convince a verifier of the correctness of a statement $R(x, w) = 1$ with **sublinear communication complexity** (proof size $O_\lambda(\log t)$) and **efficient verification** ($O_\lambda(n + \log t)$). These systems are foundational to public-key cryptography, digital signatures, secure multiparty computation, and widely used privacy-preserving cryptocurrencies like ZCash and Monero.
+The evolution of cryptographic proof systems traces back to the pioneering work of Goldreich, Micali, and Wigderson in the 1980s. Since then, the field has developed significantly, particularly in the direction of **succinct non-interactive arguments of knowledge (SNARKs)**—systems that enable a prover to convince a verifier of the correctness of a statement $R(x, w) = 1$ with **sublinear communication complexity** (proof size  $O_λ(log t) ) and **efficient verification** ($O_λ(n + \log t)$). These systems are foundational to public-key cryptography, digital signatures, secure multiparty computation, and widely used privacy-preserving cryptocurrencies like ZCash and Monero.
 
 Modern SNARKs typically follow a **modular design**, composed of information-theoretic components (e.g., PCPs, linear PCPs, IOPs, and PIOPs) and cryptographic compilers (e.g., polynomial commitment schemes, or PCS). Based on the underlying PCS design, SNARKs can be divided into:
 
@@ -76,7 +76,7 @@ They can also be classified by setup requirements:
 - **Structured Reference String (SRS)** models, which may be trusted, transparent, or updatable
 - **Idealized models**, such as the **Random Oracle Model (ROM)**, **Generic Group Model (GGM)**, and **Algebraic Group Model (AGM)**
 
-Recent research has shifted focus from minimizing proof size and verification time to **reducing prover time**, a critical factor for scaling real-world applications. Notably, systems like Libra, Spartan, and Gemini have achieved **linear-time provers ($O(n)$)**, making them ideal for large-scale computation. Balancing **succinct proofs**, **efficient verification**, and **minimal prover overhead** is now the central challenge and ambition of next-generation SNARKs.
+Recent research has shifted focus from minimizing proof size and verification time to **reducing prover time**, a critical factor for scaling real-world applications. Notably, systems like Libra, Spartan, and Gemini have achieved **linear-time provers (O(n))**, making them ideal for large-scale computation. Balancing **succinct proofs**, **efficient verification**, and **minimal prover overhead** is now the central challenge and ambition of next-generation SNARKs.
 
 #### Succinct Arguments of Knowledge (SAKs)
 
@@ -91,7 +91,7 @@ Two core properties are required for soundness and utility:
 - **Completeness**: Honest provers always convince the verifier.
 - **Knowledge Soundness**: If a malicious prover can convince the verifier, then it is possible to extract a valid witness.
 
-The defining feature of _succinctness_ ensures that both communication and verification complexity are polylogarithmic in the size of the computation ($\text{poly}(\lambda, \log |w|)$), making the proof system practical even for large computations. This "proofs much smaller than computation" property enables powerful applications in verifiable computation, privacy-preserving systems, and blockchain scalability.
+The defining feature of _succinctness_ ensures that both communication and verification complexity are polylogarithmic in the size of the computation ($poly(λ, \log |w|)$), making the proof system practical even for large computations. This "proofs much smaller than computation" property enables powerful applications in verifiable computation, privacy-preserving systems, and blockchain scalability.
 
 #### Polynomial Commitment Schemes (PCS)
 
@@ -112,7 +112,7 @@ PCS guarantees three critical properties:
 
 By applying the **Fiat-Shamir transform**, these interactive protocols can be made non-interactive in the **Random Oracle Model (ROM)**. The key advantage of PCS is its **succinctness**—the size of the commitment and proof depends only on the security parameter, not on the polynomial's degree. This makes PCS the perfect cryptographic compiler to transform idealized information-theoretic PIOPs into practical SNARKs.
 
-The security of many PCS constructions—especially **KZG-based PCS**—relies on the **q-DLOG assumption**: given powers of a secret $\tau$ in two groups $g_1, g_2$, computing $\tau$ is infeasible.
+The security of many PCS constructions—especially **KZG-based PCS**—relies on the **q-DLOG assumption**: given powers of a secret $\tau$ in two groups $g₁^τ, g₁^τ², ..., g₁^τᵍ, g₂^τ, g₂^τ², ..., g₂^τᵍ$, computing $\tau$ is infeasible.
 
 #### Polynomial Interactive Oracle Proofs (PIOP)
 
@@ -131,7 +131,7 @@ The algebraic underpinnings of zkSNARKs rest on concepts like **multilinear poly
 
 - **Multilinear Extension (MLE)** maps a function defined on the Boolean hypercube $B^\mu$ to a polynomial over $\mathbb{F}^\mu$. A key tool here is the polynomial:
 
-  $\tilde{eq}_\mu(x, y) = \prod_{i=1}^\mu (x_i y_i + (1 - x_i)(1 - y_i))$
+  $eq_\mu(x, y) = \prod_{i=1}^\mu (x_i y_i + (1 - x_i)(1 - y_i))$
   which evaluates to 1 if $x = y$ and 0 otherwise. This enables efficient construction of **Lagrange basis polynomials** and supports interpolation.
 
 - **Sumcheck Protocols** allow the prover to convince the verifier of the sum of a polynomial over the hypercube, reducing exponential complexity $O(2^\mu)$ to linear interaction.
@@ -148,11 +148,11 @@ The GKR (Goldwasser–Kalai–Rothblum) protocol is an interactive proof system 
 
 The GKR protocol verifies circuit evaluations by ascending from the output layer (layer 0) to the input layer (layer $d$), encoding inter-layer relationships via the equation:
 
-$V_i(z) = \sum_{x,y \in \{0,1\}^{s_{i+1}}} \big( \text{add}_{i+1}(z,x,y) \cdot (V_{i+1}(x) + V_{i+1}(y)) + \text{mult}_{i+1}(z,x,y) \cdot V_{i+1}(x) \cdot V_{i+1}(y) \big)$
+$V_i(z) = \sum_{x,y \in \{0,1\}^{s_{i+1}}} \big( add_{i+1}(z,x,y) \cdot (V_{i+1}(x) + V_{i+1}(y)) + mult_{i+1}(z,x,y) \cdot V_{i+1}(x) \cdot V_{i+1}(y) \big)$
 
 Here, $\text{add}_i$ and $\text{mult}_i$ are predicate functions that describe the structure of the circuit connections.
 
-Originally, GKR had a significant efficiency bottleneck. A naive implementation would require $O(S^2)$ time for the prover, where $S$ is the number of gates in a layer (with $s = \log S$). This inefficiency arises because a degree-$2s$ multivariate polynomial over Boolean inputs has at least $2^{2s} = S^2$ monomials.
+Originally, GKR had a significant efficiency bottleneck. A naive implementation would require $O(S^2)$ time for the prover, where $S$ is the number of gates in a layer (with $s = \log S$). This inefficiency arises because a degree-2s multivariate polynomial over Boolean inputs has at least $2^{2s} = S^2$ monomials.
 
 To improve efficiency, the protocol uses the **sum-check** subprotocol to verify layer relations. A key challenge is to merge multiple claims per round efficiently. The original GKR protocol used evaluation at online points, while later improvements, like those in Libra, adopted the use of **random linear combinations**, reducing prover time from $O(S \log S)$ to linear $O(S)$.
 
@@ -245,7 +245,7 @@ This method uses a linear combination of a commitment $H + \rho G$, where $G$ is
 
 The GKR protocol still has potential information leakage points. At the end of the zero-knowledge and checking phases, the verifier (V) must query an oracle at random points to evaluate polynomials, which leads to the leakage of evaluation values for the polynomials $\tilde{V}_i$ defined by the i-th layer of two circuits, specifically $\tilde{V}_i(u)$ and $\tilde{V}_i(v)$. The Libra system’s zero-knowledge GKR protocol addresses the information leakage issue present in the GKR protocol through a series of innovative techniques. Even after applying the zero-knowledge and checking protocols, the verifier can still gain information about the circuits by querying polynomial evaluation values $\tilde{V}_i(u)$ and $\tilde{V}_i(v)$.
 
-Libra builds on the low-degree extension idea proposed by Chiesa et al., where the polynomial $\dot{V}_i(z) = \tilde{V}_i(z) + Z_i(z)\sum_{w \in {0,1}^\lambda}R_i(z,w)$, with $Z(z) = \prod_{i=1}^{s_i} z_i(1-z_i)$, guarantees that $Z(z) = 0$ for all $z \in {0,1}^{s_i}$. Here, $R_i(z,w)$ is a random low-degree polynomial, and $\lambda$ is the security parameter. However, the key innovation in Libra’s approach is the proof that the mask polynomial $R_i$ can be drastically simplified to a small polynomial containing only two variables, each with degree 2, as opposed to the original approach that requires a polynomial with $s_i + 2s_{i+1} + \lambda$ variables.
+Libra builds on the low-degree extension idea proposed by Chiesa et al., where the polynomial $V̇ᵢ(z)=Ṽᵢ(z)+Zᵢ(z)∑_{w∈{0,1}^λ}Rᵢ(z,w)$, with $Z(z) = ∏{i=1}^{sᵢ} zᵢ(1-zᵢ)$, guarantees that $Z(z) = 0$ for all $z \in {0,1}^{s_i}$. Here, $R_i(z,w)$ is a random low-degree polynomial, and $\lambda$ is the security parameter. However, the key innovation in Libra’s approach is the proof that the mask polynomial $R_i$ can be drastically simplified to a small polynomial containing only two variables, each with degree 2, as opposed to the original approach that requires a polynomial with $s_i + 2s_{i+1} + \lambda$ variables.
 
 The complete protocol flow includes initialization, output layer processing, zero-knowledge and checking execution, intermediate layer recursive verification, and final input layer verification. The protocol rigorously proves its zero-knowledge property by constructing a simulator $S$ that uses a zero-knowledge and checking simulator as a subroutine. It then proves that the view generated by this simulator is indistinguishable from the real protocol. The critical proof steps are based on row-reduction analysis of the matrix formed by the four evaluation values of $R_i$, ensuring that the matrix is full rank when $u_1 \neq v_1$ and $2c^2 - 1 \neq 0 \mod p$, which guarantees the linear independence and uniform distribution of the four evaluation values.
 
@@ -263,7 +263,7 @@ The full protocol follows a layered verification process, from the output layer 
 
   - The prover (P) and verifier (V) perform zero-knowledge checks and verify the relationship between the output layer and the first layer:
 
-  $\dot{V}_0(g^{(0)}) = \sum_{x,y \in \{0,1\}^{s_1}} \text{mult}_1(g^{(0)},x,y)(\dot{V}_1(x) \cdot \dot{V}_1(y)) + \text{add}_1(g^{(0)},x,y)(\dot{V}_1(x) + \dot{V}_1(y))$
+  $V̇₀(g⁽⁰⁾) = ∑_{x,y∈{0,1}^s₁} m̃ult₁(g⁽⁰⁾,x,y)(V̇₁(x)·V̇₁(y)) + ãdd₁(g⁽⁰⁾,x,y)(V̇₁(x)+V̇₁(y))$
 
   - The verifier (V) receives the evaluation values for two points $\dot{V}_1(u^{(1)})$ and $\dot{V}_1(v^{(1)})$.
   - The verifier (V) computes the gate function values and verifies consistency:
@@ -275,7 +275,7 @@ The full protocol follows a layered verification process, from the output layer 
   - The verifier (V) selects random coefficients $\alpha^{(i)}, \beta^{(i)}$ for the linear combination.
   - Zero-knowledge checks are performed, and the relationship between the current layer and the next layer is verified:
 
-  $\alpha^{(i)} \cdot \dot{V}_i(u^{(i)}) + \beta^{(i)} \cdot \dot{V}_i(v^{(i)}) = \sum_{x,y \in \{0,1\}^{s_{i+1}}, w \in \{0,1\}} \left( I(0̄,w) \cdot \text{Mult}_{i+1}(x,y)(\dot{V}_{i+1}(x) \cdot \dot{V}_{i+1}(y)) + \text{Add}_{i+1}(x,y)(\dot{V}_{i+1}(x) + \dot{V}_{i+1}(y)) \right.$
+  $α⁽ⁱ⁾·V̇ᵢ(u⁽ⁱ⁾) + β⁽ⁱ⁾·V̇ᵢ(v⁽ⁱ⁾) =     ∑_{x,y∈{0,1}^sᵢ₊₁,w∈{0,1}} (      I(0̄,w)·Multᵢ₊₁(x,y)(V̇ᵢ₊₁(x)·V̇ᵢ₊₁(y)) +       Addᵢ₊₁(x,y)(V̇ᵢ₊₁(x)+V̇ᵢ₊₁(y)) +       I((x,y),0̄)(α⁽ⁱ⁾·Zᵢ(u⁽ⁱ⁾)·Rᵢ(u₁⁽ⁱ⁾,w) + β⁽ⁱ⁾·Zᵢ(v⁽ⁱ⁾)·Rᵢ(v₁⁽ⁱ⁾,w)))$
 
   $\left. + I((x,y),0̄)(\alpha^{(i)} \cdot Z_i(u^{(i)}) \cdot R_i(u_1^{(i)},w) + \beta^{(i)} \cdot Z_i(v^{(i)}) \cdot R_i(v_1^{(i)},w)) \right)$
 
@@ -284,13 +284,14 @@ The full protocol follows a layered verification process, from the output layer 
 
   - The verifier (V) computes necessary coefficients and performs local validation:
 
-    - $a_{i+1} = \alpha^{(i)} \cdot \text{mult}_{i+1}(u^{(i)}, u^{(i+1)}, v^{(i+1)}) + \beta^{(i)} \cdot \text{mult}_{i+1}(v^{(i)}, u^{(i+1)}, v^{(i+1)})$
-    - $b_{i+1} = \alpha^{(i)} \cdot \text{add}_{i+1}(u^{(i)}, u^{(i+1)}, v^{(i+1)}) + \beta^{(i)} \cdot \text{add}_{i+1}(v^{(i)}, u^{(i+1)}, v^{(i+1)})$
+    - $aᵢ₊₁ = α⁽ⁱ⁾·m̃ultᵢ₊₁(u⁽ⁱ⁾,u⁽ⁱ⁺¹⁾,v⁽ⁱ⁺¹⁾) + β⁽ⁱ⁾·m̃ultᵢ₊₁(v⁽ⁱ⁾,u⁽ⁱ⁺¹⁾,v⁽ⁱ⁺¹⁾)$
+    - $bᵢ₊₁ = α⁽ⁱ⁾·ãddᵢ₊₁(u⁽ⁱ⁾,u⁽ⁱ⁺¹⁾,v⁽ⁱ⁺¹⁾) + β⁽ⁱ⁾·ãddᵢ₊₁(v⁽ⁱ⁾,u⁽ⁱ⁺¹⁾,v⁽ⁱ⁺¹⁾)$
     - $Z_i(u^{(i)}), Z_i(v^{(i)}), I(0̄,c^{(i)}), I((u^{(i+1)}, v^{(i+1)}),0̄)$
 
   - The value of $R_i$ at specific two points is opened for verification:
 
-  $I(0̄,c^{(i)}) \left(a_{i+1}(\dot{V}_{i+1}(u^{(i+1)}) \cdot \dot{V}_{i+1}(v^{(i+1)})) + b_{i+1}(\dot{V}_{i+1}(u^{(i+1)}) + \dot{V}_{i+1}(v^{(i+1)})) \right)$
+  $I(0̄,c⁽ⁱ⁾)(aᵢ₊₁(V̇ᵢ₊₁(u⁽ⁱ⁺¹⁾)·V̇ᵢ₊₁(v⁽ⁱ⁺¹⁾))+bᵢ₊₁(V̇ᵢ₊₁(u⁽ⁱ⁺¹⁾)+V̇ᵢ₊₁(v⁽ⁱ⁺¹⁾)))+
+I((u⁽ⁱ⁺¹⁾,v⁽ⁱ⁺¹⁾),0̄)(α⁽ⁱ⁾·Zᵢ(u⁽ⁱ⁾)·Rᵢ(u₁⁽ⁱ⁾,c⁽ⁱ⁾) + β⁽ⁱ⁾·Zᵢ(v⁽ⁱ⁾)·Rᵢ(v₁⁽ⁱ⁾,c⁽ⁱ⁾))$
 
   $+ I((u^{(i+1)}, v^{(i+1)}),0̄)(\alpha^{(i)} \cdot Z_i(u^{(i)}) \cdot R_i(u_1^{(i)}, c^{(i)}) + \beta^{(i)} \cdot Z_i(v^{(i)}) \cdot R_i(v_1^{(i)}, c^{(i)}))$
 
@@ -302,7 +303,7 @@ The full protocol follows a layered verification process, from the output layer 
   - The values of $R_k$ at four points are opened.
   - The mask form is verified for consistency with the actual inputs:
 
-  $\dot{V}_k(u^{(d)}) = \tilde{V}_k(u^{(d)}) + Z_k(u^{(d)}) \sum_{w \in \{0,1\}} R_k(u_1^{(d)},w), \quad \dot{V}_k(v^{(d)}) = \tilde{V}_k(v^{(d)}) + Z_k(v^{(d)}) \sum_{w \in \{0,1\}} R_k(v_1^{(d)},w)$
+  $V̇ₖ(u⁽ᵈ⁾) = Ṽₖ(u⁽ᵈ⁾) + Zₖ(u⁽ᵈ⁾)∑_{w∈{0,1}} Rₖ(u₁⁽ᵈ⁾,w)  V̇ₖ(v⁽ᵈ⁾) = Ṽₖ(v⁽ᵈ⁾) + Zₖ(v⁽ᵈ⁾)∑_{w∈{0,1}} Rₖ(v₁⁽ᵈ⁾,w)$
 
   - Based on the verification results, the proof is either accepted or rejected.
 
@@ -357,10 +358,6 @@ The Libra system introduces several optimizations to reduce the complexity of zk
 These innovations ensure that Libra's zkVPD maintains the desired zero-knowledge property while offering efficient proof generation and verification. The overall time complexity for the multi-linear commitment and opening algorithm is linear in $O(2^\ell)$, and the verification complexity is $O(\ell)$, ensuring that the system is both practical and secure for use in the Libra protocol.
 
 The input layer zkVPD protocol ensures the validity of the polynomial evaluation without revealing any sensitive information, allowing Libra to achieve both privacy and efficiency in its zero-knowledge proofs.
-
-### **Conclusion**
-
-The GKR protocol, through careful algorithmic design in Libra, achieves **linear-time prover complexity** without sacrificing soundness or completeness. Innovations like FunctionEvaluations, two-phase sum-check decomposition, and use of sparse multilinear extensions are key to scaling interactive proofs over large circuits. These advances not only make GKR practical but also foundational in modern zero-knowledge systems.
 
 ---
 
