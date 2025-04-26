@@ -28,7 +28,7 @@ Authors: [Evta](https://twitter.com/pwhattie), looking forward to your joining
 
 # Pianist: Distributed SNARKs Overcoming the Bottlenecks of Proof Generation
 
-Distributed SNARK technology speeds up zero-knowledge proofs by enabling collaborative proving across multiple machines, with approaches falling into two categories **Privacy-preserving**(outsourcing computation to multiple servers) and **Computation-accelerating**(using many machines in parallel). Recent systems like deVirgo, HyperPianist, Cirrus, Pianist, and Hekaton use **distributed PIOP + distributed PCS**. Among these, **Pianist** stands out with constant proof size, communication and verification complexity，and efficiently handles large-scale tasks for blockchain applications like zkRollup and zkEVM by integrating with Libra.
+Distributed SNARK technology speeds up zero-knowledge proofs by enabling collaborative proving across multiple machines, with approaches falling into two categories **Privacy-preserving**(outsourcing computation to multiple servers) and **Computation-accelerating**(using many machines in parallel). Recent systems like deVirgo, Cirrus, Pianist, and Hekaton use **distributed PIOP + distributed PCS**. Among these, **Pianist** stands out with constant proof size, communication and verification complexity，and efficiently handles large-scale tasks for blockchain applications like zkRollup and zkEVM by integrating with Libra.
 
 Pianist combines a bivariate Plonk constraint system with distributed KZG polynomial commitment, introducing the Robust Collaborative Proving System (RCPS) to verify individual machine contributions. Its main limitation is the 10× overhead when converting R1CS circuits, which has prompted research into more efficient R1CS-native distributed SNARK designs, exploring enhanced **inner product arguments**, new **batchable bivariate KZG commitment variants**, and **lookup arguments for non-fixed tables** combined with **efficient preprocessing methods**.
 
@@ -101,6 +101,22 @@ In contrast, **Pianist** offers a fundamentally more scalable and robust approac
 - **Minimal inter-machine communication**, with communication complexity depending only on the **number of machines** $O(M)$, not on the total circuit size,
 - **Constant proof size** $O(1)$ regardless of circuit size or machine count,
 - **Robustness**, allowing the detection and exclusion of malicious or faulty participants through partial proof verification.
+
+**Comparative Analysis: DIZK vs. deVirgo vs. Pianist**
+ 
+ In a distributed setting, Pianist splits a total circuit of size $N$ across $M$ machines, with each machine handling a **sub-circuit** of size $T = N / M$. The table below summarizes the performance characteristics of each system:
+ 
+ | System      | Prover Time     | Communication Cost | Proof Size & Verification | Robustness |
+ | ----------- | --------------- | ------------------ | ------------------------- | ---------- |
+ | **DIZK**    | $O(T \log^2 T)$ | $O(N)$             | $O(1)$                    | ✗          |
+ | **deVirgo** | $O(T \log T)$   | $O(N)$             | $O(\log^2 N)$             | ✗          |
+ | **Pianist** | $O(T \log T)$   | $O(M)$             | $O(1)$                    | ✓          |
+ 
+ Where:
+ 
+ - $M$ is the number of machines in the distributed prover system,
+ - $N$ is the total number of gates (circuit size),
+ - $T = N/M$ is the number of gates per sub-circuit (per machine).
 
 **A New Paradigm for Scalable zkSNARKs**
 
@@ -256,7 +272,7 @@ In terms of IPA, recent techniques span discrete logarithm-based constructions a
 
 Distributed SNARKs generally fall into two categories. The first relies on secret-sharing the witness across multiple machines for privacy, though this offers limited acceleration as each share scales with the original witness size. The second—and more relevant—category uses multiple machines to accelerate a single prover's workload. Examples include DIZK, which extends Groth16 over R1CS using distributed algorithms for MSMs and FFTs. However, its reliance on distributed FFTs leads to high communication overhead and increases total proving time.
 
-Recent work (e.g., deVirgo, HyperPianist, Cirrus, Pianist, Hekaton) shares a core strategy: decomposing a large statement into smaller substatements processed by multiple provers, then aggregating the subproofs into a final proof. These systems typically follow a "distributed PIOP + distributed PCS" design, with efficiency determined by the specific protocol details.
+Recent work (e.g., deVirgo, Cirrus, Pianist, Hekaton) shares a core strategy: decomposing a large statement into smaller substatements processed by multiple provers, then aggregating the subproofs into a final proof. These systems typically follow a "distributed PIOP + distributed PCS" design, with efficiency determined by the specific protocol details.
 
 This new line of work brings four key innovations:
 
@@ -352,7 +368,7 @@ By integrating all the innovations discussed—including:
 - the batched bivariate KZG commitment scheme,
 - and its distributed generalization—
 
-the work successfully constructs a theoretically sound and practically efficient **distributed SNARK system for R1CS**. This represents a major step forward in scalable zero-knowledge proof systems and distributed cryptographic protocols.
+the work successfully constructs a theoretically sound and practically efficient **distributed SNARK system for R1CS**.
 
 <details><summary><b> Code </b></summary>
 
