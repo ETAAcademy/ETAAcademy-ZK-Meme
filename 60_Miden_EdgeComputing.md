@@ -42,7 +42,7 @@ This integration also enables the automation of resource allocation and coordina
 
 **Edge-Cloud Collaborative Computing (ECCC)**
 
-The **Edge-Cloud Collaborative Computing** paradigm leverages a three-tier architecture—cloud, edge, and end devices—to combine the computational power of the cloud with the low-latency responsiveness of edge nodes. This distributed intelligence framework balances resource usage through parallelism across tasks, data, and models. It dynamically manages critical resources, including computational power (Ck), communication bandwidth (Bij), and storage capacity (Sk).
+The **Edge-Cloud Collaborative Computing** paradigm leverages a three-tier architecture—cloud, edge, and end devices—to combine the computational power of the cloud with the low-latency responsiveness of edge nodes. This distributed intelligence framework balances resource usage through parallelism across tasks, data, and models. It dynamically manages critical resources, including computational power ($C_k$), communication bandwidth ($B_{ij}$), and storage capacity ($S_k$).
 
 Advanced model optimization techniques are used throughout the system:
 
@@ -125,8 +125,6 @@ Model adaptation is achieved via three learning paradigms:
 - **Transfer Learning (TL)**: Uses pre-trained models to accelerate learning on new tasks, as seen in surface defect detection and edge-cloud cooperative environments.
 - **Federated Learning (FL)**: Enables decentralized training on local data with global model aggregation, maintaining data privacy. Notable examples include FedCAE and QuAsyncFL.
 - **Continual Learning (CL)**: Allows models to learn from sequential data without catastrophic forgetting, ideal for dynamic contexts such as digital twins and intelligent traffic systems.
-
-Table III (not included here) provides a comparative analysis of these methods across various applications. These strategies, often combined with compression and edge-cloud collaboration, address core challenges of resource constraints, privacy, and adaptability in dynamic environments.
 
 #### Resource-Aware Optimization
 
@@ -236,8 +234,6 @@ Despite advancements, several technical challenges remain:
 
 - **Performance Bottlenecks**: Latency and bandwidth constraints, limited edge computing and memory capacity, and real-time requirements pose challenges. Solutions include task offloading, data compression, distributed storage (e.g., EdgeKV), and adaptive resource allocation.
 
-**Outlook: Next-Generation AI and System-Level Innovations**
-
 Future research is expected to advance in two major areas:
 
 - **Advanced AI Techniques**: These include Neural Architecture Search (NAS), AutoML, optimized LLMs for edge inference (e.g., AgileQuant, EdgeMoE), autonomous AI agents, embodied AI for constrained devices, neuromorphic computing for energy efficiency, quantum edge computing, and 6G integration for ultra-low latency and high bandwidth.
@@ -313,13 +309,9 @@ The **Sponge construction** has become a standard in modern cryptography. It div
 
 However, one of the major challenges in sponge-based hashing is handling inputs of arbitrary lengths efficiently. Traditional padding methods, such as the commonly used **pad10**, are simple but inefficient. They add extra permutation rounds even when inputs are perfectly aligned, which leads to unnecessary overhead—especially problematic for small messages. This inefficiency is precisely what the **GSponge** family of hash functions aims to resolve.
 
-**From GSponge to Sponge2: Efficient Padding Meets Algebraic Soundness**
-
 In Miden’s zero-knowledge virtual machine (zkVM), efficient and secure hashing is essential for transaction execution, proof generation, and state updates. The **GSponge** and **Sponge2** constructions were introduced to optimize performance and simplify security proofs within the context of finite field arithmetic.
 
 Unlike traditional sponge models that rely on general-purpose padding, **GSponge** is designed with **domain-specific padding** strategies that avoid unnecessary rounds. It achieves optimal performance for short messages while maintaining strong cryptographic properties. Moreover, **GSponge** offers an important advancement in the realm of **indifferentiability proofs**, a modern security criterion for hash function soundness.
-
-**Indifferentiability: A Key to Hash Security**
 
 The security of hash constructions is typically established using a **two-step approach**:
 
@@ -364,8 +356,6 @@ Thanks to the flexibility of its parameters, **GSponge** can precisely replicate
 
 This unified formulation not only simplifies the interpretation and comparison of various sponge-based designs, but also provides a shared theoretical foundation for their security proofs—bridging gaps where some sponge variants previously lacked formal analysis.
 
-**Security of GSponge**
-
 The primary security objective of GSponge is _indifferentiability from a random oracle_, which—when combined with a sufficiently large output size—naturally implies key hash properties such as preimage resistance and collision resistance.
 
 One of the key insights of the GSponge framework is that its security analysis can be substantially simplified by abstracting away two seemingly significant parameters:
@@ -395,8 +385,6 @@ These optimizations are made possible by a **dynamic domain separator** $i$, whi
 - Otherwise: $i = (r - ((|M| - r_0) \mod r)) \mod r$
 
 This adaptive separator guarantees unique and unambiguous processing of messages of varying lengths, preventing collisions and ambiguity in interpretation.
-
-**Security of Sponge2**
 
 Sponge2 maintains strong theoretical guarantees by being _indifferentiable from a random oracle_, with a provable upper bound on the adversary’s advantage:
 
@@ -429,9 +417,10 @@ These mathematically grounded improvements make Sponge2 not only ideal for **Mid
 
 <details><summary><b> Code </b></summary>
 
-<details><summary><b> Code </b></summary>
+<details><summary><b> miden-objects/src/account </b></summary>
 
 ```rust
+// crates/miden-objects/src/account/mod.rs
 pub struct Account {
     id: AccountId,
     vault: AssetVault,
@@ -460,15 +449,224 @@ impl Account {
             self.code.commitment(),
         )
     }
+
+    pub fn apply_delta(&mut self, delta: &AccountDelta) -> Result<(), AccountError> {
+        self.vault
+            .apply_delta(delta.vault())
+            .map_err(AccountError::AssetVaultUpdateError)?;
+
+        self.storage.apply_delta(delta.storage())?;
+
+        if let Some(nonce) = delta.nonce() {
+            self.set_nonce(nonce)?;
+        }
+
+        Ok(())
+    }
+}
+```
+
+```rust
+// crates/miden-objects/src/account/delta/mod.rs
+pub struct AccountDelta {
+    storage: AccountStorageDelta,
+    vault: AccountVaultDelta,
+    nonce: Option<Felt>,
+}
+
+impl AccountDelta {
+    pub fn new(
+        storage: AccountStorageDelta,
+        vault: AccountVaultDelta,
+        nonce: Option<Felt>,
+    ) -> Result<Self, AccountDeltaError> {
+        validate_nonce(nonce, &storage, &vault)?;
+        Ok(Self { storage, vault, nonce })
+    }
+
+    pub fn merge(&mut self, other: Self) -> Result<(), AccountDeltaError> {
+        match (&mut self.nonce, other.nonce) {
+            (Some(old), Some(new)) if new.as_int() <= old.as_int() => {
+                return Err(AccountDeltaError::InconsistentNonceUpdate(format!(
+                    "new nonce {new} is not larger than the old nonce {old}"
+                )));
+            },
+            (old, new) => *old = new.or(*old),
+        };
+        self.storage.merge(other.storage)?;
+        self.vault.merge(other.vault)
+    }
+}
+```
+
+```rust
+// crates/miden-objects/src/account/storage/mod.rs
+pub struct AccountStorage {
+    slots: Vec<StorageSlot>,
+}
+
+impl AccountStorage {
+    pub const MAX_NUM_STORAGE_SLOTS: usize = 255;
+
+    pub fn new(slots: Vec<StorageSlot>) -> Result<AccountStorage, AccountError> {
+        let num_slots = slots.len();
+
+        if num_slots > Self::MAX_NUM_STORAGE_SLOTS {
+            return Err(AccountError::StorageTooManySlots(num_slots as u64));
+        }
+
+        Ok(Self { slots })
+    }
+
+    pub fn commitment(&self) -> Digest {
+        build_slots_commitment(&self.slots)
+    }
+
+    pub fn get_item(&self, index: u8) -> Result<Digest, AccountError> {
+        self.slots
+            .get(index as usize)
+            .ok_or(AccountError::StorageIndexOutOfBounds {
+                slots_len: self.slots.len() as u8,
+                index,
+            })
+            .map(|slot| slot.value().into())
+    }
+}
+```
+
+```rust
+// crates/miden-objects/src/account/mod.rs
+pub fn hash_account(
+    id: AccountId,
+    nonce: Felt,
+    vault_root: Digest,
+    storage_commitment: Digest,
+    code_commitment: Digest,
+) -> Digest {
+    let mut elements = [ZERO; 16];
+    elements[0] = id.suffix();
+    elements[1] = id.prefix().as_felt();
+    elements[3] = nonce;
+    elements[4..8].copy_from_slice(&*vault_root);
+    elements[8..12].copy_from_slice(&*storage_commitment);
+    elements[12..].copy_from_slice(&*code_commitment);
+    Hasher::hash_elements(&elements)
+}
+```
+
+</details>
+
+<details><summary><b> miden-objects/src/asset </b></summary>
+
+```rust
+// crates/miden-objects/src/asset/mod.rs
+pub enum Asset {
+    Fungible(FungibleAsset),
+    NonFungible(NonFungibleAsset),
+}
+
+// crates/miden-objects/src/asset/fungible.rs
+pub struct FungibleAsset {
+    value: Word,
+}
+
+impl FungibleAsset {
+    pub fn new(faucet_id: AccountIdPrefix, amount: u64) -> Result<Self, AssetError> {
+        if amount > MAX_FUNGIBLE_ASSET_AMOUNT {
+            return Err(AssetError::FungibleAssetAmountTooLarge(amount));
+        }
+
+        let value = [
+            Felt::new(amount),
+            ZERO,
+            faucet_id.suffix(),
+            faucet_id.as_felt(),
+        ];
+
+        Ok(Self { value })
+    }
+
+    pub fn amount(&self) -> u64 {
+        self.value[0].as_int()
+    }
+}
+
+// crates/miden-objects/src/asset/vault.rs
+pub struct AssetVault {
+    assets: BTreeMap<Word, Word>,
+    root: Digest,
+}
+
+impl AssetVault {
+    pub fn add_asset(&mut self, asset: Asset) -> Result<(), AssetError> {
+        let key = asset.vault_key();
+
+        match asset {
+            Asset::Fungible(asset) => self.add_fungible_asset(asset)?,
+            Asset::NonFungible(asset) => self.add_non_fungible_asset(asset)?,
+        }
+
+        self.update_root();
+        Ok(())
+    }
 }
 
 ```
 
 </details>
 
-<details><summary><b> Code </b></summary>
+<details><summary><b> miden-objects/src/note </b></summary>
 
 ```rust
+// crates/miden-objects/src/note/mod.rs
+pub struct Note {
+    header: NoteHeader,
+    details: NoteDetails,
+    nullifier: Nullifier,
+}
+
+impl Note {
+    pub fn new(assets: NoteAssets, metadata: NoteMetadata, recipient: NoteRecipient) -> Self {
+        let details = NoteDetails::new(assets, recipient);
+        let header = NoteHeader::new(details.id(), metadata);
+        let nullifier = details.nullifier();
+
+        Self { header, details, nullifier }
+    }
+
+    pub fn commitment(&self) -> Digest {
+        self.header.commitment()
+    }
+}
+
+// crates/miden-objects/src/note/metadata.rs
+pub struct NoteMetadata {
+    sender: AccountId,
+    tag: NoteTag,
+    created_at: BlockNumber,
+    note_type: NoteType,
+}
+
+// crates/miden-objects/src/note/recipient.rs
+pub struct NoteRecipient {
+    serial_num: Word,
+    script: NoteScript,
+    inputs: NoteInputs,
+}
+
+// crates/miden-objects/src/note/script.rs
+pub struct NoteScript {
+    mast_root: Digest,
+}
+
+```
+
+</details>
+
+<details><summary><b> miden-objects/src/transaction </b></summary>
+
+```rust
+// crates/miden-objects/src/transaction/executed_tx.rs
 pub struct ExecutedTransaction {
     id: OnceCell<TransactionId>,
     tx_inputs: TransactionInputs,
@@ -502,40 +700,78 @@ impl ExecutedTransaction {
     }
 }
 
-```
-
-</details>
-
-<details><summary><b> Code </b></summary>
-
-```rust
-pub struct Note {
-    header: NoteHeader,
-    details: NoteDetails,
-    nullifier: Nullifier,
+// crates/miden-objects/src/transaction/proven_tx.rs
+pub struct ProvenTransaction {
+    tx_hash: TransactionId,
+    account_update: TxAccountUpdate,
+    output_notes: OutputNotes,
+    input_notes: Vec<InputNoteCommitment>,
+    expiration_block_num: BlockNumber,
+    proof: Proof,
 }
 
-impl Note {
-    pub fn new(assets: NoteAssets, metadata: NoteMetadata, recipient: NoteRecipient) -> Self {
-        let details = NoteDetails::new(assets, recipient);
-        let header = NoteHeader::new(details.id(), metadata);
-        let nullifier = details.nullifier();
-
-        Self { header, details, nullifier }
-    }
-
-    pub fn commitment(&self) -> Digest {
-        self.header.commitment()
-    }
+// crates/miden-objects/src/transaction/inputs.rs
+pub struct TransactionInputs {
+    account: Account,
+    seed: Word,
+    block_header: BlockHeader,
+    mmr: Mmr,
+    input_notes: InputNotes<InputNote>,
 }
 
 ```
 
 </details>
 
-<details><summary><b> Code </b></summary>
+<details><summary><b> miden-objects/src/block </b></summary>
 
 ```rust
+// crates/miden-objects/src/block/header.rs
+pub struct BlockHeader {
+    block_num: BlockNumber,
+    prev_hash: Digest,
+    account_root: Digest,
+    nullifier_root: Digest,
+    note_root: Digest,
+    batch_root: Digest,
+    proof_hash: Digest,
+}
+
+// crates/miden-objects/src/block/proposed_block.rs
+pub struct ProposedBlock {
+    header: BlockHeader,
+    account_updates: Vec<AccountUpdate>,
+    note_outputs: Vec<OutputNote>,
+    nullifiers: Vec<Nullifier>,
+    batch_root: Option<Digest>,
+}
+
+// crates/miden-objects/src/block/proven_block.rs
+pub struct ProvenBlock {
+    header: BlockHeader,
+    proof: Proof,
+}
+
+// crates/miden-objects/src/block/account_tree.rs
+pub struct AccountTree {
+    root: Digest,
+    accounts: BTreeMap<AccountId, Digest>,
+}
+
+// crates/miden-objects/src/block/nullifier_tree.rs
+pub struct NullifierTree {
+    root: Digest,
+    nullifiers: BTreeSet<Nullifier>,
+}
+
+```
+
+</details>
+
+<details><summary><b> miden-objects/src/executor </b></summary>
+
+```rust
+// crates/miden-tx/src/executor/mod.rs
 pub struct TransactionExecutor {
     data_store: Arc<dyn DataStore>,
     authenticator: Option<Arc<dyn TransactionAuthenticator>>,
@@ -547,8 +783,6 @@ impl TransactionExecutor {
         data_store: Arc<dyn DataStore>,
         authenticator: Option<Arc<dyn TransactionAuthenticator>>,
     ) -> Self {
-        const _: () = assert!(MIN_TX_EXECUTION_CYCLES <= MAX_TX_EXECUTION_CYCLES);
-
         Self {
             data_store,
             authenticator,
@@ -557,8 +791,7 @@ impl TransactionExecutor {
                 MIN_TX_EXECUTION_CYCLES,
                 false,
                 false,
-            )
-            .expect("Must not fail while max cycles is more than min trace length"),
+            ).expect("Must not fail while max cycles is more than min trace length"),
         }
     }
 
@@ -570,7 +803,39 @@ impl TransactionExecutor {
         notes: InputNotes<InputNote>,
         tx_args: TransactionArgs,
     ) -> Result<ExecutedTransaction, TransactionExecutorError> {
-        // Implementation details...
+        let mut ref_blocks = validate_input_notes(&notes, block_ref)?;
+        ref_blocks.insert(block_ref);
+
+        let (account, seed, ref_block, mmr) =
+            maybe_await!(self.data_store.get_transaction_inputs(account_id, ref_blocks))
+                .map_err(TransactionExecutorError::FetchTransactionInputsFailed)?;
+
+        validate_account_inputs(&tx_args, &ref_block)?;
+
+        let tx_inputs = TransactionInputs::new(account, seed, ref_block, mmr, notes)
+            .map_err(TransactionExecutorError::InvalidTransactionInputs)?;
+
+        let (stack_inputs, advice_inputs) =
+            TransactionKernel::prepare_inputs(&tx_inputs, &tx_args, None)
+                .map_err(TransactionExecutorError::InvalidTransactionInputs)?;
+
+        let advice_recorder: RecAdviceProvider = advice_inputs.into();
+        let mut host = TransactionHost::new(
+            tx_inputs.account().into(),
+            advice_recorder,
+            self.data_store.clone(),
+            self.authenticator.clone(),
+            tx_args.foreign_account_code_commitments(),
+        ).map_err(TransactionExecutorError::TransactionHostCreationFailed)?;
+
+        let result = vm_processor::execute(
+            &TransactionKernel::main(),
+            stack_inputs,
+            &mut host,
+            self.exec_options,
+        ).map_err(TransactionExecutorError::TransactionProgramExecutionFailed)?;
+
+        build_executed_transaction(tx_args, tx_inputs, result.stack_outputs().clone(), host)
     }
 }
 
@@ -578,9 +843,60 @@ impl TransactionExecutor {
 
 </details>
 
-<details><summary><b> Code </b></summary>
+<details><summary><b> miden-objects/src/prover </b></summary>
 
 ```rust
+// crates/miden-tx/src/prover/local.rs
+pub struct LocalTransactionProver {
+    options: ProvingOptions,
+}
+
+impl LocalTransactionProver {
+    pub fn new(options: ProvingOptions) -> Self {
+        Self { options }
+    }
+
+    pub fn prove(
+        &self,
+        executed_tx: ExecutedTransaction,
+    ) -> Result<ProvenTransaction, TransactionProvingError> {
+        let (account_delta, tx_outputs, tx_witness, _) = executed_tx.into_parts();
+
+        let (pub_inputs, priv_inputs) = build_proof_inputs(
+            &tx_witness.tx_inputs,
+            &tx_outputs,
+            &account_delta,
+            &tx_witness.tx_args,
+            &tx_witness.advice_witness,
+        )?;
+
+        let proof = generate_proof(
+            &TransactionKernel::main(),
+            pub_inputs,
+            priv_inputs,
+            &self.options,
+        )?;
+
+        let proven_tx = ProvenTransaction::new(
+            tx_witness.tx_inputs.account().id(),
+            account_delta,
+            tx_outputs,
+            proof,
+        )?;
+
+        Ok(proven_tx)
+    }
+}
+
+```
+
+</details>
+
+<details><summary><b> miden-lib/asm </b></summary>
+
+```assembly
+// crates/miden-lib/asm/note_scripts/P2ID.masm
+# P2ID (Pay-to-ID) Script Example
 use.miden::account
 use.miden::note
 use.miden::contracts::wallets::basic->wallet
@@ -617,20 +933,96 @@ end
 
 </details>
 
-<details><summary><b> Code </b></summary>
+<details><summary><b> miden-tx/src/auth </b></summary>
 
 ```rust
-#[tokio::main]
-async fn main() -> Result<(), String> {
-    use clap::Parser;
+// crates/miden-tx/src/auth/mod.rs
+pub trait TransactionAuthenticator: Send + Sync {
+    fn authenticate(
+        &self,
+        account_id: AccountId,
+        message: Word,
+        signature: &[u8],
+    ) -> Result<(), AuthenticationError>;
+}
 
-    setup_tracing()?;
+// crates/miden-tx/src/auth/rpo_falcon512.rs
+pub struct RpoFalcon512Authenticator {
+    pub_key_provider: Arc<dyn PublicKeyProvider>,
+}
 
-    // read command-line args
-    let cli = Cli::parse();
+impl TransactionAuthenticator for RpoFalcon512Authenticator {
+    fn authenticate(
+        &self,
+        account_id: AccountId,
+        message: Word,
+        signature: &[u8],
+    ) -> Result<(), AuthenticationError> {
+        let pub_key = self.pub_key_provider.get_public_key(account_id)?;
 
-    // execute cli action
-    cli.execute().await
+        let signature = Signature::from_bytes(signature)
+            .map_err(|_| AuthenticationError::InvalidSignature)?;
+
+        pub_key.verify(message.as_bytes(), &signature)
+            .map_err(|_| AuthenticationError::SignatureVerificationFailed)
+    }
+}
+
+```
+
+</details>
+
+<details><summary><b> miden-objects/src/utils/mmr.rs </b></summary>
+
+```rust
+// crates/miden-objects/src/utils/mmr.rs
+pub struct Mmr {
+    peaks: Vec<Digest>,
+    num_leaves: u64,
+}
+
+impl Mmr {
+    pub fn new(peaks: Vec<Digest>, num_leaves: u64) -> Self {
+        Self { peaks, num_leaves }
+    }
+
+    pub fn root(&self) -> Digest {
+        if self.peaks.is_empty() {
+            return EMPTY_WORD;
+        }
+
+        let mut result = self.peaks[0];
+        for peak in &self.peaks[1..] {
+            result = Hasher::merge(&result, peak);
+        }
+
+        result
+    }
+
+    pub fn verify_proof(
+        &self,
+        leaf: Digest,
+        leaf_index: u64,
+        proof: &[Digest],
+    ) -> Result<bool, MmrError> {
+        if leaf_index >= self.num_leaves {
+            return Err(MmrError::LeafIndexOutOfBounds);
+        }
+
+        let mut current = leaf;
+        let mut pos = leaf_index;
+
+        for &sibling in proof {
+            if pos % 2 == 0 {
+                current = Hasher::merge(&current, &sibling);
+            } else {
+                current = Hasher::merge(&sibling, &current);
+            }
+            pos /= 2;
+        }
+
+        Ok(self.peaks.contains(&current))
+    }
 }
 
 ```
