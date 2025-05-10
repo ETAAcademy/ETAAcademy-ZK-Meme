@@ -28,7 +28,7 @@ Authors: [Evta](https://twitter.com/pwhattie), looking forward to your joining
 
 # Pianist: Distributed SNARKs Overcoming the Bottlenecks of Proof Generation
 
-Distributed SNARK technology speeds up zero-knowledge proofs by enabling collaborative proving across multiple machines, with approaches falling into two categories **Privacy-preserving**(outsourcing computation to multiple servers) and **Computation-accelerating**(using many machines in parallel). Recent systems like deVirgo, HyperPianist, Cirrus, Pianist, and Hekaton use **distributed PIOP + distributed PCS**. Among these, **Pianist** stands out with constant proof size, communication complexity and verification complexity and efficiently handles large-scale tasks for blockchain applications like zkRollup and zkEVM by integrating with Libra.
+Distributed SNARK technology speeds up zero-knowledge proofs by enabling collaborative proving across multiple machines, with approaches falling into two categories **Privacy-preserving**(outsourcing computation to multiple servers) and **Computation-accelerating**(using many machines in parallel). Recent systems like deVirgo, Cirrus, Pianist, and Hekaton use **distributed PIOP + distributed PCS**. Among these, **Pianist** stands out with constant proof size, communication and verification complexity，and efficiently handles large-scale tasks for blockchain applications like zkRollup and zkEVM by integrating with Libra.
 
 Pianist combines a bivariate Plonk constraint system with distributed KZG polynomial commitment, introducing the Robust Collaborative Proving System (RCPS) to verify individual machine contributions. Its main limitation is the 10× overhead when converting R1CS circuits, which has prompted research into more efficient R1CS-native distributed SNARK designs, exploring enhanced **inner product arguments**, new **batchable bivariate KZG commitment variants**, and **lookup arguments for non-fixed tables** combined with **efficient preprocessing methods**.
 
@@ -59,12 +59,12 @@ $S(Y, X) = \sum_{i=0}^{M-1} R_i(Y) \cdot s_i(X)$
 where:
 
 - $M$ is the total number of machines,
-- $s_i(X)$ is a witness column (e.g., $a_i(X), b_i(X), o_i(X)$) from machine $i$,
+- $s_i(X)$ is a witness column ( e.g., $a_i(X), b_i(X), o_i(X)$ ) from machine $i$,
 - $R_i(Y)$ is the **Lagrange polynomial** associated with node $i$, defined over the $M$-th roots of unity.
 
 This method is extended to all input/output/constraint polynomials:
 
-$A(Y, X) = \sum R_i(Y) a_i(X),\quad B(Y, X) = \sum R_i(Y) b_i(X),\quad O(Y, X) = \sum R_i(Y) o_i(X)$
+$A(Y,X)=\sum_{i=0}^{M-1}R_i(Y)a_i(X)，B(Y,X)=\sum_{i=0}^{M-1}R_i(Y)b_i(X)， O(Y,X)=\sum_{i=0}^{M-1}R_i(Y)o_i(X)$
 
 These are then combined into a global bivariate constraint polynomial:
 
@@ -103,20 +103,20 @@ In contrast, **Pianist** offers a fundamentally more scalable and robust approac
 - **Robustness**, allowing the detection and exclusion of malicious or faulty participants through partial proof verification.
 
 **Comparative Analysis: DIZK vs. deVirgo vs. Pianist**
-
-In a distributed setting, Pianist splits a total circuit of size $N$ across $M$ machines, with each machine handling a **sub-circuit** of size $T = N / M$. The table below summarizes the performance characteristics of each system:
-
-| System      | Prover Time     | Communication Cost | Proof Size & Verification | Robustness |
-| ----------- | --------------- | ------------------ | ------------------------- | ---------- |
-| **DIZK**    | $O(T \log^2 T)$ | $O(N)$             | $O(1)$                    | ✗          |
-| **deVirgo** | $O(T \log T)$   | $O(N)$             | $O(\log^2 N)$             | ✗          |
-| **Pianist** | $O(T \log T)$   | $O(M)$             | $O(1)$                    | ✓          |
-
-Where:
-
-- $M$ is the number of machines in the distributed prover system,
-- $N$ is the total number of gates (circuit size),
-- $T = N/M$ is the number of gates per sub-circuit (per machine).
+ 
+ In a distributed setting, Pianist splits a total circuit of size $N$ across $M$ machines, with each machine handling a **sub-circuit** of size $T = N / M$. The table below summarizes the performance characteristics of each system:
+ 
+ | System      | Prover Time     | Communication Cost | Proof Size & Verification | Robustness |
+ | ----------- | --------------- | ------------------ | ------------------------- | ---------- |
+ | **DIZK**    | $O(T \log^2 T)$ | $O(N)$             | $O(1)$                    | ✗          |
+ | **deVirgo** | $O(T \log T)$   | $O(N)$             | $O(\log^2 N)$             | ✗          |
+ | **Pianist** | $O(T \log T)$   | $O(M)$             | $O(1)$                    | ✓          |
+ 
+ Where:
+ 
+ - $M$ is the number of machines in the distributed prover system,
+ - $N$ is the total number of gates (circuit size),
+ - $T = N/M$ is the number of gates per sub-circuit (per machine).
 
 **A New Paradigm for Scalable zkSNARKs**
 
@@ -124,7 +124,7 @@ Pianist breaks through the limitations of prior distributed ZKP systems by decou
 
 By supporting **general-purpose circuits** and introducing a **robust collaborative proof architecture**, Pianist sets a new standard for distributed zkSNARK systems—ideal for applications like **zkRollups**, **zkEVM**, and any use case requiring **secure, large-scale, and distributed computation**.
 
-### Beyond Recursion: Pianist’s Distributed ZKP Architecture vs. PCD and IVC
+### Beyond Recursion: Distributed ZKP Architecture vs. PCD and IVC
 
 In addition to distributed proof systems, alternative techniques have been proposed for handling large-scale computations—particularly **Proof-Carrying Data (PCD)** and **Incrementally Verifiable Computation (IVC)**, which were discussed in earlier works involving **Reed-Solomon codes**.
 
@@ -168,9 +168,9 @@ Pianist is a fully distributed SNARK (Succinct Non-Interactive Argument of Knowl
 
 Pianist's technical innovation lies in the combination of a bivariate KZG polynomial commitment scheme with a bivariate polynomial IOP. This enables distributed machines to independently commit to subcircuits and construct a complete distributed proof by exchanging only specific evaluation points and succinct proofs. Built atop the Plonk protocol, Pianist rigorously encodes each subcircuit into an arithmetic constraint system. Inputs and outputs of circuit gates are mapped into polynomials, and carefully crafted selector polynomials distinguish between different gate types to form gate constraint equations. To ensure circuit integrity, Pianist implements copy constraints using structured product arguments and running product polynomials. The prover constructs polynomial relations representing wiring constraints and engages in a structured three-round interaction to convince the verifier of constraint satisfaction, thereby guaranteeing the correctness of the full computation.
 
-At its core, Pianist uses bivariate polynomials to build a distributed constraint system, aggregating polynomials from independently computed subcircuits into a single bivariate polynomial while preserving constraint structure. A naive aggregation approach such as $A(Y, X) = \sum_{i=0}^{M-1} Y^i a_i(X)$ introduces problematic cross-terms like $Y^i a_i(X) \cdot Y^j b_j(X)$. Inspired by Caulk, Pianist instead leverages Lagrange polynomials $R_i(Y)$ as aggregation tools. Each party _i_ holds a local witness vector $\vec{a}_i = (a_{i,0}, \dots, a_{i,T-1})$, which is interpolated into a univariate polynomial $a_i(X)$ using Lagrange polynomials $L_j(X)$ over the T-th roots of unity. These are combined using a second set of Lagrange polynomials $R_i(Y)$ (over M-th roots of unity) to form a bivariate polynomial $A(Y, X) = \sum_{i=0}^{M-1} a_i(X) R_i(Y)$.
+At its core, Pianist uses bivariate polynomials to build a distributed constraint system, aggregating polynomials from independently computed subcircuits into a single bivariate polynomial while preserving constraint structure. A naive aggregation approach such as $A(Y, X) = \sum_{i=0}^{M-1} Y^i a_i(X)$ introduces problematic cross-terms like $Y^i a_i(X) \cdot Y^j b_j(X)$. Inspired by Caulk, Pianist instead leverages Lagrange polynomials $R_i(Y)$ as aggregation tools. Each party i holds a local witness vector $\vec{a_i} = (a_{i,0}, \dots, a_{i,T-1})$, which is interpolated into a univariate polynomial $a_i(X)$ using Lagrange polynomials $L_j(X)$ over the T-th roots of unity. These are combined using a second set of Lagrange polynomials $R_i(Y)$ (over M-th roots of unity) to form a bivariate polynomial $A(Y, X) = \sum_{i=0}^{M-1} a_i(X) R_i(Y)$.
 
-Lowercase letters (a, b, c) denote local univariate polynomials, while uppercase letters (A, B, C) represent aggregated bivariate polynomials. (x, y) refers to concrete evaluations, and (X, Y) are the symbolic polynomial variables.The key property of Lagrange polynomials — where $R_i(\omega_Y^j) = 1$ when $i = j$ and $0$ otherwise — enables $A(\omega_Y^i, X) = a_i(X)$, allowing precise extraction of each party's contribution. This property underpins Pianist's ability to encode global circuit structure while enabling efficient local computation.
+Lowercase letters (a, b, c) denote local univariate polynomials, while uppercase letters (A, B, C) represent aggregated bivariate polynomials. (x, y) refers to concrete evaluations, and (X, Y) are the symbolic polynomial variables.The key property of Lagrange polynomials — where $R_i(\omega_Y^j) = 1$ when $i = j$ and $0$ otherwise — enables $A(\omega_Y^i, X) = \sum_{j=0}^{M-1} a_j(X)R_j(\omega_Y^i) = a_i(X) \cdot 1 + \sum_{j \neq i} a_j(X) \cdot 0 = a_i(X)$, allowing precise extraction of each party's contribution. This property underpins Pianist's ability to encode global circuit structure while enabling efficient local computation.
 
 Using this structure, Pianist defines aggregated Plonk-style gate constraints $G(Y, X)$, copy constraints $P_0(Y, X)$ and $P_1(Y, X)$, and a linear combination constraint:
 
@@ -180,13 +180,13 @@ where $V_Y(Y) = Y^M - 1$. Due to the selector property of Lagrange polynomials, 
 
 All polynomials except $H_Y(Y, X)$ can be maintained entirely in a distributed fashion. To handle $H_Y$, the prover sends only its evaluation at a random verifier-supplied point $\alpha$. This allows Pianist to operate in a truly distributed mode: each machine works independently and communicates minimally to produce a unified, succinct proof. The system remains efficient and scalable not only for fully data-parallel tasks, but also supports simple inter-circuit wiring through custom gates and Y-variable shifts.
 
-### Distributed KZG Commitments and Extending Distributed SNARKs to Arbitrary Circuits with Robust Coordination
+### Distributed KZG Commitments and Extending to Arbitrary Circuits with Robust Coordination
 
 While Pianist was initially designed to efficiently handle data-parallel subcircuits, it significantly advances beyond this limitation by supporting **arbitrary general circuits**, addressing a core challenge in distributed SNARK design: **ensuring correct wiring across independently computed subcircuits**.
 
 **Generalizing Wire Connections Across Subcircuits**
 
-Traditional Plonk protocols use permutation polynomials—$\sigma_a(X)$, $\sigma_b(X)$, and $\sigma_c(X)$—to manage wiring within a single circuit. Pianist generalizes this concept by introducing a **two-dimensional coordinate system** for wire mappings across distributed subcircuits. Specifically, for each input/output type $s \in \{a, b, o\}$, Pianist defines:
+Traditional Plonk protocols use permutation polynomials $\sigma_a(X)$, $\sigma_b(X)$, and $\sigma_c(X)$—to manage wiring within a single circuit. Pianist generalizes this concept by introducing a **two-dimensional coordinate system** for wire mappings across distributed subcircuits. Specifically, for each input/output type $\{(\sigma_{Y,s,i}(X), \sigma_{X,s,i}(X))\}_{s\in\{a,b,o\}}$, Pianist defines:
 
 $(\sigma_{Y,s,i}(\omega_X^j), \sigma_{X,s,i}(\omega_X^j)) = (\omega_Y^{i'}, k'_{s} \cdot \omega_X^{j'})$
 
@@ -213,7 +213,7 @@ These constraints are then aggregated with the arithmetic gate constraint $G(Y, 
 
 To bring these theoretical advancements to practical use, Pianist integrates a fully **distributed KZG polynomial commitment scheme**, enabling a **completely decentralized SNARK construction**. This realization answers a long-standing challenge: **Can we construct an efficient SNARK protocol entirely from a distributed IOP and a distributed PCS? Pianist answers yes.**
 
-In this setting, a degree-$N$ polynomial is split across $M$ machines, each holding a chunk of size $T = N/M$. The commitment scheme achieves three key goals:
+In this setting, a degree-N polynomial is split across $M$ machines, each holding a chunk of size $T = N/M$. The commitment scheme achieves three key goals:
 
 - **Linear-time proof generation** across all machines
 - **Minimal communication overhead**
@@ -260,19 +260,19 @@ A central verifier node ($P_0$) not only aggregates local proofs but also **veri
 
 ## 2. Towards a Scalable Distributed SNARK for R1CS
 
-In modern SNARK systems, the proving time remains a dominant bottleneck. Distributed SNARKs aim to overcome this by allowing multiple provers to collaboratively generate a proof, significantly enhancing efficiency and scalability for large-scale computations. Among them, Pianist is currently the state-of-the-art distributed SNARK for Plonk-style circuits, offering constant-size proofs, constant average communication cost, and constant verifier complexity. However, when applied to Rank-1 Constraint Systems (R1CS), it requires converting R1CS to Plonk form—a transformation that dramatically increases the circuit size and incurs roughly 10× overhead.
+In modern SNARK systems, the proving time remains a dominant bottleneck. Distributed SNARKs aim to overcome this by allowing multiple provers to collaboratively generate a proof, significantly enhancing efficiency and scalability for large-scale computations. Among them, Pianist is currently the state-of-the-art distributed SNARK for Plonk-style circuits, offering constant size proofs, average communication cost, and verifier complexity. However, when applied to Rank-1 Constraint Systems (R1CS), it requires converting R1CS to Plonk form—a transformation that dramatically increases the circuit size and incurs roughly 10× overhead.
 
 This inefficiency stems from the fundamental differences between R1CS and Plonk. While Plonk excels at handling arbitrary nonlinear gates and supports custom constraints, R1CS offers free addition gates and benefits from a mature ecosystem, including widely adopted DSLs and toolchains such as Circom. Unfortunately, using Plonk-optimized SNARKs like Pianist to prove R1CS statements leads to significant performance penalties. For instance, converting a circuit with 261,833 R1CS constraints can result in over 2.5 million Plonk constraints, increasing the setup and proof cost substantially. On the other hand, existing distributed SNARK systems tailored for R1CS, such as DIZK and Hekaton, lag behind Pianist in asymptotic efficiency.
 
 This tradeoff presents a critical challenge across applications like blockchains, zero-knowledge virtual machines, verifiable fully homomorphic encryption, and privacy-preserving machine learning. The technical difficulty arises from the structure of R1CS itself—it models constraints as sparse $n \times n$ matrices with $O(n)$ nonzero elements, making efficient distributed processing more complex than in Plonk. Existing approaches often suffer from linear communication costs (e.g., Ligero-based schemes) or logarithmic proof size and verifier time (e.g., methods using univariate and multilinear sum-checks).
 
-A novel solution to this challenge lies at the intersection of two core technologies: \_inner product arguments (IPA) and distributed SNARKs. This approach introduces a highly efficient inner product argument, combined with a preprocessed variant of the KZG commitment scheme adapted to support batched bivariate polynomial commitments and lookup arguments without precomputed tables. As a result, it achieves constant verifier complexity and supports general computation beyond data-parallel circuits, while remaining compatible with a scalable distributed setup.
+A novel solution to this challenge lies at the intersection of two core technologies: inner product arguments (IPA) and distributed SNARKs. This approach introduces a highly efficient inner product argument, combined with a preprocessed variant of the KZG commitment scheme adapted to support batched bivariate polynomial commitments and lookup arguments without precomputed tables. As a result, it achieves constant verifier complexity and supports general computation beyond data-parallel circuits, while remaining compatible with a scalable distributed setup.
 
 In terms of IPA, recent techniques span discrete logarithm-based constructions and Reed-Solomon code-based methods, offering logarithmic proof sizes and avoiding trusted setup. Alternatively, modular IPA constructions using PIOP + PCS frameworks allow flexible tradeoffs via the choice of the underlying PCS. Notably, KZG-based variants can achieve constant-sized proofs, particularly those leveraging univariate sum-checks and Laurent polynomials.
 
 Distributed SNARKs generally fall into two categories. The first relies on secret-sharing the witness across multiple machines for privacy, though this offers limited acceleration as each share scales with the original witness size. The second—and more relevant—category uses multiple machines to accelerate a single prover's workload. Examples include DIZK, which extends Groth16 over R1CS using distributed algorithms for MSMs and FFTs. However, its reliance on distributed FFTs leads to high communication overhead and increases total proving time.
 
-Recent work (e.g., deVirgo, HyperPianist, Cirrus, Pianist, Hekaton) shares a core strategy: decomposing a large statement into smaller substatements processed by multiple provers, then aggregating the subproofs into a final proof. These systems typically follow a "distributed PIOP + distributed PCS" design, with efficiency determined by the specific protocol details.
+Recent work (e.g., deVirgo, Cirrus, Pianist, Hekaton) shares a core strategy: decomposing a large statement into smaller substatements processed by multiple provers, then aggregating the subproofs into a final proof. These systems typically follow a "distributed PIOP + distributed PCS" design, with efficiency determined by the specific protocol details.
 
 This new line of work brings four key innovations:
 
@@ -323,7 +323,7 @@ $\sum_{i \in [\ell]} \langle P'[i], W[i] \rangle = \sum_{i \in [\ell]} \langle A
 
 For the quadratic constraint $\mathbf{a} \circ \mathbf{b} = \mathbf{c}$, a similar decomposition is applied, resulting in $\ell$ small element-wise product constraints $A[i] \circ B[i] = C[i]$. These are then randomized and combined into inner products using structured challenge vectors, further reducing the number of required proofs.
 
-Additionally, to minimize communication, the system constructs _virtual polynomials_ to implicitly compute $f'_{B[i]}$ from $f_{B[i]}$, allowing the removal of an entire polynomial oracle.
+Additionally, to minimize communication, the system constructs virtual polynomials to implicitly compute $f_{B[i]}'$ from $f_{B[i]}$, allowing the removal of an entire polynomial oracle.
 
 This hybrid approach—fusing advanced inner product PIOP design with strategic R1CS-to-inner-product conversion—provides a foundation for scalable and efficient distributed SNARK systems, opening up possibilities for real-world deployment in blockchain, zero-knowledge virtual machines, and privacy-preserving computation.
 
@@ -368,7 +368,7 @@ By integrating all the innovations discussed—including:
 - the batched bivariate KZG commitment scheme,
 - and its distributed generalization—
 
-the work successfully constructs a theoretically sound and practically efficient **distributed SNARK system for R1CS**. This represents a major step forward in scalable zero-knowledge proof systems and distributed cryptographic protocols.
+the work successfully constructs a theoretically sound and practically efficient **distributed SNARK system for R1CS**.
 
 <details><summary><b> Code </b></summary>
 
