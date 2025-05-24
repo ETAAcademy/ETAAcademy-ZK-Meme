@@ -48,7 +48,7 @@ To address these challenges, blockchain scalability has evolved into a **multi-l
 
 Among these, **parallel computing** has emerged as a cornerstone of blockchain scalability. Depending on the granularity, parallelism can be applied at various levels:
 
-- **Account-level** (Solana),
+- **Account-level** (ETH, Solana),
 - **Object-level** (Sui),
 - **Transaction-level** (Monad, Aptos),
 - **Call-level or Micro-VM** (MegaETH),
@@ -162,9 +162,9 @@ In a zk-parallel blockchain architecture, recursive zero-knowledge proofs (zkSNA
 
 **Notation**
 
-- $SV(b)_i$: The _i-th_ state view within batch _b_
-- $Tx(b)_i$: The _i-th_ transaction in batch _b_
-- $S_l$: The _l-th_ global state
+- $SV_i^{(b)}$: The i-th state view within batch b
+- $Tx_i^{(b)}$: The i-th transaction in batch b
+- $S_l$: The l-th global state
 - $H()$: Cryptographic hash function
 - $π$: Zero-knowledge proof (proof object)
 
@@ -176,13 +176,13 @@ This is the most basic level of proof, validating the correct execution of a sin
   $(pk_{\text{TxBase}}, vk_{\text{TxBase}}) \leftarrow \text{Setup}(1^\lambda)$
 
 - **Proving**:
-  $\pi^i_{\text{TxBase}} \leftarrow \text{Prove}(pk_{\text{TxBase}}, (SV(b)_i, SV(b)_{i+1}, H(Tx(b)_i)), Tx(b)_i)$
+  $\pi^i_{TxBase} \leftarrow \text{Prove}(pk_{TxBase}, (SV_i^{(b)}, SV_{i+1}^{(b)}, H(Tx(b)_i)), (Tx(b)_i))$
 
 - **Verification**:
-  $\text{Verify}(vk_{\text{TxBase}}, (SV(b)_i, SV(b)_{i+1}, htx_i), \pi^i_{\text{TxBase}}) \in \{\text{true}, \text{false}\}$
+  $\text{Verify}(vk_{\text{TxBase}}, (SV_i^{(b)}, SV_{i+1}^{(b)}, htx_i), \pi^i_{\text{TxBase}}) \in \{\text{true}, \text{false}\}$
 
 **Interpretation:**
-This proof ensures that executing transaction `Tx(b)_i` correctly transitions the state from `SV(b)_i` to `SV(b)_{i+1}`.
+This proof ensures that executing transaction $Tx_i^{(b)}$ correctly transitions the state from $SV_i^{(b)}$ to $SV_{i+1}^{(b)}$.
 
 **2) Transaction Merge Proof (Tx-Merge)**
 
@@ -192,71 +192,71 @@ This aggregates multiple transaction proofs into a single proof for efficiency.
   $(pk_{\text{TxMerge}}, vk_{\text{TxMerge}}) \leftarrow \text{Setup}(1^\lambda)$
 
 - **Proving**:
-  $\pi^{i..j}_{\text{TxMerge}} \leftarrow \text{Prove}(pk_{\text{TxMerge}}, a, w)$
+  $\pi_{\text{TxMerge}}^{i..j} \leftarrow \text{Prove}(pk_{\text{TxMerge}}, a, w)$
   where:
 
-  - $a = (SV(b)_i, SV(b)_{j+1}, htx_{i..j})$: public inputs
+  - $a = (SV_i^{(b)}, SV_{j+1}^{(b)}, htx_{i..j})$: public inputs
   - $w$: witness (intermediate state transitions and individual proofs)
 
 **Interpretation:**
-This proof confirms that a sequence of transactions from `Tx(b)_i` to `Tx(b)_j` collectively and correctly transitions the state from `SV(b)_i` to `SV(b)_{j+1}`.
+This proof confirms that a sequence of transactions from $Tx_i^{(b)}$ to $Tx_j^{(b)}$ collectively and correctly transitions the state from $SV_i^{(b)}$ to $SV_{j+1}^{(b)}$.
 
 **3) Membership Proof (Mem-Proof)**
 
 This proof validates that a local state view is consistent with the current global state.
 
 - **Setup**:
-  $(pk_{\text{Mem}}, vk_{\text{Mem}}) \leftarrow \text{Setup}(1^\lambda)$
+  $(pk_{\text{Mem}}, vk_{\text{Mem}}) \leftarrow \text{Setup}(1^{\lambda})$
 
 - **Proving**:
-  $\pi^b_{\text{Mem}} \leftarrow \text{Prove}(pk_{\text{Mem}}, (SV(b)_i, S_l), w)$
+  $\pi_{\text{Mem}}^b \leftarrow \text{Prove}(pk_{\text{Mem}}, (SV_i^{(b)}, S_l), w)$
 
 - **Verification**:
-  $\text{Verify}(vk_{\text{Mem}}, (SV(b)_i, S_l), \pi^b_{\text{Mem}}) \in \{\text{true}, \text{false}\}$
+  $\text{Verify}(vk_{\text{Mem}}, (SV_i^{(b)}, S_l), \pi_{\text{Mem}}^b) \in \{\text{true}, \text{false}\}$
 
 **Interpretation:**
-Proves that `SV(b)_i`, the local state view for batch `b`, is a valid subset of the global state `S_l`.
+Proves that $SV_i^{(b)}$, the local state view for batch $b$, is a valid subset of the global state $S_l$.
 
 **4) Batch Execution Proof (Batch-Proof)**
 
 This proof confirms the correct execution of an entire batch of transactions.
 
 - **Proving**:
-  $\pi^b_{\text{Batch}} \leftarrow \text{Prove}(pk_{\text{Batch}}, a, w)$
+  $\pi{\text{Batch}}^b \leftarrow \text{Prove}(pk_{\text{Batch}}, a, w)$
   where:
 
-  - $a = (S_0, SV(b)_{m+1}, htx(b)_{0..m})$: public inputs
-  - $w = (SV(b)_0, \pi^b_{\text{Mem}}, \pi^{TxMerge}_{0..m})$: witness
+  - $a = (S_0, SV_{m+1}^{(b)}, htx(b)_{0..m})$: public inputs
+  - $w = (SV_0^{(b)}, \pi_{\text{Mem}^b}, \pi_{0..m})^{TxMerge}$: witness
 
 **Interpretation:**
-Proves that batch `b` transitions from the initial state `SV(b)_0` to final state `SV(b)_{m+1}` correctly, and that this process is consistent with the starting global state `S_0`.
+Proves that batch `b` transitions from the initial state $SV_0^{(b)}$ to final state $SV_{m+1}^{(b)}$ correctly, and that this process is consistent with the starting global state $S_0$.
 
 **5) Global State Transition Proof (Global-State-Trans)**
 
 This validates that the global state correctly updates after a batch is applied.
 
 - **Proving**:
-  $\pi^b_{\text{StateTrans}} \leftarrow \text{Prove}(pk_{\text{StateTrans}}, a, w)$
+  $\pi_{\text{StateTrans}}^b \leftarrow \text{Prove}(pk_{\text{StateTrans}}, a, w)$
   where:
 
-  - $a = (S_l, SV(b)_{m+1}, S_{l+1})$
+  - $a = (S_l, SV_{m+1}^{(b)}, S_{l+1})$
 
 - **Verification**:
-  $\text{Verify}(vk_{\text{StateTrans}}, (S_l, SV(b)_{m+1}, S_{l+1}), \pi^b_{\text{StateTrans}}) \in \{\text{true}, \text{false}\}$
+  $\text{Verify}(vk_{\text{StateTrans}}, (S_l, SV_{m+1}^{(b)}, S_{l+1}), \pi_{\text{StateTrans}}^b) \in \{\text{true}, \text{false}\}$
 
 **Interpretation:**
-Confirms that applying state changes in `SV(b)_{m+1}` to global state `S_l` results in the correct next global state `S_{l+1}`.
+Confirms that applying state changes in $SV_{m+1}^{(b)}$ to global state $S_l$ results in the correct next global state $S_{l+1}$.
 
 **6) Final Batch Proof (Final-Batch-Proof)**
 
 This aggregates the batch execution and global state transition proofs into a unified statement.
 
 - **Proving**:
-  $\pi^b_{\text{FinalBatch}} \leftarrow \text{Prove}(pk_{\text{FinalBatch}}, a, w)$
+  $\pi_{\text{FinalBatch}^b} \leftarrow \text{Prove}(pk_{\text{FinalBatch}}, a, w)$
   where:
 
-  - $a = (S_0, S_l, SV(b)_m, S_{l+1}, h)$
-  - $w = (\pi^b_{\text{Batch}}, \pi^b_{\text{StateTrans}})$
+  - $a = (S_0, S_l, SV_m^{(b)}, S_{l+1}, h)$
+  - $w = (\pi_{\text{Batch}}^b, \pi_{\text{StateTrans}}^b)$
 
 **Interpretation:**
 Combines the correctness of the batch’s execution and its application to the global state, serving as a compact and final proof of that batch's validity.
@@ -481,11 +481,11 @@ These methods embody a key principle: **the effectiveness of parallel execution 
 
 Building on this principle, a new execution paradigm is proposed that integrates speculative execution with leaderless consensus. Each node speculatively processes and analyzes transactions _before_ consensus, predicting dependencies without requiring prior knowledge of read/write sets. The execution proceeds in three main phases:
 
-1. **Speculation**: Each node speculatively executes its assigned transactions to gather data about read/write sets, conflicts, and execution traces. This maximizes concurrency and reveals dependencies early.
+- **Speculation**: Each node speculatively executes its assigned transactions to gather data about read/write sets, conflicts, and execution traces. This maximizes concurrency and reveals dependencies early.
 
-2. **Ordering**: Based on the speculative results, nodes build a partially ordered execution plan (a DAG) that captures transaction dependencies. These plans are included in block proposals and fed into the consensus mechanism.
+- **Ordering**: Based on the speculative results, nodes build a partially ordered execution plan (a DAG) that captures transaction dependencies. These plans are included in block proposals and fed into the consensus mechanism.
 
-3. **Replay**: Once consensus is achieved on a block and its execution plan, all nodes replay the transactions deterministically, following the dependency graph. Independent transactions can be processed in parallel, while conflicting ones follow the agreed order.
+- **Replay**: Once consensus is achieved on a block and its execution plan, all nodes replay the transactions deterministically, following the dependency graph. Independent transactions can be processed in parallel, while conflicting ones follow the agreed order.
 
 **Speculation Phase: Building the Dependency DAG**
 
@@ -664,7 +664,7 @@ In DeFi applications, transaction ordering directly impacts profit. During the s
 
 ---
 
-### 2.3 MPT, Asynchronous Parallel Execution and
+### 2.3 MPT, Asynchronous Parallel Execution and Pipeline
 
 **Merkle Patricia Trie (MPT)**
 
@@ -1059,7 +1059,7 @@ Assume:
 - The top layers of the account trie (e.g., top 4 layers) are fully populated.
 - Each transaction modifies on average `µ` accounts.
 - `m` transactions remain unexecuted.
-- A node at level `r` has a probability of `16^{-r}` to be modified in each update.
+- A node at level `r` has a probability of $16^{-r}$ to be modified in each update.
 
 The probability that a node `N` at level `r` will **not** be modified in the remaining updates is:
 
@@ -1090,6 +1090,6 @@ This ensures correctness of recovered states **without requiring a full resync o
 
 This asynchronous pipeline framework successfully decouples execution from storage, improves concurrency, and ensures correctness — enabling scalable and performant state management for next-generation blockchain systems.
 
-[Monad](https://github.com/megaeth-labs)
+[Monad](https://github.com/monad-developers)
 
-[MegaETH](https://github.com/monad-developers)
+[MegaETH](https://github.com/megaeth-labs)
