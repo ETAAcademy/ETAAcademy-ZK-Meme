@@ -1,7 +1,5 @@
 # ETAAcademy-ZKMeme: 61. Parallelism
 
-/ˈparəlɛlɪz(ə)m/
-
 <table>
   <tr>
     <th>title</th>
@@ -294,7 +292,7 @@ Despite multiple rounds of scaling efforts, Ethereum's execution layer continues
 
 Together, these initiatives represent a multi-layered stack of EVM parallelization—from instruction-level all the way to architectural modularity.
 
-#### Monad: A High-Throughput Parallel EVM Chain
+### Monad: A High-Throughput Parallel EVM Chain
 
 **Monad** represents one of the most advanced attempts to parallelize EVM execution without sacrificing compatibility. Its architecture is built around three core innovations:
 
@@ -332,7 +330,7 @@ Despite introducing parallel execution, Monad retains full compatibility with Et
 
 To manage correctness under _optimistic execution_, Monad tracks the inputs and outputs of parallel transactions. If a later transaction reads data that was changed by an earlier transaction, the affected transaction is re-executed. While this incurs some overhead, many operations (e.g., signature recovery) do not depend on state and need not be repeated. Cached state can also reduce redundant computation during re-execution.
 
-#### MegaETH: A Micro-VM Architecture for Maximal Parallelism
+### MegaETH: A Micro-VM Architecture for Maximal Parallelism
 
 **MegaETH** takes a more radical approach to parallelism. Rather than optimistically layering parallel execution onto a sequential engine, MegaETH completely redefines the EVM execution model. Its architecture is centered around three key components:
 
