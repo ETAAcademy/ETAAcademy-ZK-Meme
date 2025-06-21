@@ -414,7 +414,7 @@ Modern Ring-LWE-based cryptosystems rely on efficient ring arithmetic and the ha
 - **Ciphertext**: $\tilde{c} = e_0 \tilde{a} + \tilde{e} \in (R_q^\vee)^l$;
 - **Decryption**: computes $d = \langle \tilde{c}, \tilde{x} \rangle \in R^\vee$, and recovers $\mu = t d \bmod pR$.
 
-**Compact public-key variants** embed messages in $(u, v) = (\hat{m}(z a + e_0), z b + e_{00})$, also based on Ring-LWE. **Homomorphic encryption** uses ciphertexts of the form $c(S) = c_0 + c_1 S$, supporting computation on encrypted data.
+**Compact public-key variants** embed messages in $(u, v) = (\hat{m}(z a + e_0), z b + e_0)$, also based on Ring-LWE. **Homomorphic encryption** uses ciphertexts of the form $c(S) = c_0 + c_1 S$, supporting computation on encrypted data.
 
 To control **noise growth**, schemes use:
 
@@ -578,13 +578,13 @@ lies in a discrete Gaussian over the coset $\Lambda_q(B) + c$, maintaining the c
     │                          │
     │     pTrapGen             │─────┐
     │                          │     ▼
-    └──────────────────────────┘   Matrix B ∈ R_q^{t×k}
+    └──────────────────────────┘   Matrix B ∈ Rqᵗˣᵏ
                │                    Trapdoor td = (f,d)
                ▼
     Equivocate(td, r, c, s) ─────► New solution 𝑟̃
                   │
                   ▼
-    𝑒̃ := c^T - 𝑟̃^T B mod q ≈ Gaussian over Λq(B)+c
+    𝑒̃ := cᵀ - r̃ᵀ B mod q ≈ Gaussian over Λq(B)+c
 ```
 
 #### XiO: Modular and Secure Obfuscation via Lattices
