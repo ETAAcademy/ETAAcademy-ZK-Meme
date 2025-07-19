@@ -26,11 +26,11 @@ Authors: [Evta](https://twitter.com/pwhattie), looking forward to your joining
 
 # Lattice-Based Zero-Knowledge Proof Systems: MLE-PCS, LaBRADOR, and Greyhound
 
-**Multilinear Extension Polynomial Commitment Scheme (MLE-PCS)** is a class of efficient commitment mechanisms for multilinear polynomials defined over Boolean hypercubes. It supports four types of commitment primitives—**KZG10**, **Merkle Tree**, **Pedersen**, and **Ajtai**—and integrates four types of proof techniques: **quotient polynomial**, **inner product**, **sumcheck**, and **split-and-fold**, enabling $O(N)$-complexity proof generation.
+**Multilinear Polynomial Commitment Schemes (MLE-PCS)** are a class of efficient commitment mechanisms tailored for multilinear polynomials defined over Boolean hypercubes. They fall into **four main categories** based on the underlying commitment primitives—**KZG10**, **Merkle Tree**, **Pedersen**, and **Ajtai**—and employ **four principal proof techniques**: **quotient polynomial**, **inner product**, **sumcheck**, and **split-and-fold**. These designs enable proof generation with **$O(N)$** prover complexity, significantly improving over traditional schemes.
 
 **LaBRADOR** is a post-quantum recursive zero-knowledge proof system built on the **Module-SIS** assumption. It employs a two-layer Ajtai commitment structure, **Johnson–Lindenstrauss (JL) projections**, norm **amortization and aggregation techniques**, and an efficient verification of **inner product constraints**. LaBRADOR also provides a reduction from **R1CS** (Rank-1 Constraint System) to its native constraint model, allowing it to support mixed binary and large-modulus constraints.
 
-**Greyhound**, building upon LaBRADOR, proposes a **lattice-based polynomial commitment scheme**. It introduces a three-round protocol and a two-layer commitment structure that reduces polynomial evaluations to LaBRADOR-style inner product constraints. Using the **AFLN24** technique, it performs ring-switching to enable compatibility with the LaBRADOR framework. Greyhound ensures **zero-knowledge** via the **Module-LWE** assumption and forms a cohesive, post-quantum secure ecosystem for zero-knowledge proof systems.
+**Greyhound**, building upon LaBRADOR, proposes a **lattice-based polynomial commitment scheme**. It introduces a three-round protocol and a two-layer commitment structure that reduces polynomial evaluations to LaBRADOR-style inner product constraints. To enable compatibility with the LaBRADOR framework, it performs ring-switching between structured rings and finite fields. Greyhound ensures **zero-knowledge** via the **Module-LWE** assumption and forms a cohesive, post-quantum secure ecosystem for zero-knowledge proof systems.
 
 ---
 
@@ -112,7 +112,7 @@ $\tilde{f}(X_0, \ldots, X_{n-1}) = \langle \vec{f}, \bigotimes_{i=0}^{n-1}(1, X_
 
 The folding follows a recurrence:
 
-$\langle \vec{f}, \bigotimes_{j=0}^{n-1}(1, u_j) \rangle = \langle \vec{f}_{\text{even}}, \bigotimes_{j=1}^{n-1}(1, u_j) \rangle + u_0 \cdot \langle \vec{f}_{\text{odd}}, \bigotimes_{j=1}^{n-1}(1, u_j) \rangle$
+$\langle \vec{f}, \bigotimes_{j=0}^{n-1}(1, u_j) \rangle = \langle \vec{f_{\text{even}}}, \bigotimes_{j=1}^{n-1}(1, u_j) \rangle + u_0 \cdot \langle \vec{f_{\text{odd}}}, \bigotimes_{j=1}^{n-1}(1, u_j) \rangle$
 
 This method is particularly suitable for recursive proof systems and STARK-like designs.
 
@@ -134,7 +134,7 @@ This setup defines a **principal relation $R$**, composed of:
 
 Each function in $F$ takes the form:
 
-$f(\vec{s}_1, \ldots, \vec{s}_r) = \sum_{i,j=1}^{r} a_{ij} \langle \vec{s}_i, \vec{s}_j \rangle + \sum_{i=1}^{r} \langle \vec{\varphi}_i, \vec{s}_i \rangle - b$
+$f(\vec{s_1}, \ldots, \vec{s_r}) = \sum_{i,j=1}^{r} a_{ij} \langle \vec{s_i}, \vec{s_j} \rangle + \sum_{i=1}^{r} \langle \vec{\varphi}_i, \vec{s_i} \rangle - b$
 
 Where:
 
@@ -173,7 +173,7 @@ LaBRADOR achieves efficient zero-knowledge proofs using **four main cryptographi
 To hide the witness vectors, LaBRADOR uses **Ajtai commitments**, which are lattice-based and post-quantum secure.
 
 - **Inner Commitment**: For each vector $\vec{s}_i$, compute $\vec{t}_i = A \vec{s}_i \in \mathbb{R}_q^\kappa$ using a public matrix $A$.
-- **Outer Commitment**: Since sending all $\vec{t}_i$ is expensive, each is decomposed by a radix-$b_1$ representation:
+- **Outer Commitment**: Since sending all $\vec{t}_i$ is expensive, each is decomposed by a $radix-b_1$ representation:
 
   $\vec{t}_i = \vec{t}_i^{(0)} + b_1 \vec{t}_i^{(1)} + \cdots + b_1^{t_1 - 1} \vec{t}_i^{(t_1 - 1)}$
 
@@ -228,7 +228,7 @@ $\vec{z} = \sum_{i=1}^r c_i \vec{s}_i$
 This **single vector** replaces the entire witness in the proof. All inner products in $F$ can be re-expressed as functions of $\vec{z}$:
 
 - $\langle \vec{z}, \vec{z} \rangle = \sum_{i,j} g_{ij} c_i c_j$
-- $\sum_i \langle \vec{\varphi}_i, \vec{z} \rangle c_i = \sum_{i,j} h_{ij} c_i c_j$
+- $\sum_i \langle \vec{\varphi_i}, \vec{z} \rangle c_i = \sum_{i,j} h_{ij} c_i c_j$
 - Total sum checks against constant $b$: $\sum a_{ij} g_{ij} + \sum h_{ii} = b$
 
 The prover commits to $g_{ij}, h_{ij}$ as “garbage terms” using the second outer commitment $\vec{u}_2$, which are then revealed with $\vec{z}$ during verification.
@@ -249,7 +249,7 @@ If all verification checks pass, the verifier is convinced that the prover posse
 
 ### Recursive Composition in LaBRADOR
 
-The core goal of the LaBRADOR protocol is to prove knowledge of a set of vectors $\vec{s}_1, \dots, \vec{s}_r$ satisfying certain **dot product constraints** and a **norm bound**, collectively called the _principal relation_ $R$. At the end of the main protocol, the prover sends several values—$\vec{z}, \vec{t}, \vec{g}, \vec{h}$—that themselves satisfy a new set of dot product and norm constraints structurally similar to $R$. This observation allows LaBRADOR to apply **recursion**: the main protocol can be executed _on itself_, enabling **recursive composition**. This forms the foundation for building highly efficient, recursive zero-knowledge proof systems, such as recursive SNARKs.
+The core goal of the LaBRADOR protocol is to prove knowledge of a set of vectors $\vec{s}_1, \dots, \vec{s}_r$ satisfying certain **dot product constraints** and a **norm bound**, collectively called the _principal relation_ $R$. At the end of the main protocol, the prover sends several values— $\vec{z}, \vec{t}, \vec{g}, \vec{h}$ —that themselves satisfy a new set of dot product and norm constraints structurally similar to $R$. This observation allows LaBRADOR to apply **recursion**: the main protocol can be executed _on itself_, enabling **recursive composition**. This forms the foundation for building highly efficient, recursive zero-knowledge proof systems, such as recursive SNARKs.
 
 #### Merging Constraints for Recursion
 
@@ -296,19 +296,17 @@ To execute recursion, LaBRADOR constructs a new input instance of the protocol:
 - **Vector Partitioning**:
   Vectors $\vec{z}^{(0)}$, $\vec{z}^{(1)}$, and $\vec{v}$ are each partitioned into chunks of fixed length $n'$, forming new vectors:
 
-  $\vec{s}_1', \dots, \vec{s}_{r'}' \in \mathbb{R}_q^{n'}$
+  $\vec{s_1'}, \dots, \vec{s_{r'}}' \in \mathbb{R}_q^{n'}$
 
 - **Constraint System Construction**:
   A new set of dot product constraints is defined over these new witness vectors:
 
-  $g^{(k)}(\vec{s}_1', \dots, \vec{s}_{r'}') = \sum_{i,j} a_{ij}^{(k)} \langle \vec{s}_i', \vec{s}_j' \rangle + \sum_i \langle \vec{\varphi}_i^{(k)}, \vec{s}_i' \rangle - b^{(k)} = 0$
+  $g^{(k)}(\vec{s_1}', \dots, \vec{s_{r'}}') = \sum_{i,j} a_{ij}^{(k)} \langle \vec{s_i}', \vec{s_j}' \rangle + \sum_i \langle \vec{\varphi}_i^{(k)}, \vec{s_i}' \rangle - b^{(k)} = 0$
 
 - **Norm Bound Update**:
   The combined norm constraint becomes:
 
-  $$
-  \|\vec{z}^{(0)}\|^2 + \|\vec{z}^{(1)}\|^2 + \|\vec{v}\|^2 \leq \underbrace{\frac{2}{b^2} \gamma^2 + \gamma_1^2 + \gamma_2^2}_{:= (\beta')^2}
-  $$
+  $\|\vec{z^{(0)}}\|^2 + \|\vec{z^{(1)}}\|^2 + \|\vec{v}\|^2 \leq \underbrace{\frac{2}{b^2} \gamma^2 + \gamma_1^2 + \gamma_2^2}_{:= (\beta')^2}$
 
   forming a new relation $R(n', r', \beta')$ suitable for the next recursive layer.
 
@@ -361,7 +359,7 @@ LaBRADOR sidesteps multiplication by working modulo 2, where Boolean operations 
 
 #### Supporting Large Modulus Arithmetic: R1CS mod $2^d + 1$
 
-Many real-world applications operate over large moduli, such as $q = 2^{64} + 1$, which are incompatible with the binary trick above. LaBRADOR extends its framework to support **modulo-$2^d + 1$ arithmetic**, enabling efficient constraints over large integers.
+Many real-world applications operate over large moduli, such as $q = 2^{64} + 1$, which are incompatible with the binary trick above. LaBRADOR extends its framework to support **modulo- $2^d + 1$ arithmetic**, enabling efficient constraints over large integers.
 
 - **Embedding into Lattices via Ring Morphism**:
   Elements of $\mathbb{Z}_{2^d + 1}$ are embedded into the polynomial ring $R_q$ using the morphism:
@@ -377,14 +375,14 @@ Many real-world applications operate over large moduli, such as $q = 2^{64} + 1$
 
   These are again dot product constraints, reducing back to **linear inner products over the ring**, expressible and provable within the lattice proof system.
 
-#### Composing Binary and Mod-$2^d + 1$ R1CS
+#### Composing Binary and Mod- $2^d + 1$ R1CS
 
 Practical applications often involve both binary logic and large integer arithmetic. For example, proving the validity of a **Dilithium signature** requires:
 
 - Binary constraints for the message hash and Fiat-Shamir challenge (e.g., SHA or Merkle hash logic),
 - Large-modulus arithmetic for signature verification over $\mathbb{Z}_q$.
 
-LaBRADOR supports **mixed R1CS encodings**—combining binary and mod-$2^d + 1$ constraints—in a unified system. All components share the same lattice-based commitment layer, and the final proof **merges constraints across both domains**, enabling powerful and flexible zero-knowledge applications.
+LaBRADOR supports **mixed R1CS encodings**—combining binary and mod- $2^d + 1$ constraints—in a unified system. All components share the same lattice-based commitment layer, and the final proof **merges constraints across both domains**, enabling powerful and flexible zero-knowledge applications.
 
 ---
 
@@ -528,7 +526,11 @@ c^\top G_r & 0 & -a^\top G_m \\
 \hat{w} \\
 \hat{t} \\
 z
-\end{bmatrix} = \begin{bmatrix}v \\u \\y \\0 \\0\end{bmatrix}
+\end{bmatrix} = \begin{bmatrix}v \\ 
+u \\ 
+y \\ 
+0 \\ 
+0\end{bmatrix}
 $$
 
 Each block of this matrix encodes a structural constraint from the evaluation proof:
@@ -551,11 +553,9 @@ Let:
 - $f(x) = \sum_{i=0}^{N-1} f_i x^i$ be the polynomial to be evaluated.
 - Split the coefficients into $r$ blocks of size $m$:
 
-  $$
-  f_1 = (f_0, ..., f_{m-1}),\quad
+  $f_1 = (f_0, ..., f_{m-1}),\quad
   f_2 = (f_m, ..., f_{2m-1}),\quad \ldots,\quad
-  f_r = (\ldots, f_{N-1})
-  $$
+  f_r = (\ldots, f_{N-1})$
 
 Let:
 
@@ -624,7 +624,7 @@ The entire evaluation proof thus becomes a structured dot product over these gad
 
 ### Polynomial Commitments over $\mathbb{Z}_q$ via Ring Transformations in LaBRADOR
 
-LaBRADOR operates over the ring $R_q = \mathbb{Z}_q[X]/(X^d + 1)$, whereas most traditional polynomial commitment schemes work directly over the finite field $\mathbb{Z}_q$. To bridge this gap, LaBRADOR leverages a technique from AFLN24 that transforms polynomial evaluation statements over $\mathbb{Z}_q$ into equivalent computations within $R_q$.
+LaBRADOR operates over the ring $R_q = \mathbb{Z}_q[X]/(X^d + 1)$, whereas most traditional polynomial commitment schemes work directly over the finite field $\mathbb{Z}_q$. To bridge this gap, LaBRADOR leverages a technique that transforms polynomial evaluation statements over $\mathbb{Z}_q$ into equivalent computations within $R_q$.
 
 Suppose we wish to prove a polynomial evaluation statement of the form:
 
@@ -634,7 +634,7 @@ To do this using LaBRADOR, the polynomial $f$ is first partitioned into chunks o
 
 $f = (f_0, f_1, \dots, f_{N/d - 1})$
 
-Each chunk $f_i$ corresponds to a degree-$d$ polynomial over $\mathbb{Z}_q$, which can be naturally embedded into $R_q$.
+Each chunk $f_i$ corresponds to a degree-d polynomial over $\mathbb{Z}_q$, which can be naturally embedded into $R_q$.
 
 Next, the input $x \in \mathbb{Z}_q$ is encoded as a polynomial in $R_q$ by defining:
 
