@@ -56,8 +56,8 @@ There are two main types of NTT:
 
 - **Cyclic Convolution-based NTT (CC-based NTT):** Suitable for polynomial rings $Z_q[x]/(x^n-1)$. The parameters require $n$ to be a power of two and $q$ to be a prime such that $q \equiv 1 \pmod{n}$, ensuring the existence of a primitive $n$-th root of unity $\omega_n$ modulo $q$, and $n^{-1}$ is the modular inverse of $n$ modulo $q$.
 
-  - **Forward NTT:** For a polynomial $a(x)$, the $j$-th coefficient after NTT is $\hat{a}_j = \sum_{i=0}^{n-1} a_i \omega_n^{ij} \mod q$, for $j = 0, 1, ..., n-1$.
-  - **Inverse NTT:** Replace $\omega_n$ with its inverse and multiply by $n^{-1}$: $a_i = n^{-1} \sum_{j=0}^{n-1} \hat{a}_j \omega_n^{-ij} \mod q$.
+  - **Forward NTT:** For a polynomial $a(x)$, the $j$-th coefficient after NTT is $a_j' = \sum_{i=0}^{n-1} a_i \omega_n^{ij} \mod q$, for $j = 0, 1, ..., n-1$.
+  - **Inverse NTT:** Replace $\omega_n$ with its inverse and multiply by $n^{-1}$: $a_i = n^{-1} \sum_{j=0}^{n-1} a_j' \omega_n^{-ij} \mod q$.
 
 - **Negative Wrapped Convolution-based NTT (NWC-based NTT):** Suitable for polynomial rings $Z_q[x]/(x^n+1)$, common in schemes like NTRU and Kyber. Here, $x^n = -1$, so higher powers of $x$ can be represented using lower powers and a negative sign. The parameters are stricter: $q \equiv 1 \pmod{2n}$, ensuring the existence of a primitive $2n$-th root of unity $\psi_{2n}$ modulo $q$. By introducing powers of $\psi$ for pre- and post-processing, the standard NTT formula can be applied to $x^n+1$ rings.
   - **Preprocessing:** Multiply each coefficient $a_i$ by $\psi^i$.
@@ -92,7 +92,7 @@ When $q$ is an NTT-friendly prime (of the form $q = q' \cdot 2^e + 1$) but does 
 
 #### Splitting Polynomial Ring
 
-This approach decomposes a large ring $Z_q[x]/(x^n \pm 1)$ into several smaller rings (e.g., $Z_q[y]/(y^{n/2^\alpha} \pm 1)$), allowing NTT to be performed in each smaller ring. This is well-suited for hardware and parallel implementations, with variants such as Pt-NTT, K-NTT, and H-NTT differing in the details of splitting and multiplication.
+This approach decomposes a large ring $Z_q[x]/(x^n \pm 1)$ into several smaller rings (e.g., $Z_q[y]$ / $(y^{n/2^α} \pm 1)$ ), allowing NTT to be performed in each smaller ring. This is well-suited for hardware and parallel implementations, with variants such as Pt-NTT, K-NTT, and H-NTT differing in the details of splitting and multiplication.
 
 - **Splitting:** Group polynomial coefficients by variable, forming a bivariate polynomial.
 - **NTT in Small Rings:** Perform NTT/inverse NTT in each small ring.
@@ -178,7 +178,7 @@ Lattice reduction algorithms are used to find short vectors in high-dimensional 
 
 ### From LWE to Ring-LWE
 
-Traditional LWE encryption is inefficient, as encrypting a single bit results in large ciphertexts and public keys. **Ring-LWE** addresses this by replacing numbers with polynomials, allowing batch processing of multiple bits per operation and greatly improving efficiency and space utilization. The core idea is to generalize operations from $\mathbb{Z}_q$ to the polynomial ring $\mathbb{Z}_q[X]/(f(X))$, where elements are polynomials $a(X) = a_0 + a_1 X + \cdots + a_{d-1} X^{d-1}$ with coefficients in $\mathbb{Z}_q$, and $f(X)$ is typically $X^d \pm 1$ (as in Kyber, NTRU, Dilithium, etc.). Polynomials can be viewed as vectors, and polynomial multiplication can be represented as matrix-vector multiplication, allowing the Ring-LWE problem to be reduced to a high-dimensional lattice problem. The security analysis is similar to standard LWE.
+Traditional LWE encryption is inefficient, as encrypting a single bit results in large ciphertexts and public keys. **Ring-LWE** addresses this by replacing numbers with polynomials, allowing batch processing of multiple bits per operation and greatly improving efficiency and space utilization. The core idea is to generalize operations from $Z_q$ to the polynomial ring $Z_q[X]/(f(X))$, where elements are polynomials $a(X) = a_0 + a_1 X + \cdots + a_{d-1} X^{d-1}$ with coefficients in $\mathbb{Z}_q$, and $f(X)$ is typically $X^d \pm 1$ (as in Kyber, NTRU, Dilithium, etc.). Polynomials can be viewed as vectors, and polynomial multiplication can be represented as matrix-vector multiplication, allowing the Ring-LWE problem to be reduced to a high-dimensional lattice problem. The security analysis is similar to standard LWE.
 
 Compared to standard LWE, Ring-LWE encryption can encrypt $d$ bits at once (where $d$ is the polynomial degree), and both public key and ciphertext sizes are significantly reduced, resulting in much higher efficiency.
 
@@ -241,11 +241,11 @@ The choice of $\bar{\beta}$ must balance the probability of rejection sampling (
 
 ### Signature Compression: Bit-Dropping and Hints
 
-Protocols like Dilithium further reduce signature size through **bit-dropping (high/low decomposition)**, removing $z_2$ and/or $w$, and careful analysis of correctness and zero-knowledge properties. In the original protocol (e.g., Fiat-Shamirized Schnorr/lattice protocols), the prover must send $z_1, z_2$ (or $w$), resulting in long signatures. The question is: can we send only $z_1$ (or $z$) and a short hash (e.g., $\rho = H(w)$), omitting $z_2$ or $w$ to **significantly reduce signature length**?
+Protocols like Dilithium further reduce signature size through **bit-dropping (high/low decomposition)**, removing $z_2$ and/or $w$, and careful analysis of correctness and zero-knowledge properties. In the original protocol (e.g., Fiat-Shamirized Schnorr/lattice protocols), the prover must send $z_1, z_2$ (or $w$), resulting in long signatures. The question is: can we send only $z_1$ (or $z$) and a short hash (e.g., $ρ = H(w)$ ), omitting $z_2$ or $w$ to **significantly reduce signature length**?
 
 **High/Low Decomposition (HIGHS/LOWS):** Each ring element $w \in Z_q$ is split into a high part (HIGHS($w$) in a set $S$ of size $2^\kappa$) and a low part (LOWS($w$) = $w$ - HIGHS($w$) in $[q/2^{\kappa+1}]$). Only the high part is kept, discarding the low part (bit-dropping), greatly reducing data size. In the protocol, $w = \text{HIGHS}(Ay)$, and only the high part is sent; verification only checks the high bits. For $Az - ct = Ay - cs_2$, as long as LOWS($Ay - cs_2$) is within range, HIGHS($Ay$) = HIGHS($Ay - cs_2$), so verification only needs to check HIGHS($Az - ct$) = $w$, without needing $z_2$.
 
-**Further Compression of Public Key and Signature:** The public key is usually a large matrix $A$ and vector $t = As_1 + s_2$, with each coefficient requiring $\log q$ bits, making the key large. To compress, only the high part of $t$ ($t_1 = \text{HIGHT}(t)$) is published, discarding the low part ($t_0 = \text{LOWT}(t)$). Thus, the public key size drops from $nd \cdot \log q$ to $nd \cdot \ell$ (with $\ell \ll \log q$). The challenge is that verification needs $t$, but only $t_1$ is available. The key equation is $Az - ct = Az - c(t_1 + t_0) = (Az - ct_1) - ct_0$. As long as $ct_0$ is small, HIGHS($Az - ct$) = HIGHS($Az - ct_1$). A **hint mechanism** is used: if $ct_0 \in [\delta_S]^n$, HIGHS($Az - ct_1$) can differ from HIGHS($Az - ct$) by at most one interval. The prover provides a 1-bit hint per coefficient, indicating "left" or "right." The verifier uses the hint and $Az - ct_1$ to recover HIGHS($Az - ct$). Modern lattice-based signatures (e.g., CRYSTALS-Dilithium, ML-DSA) essentially convert these zero-knowledge protocols (with high/low decomposition and hints) into non-interactive digital signatures via the Fiat-Shamir transform.
+**Further Compression of Public Key and Signature:** The public key is usually a large matrix $A$ and vector $t = As_1 + s_2$, with each coefficient requiring $\log q$ bits, making the key large. To compress, only the high part of $t$ ( $t_1 = HIGHT(t)$ ) is published, discarding the low part ( $t_0 = LOWT(t)$ ). Thus, the public key size drops from $nd \cdot \log q$ to $nd \cdot \ell$ (with $\ell \ll \log q$). The challenge is that verification needs $t$, but only $t_1$ is available. The key equation is $Az - ct = Az - c(t_1 + t_0) = (Az - ct_1) - ct_0$. As long as $ct_0$ is small, HIGHS($Az - ct$) = HIGHS($Az - ct_1$). A **hint mechanism** is used: if $ct_0 \in [\delta_S]^n$, HIGHS($Az - ct_1$) can differ from HIGHS($Az - ct$) by at most one interval. The prover provides a 1-bit hint per coefficient, indicating "left" or "right." The verifier uses the hint and $Az - ct_1$ to recover HIGHS($Az - ct$). Modern lattice-based signatures (e.g., CRYSTALS-Dilithium, ML-DSA) essentially convert these zero-knowledge protocols (with high/low decomposition and hints) into non-interactive digital signatures via the Fiat-Shamir transform.
 
 ### Signature and Verification Flow
 
@@ -335,7 +335,7 @@ Falcon applies the GPV framework to NTRU lattices and uses a Gaussian sampler to
 
 **UF-CMA Security:** An attacker $A$ who has seen up to $Q_s$ signatures should not be able to forge a valid signature on a new message. If $A$ can forge, it can be used to solve the (QH+1)-R-ISIS (multi-target ring ISIS) problem.
 
-- **Original UF-CMA Security:** $A$ interacts with a signing oracle and a hash oracle, and finally outputs $(m^*, \sigma^*)$. If the signature verifies and $m^*$ was not previously queried, $A$ wins.
+- **Original UF-CMA Security:** $A$ interacts with a signing oracle and a hash oracle, and finally outputs $(m*, σ*)$. If the signature verifies and $m^*$ was not previously queried, $A$ wins.
 - **Limiting Resampling:** If the sampling success rate is low and many resamplings are needed, security degrades. If the total number of samplings exceeds $C_s$, the oracle aborts. If $p$ is the probability of successful sampling, the security loss is bounded by a function of $Q_s, C_s, p$.
 - **Preventing Salt Collisions:** The salt $r$ is chosen to be sufficiently long (e.g., 320 bits), making collisions extremely unlikely. If the same $(\text{pk}, r, m)$ is queried multiple times, the oracle aborts.
 - **Simulating the Hash Oracle:** The ideal (uniform) distribution is replaced by the actual distribution (Gaussian sampling + NTRU structure), and Rényi divergence is used to quantify the difference. The hash oracle no longer returns a uniformly random $c$, but one generated via Gaussian sampling. The security loss is controlled by the Rényi divergence.
