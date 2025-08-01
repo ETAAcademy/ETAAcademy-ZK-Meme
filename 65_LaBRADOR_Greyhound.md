@@ -26,11 +26,11 @@ Authors: [Evta](https://twitter.com/pwhattie), looking forward to your joining
 
 # Lattice-Based Zero-Knowledge Proof Systems: MLE-PCS, LaBRADOR, and Greyhound
 
-**Multilinear Extension Polynomial Commitment Scheme (MLE-PCS)** is a class of efficient commitment mechanisms for multilinear polynomials defined over Boolean hypercubes. It supports four types of commitment primitives—**KZG10**, **Merkle Tree**, **Pedersen**, and **Ajtai**—and integrates four types of proof techniques: **quotient polynomial**, **inner product**, **sumcheck**, and **split-and-fold**, enabling $O(N)$-complexity proof generation.
+**Multilinear Polynomial Commitment Schemes (MLE-PCS)** are a class of efficient commitment mechanisms tailored for multilinear polynomials defined over Boolean hypercubes. They fall into **four main categories** based on the underlying commitment primitives—**KZG10**, **Merkle Tree**, **Pedersen**, and **Ajtai**—and employ **four principal proof techniques**: **quotient polynomial**, **inner product**, **sumcheck**, and **split-and-fold**. These designs enable proof generation with **$O(N)$** prover complexity, significantly improving over traditional schemes.
 
 **LaBRADOR** is a post-quantum recursive zero-knowledge proof system built on the **Module-SIS** assumption. It employs a two-layer Ajtai commitment structure, **Johnson–Lindenstrauss (JL) projections**, norm **amortization and aggregation techniques**, and an efficient verification of **inner product constraints**. LaBRADOR also provides a reduction from **R1CS** (Rank-1 Constraint System) to its native constraint model, allowing it to support mixed binary and large-modulus constraints.
 
-**Greyhound**, building upon LaBRADOR, proposes a **lattice-based polynomial commitment scheme**. It introduces a three-round protocol and a two-layer commitment structure that reduces polynomial evaluations to LaBRADOR-style inner product constraints. Using the **AFLN24** technique, it performs ring-switching to enable compatibility with the LaBRADOR framework. Greyhound ensures **zero-knowledge** via the **Module-LWE** assumption and forms a cohesive, post-quantum secure ecosystem for zero-knowledge proof systems.
+**Greyhound**, building upon LaBRADOR, proposes a **lattice-based polynomial commitment scheme**. It introduces a three-round protocol and a two-layer commitment structure that reduces polynomial evaluations to LaBRADOR-style inner product constraints. To enable compatibility with the LaBRADOR framework, it performs ring-switching between structured rings and finite fields. Greyhound ensures **zero-knowledge** via the **Module-LWE** assumption and forms a cohesive, post-quantum secure ecosystem for zero-knowledge proof systems.
 
 ---
 
