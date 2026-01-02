@@ -615,7 +615,7 @@ Even with $\gamma = 1$, time constraints prevent infinite reward collection. In 
 
 The central mathematical idea in RL is the **Bellman Optimality Equation**:
 
-$Q^*(s, a) = r + \gamma \max_{a'} Q^*(s', a')$
+$Q(s, a) = r + \gamma \max_{a'} Q(s', a')$
 
 This equation links:
 
@@ -1238,9 +1238,9 @@ To reduce computational cost:
 
 Pipeline:
 
-1. **Encoder** compresses image into latent vector $z_0$
-2. Diffusion operates on $z_0$
-3. **Decoder** reconstructs full-resolution image
+(1) **Encoder** compresses image into latent vector $z_0$
+(2) Diffusion operates on $z_0$
+(3) **Decoder** reconstructs full-resolution image
 
 This makes models like **Stable Diffusion** feasible on consumer hardware.
 
@@ -2113,9 +2113,9 @@ Instead of:
 
 Use:
 
-1. Extract key issues
-2. Create response outline
-3. Write final message
+(1) Extract key issues
+(2) Create response outline
+(3) Write final message
 
 This improves:
 
